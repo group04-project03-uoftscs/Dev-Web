@@ -4,15 +4,15 @@ Our goal is to create a useful portal for developers to find news, job postings,
 
 ## Team Members
 
-* Annie Kwan
-* Elshie Akindele
-* Hector Garcia Millares
-* Kevin Sajan
-* Jhonny Lin
-* Niv Suroghon
+* [Annie Kwan](https://github.com/akwanmtl)
+* [Elshie Akindele](https://github.com/elshie21)
+* [Hector Garcia Millares](https://github.com/hector-gm)
+* [Jhonny Lin](https://github.com/Jlin72)
+* [Kevin Sajan](https://github.com/kevsaj)
+* [Niv Suroghon](https://github.com/nsuroghon)
 
 ## Branding
-! [Dev_Web_Logo](client/src/assets/images/Dev Web.gif)
+![Dev Web Logo](client/src/assets/images/Dev_Web.gif)
 
 ## Project Description
 
@@ -39,6 +39,24 @@ We're adding database functionality to our solution to ease the load of bookmark
 * Tailwinds CSS
 * Ant Design
 * OAuth 2.0
+
+## Tech Used
+
+* MongoDB
+* Express
+* React
+* Node
+
+## Credits
+
+## License
+
+Licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
+![badge](https://img.shields.io/badge/license-mit-brightgreen)
+
+## Contributing
+
+Pull requests are welcome. For any changes, please open an issue first to discuss what you would like to change.
 
 
 
