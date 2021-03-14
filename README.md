@@ -12,8 +12,7 @@ Our goal is to create a useful portal for developers to find news, job postings,
 * Niv Suroghon
 
 ## Branding
-
-![Dev Web Logo](./client/src/assets/images/Dev\ Web.gif)
+! [Dev_Web_Logo](client/src/assets/images/Dev Web.gif)
 
 ## Project Description
 
@@ -31,4 +30,15 @@ We're adding database functionality to our solution to ease the load of bookmark
 1. [Listen Notes](https://www.listennotes.com/api/docs)
 2. [Hacker News](https://github.com/HackerNews/API)
 3. [News API](https://newsapi.org/docs)
-4.[GitHub Jobs](https://jobs.github.com/api)
+4. [GitHub Jobs](https://jobs.github.com/api)
+
+## Libraries Used
+
+* bcrypt
+* Puppeteer
+* Tailwinds CSS
+* Ant Design
+* OAuth 2.0
+
+
+
