@@ -50,6 +50,9 @@ const ListenNotesURL = "https://listen-api.listennotes.com/api/v2";
 const ListenNotesBest = ListenNotesURL+`/best_podcasts?genre_id=127`;
 const ListenNotesTopic = ListenNotesURL+`/search?q=developer&sort_by_date=1&type=episode&genre_ids=143%2C140%2C163%2C136%2C164&language=English&safe_mode=0`;
 
+
+const ListenNotesPodcast = ListenNotesURL + `/best_podcasts?genre_id=127`;
+
 const getBestPodcasts = (cb) => {
   axios({
     method: 'get',
@@ -148,13 +151,89 @@ router.route("/listennotespodcasts")
     })
   })
 
-  router.route("/listennotesepisodes")
-  .get((req,res)=>{
-    // getLatestEpisodes(data =>{ // to be used when using API calls
-    getFakeEpisodes(data =>{ // get saved response to save on api
-      res.json(data);
-    })
+router.route("/listennotesepisodes")
+.get((req,res)=>{
+  // getLatestEpisodes(data =>{ // to be used when using API calls
+  getFakeEpisodes(data =>{ // get saved response to save on api
+    res.json(data);
   })
+})
+
+// const fakeEpisode = require('./apiresponses/episode-response.json')
+// router.route("/listennotesepisode/:id")
+// .get((req,res)=>{
+  
+//     const episode = {
+      
+//       id: fakeEpisode.id,
+//       title: fakeEpisode.title,
+//       url: fakeEpisode.link,
+//       image: fakeEpisode.image,
+//       audio: fakeEpisode.audio,
+//       date: Moment(fakeEpisode.pub_date_ms).format("MMM DD, YYYY"),
+//       type: "episodes",
+//       source: "listennotes"
+//     }
+//     res.json(episode)
+  
+// })
+
+// //real api call
+router.route("/listennotesepisode/:id")
+.get((req,res)=>{
+  axios({
+    method: 'get',
+      url: `${ListenNotesURL}/episodes/${req.params.id}`,
+      headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
+  })
+  .then(result =>{
+    console.log(result.data);
+
+    const episode = {
+      
+      id: result.data.id,
+      title: result.data.title,
+      url: result.data.link,
+      image: result.data.image,
+      audio: result.data.audio,
+      date: Moment(result.data.pub_date_ms).format("MMM DD, YYYY"),
+      type: "episodes",
+      source: "listennotes"
+    }
+    res.json(episode)
+  })
+  .catch(err=>{
+    console.log(err);
+    res.json([])
+  })
+})
+
+router.route("/listennotespodcast/:id")
+.get((req,res)=>{
+  axios({
+    method: 'get',
+      url: `${ListenNotesURL}/podcasts/${req.params.id}?sort=recent_first`,
+      headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
+  })
+  .then(result =>{
+    console.log(result.data);
+    const podcast = {
+      id: result.data.id,
+      title: result.data.title,
+      url: result.data.website,
+      image: result.data.image,
+      date: Moment(result.data.latest_pub_date_ms).format("MMM DD, YYYY"),
+      type: "podcasts",
+      source: "listennotes"
+    }
+    res.json(podcast)
+    
+  })
+  .catch(err=>{
+    console.log(err);
+    res.json([])
+  })
+})
 
 
 // News API

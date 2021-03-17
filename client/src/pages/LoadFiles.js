@@ -21,7 +21,7 @@ function LoadFiles () {
   
   useEffect(() => {
     console.log('loading files');
-    getUser("username"); // We need to get the user that is logged in here. I added the name directly here for testing purpose
+    getUser("test"); // We need to get the user that is logged in here. I added the name directly here for testing purpose
     
     getCode();
 
@@ -51,14 +51,82 @@ function LoadFiles () {
     }
   }
 
+  const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
+    if(databaseList.length === favoriteList.length) cb(favoriteList);
+    else{
+      let fave = databaseList[favoriteList.length];
+      if(fave.type === "episodes" || fave.type === "podcasts") {
+        let localItems = JSON.parse(localStorage.getItem(fave.type));
+        let found = localItems.filter(item => item.id === fave.id);
+        if(found.length === 1) {
+          favoriteList.push(found[0]);
+          getFavoriteRecursion(databaseList,favoriteList,cb)
+        }
+        else {
+          if(fave.type === "episodes"){
+            API.getEpisode(fave.id)
+              .then(result => {
+
+                let saved = JSON.parse(localStorage.getItem(fave.type));
+                saved.push(result.data);
+                localStorage.setItem(fave.type, JSON.stringify(saved));
+                
+                favoriteList.push(result.data);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+              .catch(err =>{
+                console.log(err);
+                favoriteList.push(fave);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+          }
+          else if(fave.type === "podcasts"){
+            API.getPodcast(fave.id)
+              .then(result => {
+                console.log(result.data)
+
+                let saved = JSON.parse(localStorage.getItem(fave.type));
+                saved.push(result.data);
+                localStorage.setItem(fave.type, JSON.stringify(saved));
+                
+                favoriteList.push(result.data);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+              .catch(err =>{
+                console.log(err);
+                favoriteList.push(fave);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+          }
+        }
+      }
+      else {
+        favoriteList.push(fave);
+        getFavoriteRecursion(databaseList,favoriteList,cb);
+      }
+    }
+  }
+
   const getUser = (user) => {
     API.getUser(user)
       .then(result =>{
         console.log('user')
-        console.log(result.data[0])
-        dispatch({ type: UPDATE_USER, user: result.data[0]});
         
-        dispatch({ type: UPDATE_FAVORITES, items: result.data[0].favorites});
+        const userData =  result.data[0];
+
+        getFavoriteRecursion(userData.favorites,[], favoriteList =>{
+          
+          console.log(favoriteList)
+          dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+        });
+        
+        dispatch({ type: UPDATE_USER, user:{
+          username: userData.username,
+          password: userData.password,
+          github: userData.github,
+        }});
+        
+        
       })
       .catch(err =>{
         console.log(err)
