@@ -16,15 +16,44 @@ function Card ({article}) {
 
   // when you click on the button, calls on the api to add the article in the favorite list in the user database
   const addBookmark = () => {
-    API.saveFavorite(state.user.username, article)
+    let itemToAdd = {...article}
+    if(article.type === "episodes" || article.type === "podcasts" ){
+      itemToAdd = {
+        id: article.id,
+        date: article.date,
+        type: article.type,
+        source: article.source
+      }
+      
+      console.log(localStorage.getItem(article.type))
+      let saved = JSON.parse(localStorage.getItem(article.type));
+      saved.push(article);
+      localStorage.setItem(article.type, JSON.stringify(saved));
+    }
+
+    API.saveFavorite(state.user.username, itemToAdd)
       .then(result =>{
         console.log(result)
-        dispatch({type: ADD_FAVORITE, item: article});
+        dispatch({type: ADD_FAVORITE, item: itemToAdd});
       })
   }
 
   // when you click on the button, calls on the api to remove the article from the favorite list in the user database
   const removeBookmark = () => {
+    let itemToAdd = {...article}
+    if(article.type === "episodes" || article.type === "podcasts" ){
+      itemToAdd = {
+        id: article.id,
+        date: article.date,
+        type: article.type,
+        source: article.source
+      }
+
+      let saved = JSON.parse(localStorage.getItem(article.type));
+      let newSaved = saved.filter(item => item.id !== article.id)
+      localStorage.setItem(article.type, JSON.stringify(newSaved));
+    }
+
     API.removeFavorite(state.user.username, article)
       .then(result =>{
         console.log(result)

@@ -6,11 +6,20 @@ import { useStoreContext } from "../utils/GlobalState";
 function Podcast() {
   
   const [state, dispatch] = useStoreContext();
-  console.log(state.bestPodcasts)
   return(
     <div>
-      News
+      Podcasts
       {state.bestPodcasts.length!==0 ?  state.bestPodcasts.map((article) => {
+        return (
+          <Card article={article} key={article.id}/>
+        )
+      })
+      : 
+      <div>Loading</div>
+    }
+    
+    Episodes
+      {state.recentEpisodes.length!==0 ?  state.recentEpisodes.map((article) => {
         return (
           <Card article={article} key={article.id}/>
         )

@@ -65,7 +65,8 @@ const getBestPodcasts = (cb) => {
         url: podcast.website,
         image: podcast.image,
         date: Moment(podcast.latest_pub_date_ms).format("MMM DD, YYYY"),
-        type: "podcasts"
+        type: "podcasts",
+        source: "listennotes"
       }
     });
     cb(podcasts)
@@ -92,7 +93,8 @@ const getLatestEpisodes = (cb) => {
         image: episode.image,
         audio: episode.audio,
         date: Moment(episode.pub_date_ms).format("MMM DD, YYYY"),
-        type: "episodes"
+        type: "episodes",
+        source: "listennotes"
       }
     });
     cb(episodes)
@@ -113,7 +115,8 @@ const getFakePodcasts = (cb) => {
       url: podcast.website,
       image: podcast.image,
       date: Moment(podcast.latest_pub_date_ms).format("MMM DD, YYYY"),
-      type: "podcasts"
+      type: "podcasts",
+      source: "listennotes"
     }
   });
   cb(podcasts)
@@ -130,7 +133,8 @@ const getFakeEpisodes = (cb) => {
       image: episode.image,
       audio: episode.audio,
       date: Moment(episode.pub_date_ms).format("MMM DD, YYYY"),
-      type: "episodes"
+      type: "episodes",
+      source: "listennotes"
     }
   });
   cb(episodes)

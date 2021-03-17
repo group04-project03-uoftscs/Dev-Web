@@ -25,6 +25,8 @@ function LoadFiles () {
     
     getCode();
 
+    if(localStorage.getItem('episodes') === null) localStorage.setItem('episodes', JSON.stringify([]))
+    if(localStorage.getItem('podcasts') === null) localStorage.setItem('podcasts', JSON.stringify([]))
     checkLocalStorage(UPDATE_TECHNEWS, "technews", API.getTechNews)
     checkLocalStorage(UPDATE_WORLDNEWS, "worldnews", API.getWorldNews)
     checkLocalStorage(UPDATE_EPISODES, "recentEpisodes", API.getLatestEpisodes)
