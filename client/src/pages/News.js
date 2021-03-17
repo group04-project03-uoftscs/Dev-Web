@@ -7,11 +7,11 @@ function News () {
 
 
   const [state, dispatch] = useStoreContext();
-  console.log(state.techNews)
+  console.log(state.worldNews)
   return(
     <div>
       News
-      {state.techNews.length!==0 ?  state.techNews.map((article) => {
+      {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
         return (
           <Card article={article} key={article.id}/>
         )

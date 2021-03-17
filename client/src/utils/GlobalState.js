@@ -7,7 +7,11 @@ import {
   GET_FAVORITES,
   UPDATE_USER,
   UPDATE_JOBS,
-  UPDATE_CODEWARS
+  UPDATE_CODEWARS,
+  UPDATE_WORLDNEWS,
+  UPDATE_PODCASTS,
+  UPDATE_EPISODES,
+
 } from "./actions";
 
 const StoreContext = createContext();
@@ -46,12 +50,29 @@ const reducer = (state, action) => {
         ...state,
         techNews: [...action.items]
       };
-      
+
+    case UPDATE_WORLDNEWS:
+      return {
+        ...state,
+        worldNews: [...action.items]
+      };      
 
     case UPDATE_JOBS:
       return {
         ...state,
         jobs: [...action.items]
+      };   
+
+    case UPDATE_EPISODES:
+      return {
+        ...state,
+        recentEpisodes: [...action.items]
+      };  
+
+    case UPDATE_PODCASTS:
+      return {
+        ...state,
+        bestPodcasts: [...action.items]
       };
 
       

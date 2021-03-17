@@ -3,7 +3,16 @@ import API from '../utils/API';
 import Moment from 'moment';
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_TECHNEWS, UPDATE_FAVORITES, UPDATE_USER, UPDATE_JOBS, UPDATE_CODEWARS } from "../utils/actions";
+import { 
+  UPDATE_TECHNEWS, 
+  UPDATE_WORLDNEWS,
+  UPDATE_FAVORITES, 
+  UPDATE_EPISODES,
+  UPDATE_PODCASTS, 
+  UPDATE_USER, 
+  UPDATE_JOBS, 
+  UPDATE_CODEWARS 
+} from "../utils/actions";
 
 //This file does not render any components. It requests of the api calls to get the information.
 function LoadFiles () {
@@ -16,15 +25,18 @@ function LoadFiles () {
     
     getCode();
 
-    checkLocalStorage(UPDATE_TECHNEWS, "news", getNews)
-    checkLocalStorage(UPDATE_JOBS, "jobs", getJobs)
+    checkLocalStorage(UPDATE_TECHNEWS, "technews", API.getTechNews)
+    checkLocalStorage(UPDATE_WORLDNEWS, "worldnews", API.getWorldNews)
+    checkLocalStorage(UPDATE_EPISODES, "recentEpisodes", API.getLatestEpisodes)
+    checkLocalStorage(UPDATE_PODCASTS, "bestPodcasts", API.getBestPodcasts)
+    checkLocalStorage(UPDATE_JOBS, "jobs", API.getJobs)
 
   }, []);
 
   const checkLocalStorage = (action, type, api) => {
     if(localStorage.getItem(type)){
       if(JSON.parse(localStorage.getItem(type)).date !== today) {
-        api();
+        getItems(action, type, api);
       }
       else{
         
@@ -33,7 +45,7 @@ function LoadFiles () {
       }
     }
     else{
-      api();
+      getItems(action, type, api);
     }
   }
 
@@ -62,29 +74,13 @@ function LoadFiles () {
       });
   }
 
-  const getNews = () => {
-    console.log('getting news')
-    API.getTechNews()
+  const getItems = (action, type, api) =>{
+    console.log(`getting ${type}`)
+    api()
       .then(result => {
-        dispatch({ type: UPDATE_TECHNEWS, items: result.data})
+        dispatch({ type: action, items: result.data})
       
-      localStorage.setItem('news',JSON.stringify({
-        date: today,
-        items: result.data
-      }))
-    })
-    .catch(err =>{
-      console.log(err)
-    });
-  }
-
-  const getJobs = () => {
-    console.log('getting jobs')
-    API.getJobs()
-      .then(result => {
-        dispatch({ type: UPDATE_JOBS, items: result.data})
-      
-      localStorage.setItem('jobs',JSON.stringify({
+      localStorage.setItem(type , JSON.stringify({
         date: today,
         items: result.data
       }))
