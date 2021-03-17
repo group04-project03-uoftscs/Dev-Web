@@ -1,17 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
+import Card from '../components/Card';
 
-function News() {
-  return (
+import { useStoreContext } from "../utils/GlobalState";
+
+function News () {
+
+
+  const [state, dispatch] = useStoreContext();
+  console.log(state.techNews)
+  return(
     <div>
-      <h1>News Page</h1>
-      <h2>
-        Tech
-      </h2>
-      <h2>
-        World News
-      </h2>
+      News
+      {state.techNews.length!==0 ?  state.techNews.map((article) => {
+        return (
+          <Card article={article} key={article.id}/>
+        )
+      })
+      : 
+      <div>Loading</div>
+    }
     </div>
-  );
+  )
 }
 
 export default News;
