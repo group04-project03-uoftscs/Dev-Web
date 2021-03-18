@@ -28,8 +28,8 @@ function Podcast() {
       : 
       <div>Loading</div>
     }
-
-  
+    </div>
+  )
 }
 
 export default Podcast;
