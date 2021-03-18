@@ -9,7 +9,7 @@ function News () {
   const [state, dispatch] = useStoreContext();
   console.log(state.techNews)
   return(
-    <div>
+    <div className="my-10">
       News
       {state.techNews.length!==0 ?  state.techNews.map((article) => {
         return (

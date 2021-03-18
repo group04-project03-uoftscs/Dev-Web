@@ -2,7 +2,7 @@ import React from "react";
 
 function Podcast() {
   return (
-    <div>
+    <div className="my-10">
       <h1>Podcasts Page</h1>
       <h2>
         Recent
