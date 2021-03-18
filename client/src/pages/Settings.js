@@ -3,7 +3,7 @@ import React from "react";
 function Settings() {
   return (
     <>
-    <div className="my-10">
+    <div className="my-14">
       <h1>Account Settings</h1>
       <h2>
         Edit Profile

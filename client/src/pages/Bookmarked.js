@@ -2,7 +2,7 @@ import React from "react";
 
 function Bookmarked() {
   return (
-    <div className="my-10">
+    <div className="my-14">
       <h1>All Bookmarks</h1>
       <h2>
         All
