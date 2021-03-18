@@ -3,7 +3,7 @@ module.exports = {
   style: {
     postcss: {
       plugins: [
-        require('@tailwindcss/jit'),
+        require('tailwindcss'),
         require('autoprefixer'),
       ],
     },
