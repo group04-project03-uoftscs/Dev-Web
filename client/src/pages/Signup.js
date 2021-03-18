@@ -5,7 +5,7 @@ import googleicon from "../assets/images/google.svg"
 function Signup() {
   return (
     <>
-    <main className="relative w-screen h-screen max-w-sm bg-gray-500">
+    <main className="relative w-screen h-screen bg-gray-500">
         <section className="absolute top-0 w-full h-full min-h-screen">
           <div className="mx-auto px-4 py-20 bg-gray-500">
             <div className="flex content-center items-center justify-center h-full">
