@@ -16,9 +16,29 @@ export default {
     return axios.patch("/api/user/"+user, data)
   },
   getTechNews: function() {
-    return axios.get("/api/thirdparty/hackernews");
+    return axios.get("/api/thirdparty/technewsapi");
+  },
+
+  getWorldNews: function() {
+    return axios.get("/api/thirdparty/worldnewsapi");
+  },
+
+  getLatestEpisodes: function() {
+    return axios.get("/api/thirdparty/listennotesepisodes");
   },
   
+  getBestPodcasts: function() {
+    return axios.get("/api/thirdparty/listennotespodcasts");
+  },
+  
+  getEpisode: function(id) {
+    return axios.get("/api/thirdparty/listennotesepisode/"+id);
+  },
+  
+  getPodcast: function(id) {
+    return axios.get("/api/thirdparty/listennotespodcast/"+id);
+  },
+
   getJobs: function() {
     return axios.get("/api/thirdparty/githubjobs");
   },
