@@ -14,13 +14,15 @@
     "moment": "^2.29.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^2.1.1"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build:style": "tailwind build src/styles/styles.css -o src/styles/tailwind.css",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -30,7 +32,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@tailwindcss/jit": "^0.1.1",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",

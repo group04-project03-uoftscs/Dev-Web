@@ -7,7 +7,7 @@ function Home () {
   const [state, dispatch] = useStoreContext();
   console.log(state)
   return(
-    <div>
+    <div className="my-10">
       Home page
       { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
         <div>

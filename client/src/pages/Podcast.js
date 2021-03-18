@@ -4,10 +4,11 @@ import Card from '../components/Card';
 import { useStoreContext } from "../utils/GlobalState";
 
 function Podcast() {
+
   
   const [state, dispatch] = useStoreContext();
   return(
-    <div>
+    <div className="my-10">
       Podcasts
       {state.bestPodcasts.length!==0 ?  state.bestPodcasts.map((article) => {
         return (
@@ -27,8 +28,8 @@ function Podcast() {
       : 
       <div>Loading</div>
     }
-    </div>
-  )
+
+  
 }
 
 export default Podcast;
