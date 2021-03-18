@@ -8,7 +8,7 @@ function Podcast() {
   
   const [state, dispatch] = useStoreContext();
   return(
-    <div className="my-10">
+    <div className="my-14">
       Podcasts
       {state.bestPodcasts.length!==0 ?  state.bestPodcasts.map((article) => {
         return (
