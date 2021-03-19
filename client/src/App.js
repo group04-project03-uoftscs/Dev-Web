@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './App.css'
 
 //font awesome - add to library to be used throughout the webiste
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
-
 
 //pages
 import Home from "./pages/Home";
@@ -22,6 +22,7 @@ import LoadFiles from "./pages/LoadFiles";
 
 //components
 import Nav from "./components/Nav"
+import Footer from "./components/Footer"
 
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -31,7 +32,7 @@ library.add(fasBookmark, farBookmark)
 function App() {
   return (
     <Router>
-      <div>
+      <div className="page-container">
         <StoreProvider>
           <LoadFiles />
           <Nav />
@@ -47,6 +48,8 @@ function App() {
             <Route path="/settings" component={Settings} />
             <Route path="/signup" component={Signup} />
           </Switch>
+          
+          <Footer />
         </StoreProvider>
       </div>
     </Router>
