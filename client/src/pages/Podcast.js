@@ -8,11 +8,11 @@ function Podcast() {
   
   const [state, dispatch] = useStoreContext();
   return(
-    <div className="my-14">
+    <div className="my-14 row">
       Podcasts
       {state.bestPodcasts.length!==0 ?  state.bestPodcasts.map((article) => {
         return (
-          <Card article={article} key={article.id}/>
+          <Card article={article} key={article.id} className={"col-4"}/>
         )
       })
       : 

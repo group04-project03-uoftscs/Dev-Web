@@ -62,28 +62,30 @@ function Card ({article}) {
   }
 
   return(
-    <div className="card">
-        <div className="card-header flex">
-          <div>
-            
-            <a href={article.url}><h3>{article.title}</h3></a>
-          </div>
-          <div className="span-right">
-            {isBookmarked ? 
+    <div className="card text-center bg-dark animate__animated animate__fadeInUp col-4">
+      <div className="overflow">
+        <img src={article.image} alt="a wallpaper" className="card-img-top" />
+      </div>
+      <div className="card-body text-light">
+        <h4 className="card-title">{article.date}</h4>
+        <a
+        href={article.url}
+        target="_blank"
+        className="btn btn-outline-secondary border-0"
+        rel="noreferrer"
+        >
+        {article.title}
+        </a>
+        <div className="span-right">
+             {isBookmarked ? 
               <button onClick={removeBookmark}><FontAwesomeIcon icon={['fas','bookmark']} /></button> 
               :
               <button onClick={addBookmark}><FontAwesomeIcon icon={['far','bookmark']} /></button> 
             }
             
-          </div>
-        </div>
-
-        <div className="card-body">
-          <a href={article.url}><img src={article.image}/></a>
-          
-          <p>Published: {article.date}</p>
         </div>
     </div>
+  </div>
   )
 }
 

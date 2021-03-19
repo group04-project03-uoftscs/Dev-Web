@@ -2,3 +2,20 @@
   display: flex;
   justify-content: space-between;
 }
+
+.card {
+  width:280px;
+  display: block;
+  margin: 60px auto;
+  box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
+  transition: .25s;
+  
+  /* &:hover {
+    box-shadow: 10px 5px 40px 20px darken(#341cac, 10%);
+    cursor: pointer;
+    
+    .button-primary {
+      transform: translate(10px, 0);
+    }
+  } */
+}
