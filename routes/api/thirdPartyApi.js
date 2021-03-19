@@ -340,8 +340,8 @@ router.route("/hackernews")
 
 // Get Github jobs
 router.route("/githubjobs")
-  .get((req,res) => {
-    axios("https://jobs.github.com/positions.json")
+  .post((req,res) => {
+    axios(`https://jobs.github.com/positions.json?description=${req.body.description}&location=${req.body.location}`)
     .then(result => {
       // console.log(result.data)
       result.data.map(job => {

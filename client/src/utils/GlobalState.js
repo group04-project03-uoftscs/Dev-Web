@@ -10,7 +10,7 @@ import {
   UPDATE_CODEWARS,
   UPDATE_WORLDNEWS,
   UPDATE_PODCASTS,
-  UPDATE_EPISODES,
+  UPDATE_EPISODES
 
 } from "./actions";
 
@@ -99,7 +99,7 @@ const StoreProvider = ({value = [], ...props}) => {
     recentEpisodes: [],
     bestPodcasts: [],
     jobs: [],
-    codewars: {}
+    codewars: {},
   });
   
   return <Provider value={[state, dispatch]} {...props} />;

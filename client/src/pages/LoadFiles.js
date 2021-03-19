@@ -31,7 +31,7 @@ function LoadFiles () {
     checkLocalStorage(UPDATE_WORLDNEWS, "worldnews", API.getWorldNews)
     checkLocalStorage(UPDATE_EPISODES, "recentEpisodes", API.getLatestEpisodes)
     checkLocalStorage(UPDATE_PODCASTS, "bestPodcasts", API.getBestPodcasts)
-    checkLocalStorage(UPDATE_JOBS, "jobs", API.getJobs)
+    // checkLocalStorage(UPDATE_JOBS, "jobs", API.getJobs)
 
   }, []);
 
@@ -127,6 +127,8 @@ function LoadFiles () {
         }});
         
         
+        // checkLocalStorageJobs(UPDATE_JOBS, "jobs", API.getJobs, userData.location) // will need to put location in userData
+        checkLocalStorageJobs(UPDATE_JOBS, "jobs", API.getJobs, "Canada")
       })
       .catch(err =>{
         console.log(err)
@@ -154,6 +156,63 @@ function LoadFiles () {
         date: today,
         items: result.data
       }))
+    })
+    .catch(err =>{
+      console.log(err)
+    });
+  }
+
+
+  const checkLocalStorageJobs = (action, type, api, location) => {
+    if(localStorage.getItem(type)){
+      if(JSON.parse(localStorage.getItem(type)).date !== today) {
+        getJobs(action, type, api,location);
+      }
+      else{
+        
+        console.log(type + ' already there')
+        dispatch({ type: action, items: JSON.parse(localStorage.getItem(type)).items})
+      }
+    }
+    else{
+      getJobs(action, type, api, location);
+    }
+  }
+
+  const getJobs = (action, type, api, location) =>{ 
+    console.log(`getting ${type}`)
+    let data = {
+      description: "",
+      location: (location === "") ? "remote" : location
+    }
+    console.log(data)
+    api(data)
+      .then(result => {
+        console.log(result)
+        if(result.data.length === 0) {
+          data = {
+            description: "",
+            location: "remote"
+          }
+          api(data)
+            .then(result2 =>{
+              dispatch({ type: action, items: result2.data})
+      
+                localStorage.setItem(type , JSON.stringify({
+                  date: today,
+                  items: result2.data
+                }))
+            })
+        }
+        else{
+          dispatch({ type: action, items: result.data})
+      
+          localStorage.setItem(type , JSON.stringify({
+            date: today,
+            items: result.data
+          }))
+        }
+        
     })
     .catch(err =>{
       console.log(err)
