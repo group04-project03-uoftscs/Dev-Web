@@ -41,8 +41,8 @@ export default {
   getPodcast: function(id) {
     return axios.get("/api/thirdparty/listennotespodcast/"+id);
   },
-  getJobs: function() {
-    return axios.get("/api/thirdparty/githubjobs");
+  getJobs: function(data) {
+    return axios.post("/api/thirdparty/githubjobs",data);
   },
   getCodeWars: function() {
     return axios.get("/api/thirdparty/codewars");
