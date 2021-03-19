@@ -11,6 +11,7 @@ import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
 import Home from "./pages/Home";
 import Bookmarked from "./pages/Bookmarked";
 import Jobs from "./pages/Jobs";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import News from "./pages/News";
 import NewUser from "./pages/NewUser";
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/bookmarked" component={Bookmarked} />
             <Route exact path="/jobs" component={Jobs} />
+            <Route exact path="/landing" component={Landing} />
             <Route path="/login" component={Login} />
             <Route path="/news" component={News} />
             <Route path="/newuser" component={NewUser} />

@@ -42,18 +42,12 @@ function Nav() {
                         Podcasts
                     </a>
                 </div>
-                <div class="border-b-4 text-white hover:text-black hover:border-blue-600">
-                    <a href="/settings"
+                {/* <div class="border-b-4 text-white hover:text-black hover:border-blue-600">
+                    <a href="/playlist"
                         class="flex items-center h-full md:w-16 lg:w-24 xl:w-32 justify-center hover:bg-indigo-200 focus:outline-none rounded-md">
-                        Settings
+                        Playlists
                     </a>
-                </div>
-                <div class="flex xl:hidden border-b-4 hover:border-blue-600">
-                    <a href="/settings"
-                        class="flex items-center h-full w-16 lg:w-24 xl:w-32 justify-center hover:bg-indigo-200 focus:outline-none rounded-md">
-                        Settings
-                    </a>
-                </div>
+                </div> */}
 
             </div>
             <div class="w-full  h-full flex justify-end space-x-2 items-center px-3">
