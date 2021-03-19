@@ -37,15 +37,15 @@ function App() {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/bookmarked" component={Bookmarked} />
-            <Route exact path="/jobs" component={Jobs} />
+            {/* <Route exact path="/bookmarked" component={Bookmarked} /> */}
+            {/* <Route exact path="/jobs" component={Jobs} /> */}
             <Route path="/login" component={Login} />
-            <Route path="/news" component={News} />
+            {/* <Route path="/news" component={News} />
             <Route path="/newuser" component={NewUser} />
             <Route path="/playlist" component={Playlist} />
             <Route path="/podcast" component={Podcast} />
             <Route path="/settings" component={Settings} />
-            <Route path="/signup" component={Signup} />
+            <Route path="/signup" component={Signup} /> */}
           </Switch>
         </StoreProvider>
       </div>
