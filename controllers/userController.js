@@ -9,6 +9,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  // update users info - this can be used for new users pages and account settings
+  updateUser: function(req, res) {
+    db.User.update(
+      { username : req.params.user },
+      req.body
+  ).then(dbModel => {
+      console.log(dbModel);
+      res.json(dbModel)
+    })
+    .catch(err => res.status(422).json(err));
+  },
+
   // adds a favourite item (like the news, podcasts)
   // and push it to the favorites array for that user
   saveFavorite: function(req,res) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 //icons & svg
 import githubicon from "../assets/images/github.svg"
@@ -6,7 +6,35 @@ import Location from "../assets/svg/icons8-location-96.png"
 import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_USER } from "../utils/actions";
+
 function NewUser() {
+
+/* This part below is to handle form request */
+const [state, dispatch] = useStoreContext();
+
+const githubRef = useRef();
+const locationRef = useRef();
+const languagesRef = useRef();
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  API.updateUser({
+    github: githubRef.current.value,
+    location: locationRef.current.value,
+    language: languagesRef.current.value
+  })
+    .then(result =>{
+      dispatch({
+        type: UPDATE_USER,
+        items: result.data
+      })
+
+    })
+    .catch(err => console.log(err))
+}
+/* The part above is to handle form request */
+
   return (
     <div>
       <section class="py-20 bg-gray-200  bg-opacity-50 h-screen">
