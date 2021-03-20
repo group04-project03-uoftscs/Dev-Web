@@ -30,16 +30,37 @@ function Home () {
       type: LOADING
     })
     async function getUser() {
-      const data = await API.getUser();
-      console.log(data.data)
-      console.log(data.data.hasOwnProperty('id'))
-      if(data.data.hasOwnProperty('id') || data.data.hasOwnProperty('_id')) {
+      const {data} = await API.getUser();
+      console.log(data);
+      console.log(data.hasOwnProperty('user'))
+      if(data.hasOwnProperty('user')) {
+        const userData = data.user
+        console.log(userData);
         dispatch({
           type: FOUND_USER,
-          user: data.data
+          user: userData
         });
-        console.log('logged: ' + state.logged)
-      } else if(!data.data.hasOwnProperty('id') || !data.data.hasOwnProperty('_id')) {
+        API.findGithubUser(userData.id)
+        .then(githubData=> {
+          console.log(githubData.data.length)
+          if(!githubData.data.length){
+            let newGithubUserData = {
+              username: userData.username,
+              github: userData._json,
+              auth: 'github',
+              location: userData._json.location,
+              languages: '',
+              favorites: []
+            }
+            API.addGithubUser(newGithubUserData)
+            .then(() => {
+              history.push('/newuser')
+            }) 
+          } else {
+            return;
+          }
+        })
+      } else if(!data.hasOwnProperty('user')) {
         dispatch({
           type: LOADED
         })

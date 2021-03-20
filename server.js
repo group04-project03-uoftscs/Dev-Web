@@ -25,7 +25,10 @@ passport.use(new GithubStrategy({
   callbackURL: "/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
-  userData = {...profile}
+  userData = {
+    user: {...profile},
+    auth: 'github'
+  }
   return done(null, profile)
 }
 ));

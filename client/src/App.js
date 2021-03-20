@@ -54,7 +54,6 @@ function App() {
             <Route path="/podcast" component={Podcast} />
             <Route path="/settings" component={Settings} />
             <Route path="/signup" component={Signup} />
-
           </Switch>
           
           <Footer />

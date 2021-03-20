@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 
 //icons & svg
 import githubicon from "../assets/images/github.svg"
@@ -7,12 +7,40 @@ import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_USER } from "../utils/actions";
+import { UPDATE_USER, FOUND_USER, LOADED, LOADING } from "../utils/actions";
+
+import { useHistory } from 'react-router-dom';
+import API from '../utils/API';
 
 function NewUser() {
 
 /* This part below is to handle form request */
 const [state, dispatch] = useStoreContext();
+
+const history = useHistory();
+
+  useLayoutEffect(() => {
+    dispatch({
+      type: LOADING
+    })
+    async function getUser() {
+      const {data} = await API.getUser();
+      console.log(data.hasOwnProperty('user'))
+      if(data.hasOwnProperty('user')) {
+        dispatch({
+          type: FOUND_USER,
+          user: data.user
+        });
+        console.log('logged: ' + state.logged)
+      } else if(!data.hasOwnProperty('user')) {
+        dispatch({
+          type: LOADED
+        })
+        history.push('/login')
+      }
+    }
+    getUser();
+  }, [state.logged]);
 
 const githubRef = useRef();
 const locationRef = useRef();
