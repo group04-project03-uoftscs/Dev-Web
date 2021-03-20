@@ -11,3 +11,9 @@ export const UPDATE_TECHNEWS = "UPDATE_TECHNEWS";
 export const UPDATE_WORLDNEWS = "UPDATE_WORLDNEWS";
 export const UPDATE_PODCASTS = "UPDATE_PODCASTS";
 export const UPDATE_EPISODES = "UPDATE_EPISODES";
+
+// Added these new actions for log in
+export const FOUND_USER = 'FOUND_USER';
+export const LOGGED = 'LOGGED';
+export const LOADING = 'LOADING';
+export const LOADED = 'LOADED'
