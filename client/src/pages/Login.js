@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/styles.css"
 import githubicon from "../assets/images/github.svg"
-import googleicon from "../assets/images/google.svg"
+import googleicon from "../assets/images/google.svg";
 
 function Login() {
+  useEffect(()=> {
+    fetch('/user')
+    .then(response=>response.json())
+    .then(data=> console.log(data));
+  })
+  const githubLogin = () => {
+    fetch('/github')
+  }
   return (
     <>
       <main className="relative w-full h-full min-h-screen bg-gray-500">
@@ -22,6 +30,9 @@ function Login() {
                       <button
                         className="bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                         type="button"
+                        onClick={ () => {
+                          window.location.replace('http://localhost:3001/auth/github')
+                        }}
                       >
                         <img
                           alt="..."

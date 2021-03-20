@@ -1,6 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch, Link, useHistory } from "react-router-dom";
+
 import './App.css'
+
 
 //font awesome - add to library to be used throughout the webiste
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -27,10 +30,11 @@ import Footer from "./components/Footer"
 
 import { StoreProvider } from "./utils/GlobalState";
 
-
 library.add(fasBookmark, farBookmark)
 
+
 function App() {
+
   return (
     <Router>
       <div className="page-container">
@@ -38,6 +42,7 @@ function App() {
           <LoadFiles />
           <Nav />
           <Switch>
+
             <Route exact path="/" component={Home} />
             <Route exact path="/bookmarked" component={Bookmarked} />
             <Route exact path="/jobs" component={Jobs} />
@@ -49,6 +54,7 @@ function App() {
             <Route path="/podcast" component={Podcast} />
             <Route path="/settings" component={Settings} />
             <Route path="/signup" component={Signup} />
+
           </Switch>
           
           <Footer />

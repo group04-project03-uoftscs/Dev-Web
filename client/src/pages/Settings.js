@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER } from "../utils/actions";
