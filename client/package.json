@@ -24,9 +24,9 @@
   },
   "scripts": {
     "build:style": "tailwind build src/styles/styles.css -o src/styles/tailwind.css",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "browserslist": [
