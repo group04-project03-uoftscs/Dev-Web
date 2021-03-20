@@ -8,6 +8,7 @@ import Github from "../assets/svg/icons8-github-96.png"
 
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER } from "../utils/actions";
+import API from '../utils/API'
 
 function NewUser() {
 
