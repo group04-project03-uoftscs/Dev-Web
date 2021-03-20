@@ -43,8 +43,8 @@ router.route("/codewars")
   })
 
 // Get podcasts
-const episodesResponse = './apiresponses/search-developer-response.json'
-const podcastsResponse = './apiresponses/best-tech-response.json'
+const episodesResponse = require('./apiresponses/search-developer-response.json');
+const podcastsResponse = require('./apiresponses/best-tech-response.json');
 
 const ListenNotesURL = "https://listen-api.listennotes.com/api/v2";
 const ListenNotesBest = ListenNotesURL+`/best_podcasts?genre_id=127`;
@@ -110,8 +110,7 @@ const getLatestEpisodes = (cb) => {
 
 const getFakePodcasts = (cb) => {
   let result = podcastsResponse;
-  
-  let podcasts = result.map(podcast =>{
+  let podcasts = result.podcasts.map(podcast =>{
     return {
       id: podcast.id,
       title: podcast.title,
@@ -128,7 +127,7 @@ const getFakePodcasts = (cb) => {
 const getFakeEpisodes = (cb) => {
   let result = episodesResponse;
   
-  let episodes = result.map(episode =>{
+  let episodes = result.results.map(episode =>{
     return {
       id: episode.id,
       title: episode.title_original,
@@ -341,8 +340,8 @@ router.route("/hackernews")
 
 // Get Github jobs
 router.route("/githubjobs")
-  .get((req,res) => {
-    axios("https://jobs.github.com/positions.json")
+  .post((req,res) => {
+    axios(`https://jobs.github.com/positions.json?description=${req.body.description}&location=${req.body.location}`)
     .then(result => {
       // console.log(result.data)
       result.data.map(job => {

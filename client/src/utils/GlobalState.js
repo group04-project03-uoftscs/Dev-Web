@@ -14,6 +14,7 @@ import {
   FOUND_USER,
   LOADING,
   LOADED
+
 } from "./actions";
 
 const StoreContext = createContext();
@@ -125,6 +126,7 @@ const StoreProvider = ({value = [], ...props}) => {
     codewars: {},
     logged: false,
     loading: false
+
   });
   
   return <Provider value={[state, dispatch]} {...props} />;
