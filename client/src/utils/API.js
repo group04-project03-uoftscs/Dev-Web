@@ -50,4 +50,8 @@ export default {
   getGithub: function(github) {
     return axios.get("/api/thirdparty/githubuser/"+github);
   },
+
+  getUser: function() {
+    return axios.get('/user');
+  }
 };

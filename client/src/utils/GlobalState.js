@@ -11,7 +11,9 @@ import {
   UPDATE_WORLDNEWS,
   UPDATE_PODCASTS,
   UPDATE_EPISODES,
-
+  FOUND_USER,
+  LOADING,
+  LOADED
 } from "./actions";
 
 const StoreContext = createContext();
@@ -87,10 +89,31 @@ const reducer = (state, action) => {
         ...state,
         user: {...action.user}
       };
+    // new case related to adding user
+    case FOUND_USER:
+      return {
+        ...state,
+        user: {...action.user},
+        logged: true,
+        loading: false
+      }
+    case LOADING: 
+      return {
+        ...state,
+        loading: true
+      }
+    case LOADED: 
+      return {
+        ...state,
+        loading: false
+      }
   }
 }
 
+
+
 const StoreProvider = ({value = [], ...props}) => {
+
   const [state, dispatch] = useReducer(reducer, {
     user : {},
     favorites: [],
@@ -99,7 +122,9 @@ const StoreProvider = ({value = [], ...props}) => {
     recentEpisodes: [],
     bestPodcasts: [],
     jobs: [],
-    codewars: {}
+    codewars: {},
+    logged: false,
+    loading: false
   });
   
   return <Provider value={[state, dispatch]} {...props} />;

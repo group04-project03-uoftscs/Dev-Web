@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch, Link, useHistory } from "react-router-dom";
 
 //font awesome - add to library to be used throughout the webiste
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -25,10 +25,11 @@ import Nav from "./components/Nav"
 
 import { StoreProvider } from "./utils/GlobalState";
 
-
 library.add(fasBookmark, farBookmark)
 
+
 function App() {
+
   return (
     <Router>
       <div>
@@ -36,16 +37,16 @@ function App() {
           <LoadFiles />
           <Nav />
           <Switch>
-            <Route exact path="/" component={Home} />
-            {/* <Route exact path="/bookmarked" component={Bookmarked} /> */}
-            {/* <Route exact path="/jobs" component={Jobs} /> */}
-            <Route path="/login" component={Login} />
-            {/* <Route path="/news" component={News} />
-            <Route path="/newuser" component={NewUser} />
-            <Route path="/playlist" component={Playlist} />
-            <Route path="/podcast" component={Podcast} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/signup" component={Signup} /> */}
+              <Route exact path='/' component={Home} />
+              <Route exact path="/bookmarked" component={Bookmarked} />
+              <Route exact path="/jobs" component={Jobs} />
+              <Route exact path='/login' component={Login} />
+              <Route path="/news" component={News} />
+              <Route path="/newuser" component={NewUser} />
+              <Route path="/playlist" component={Playlist} />
+              <Route path="/podcast" component={Podcast} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/signup" component={Signup} />
           </Switch>
         </StoreProvider>
       </div>

@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('../models');
 
+
 passport.use(new LocalStrategy(
   {
     usernameField: "username",
@@ -26,9 +27,24 @@ passport.use(new LocalStrategy(
         });
       }
       // If none of the above, return the user
+      // userData = {...dbUser}
       return done(null, dbUser);
     });
   }
 ));
 
+// In order to help keep authentication state across HTTP requests,
+// Sequelize needs to serialize and deserialize the user
+// Just consider this part boilerplate needed to make it all work
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+
+//exporting both passport and user
+//user will be used to store the github data
 module.exports = passport;
