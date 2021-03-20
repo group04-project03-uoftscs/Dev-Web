@@ -51,9 +51,6 @@ function News () {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [state, dispatch] = useStoreContext();
-  console.log(state.worldNews)
-
   const renderContent = () => (
     <div>
     News
