@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, Link, useHistory } from "react-router-dom";
 
 import './App.css'
-
+import './styles/tailwind.css'
+import './styles/styles.css'
 
 //font awesome - add to library to be used throughout the webiste
 import { library } from '@fortawesome/fontawesome-svg-core'

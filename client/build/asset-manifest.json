@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.145d2d79.chunk.css",
+    "main.js": "/static/js/main.f684d804.chunk.js",
+    "main.js.map": "/static/js/main.f684d804.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.113a6408.js",
+    "runtime-main.js.map": "/static/js/runtime-main.113a6408.js.map",
+    "static/js/2.55a54b92.chunk.js": "/static/js/2.55a54b92.chunk.js",
+    "static/js/2.55a54b92.chunk.js.map": "/static/js/2.55a54b92.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.145d2d79.chunk.css.map": "/static/css/main.145d2d79.chunk.css.map",
+    "static/js/2.55a54b92.chunk.js.LICENSE.txt": "/static/js/2.55a54b92.chunk.js.LICENSE.txt",
+    "static/media/background.scss": "/static/media/Foreground.be847913.png",
+    "static/media/caret.17f0a4fb.svg": "/static/media/caret.17f0a4fb.svg",
+    "static/media/github.6c955556.svg": "/static/media/github.6c955556.svg",
+    "static/media/google.eae9aa93.svg": "/static/media/google.eae9aa93.svg",
+    "static/media/icons8-bookmark.5d7e674b.svg": "/static/media/icons8-bookmark.5d7e674b.svg",
+    "static/media/icons8-news.6e506ec9.svg": "/static/media/icons8-news.6e506ec9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.113a6408.js",
+    "static/js/2.55a54b92.chunk.js",
+    "static/css/main.145d2d79.chunk.css",
+    "static/js/main.f684d804.chunk.js"
+  ]
+}

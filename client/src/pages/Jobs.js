@@ -30,7 +30,7 @@ function Jobs() {
 
       })
       .catch(err => console.log(err))
-  }
+  };
 /* The part above is to handle form request */
 
 // Used for authentication
@@ -58,12 +58,43 @@ function Jobs() {
   }, [state.logged]);
 
   return (
-    <div className="my-14">
-      <h1>List of Jobs based on area</h1>
-      <p>
-        Where you at?
-      </p>
+    <div className="my-14 container">
+      <h1 className="margin-top margin-bottom " style={{ backgroundColor: "blue", color:"white", fontSize: "2rem"}}>
+        Find dev jobs in our web
+      </h1>
+      
+      <div className="search-section">
+      <form className="search-form" onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-md-5">
+            <div className="form-group" id="description">
+              <input
+                type="text"
+                name="description"
+                value={state.description || ''}
+                placeholder="Got a title in mind?"
+              />
+            </div>
+          </div>
+          <div className="col-md-5">
+            <div className="form-group" id="location">
+              <input
+                type="text"
+                name="location"
+                value={state.location || ''}
+                placeholder="Enter a location"
+              />
+              </div>
+          </div>
+          <div className="col-md-2">
+            <button variant="primary" type="submit" className="btn-search">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
   );
 }
 
