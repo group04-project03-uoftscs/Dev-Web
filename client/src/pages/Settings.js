@@ -35,15 +35,17 @@ function Settings() {
     <>
     <div className="my-14">
       <h1>Account Settings</h1>
+
       <h2>
-        Edit Profile
+        Edit Your Profile
       </h2>
+
       <h2>
         Change Password
       </h2>
-      <h2>
+      <button className="del-account" style={{ backgroundColor:"mediumvioletred", color:"white"}}>
         Delete Account
-      </h2>
+      </button>
     </div>
     </>
   );
