@@ -108,7 +108,7 @@ function LoadFiles () {
   }
 
   const getUser = (user) => {
-    API.getUser(user)
+    API.getUserInfo(user)
       .then(result =>{
         console.log('user')
         
