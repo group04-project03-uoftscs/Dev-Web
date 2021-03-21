@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect } from "react";
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import Moment from 'moment';
 
 import API from '../utils/API';
@@ -11,7 +11,10 @@ import { useHistory } from 'react-router-dom';
 function Jobs() {
   
   const [state, dispatch] = useStoreContext();
-  const today = Moment().format("YYYY-MM-DD")
+  const today = Moment().format("YYYY-MM-DD");
+
+  const [searchLocation, setsearchLocation] = useState(state.location);
+  const [description, setDescription] = useState("");
   //Used for redirection
   const history = useHistory();
 
@@ -78,13 +81,11 @@ function Jobs() {
 
 /* This part below is to handle form request */
 
-  const descriptionRef = useRef();
-  const locationRef = useRef();
   const handleSubmit = (e) =>{
     e.preventDefault();
     API.getJobs({
-      description: descriptionRef.current.value,
-      location: locationRef.current.value
+      description: description,
+      location: searchLocation
     })
       .then(result =>{
         dispatch({
@@ -135,7 +136,8 @@ function Jobs() {
               <input
                 type="text"
                 name="description"
-                value={state.description || ''}
+                value={description}
+                onChange={e=>setDescription(e.target.value)}
                 placeholder="Got a title in mind?"
               />
             </div>
@@ -145,7 +147,8 @@ function Jobs() {
               <input
                 type="text"
                 name="location"
-                value={state.location || ''}
+                value={searchLocation}
+                onChange={e=>setsearchLocation(e.target.value)}
                 placeholder="Enter a location"
               />
               </div>
