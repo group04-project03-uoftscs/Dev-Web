@@ -303,11 +303,21 @@ router.route("/technewsapi")
           return article
         })
         const articles = await Promise.all(promises)
-        res.json(data.concat(articles))
+        const combinedArticles = interleave(data, articles);
+        res.json(combinedArticles)
       })
     })
   })
 
+const interleave = (arr1, arr2) => {
+  let newArr = [];
+  let maxLength = Math.max(arr1.length, arr2.length);
+  for(let i = 0; i < maxLength; i++){
+    if(i < arr1.length) newArr.push(arr1[i]);
+    if(i < arr2.length) newArr.push(arr2[i]);
+  }
+  return newArr;
+}
 
 // Get HackerNews Data
 const getHackerNewsIDs = (cb) => {
