@@ -7,7 +7,7 @@ import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_USER, FOUND_USER, LOADED, LOADING } from "../utils/actions";
+import { UPDATE_USER, FOUND_USER, LOADED, LOADING, UPDATE_LOCATION } from "../utils/actions";
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -57,11 +57,17 @@ const handleSubmit = (e) =>{
         type: UPDATE_USER,
         items: result.data
       })
-
+      dispatch({
+        type: UPDATE_LOCATION,
+        items: locationRef.current.value
+      })
+      history.push('/')
     })
     .catch(err => console.log(err))
 }
 /* The part above is to handle form request */
+
+console.log(state)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -97,9 +103,11 @@ const handleSubmit = (e) =>{
                   </img>
                 </div>
                 <input
-                  type="email"
+                  type="text"
                   className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  placeholder="email@example.com"
+                  placeholder="Github-Username"
+                  value={state.user.username}
+                  ref={githubRef}
                 />
               </div>
             </div>
@@ -126,6 +134,8 @@ const handleSubmit = (e) =>{
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="Toronto, Canada"
+                    value={state.location}
+                    ref={locationRef}
                   />
                 </div>
               </div>
@@ -146,6 +156,7 @@ const handleSubmit = (e) =>{
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="JavaScript, Java, Python, SQL, C#, ..."
+                    ref={languagesRef}
                   />
                 </div>
               </div>

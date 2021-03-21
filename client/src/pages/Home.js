@@ -5,7 +5,7 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { AUTH_METHOD, FOUND_USER, LOADED, LOADING } from '../utils/actions';
+import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCATION } from '../utils/actions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -56,12 +56,25 @@ function Home () {
               languages: '',
               favorites: []
             }
+            dispatch({
+              type: UPDATE_LOCATION,
+              location: userData._json.location
+            })
             API.addGithubUser(newGithubUserData)
             .then(() => {
               history.push('/newuser')
             }) 
           } else {
-            return;
+            console.log(githubData.data[0].location)
+            dispatch({
+              type: UPDATE_LOCATION,
+              location: githubData.data[0].location
+            })
+            getFavoriteRecursion(githubData.data[0].favorites,[], favoriteList =>{
+          
+              console.log(favoriteList)
+              dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+            });
           }
         })
       } else if(!data.hasOwnProperty('user')) {
@@ -73,6 +86,66 @@ function Home () {
     }
     getUser();
   }, [state.logged]);
+
+  console.log(state)
+
+  const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
+    console.log(databaseList)
+    console.log(favoriteList)
+    if(databaseList.length === favoriteList.length) cb(favoriteList);
+    else{
+      let fave = databaseList[favoriteList.length];
+      if(fave.type === "episodes" || fave.type === "podcasts") {
+        let localItems = JSON.parse(localStorage.getItem(fave.type));
+        let found = localItems.filter(item => item.id === fave.id);
+        if(found.length === 1) {
+          favoriteList.push(found[0]);
+          getFavoriteRecursion(databaseList,favoriteList,cb)
+        }
+        else {
+          if(fave.type === "episodes"){
+            API.getEpisode(fave.id)
+              .then(result => {
+
+                let saved = JSON.parse(localStorage.getItem(fave.type));
+                saved.push(result.data);
+                localStorage.setItem(fave.type, JSON.stringify(saved));
+                
+                favoriteList.push(result.data);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+              .catch(err =>{
+                console.log(err);
+                favoriteList.push(fave);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+          }
+          else if(fave.type === "podcasts"){
+            API.getPodcast(fave.id)
+              .then(result => {
+                console.log(result.data)
+
+                let saved = JSON.parse(localStorage.getItem(fave.type));
+                saved.push(result.data);
+                localStorage.setItem(fave.type, JSON.stringify(saved));
+                
+                favoriteList.push(result.data);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+              .catch(err =>{
+                console.log(err);
+                favoriteList.push(fave);
+                getFavoriteRecursion(databaseList,favoriteList,cb);
+              })
+          }
+        }
+      }
+      else {
+        favoriteList.push(fave);
+        getFavoriteRecursion(databaseList,favoriteList,cb);
+      }
+    }
+  }
 
   console.log(state)
 
