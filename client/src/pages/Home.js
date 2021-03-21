@@ -30,16 +30,37 @@ function Home () {
       type: LOADING
     })
     async function getUser() {
-      const data = await API.getUser();
-      console.log(data.data)
-      console.log(data.data.hasOwnProperty('id'))
-      if(data.data.hasOwnProperty('id') || data.data.hasOwnProperty('_id')) {
+      const {data} = await API.getUser();
+      console.log(data);
+      console.log(data.hasOwnProperty('user'))
+      if(data.hasOwnProperty('user')) {
+        const userData = data.user
+        console.log(userData);
         dispatch({
           type: FOUND_USER,
-          user: data.data
+          user: userData
         });
-        console.log('logged: ' + state.logged)
-      } else if(!data.data.hasOwnProperty('id') || !data.data.hasOwnProperty('_id')) {
+        API.findGithubUser(userData.id)
+        .then(githubData=> {
+          console.log(githubData.data.length)
+          if(!githubData.data.length){
+            let newGithubUserData = {
+              username: userData.username,
+              github: userData._json,
+              auth: 'github',
+              location: userData._json.location,
+              languages: '',
+              favorites: []
+            }
+            API.addGithubUser(newGithubUserData)
+            .then(() => {
+              history.push('/newuser')
+            }) 
+          } else {
+            return;
+          }
+        })
+      } else if(!data.hasOwnProperty('user')) {
         dispatch({
           type: LOADED
         })
@@ -55,9 +76,9 @@ function Home () {
     <>
       <div className="mx-14 flex flex-col justify-center max-h-full pl-2 pr-2 rounded-md xl:pr-4 gap-y-36">
         
-        <div class="p-4 text-white bg-blue-500 rounded-md shadow-md">
-              <div class="flex items-center justify-center">
-                <span class="text-3xl font-semibold tracking-wider uppercase">Home page</span>
+        <div className="p-4 text-white bg-blue-500 rounded-md shadow-md">
+              <div className="flex items-center justify-center">
+                <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.username}!</span>
               </div>
             </div>
         { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
@@ -68,8 +89,8 @@ function Home () {
           </div>
           :
           <div>
-            <div class="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
-              <span class="text-xl tracking-wider text-gray-500 uppercase">Loading user account info</span>
+            <div className="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
+              <span className="text-xl tracking-wider text-gray-500 uppercase">Loading user account info</span>
             </div> 
           </div>
         }
@@ -82,8 +103,8 @@ function Home () {
           })
           : 
           <div>
-            <div class="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
-              <span class="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
+            <div className="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
+              <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
             </div>
           </div>
         }

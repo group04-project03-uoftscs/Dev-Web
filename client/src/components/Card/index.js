@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/actions';
 import API from '../../utils/API';
+import logo from '../../assets/images/Dev_Web.gif'
 
 function Card ({article}) {
 
@@ -62,24 +63,24 @@ function Card ({article}) {
       })
   }
 
-  const Errorpic = 'https://picsum.photos/400';
+  const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
   const fallbackUrl = 'https://media.giphy.com/media/uprwwjptZW4Za/giphy.gif';
 
   return(
-    <div class="transition-all duration-150 flex px-4 py-6 md:w-1/2 lg:w-1/3 xl:w-1/4">
-      <div class="px-4 pb-5 flex-grow-0 bg-white bg-opacity-50 rounded text-black border border-gray-300 shadow-lg">
+    <div className="transition-all duration-150 flex px-4 py-6 md:w-1/2 lg:w-1/3 xl:w-1/4">
+      <div className="px-4 pb-5 flex-grow-0 bg-white bg-opacity-50 rounded text-black border border-gray-300 shadow-lg">
         
-        <div class="w-full mb-3 pb-5 border-b border-1 border-white">
-          <h3 class="text-xl py-2 font-semibold text-shadow"><a href={article.url}><h3>{article.title}</h3></a></h3>
+        <div className="w-full mb-3 pb-5 border-b border-1 border-white">
+          <h3 className="text-lg pt-2 font-semibold text-shadow overflow-hidden line-clamp-3"><a href={article.url}><h3>{article.title}</h3></a></h3>
         </div>
 
         <div>
-          <a href={article.url}><ReactImageFallback class="w-full h-48 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
+          <a href={article.url}><ReactImageFallback className="w-full h-48 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
           
-          <p class="mb-3 tracking-wide text-base text-shadow">
+          <p className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
           </p>
-          <button class="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg">
+          <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg">
             
             {isBookmarked ? 
               <button onClick={removeBookmark}><FontAwesomeIcon icon={['fas','bookmark']} /></button> 

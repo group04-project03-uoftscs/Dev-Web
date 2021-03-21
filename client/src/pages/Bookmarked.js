@@ -1,15 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "../styles/background.scss";
+
+import API from '../utils/API';
+import { useStoreContext } from "../utils/GlobalState";
+import { FOUND_USER, LOADING, LOADED } from "../utils/actions";
+
+// Used for redirection
+import { useHistory } from 'react-router-dom';
 
 function Bookmarked() {
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
+
+  const [state, dispatch] = useStoreContext();
+
+  //Used for redirection
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Used for authentication
+  useLayoutEffect(() => {
+    dispatch({
+      type: LOADING
+    })
+    async function getUser() {
+      const {data} = await API.getUser();
+      console.log(data.hasOwnProperty('user'))
+      if(data.hasOwnProperty('user')) {
+        dispatch({
+          type: FOUND_USER,
+          user: data.user
+        });
+        console.log('logged: ' + state.logged)
+      } else if(!data.hasOwnProperty('user')) {
+        dispatch({
+          type: LOADED
+        })
+        history.push('/login')
+      }
+    }
+    getUser();
+  }, [state.logged]);
 
   const renderContent = () => (
     <>

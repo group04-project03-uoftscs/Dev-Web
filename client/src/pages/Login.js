@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import styles from "../styles/styles.css"
 import githubicon from "../assets/images/github.svg"
 import googleicon from "../assets/images/google.svg";
+import API from '../utils/API';
 
 function Login() {
   useEffect(()=> {
-    fetch('/user')
-    .then(response=>response.json())
-    .then(data=> console.log(data));
+    API.getUser()
+    .then(data=>console.log(data.data.user))
   })
   const githubLogin = () => {
     fetch('/github')
@@ -71,6 +71,7 @@ function Login() {
                           type="email"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Email"
+                          required
                         />
                       </div>
 
@@ -85,6 +86,7 @@ function Login() {
                           type="password"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Password"
+                          required
                         />
                       </div>
                       <div>

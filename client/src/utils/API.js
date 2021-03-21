@@ -53,5 +53,13 @@ export default {
 
   getUser: function() {
     return axios.get('/user');
+  },
+
+  addGithubUser: function(githubUserData) {
+    return axios.post('/api/github/add', githubUserData);
+  },
+
+  findGithubUser: function(user) {
+    return axios.get(`/api/github/${user}`)
   }
 };
