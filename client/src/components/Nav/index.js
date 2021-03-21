@@ -3,9 +3,6 @@ import { useStoreContext } from "../../utils/GlobalState";
 import UserDropdown from "./UserDropdown";
 import LoginDropdown from "./LoginDropdown";
 import ReactImageFallback from "react-image-fallback";
-import { FOUND_USER, LOADED, LOADING } from '../../utils/actions';
-import { useHistory } from 'react-router-dom';
-import API from '../../utils/API';
 
 //svg & icons
 import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg"
@@ -17,35 +14,6 @@ import Login from "../../assets/svg/icons8-user-shield-96.png"
 function Nav() {
   const [store] = useStoreContext();
   const Errorpic = 'https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png';
-
-  const [state, dispatch] = useStoreContext();
-
-  console.log(state);
-  const history = useHistory();
-
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const data = await API.getUser();
-      console.log(data.data)
-      console.log(data.data.hasOwnProperty('id'))
-      if(data.data.hasOwnProperty('id') || data.data.hasOwnProperty('_id')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.data
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.data.hasOwnProperty('id') || !data.data.hasOwnProperty('_id')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
-    }
-    getUser();
-  }, [state.logged]);
 
   return (
     <nav className="fixed top-0 w-full z-30">
@@ -97,7 +65,7 @@ function Nav() {
                 </a>
                 <a href="/"
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center">
-                    <ReactImageFallback src={state.user.profileUrl} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
+                    <ReactImageFallback src={Errorpic} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
                 </a>
                 <a 
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
