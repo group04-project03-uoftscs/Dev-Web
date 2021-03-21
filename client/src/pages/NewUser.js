@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 
 //icons & svg
 import githubicon from "../assets/images/github.svg"
@@ -16,6 +16,9 @@ function NewUser() {
 
 /* This part below is to handle form request */
 const [state, dispatch] = useStoreContext();
+const [newLocation, setNewLocation] = useState(state.location);
+const [newUsername, setNewUsername] = useState(state.user.username);
+const [newLanguages, setNewLanguages] = useState("");
 
 const history = useHistory();
 
@@ -42,15 +45,12 @@ const history = useHistory();
     getUser();
   }, [state.logged]);
 
-const githubRef = useRef();
-const locationRef = useRef();
-const languagesRef = useRef();
 const handleSubmit = (e) =>{
   e.preventDefault();
-  API.updateUser({
-    github: githubRef.current.value,
-    location: locationRef.current.value,
-    language: languagesRef.current.value
+  API.updateUser(state.user.username,{
+    // github: newUsername,
+    location: newLocation,
+    language: newLanguages
   })
     .then(result =>{
       dispatch({
@@ -59,7 +59,7 @@ const handleSubmit = (e) =>{
       })
       dispatch({
         type: UPDATE_LOCATION,
-        items: locationRef.current.value
+        items: newLocation
       })
       history.push('/')
     })
@@ -106,8 +106,8 @@ console.log(state)
                   type="text"
                   className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                   placeholder="Github-Username"
-                  value={state.user.username}
-                  ref={githubRef}
+                  value={newUsername}
+                  onChange={e=>setNewUsername(e.target.value)}
                 />
               </div>
             </div>
@@ -134,8 +134,8 @@ console.log(state)
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="Toronto, Canada"
-                    value={state.location}
-                    ref={locationRef}
+                    value={newLocation}
+                    onChange={e=>setNewLocation(e.target.value)}
                   />
                 </div>
               </div>
@@ -156,7 +156,8 @@ console.log(state)
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="JavaScript, Java, Python, SQL, C#, ..."
-                    ref={languagesRef}
+                    value={newLanguages}
+                    onChange={e=>setNewLanguages(e.target.value)}
                   />
                 </div>
               </div>
