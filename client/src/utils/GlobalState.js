@@ -13,8 +13,8 @@ import {
   UPDATE_EPISODES,
   FOUND_USER,
   LOADING,
-  LOADED
-
+  LOADED,
+  AUTH_METHOD
 } from "./actions";
 
 const StoreContext = createContext();
@@ -108,6 +108,12 @@ const reducer = (state, action) => {
         ...state,
         loading: false
       }
+    case AUTH_METHOD: {
+      return {
+        ...state,
+        auth: action.auth
+      }
+    }
   }
 }
 
@@ -125,8 +131,8 @@ const StoreProvider = ({value = [], ...props}) => {
     jobs: [],
     codewars: {},
     logged: false,
-    loading: false
-
+    loading: false,
+    auth: ''
   });
   
   return <Provider value={[state, dispatch]} {...props} />;

@@ -17,3 +17,4 @@ export const FOUND_USER = 'FOUND_USER';
 export const LOGGED = 'LOGGED';
 export const LOADING = 'LOADING';
 export const LOADED = 'LOADED'
+export const AUTH_METHOD = 'AUTH_METHOD';

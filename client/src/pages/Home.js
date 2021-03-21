@@ -5,7 +5,7 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { FOUND_USER, LOADED, LOADING } from '../utils/actions';
+import { AUTH_METHOD, FOUND_USER, LOADED, LOADING } from '../utils/actions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -37,6 +37,10 @@ function Home () {
         const userData = data.user
         console.log(userData);
         dispatch({
+          type: AUTH_METHOD,
+          auth: data.auth
+        })
+        dispatch({
           type: FOUND_USER,
           user: userData
         });
@@ -64,7 +68,7 @@ function Home () {
         dispatch({
           type: LOADED
         })
-        history.push('/login')
+        history.push('/landing')
       }
     }
     getUser();
@@ -115,6 +119,7 @@ function Home () {
 
   return(
     <div>
+      {console.log(state)}
       <section className="Parallax">
         <div
           className="Parallax__background"
