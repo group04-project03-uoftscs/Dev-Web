@@ -7,7 +7,12 @@ import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg
 import { ReactComponent as News } from "../../assets/svg/icons8-news.svg"
 import Login from "../../assets/svg/icons8-user-shield-96.png"
 
+import { useStoreContext } from "../../utils/GlobalState";
+
 const UserDropdown = () => {
+
+  
+  const [state,dispatch] = useStoreContext();
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -45,6 +50,28 @@ const UserDropdown = () => {
           "bg-indigo-100 text-base z-50 float-left px-2 py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
+        {state.logged ? 
+          <div>
+            <Link
+            to="/settings"
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
+            }
+            >
+            Account Settings
+            </Link>
+            <div className="h-0 my-2 border border-solid border-white" />
+            <Link
+            to="/logout"
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
+            }
+            >
+            Logout
+            </Link>
+          </div>
+          :
+        <div>
         <Link
           to="/Login"
           className={
@@ -62,14 +89,17 @@ const UserDropdown = () => {
         >
           Sign Up
         </Link>
-        <Link
+        </div>
+        }
+        
+        {/* <Link
           to="/newuser"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           New User
-        </Link>
+        </Link> */}
       </div>
     </>
   );

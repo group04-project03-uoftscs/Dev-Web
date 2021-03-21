@@ -173,7 +173,7 @@ function Home () {
         }
 
         <div>
-          {state.favorites.length!==0 ?  state.favorites.map((article) => {
+          {state.favorites.length!==0 ?  state.favorites.slice(0,Math.min(state.favorites.length,5)).map((article) => {
             return (
               <Card article={article} key={article.id}/>
             )

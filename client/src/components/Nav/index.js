@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useStoreContext } from "../../utils/GlobalState";
 import UserDropdown from "./UserDropdown";
 import LoginDropdown from "./LoginDropdown";
 import ReactImageFallback from "react-image-fallback";
@@ -13,21 +12,20 @@ import Podcast from "../../assets/svg/icons8-browse-podcasts-96.png"
 import Login from "../../assets/svg/icons8-user-shield-96.png"
 
 function Nav() {
-  const [store] = useStoreContext();
   const Errorpic = 'https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png';
 
   return (
     <nav className="fixed top-0 w-full z-30">
         <div className="w-full bg-indigo-500 shadow-md h-12 flex justify-between ">
             <div className="w-full lg:w-4/6 xl:w-full  h-full flex items-center px-4 ">
-                <Link to="/landing"><img className="fill-current w-8 h-8 lg:w-10 lg:h-10 text-white"
+                <Link to="/"><img className="fill-current w-8 h-8 lg:w-10 lg:h-10 text-white"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3f6aff"
                         src="https://i.postimg.cc/CMBZQw3B/Dev-Web.png"></img></Link>
 
                 <div className="relative mx-3" x-data="{dropdown : false}">
                 </div>
             </div>
-
+        
             <div className="hidden md:flex w-full  h-full justify-center">
                 <div className="border-b-4 text-white hover:text-black hover:border-blue-600">
                     <Link to="/news"
