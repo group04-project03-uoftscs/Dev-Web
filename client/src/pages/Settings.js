@@ -8,6 +8,8 @@ import { UPDATE_USER, FOUND_USER, LOADING, LOADED } from "../utils/actions";
 // Used for redirection
 import { useHistory } from 'react-router-dom';
 
+import { githubAuth } from '../functions/functions';
+
 function Settings() {
 
   //Used for redirection
@@ -41,27 +43,25 @@ function Settings() {
 
   //User authentication
   useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
+    if(state.logged) {
+      return;
+    } else {
+      API.getUser()
+      .then(({data}) => {
+        console.log(data);
+        if(data.auth === 'github') {
+          githubAuth(data, dispatch, API, state)
+        } else if (data.auth === 'local') {
+          dispatch({
+            type: FOUND_USER,
+            user: {...data.user}
+          })
+        } else {
+          history.push('/landing')
+        }
+      })
     }
-    getUser();
-  }, [state.logged]);
+  }, []);
 
   return (
     <>

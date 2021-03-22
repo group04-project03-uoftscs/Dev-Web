@@ -10,6 +10,8 @@ import { useStoreContext } from "../utils/GlobalState";
 
 import { FOUND_USER, LOADED, LOADING } from '../utils/actions';
 
+import { githubAuth } from '../functions/functions';
+
 import API from '../utils/API';
 
 function News () {
@@ -19,27 +21,25 @@ function News () {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
+    if(state.logged) {
+      return;
+    } else {
+      API.getUser()
+      .then(({data}) => {
+        console.log(data);
+        if(data.auth === 'github') {
+          githubAuth(data, dispatch, API, state)
+        } else if (data.auth === 'local') {
+          dispatch({
+            type: FOUND_USER,
+            user: {...data.user}
+          })
+        } else {
+          history.push('/landing')
+        }
+      })
     }
-    getUser();
-  }, [state.logged]);
+  }, []);
 
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);

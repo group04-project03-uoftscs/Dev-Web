@@ -5,7 +5,9 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { AUTH_METHOD, FOUND_USER, LOADED, LOADING } from '../utils/actions';
+import { FOUND_USER } from '../utils/actions';
+
+import { githubAuth } from '../functions/functions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -26,79 +28,31 @@ function Home () {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    // This will get the user data if used any other type of logging in
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data);
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
+    API.getUser()
+      .then(({data}) => {
+        console.log(data);
         if(data.auth === 'github') {
-          githubAuth(data);
-        }
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/landing')
-      }
-    }
-    //Check if user is logged in or not, this is mainly for local logging in
-    if(!state.logged) {
-      history.push('/landing')
-    } else {
-      if(state.auth === 'local') {
-        API.getDatabaseUser(state.user.username)
-          .then(data => {
-            console.log(data.data[0].firstTime);
-            if(data.data[0].firstTime === true) {
+          githubAuth(data, dispatch, API, state)
+        } else if (data.auth === 'local') {
+          dispatch({
+            type: FOUND_USER,
+            user: data.user
+          });
+          API.getDatabaseUser(data.user.username)
+          .then(localData => {
+            console.log(localData.data[0].firstTime);
+            if(localData.data[0].firstTime === true) {
               API.getLocalUserUpdate(state.user.username, {firstTime: false})
               .then(() => history.push('/newuser'));
             }
           })
-      } else if (!state.auth) {
-        getUser();
-      }
-    }
-  }, [state.logged]);
+        } else {
+          history.push('/landing')
+        }
+      })
+  }, []);
 
   console.log(state)
-
-  const githubAuth = (data) => {
-    const userData = data.user
-        console.log(userData);
-        dispatch({
-          type: AUTH_METHOD,
-          auth: data.auth
-        })
-        dispatch({
-          type: FOUND_USER,
-          user: userData
-        });
-        API.findGithubUser(userData.id)
-        .then(githubData=> {
-          console.log(githubData.data.length)
-          if(!githubData.data.length){
-            let newGithubUserData = {
-              username: userData.username,
-              github: userData._json,
-              auth: 'github',
-              location: userData._json.location,
-              languages: '',
-              favorites: [],
-              firstTime: false
-            }
-            API.addGithubUser(newGithubUserData)
-            .then(() => {
-              history.push('/newuser')
-            }) 
-          } else {
-            return;
-          }
-        })
-  }
 
   const renderContent = () => (
     <>

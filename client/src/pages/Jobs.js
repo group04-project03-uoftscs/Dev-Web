@@ -1,8 +1,9 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_JOBS, FOUND_USER, LOADING, LOADED } from "../utils/actions";
+import { githubAuth } from '../functions/functions';
 
 // Used for redirection
 import { useHistory } from 'react-router-dom';
@@ -34,28 +35,26 @@ function Jobs() {
 /* The part above is to handle form request */
 
 // Used for authentication
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
+useLayoutEffect(() => {
+  if(state.logged) {
+    return;
+  } else {
+    API.getUser()
+    .then(({data}) => {
+      console.log(data);
+      if(data.auth === 'github') {
+        githubAuth(data, dispatch, API, state)
+      } else if (data.auth === 'local') {
         dispatch({
           type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
+          user: {...data.user}
         })
-        history.push('/login')
+      } else {
+        history.push('/landing')
       }
-    }
-    getUser();
-  }, [state.logged]);
+    })
+  }
+}, []);
 
   return (
     <div className="my-14 container">

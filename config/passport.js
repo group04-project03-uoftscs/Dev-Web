@@ -30,7 +30,21 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+  let userInformation;
+  if(obj.hasOwnProperty('provider')) {
+    userInformation = {
+      user: {...obj},
+      auth: obj.provider
+    }
+  } else {
+    userInformation = {
+      user: {
+        username: obj.username
+      },
+      auth: 'local'
+    }
+  }
+  cb(null, userInformation);
 });
 
 

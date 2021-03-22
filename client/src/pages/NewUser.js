@@ -20,26 +20,32 @@ const [state, dispatch] = useStoreContext();
 const history = useHistory();
 
   useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
+    // dispatch({
+    //   type: LOADING
+    // })
+    // async function getUser() {
+    //   const {data} = await API.getUser();
+    //   console.log(data.hasOwnProperty('user'))
+    //   if(data.hasOwnProperty('user')) {
+    //     dispatch({
+    //       type: FOUND_USER,
+    //       user: data.user
+    //     });
+    //     console.log('logged: ' + state.logged)
+    //   } else if(!data.hasOwnProperty('user')) {
+    //     dispatch({
+    //       type: LOADED
+    //     })
+    //     history.push('/login')
+    //   }
+    // }
+    // getUser();
+    console.log(state.logged)
+    if(state.logged) {
+      return;
+    } else {
+      history.push('/landing');
     }
-    getUser();
   }, [state.logged]);
 
 const githubRef = useRef();

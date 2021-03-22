@@ -15,6 +15,7 @@ import {
   LOADING,
   LOADED,
   AUTH_METHOD,
+  FOUND_LOCAL_USER,
 } from "./actions";
 
 const StoreContext = createContext();
@@ -95,6 +96,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: {...action.user},
+        logged: true,
+        loading: false
+      };
+    case FOUND_LOCAL_USER:
+      return {
+        ...state,
+        user: action.user,
         logged: true,
         loading: false
       };

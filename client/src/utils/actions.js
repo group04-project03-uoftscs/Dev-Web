@@ -14,6 +14,7 @@ export const UPDATE_EPISODES = "UPDATE_EPISODES";
 
 // Added these new actions for log in
 export const FOUND_USER = 'FOUND_USER';
+export const FOUND_LOCAL_USER = 'FOUND_LOCAL_USER';
 export const LOGGED = 'LOGGED';
 export const LOADING = 'LOADING';
 export const LOADED = 'LOADED'
