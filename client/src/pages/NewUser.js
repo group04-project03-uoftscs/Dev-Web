@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 
 //icons & svg
 import githubicon from "../assets/images/github.svg"
@@ -7,7 +7,7 @@ import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_USER, FOUND_USER, LOADED, LOADING } from "../utils/actions";
+import { UPDATE_USER, FOUND_USER, LOADED, LOADING, UPDATE_LOCATION } from "../utils/actions";
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -16,6 +16,9 @@ function NewUser() {
 
 /* This part below is to handle form request */
 const [state, dispatch] = useStoreContext();
+const [newLocation, setNewLocation] = useState(state.location);
+const [newUsername, setNewUsername] = useState(state.user.username);
+const [newLanguages, setNewLanguages] = useState("");
 
 const history = useHistory();
 
@@ -42,26 +45,29 @@ const history = useHistory();
     getUser();
   }, [state.logged]);
 
-const githubRef = useRef();
-const locationRef = useRef();
-const languagesRef = useRef();
 const handleSubmit = (e) =>{
   e.preventDefault();
-  API.updateUser({
-    github: githubRef.current.value,
-    location: locationRef.current.value,
-    language: languagesRef.current.value
+  API.updateUser(state.user.username,{
+    // github: newUsername,
+    location: newLocation,
+    language: newLanguages
   })
     .then(result =>{
       dispatch({
         type: UPDATE_USER,
         items: result.data
       })
-
+      dispatch({
+        type: UPDATE_LOCATION,
+        items: newLocation
+      })
+      history.push('/')
     })
     .catch(err => console.log(err))
 }
 /* The part above is to handle form request */
+
+console.log(state)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -97,9 +103,11 @@ const handleSubmit = (e) =>{
                   </img>
                 </div>
                 <input
-                  type="email"
+                  type="text"
                   className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  placeholder="email@example.com"
+                  placeholder="Github-Username"
+                  value={newUsername}
+                  onChange={e=>setNewUsername(e.target.value)}
                 />
               </div>
             </div>
@@ -126,6 +134,8 @@ const handleSubmit = (e) =>{
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="Toronto, Canada"
+                    value={newLocation}
+                    onChange={e=>setNewLocation(e.target.value)}
                   />
                 </div>
               </div>
@@ -146,6 +156,8 @@ const handleSubmit = (e) =>{
                     type="text"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                     placeholder="JavaScript, Java, Python, SQL, C#, ..."
+                    value={newLanguages}
+                    onChange={e=>setNewLanguages(e.target.value)}
                   />
                 </div>
               </div>

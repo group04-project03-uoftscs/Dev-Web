@@ -24,6 +24,7 @@ import Podcast from "./pages/Podcast";
 import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 import LoadFiles from "./pages/LoadFiles";
+import PrivateRoute from "./pages/PrivateRoute"
 
 //components
 import Nav from "./components/Nav"
@@ -44,17 +45,20 @@ function App() {
           <Nav />
           <Switch>
 
+            {/* <Route exact path="/landing" component={Landing} /> */}
             <Route exact path="/" component={Home} />
-            <Route exact path="/bookmarked" component={Bookmarked} />
-            <Route exact path="/jobs" component={Jobs} />
-            <Route exact path="/landing" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/news" component={News} />
-            <Route path="/newuser" component={NewUser} />
-            <Route path="/playlist" component={Playlist} />
-            <Route path="/podcast" component={Podcast} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <PrivateRoute exact path="/bookmarked" component={Bookmarked}/>
+            <PrivateRoute exact path="/jobs" component={Jobs}/>
+            <PrivateRoute exact path="/news" component={News} />
+            <PrivateRoute exact path="/newuser" component={NewUser} />
+            <PrivateRoute exact path="/playlist" component={Playlist} />
+            <PrivateRoute exact path="/podcast" component={Podcast} />
+            <PrivateRoute exact path="/settings" component={Settings} />
+
+
+            <Route component={ Home } /> 
           </Switch>
           
           <Footer />

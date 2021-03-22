@@ -6,6 +6,7 @@ import {
   UPDATE_TECHNEWS,
   GET_FAVORITES,
   UPDATE_USER,
+  UPDATE_LOCATION,
   UPDATE_JOBS,
   UPDATE_CODEWARS,
   UPDATE_WORLDNEWS,
@@ -90,6 +91,12 @@ const reducer = (state, action) => {
         ...state,
         user: {...action.user}
       };
+
+    case UPDATE_LOCATION: 
+      return {
+        ...state,
+        location: action.location
+      }
     // new case related to adding user
     case FOUND_USER:
       return {
@@ -132,6 +139,7 @@ const StoreProvider = ({value = [], ...props}) => {
     codewars: {},
     logged: false,
     loading: false,
+    location: "",
     auth: ''
   });
   

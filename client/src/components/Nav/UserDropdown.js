@@ -4,6 +4,7 @@ import { createPopper } from "@popperjs/core";
 import { ReactComponent as Caret } from "../../assets/svg/caret.svg"
 import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg"
 import { ReactComponent as News } from "../../assets/svg/icons8-news.svg"
+import { Link } from "react-router-dom";
 
 const UserDropdown = () => {
   // dropdown props
@@ -21,9 +22,9 @@ const UserDropdown = () => {
   };
   return (
     <>
-      <a
+      <Link
         className="text-gray-600 block"
-        href="#pablo"
+        to="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -35,7 +36,7 @@ const UserDropdown = () => {
             <svg viewBox="0 0 64 64" width="96px" height="96px"><Caret /></svg>
           </div>
         </div>
-      </a>
+      </Link>
       <div
         ref={popoverDropdownRef}
         className={
@@ -43,39 +44,39 @@ const UserDropdown = () => {
           "bg-indigo-200 text-base z-50 float-left px-2 py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <a
-          href="/news"
+        <Link
+          to="/news"
           className={
             "text-md py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-bold text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           News
-        </a>
-        <a
-          href="/jobs"
+        </Link>
+        <Link
+          to="/jobs"
           className={
             "text-md py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           Jobs
-        </a>
-        <a
-          href="/podcast"
+        </Link>
+        <Link
+          to="/podcast"
           className={
             "text-md py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           Podcasts
-        </a>
+        </Link>
         <div className="h-0 my-2 border border-solid border-white" />
-        <a
-          href="/settings"
+        <Link
+          to="/settings"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           Account Settings
-        </a>
+        </Link>
       </div>
     </>
   );
