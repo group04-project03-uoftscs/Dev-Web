@@ -10,9 +10,10 @@ import { useStoreContext } from "../utils/GlobalState";
 
 import { FOUND_USER, LOADED, LOADING } from '../utils/actions';
 
-import { githubAuth } from '../functions/functions';
+import { githubAuth, checkLocalStorageHome } from '../functions/functions';
 
 import API from '../utils/API';
+import axios from 'axios';
 
 function News () {
 
@@ -24,6 +25,7 @@ function News () {
     if(state.logged) {
       return;
     } else {
+      checkLocalStorageHome(axios, dispatch)
       API.getUser()
       .then(({data}) => {
         console.log(data);

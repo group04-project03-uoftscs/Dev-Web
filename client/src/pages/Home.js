@@ -5,12 +5,13 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { FOUND_USER } from '../utils/actions';
+import { FOUND_USER, AUTH_METHOD } from '../utils/actions';
 
-import { githubAuth } from '../functions/functions';
+import { githubAuth, checkLocalStorageHome } from '../functions/functions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
+import axios from 'axios';
 
 function Home () {
   const [offsetY, setOffsetY] = useState(0);
@@ -28,29 +29,33 @@ function Home () {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    API.getUser()
-      .then(({data}) => {
-        console.log(data);
-        if(data.auth === 'github') {
-          githubAuth(data, dispatch, API, state)
-        } else if (data.auth === 'local') {
-          dispatch({
-            type: FOUND_USER,
-            user: data.user
-          });
-          API.getDatabaseUser(data.user.username)
-          .then(localData => {
-            console.log(localData.data[0].firstTime);
-            if(localData.data[0].firstTime === true) {
-              API.getLocalUserUpdate(state.user.username, {firstTime: false})
-              .then(() => history.push('/newuser'));
-            }
-          })
-        } else {
-          history.push('/landing')
-        }
-      })
-  }, []);
+    async function checkDatabase(axios, dispatch, history, API, state) {
+      await checkLocalStorageHome(axios, dispatch);
+      API.getUser()
+        .then(({data}) => {
+          console.log(data);
+          if(data.auth === 'github') {
+            githubAuth(data, dispatch, API, state)
+          } else if (data.auth === 'local') {
+            dispatch({
+              type: FOUND_USER,
+              user: data.user
+            });
+            API.getDatabaseUser(data.user.username)
+            .then(localData => {
+              console.log(localData.data[0].firstTime);
+              if(localData.data[0].firstTime === true) {
+                API.getLocalUserUpdate(state.user.username, {firstTime: false})
+                .then(() => history.push('/newuser'));
+              }
+            })
+          } else if(!state.logged) {
+            history.push('/landing')
+          }
+        })
+    }
+    checkDatabase(axios, dispatch, history, API, state)
+  }, [state.logged]);
 
   console.log(state)
 

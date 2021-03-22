@@ -32,4 +32,65 @@ export const githubAuth = (data, dispatch, API, state) => {
           return;
         }
       })
+};
+
+export const checkLocalStorageHome = (axios, dispatch) => {
+  if(localStorage.getItem('user')) {
+    let userData = JSON.parse(localStorage.getItem('user'));
+    console.log(userData);
+    axios({
+      method: 'POST',
+      data: userData,
+      withCredentials: true,
+      url: "/user/login"
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data)
+      if(res.data === 'Incorrect login information') {
+        alert('Email or password is not correct')
+      } else {
+        dispatch({
+          type: FOUND_USER,
+          user: {
+            username: userData.username
+          }
+        });
+        dispatch({
+          type: AUTH_METHOD,
+          auth: 'local'
+        });
+      }
+    });
+  }
+}
+
+export const checkLocalStorageLanding = (axios, dispatch) => {
+  if(localStorage.getItem('user')) {
+    let userData = JSON.parse(localStorage.getItem('user'));
+    console.log(userData);
+    axios({
+      method: 'POST',
+      data: userData,
+      withCredentials: true,
+      url: "/user/login"
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data)
+      if(res.data === 'Incorrect login information') {
+        alert('Email or password is not correct')
+      } else {
+        dispatch({
+          type: FOUND_USER,
+          user: {
+            username: userData.username
+          }
+        });
+        dispatch({
+          type: AUTH_METHOD,
+          auth: 'local'
+        });
+      }
+    });
+    window.location.replace('/');
+  }
 }

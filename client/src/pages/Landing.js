@@ -1,10 +1,18 @@
-import React, { useRef } from "react";
-import { useSpring, animated } from 'react-spring'
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import React, { useRef, useEffect } from "react";
+import { useSpring, animated } from 'react-spring';
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
+import {checkLocalStorageLanding} from '../functions/functions'
+import axios from 'axios';
+import { useStoreContext } from "../utils/GlobalState";
 
 function Landing() {
     const parallax = useRef()
     const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
+    const [state, dispatch] = useStoreContext();
+
+    useEffect(() => {
+      checkLocalStorageLanding(axios, dispatch);
+    }, [])
 
     return (
       <Parallax pages={3} >

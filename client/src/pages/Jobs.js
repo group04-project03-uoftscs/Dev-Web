@@ -3,7 +3,8 @@ import React, { useRef, useLayoutEffect, useEffect } from "react";
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_JOBS, FOUND_USER, LOADING, LOADED } from "../utils/actions";
-import { githubAuth } from '../functions/functions';
+import { checkLocalStorageHome, githubAuth } from '../functions/functions';
+import axios from 'axios';
 
 // Used for redirection
 import { useHistory } from 'react-router-dom';
@@ -39,6 +40,7 @@ useLayoutEffect(() => {
   if(state.logged) {
     return;
   } else {
+    checkLocalStorageHome(axios, dispatch)
     API.getUser()
     .then(({data}) => {
       console.log(data);

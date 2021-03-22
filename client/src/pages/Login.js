@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/styles.css"
 import githubicon from "../assets/images/github.svg"
 import googleicon from "../assets/images/google.svg";
@@ -12,12 +12,13 @@ function Login() {
 
   const [state, dispatch] = useStoreContext();
   const history = useHistory();
-
-  useEffect(()=> {
-    API.getUser()
-    .then(data=>console.log(data.data.user))
-    console.log(state);
-  })
+  const [remember, setRemember] = useState(false);
+  
+  // useEffect(()=> {
+  //   API.getUser()
+  //   .then(data=>console.log(data.data.user))
+  //   console.log(state);
+  // })
   const githubLogin = () => {
     fetch('/github')
   }
@@ -44,6 +45,9 @@ function Login() {
       if(res.data === 'Incorrect login information') {
         alert('Email or password is not correct')
       } else {
+        if(remember) {
+          localStorage.setItem('user', JSON.stringify(userData));
+        }
         dispatch({
           type: FOUND_USER,
           user: {
@@ -144,6 +148,8 @@ function Login() {
                             id="customCheckLogin"
                             type="checkbox"
                             className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                            name='remember'
+                            onChange={(e) => setRemember(e.target.checked)}
                           />
                           <span className="ml-2 text-sm font-semibold text-gray-700">
                             Remember me
