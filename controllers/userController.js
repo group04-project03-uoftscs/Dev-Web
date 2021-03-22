@@ -9,6 +9,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  // addUser will be used to add a user to the database when they register for the first time
+    addUser: function(req,res) {
+      db.User.findOne({username: req.body.username}, (err, res) => {
+        if(err) throw err;
+        if(res) res.send('User already exists');
+        if(!res) {
+          db.User.create(req.body)
+          .then(dbModel => res.send(dbModel))
+        }
+      })
+    },
+
   // update users info - this can be used for new users pages and account settings
   updateUser: function(req, res) {
     db.User.update(
@@ -42,6 +54,20 @@ module.exports = {
       res.json(dbModel)
     })
     .catch(err => res.status(422).json(err));
+  },
+
+  getLocalUserUpdate: function(req,res) {
+    console.log(req.params.user);
+    console.log(req.body);
+    db.User.findOneAndUpdate({username: req.params.user},
+      req.body,
+      {new: true}
+      )
+      .then(dbModel => {
+        console.log(dbModel);
+        res.json(dbModel)
+      })
+      .catch(err => res.status(422).json(err));
   },
 
   // renives a favourite item (like the news, podcasts)

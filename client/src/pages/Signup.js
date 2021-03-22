@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import githubicon from "../assets/images/github.svg"
 import googleicon from "../assets/images/google.svg"
+import API from '../utils/API';
+import bcrypt from 'bcryptjs';
 
 function Signup() {
+
+  const emailInput = useRef();
+  const usernameInput = useRef();
+  const passwordInput = useRef();
+
+  const [checked, setChecked] = useState('false');
+
+  const handleChecked = (e) => {
+    return setChecked(e.target.checked);
+  }
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if(!checked) {
+      return alert('Please accept our privacy policy')
+    }
+    let hashedPassword = bcrypt.hashSync(passwordInput.current.value, 10);
+    const body = {
+      username: usernameInput.current.value,
+      email: emailInput.current.value,
+      password: hashedPassword,
+      auth: 'local',
+      location: '',
+      languages: '',
+      favorites: []
+    }
+    const verifyUser = await API.getDatabaseUser(usernameInput.current.value);
+    if(Object.keys(verifyUser.data).length > 0) {
+      return alert('User alreaedy exists');
+    }
+    API.signup(body);
+  }
+  
   return (
     <>
     <main className="relative w-screen h-screen bg-gray-500">
@@ -47,7 +82,7 @@ function Signup() {
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign up with credentials</small>
                     </div>
-                    <form>
+                    <form onSubmit={handleSignUp}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -59,6 +94,7 @@ function Signup() {
                           type="email"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Name"
+                          ref={usernameInput}
                         />
                       </div>
 
@@ -73,6 +109,7 @@ function Signup() {
                           type="email"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Email"
+                          ref={emailInput}
                         />
                       </div>
 
@@ -87,6 +124,7 @@ function Signup() {
                           type="password"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Password"
+                          ref={passwordInput}
                         />
                       </div>
 
@@ -96,6 +134,8 @@ function Signup() {
                             id="customCheckLogin"
                             type="checkbox"
                             className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                            name='check'
+                            onChange={handleChecked}
                           />
                           <span className="ml-2 text-sm font-semibold text-gray-700">
                             I agree with the{" "}
@@ -113,7 +153,7 @@ function Signup() {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                          type="button"
+                          type="submit"
                         >
                           Create Account
                         </button>

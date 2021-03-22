@@ -29,12 +29,45 @@ function Home () {
     dispatch({
       type: LOADING
     })
+    // This will get the user data if used any other type of logging in
     async function getUser() {
       const {data} = await API.getUser();
       console.log(data);
       console.log(data.hasOwnProperty('user'))
       if(data.hasOwnProperty('user')) {
-        const userData = data.user
+        if(data.auth === 'github') {
+          githubAuth(data);
+        }
+      } else if(!data.hasOwnProperty('user')) {
+        dispatch({
+          type: LOADED
+        })
+        history.push('/landing')
+      }
+    }
+    //Check if user is logged in or not, this is mainly for local logging in
+    if(!state.logged) {
+      history.push('/landing')
+    } else {
+      if(state.auth === 'local') {
+        API.getDatabaseUser(state.user.username)
+          .then(data => {
+            console.log(data.data[0].firstTime);
+            if(data.data[0].firstTime === true) {
+              API.getLocalUserUpdate(state.user.username, {firstTime: false})
+              .then(() => history.push('/newuser'));
+            }
+          })
+      } else if (!state.auth) {
+        getUser();
+      }
+    }
+  }, [state.logged]);
+
+  console.log(state)
+
+  const githubAuth = (data) => {
+    const userData = data.user
         console.log(userData);
         dispatch({
           type: AUTH_METHOD,
@@ -54,7 +87,8 @@ function Home () {
               auth: 'github',
               location: userData._json.location,
               languages: '',
-              favorites: []
+              favorites: [],
+              firstTime: false
             }
             API.addGithubUser(newGithubUserData)
             .then(() => {
@@ -64,17 +98,7 @@ function Home () {
             return;
           }
         })
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/landing')
-      }
-    }
-    getUser();
-  }, [state.logged]);
-
-  console.log(state)
+  }
 
   const renderContent = () => (
     <>

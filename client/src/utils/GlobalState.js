@@ -14,7 +14,7 @@ import {
   FOUND_USER,
   LOADING,
   LOADED,
-  AUTH_METHOD
+  AUTH_METHOD,
 } from "./actions";
 
 const StoreContext = createContext();
@@ -97,7 +97,7 @@ const reducer = (state, action) => {
         user: {...action.user},
         logged: true,
         loading: false
-      }
+      };
     case LOADING: 
       return {
         ...state,
