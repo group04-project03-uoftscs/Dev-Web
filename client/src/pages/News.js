@@ -77,7 +77,7 @@ function News () {
             <h2 className="text-xl font-bold text-gray-700 md:text-2xl">World News</h2>
           </div>
 
-                {/* World Newa */}
+                {/* World News */}
           <div>
             <div className="my-14 flex flex-row flex-wrap mx-auto">
       
