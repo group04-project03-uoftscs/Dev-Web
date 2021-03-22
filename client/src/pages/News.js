@@ -51,18 +51,45 @@ function News () {
   }, []);
 
   const renderContent = () => (
-    <div>
-    News
-      <div className="my-14 flex flex-row flex-wrap mx-auto">
+    <div className="px-6 py-8">
+      <div className="flex justify-between container mx-auto">
+        <div className="w-full lg:w-8/12">
+            {/* Header */}
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-bold text-gray-700 md:text-2xl">Tech News</h1>
+          </div>
+            {/* Tech News Card */}
+          <div>
+            <div className="my-14 flex flex-row flex-wrap mx-auto">
       
-      {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
-        return (
-          <Card article={article} key={article.id}/>
-        )
-      })
-      : 
-      <div>Loading</div>
-      }
+              {state.techNews.length!==0 ?  state.techNews.map((article) => {
+              return (
+              <Card article={article} key={article.id}/>
+              )}): 
+              <div>Loading</div>}
+            </div>
+          </div>
+         </div>
+
+        <div className="lg: w-4/12">
+              {/* Header */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">World News</h2>
+          </div>
+
+                {/* World News */}
+          <div>
+            <div className="my-14 flex flex-row flex-wrap mx-auto">
+      
+              {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
+              return (
+              <Card article={article} key={article.id}/>
+              )}): 
+              <div>Loading</div>}
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
   );

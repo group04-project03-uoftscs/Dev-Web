@@ -4,6 +4,7 @@ export const UPDATE_FAVORITES = "UPDATE_FAVORITES";
 export const GET_FAVORITES = "GET_FAVORITES";
 
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_LOCATION = "UPDATE_LOCATION";
 export const UPDATE_JOBS = "UPDATE_JOBS";
 export const UPDATE_CODEWARS = "UPDATE_CODEWARS";
 
@@ -17,3 +18,4 @@ export const FOUND_USER = 'FOUND_USER';
 export const LOGGED = 'LOGGED';
 export const LOADING = 'LOADING';
 export const LOADED = 'LOADED'
+export const AUTH_METHOD = 'AUTH_METHOD';

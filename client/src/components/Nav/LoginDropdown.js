@@ -1,12 +1,18 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { Link } from "react-router-dom";
 
 import { ReactComponent as Caret } from "../../assets/svg/caret.svg"
 import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg"
 import { ReactComponent as News } from "../../assets/svg/icons8-news.svg"
 import Login from "../../assets/svg/icons8-user-shield-96.png"
 
+import { useStoreContext } from "../../utils/GlobalState";
+
 const UserDropdown = () => {
+
+  
+  const [state,dispatch] = useStoreContext();
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -22,9 +28,9 @@ const UserDropdown = () => {
   };
   return (
     <>
-      <a
+      <Link
         className="text-gray-600 block"
-        href="#pablo"
+        to="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -36,7 +42,7 @@ const UserDropdown = () => {
             <img viewBox="0 0 64 64" width="96px" height="96px" src={ Login }></img>
           </div>
         </div>
-      </a>
+      </Link>
       <div
         ref={popoverDropdownRef}
         className={
@@ -44,31 +50,56 @@ const UserDropdown = () => {
           "bg-indigo-100 text-base z-50 float-left px-2 py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <a
-          href="/Login"
+        {state.logged ? 
+          <div>
+            <Link
+            to="/settings"
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
+            }
+            >
+            Account Settings
+            </Link>
+            <div className="h-0 my-2 border border-solid border-white" />
+            <Link
+            to="/logout"
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
+            }
+            >
+            Logout
+            </Link>
+          </div>
+          :
+        <div>
+        <Link
+          to="/Login"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           Login
-        </a>
+        </Link>
         <div className="h-0 my-2 border border-solid border-white" />
-        <a
-          href="/signup"
+        <Link
+          to="/signup"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           Sign Up
-        </a>
-        <a
-          href="/newuser"
+        </Link>
+        </div>
+        }
+        
+        {/* <Link
+          to="/newuser"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
           }
         >
           New User
-        </a>
+        </Link> */}
       </div>
     </>
   );
