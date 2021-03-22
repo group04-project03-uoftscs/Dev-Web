@@ -3,6 +3,7 @@ import githubicon from "../assets/images/github.svg"
 import googleicon from "../assets/images/google.svg"
 import API from '../utils/API';
 import bcrypt from 'bcryptjs';
+import { useHistory } from 'react-router-dom';
 
 function Signup() {
 
@@ -10,7 +11,9 @@ function Signup() {
   const usernameInput = useRef();
   const passwordInput = useRef();
 
-  const [checked, setChecked] = useState('false');
+  const history = useHistory();
+
+  const [checked, setChecked] = useState(false);
 
   const handleChecked = (e) => {
     return setChecked(e.target.checked);
@@ -18,9 +21,7 @@ function Signup() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if(!checked) {
-      return alert('Please accept our privacy policy')
-    }
+    console.log(checked)
     let hashedPassword = bcrypt.hashSync(passwordInput.current.value, 10);
     const body = {
       username: usernameInput.current.value,
@@ -31,11 +32,18 @@ function Signup() {
       languages: '',
       favorites: []
     }
+    console.log(body);
     const verifyUser = await API.getDatabaseUser(usernameInput.current.value);
     if(Object.keys(verifyUser.data).length > 0) {
       return alert('User alreaedy exists');
     }
-    API.signup(body);
+    if(!checked) {
+      return alert('Please accept our privacy policy')
+    } else if(checked){
+      API.signup(body)
+      .then(data => history.push('/login'))
+      .catch(err =>  console.log(err));
+    }
   }
   
   return (

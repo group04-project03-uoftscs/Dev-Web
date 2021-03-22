@@ -11,12 +11,12 @@ module.exports = {
 
   // addUser will be used to add a user to the database when they register for the first time
     addUser: function(req,res) {
-      db.User.findOne({username: req.body.username}, (err, res) => {
+      db.User.findOne({username: req.body.username}, (err, user) => {
         if(err) throw err;
-        if(res) res.send('User already exists');
-        if(!res) {
+        if(user) res.send('User already exists');
+        if(!user) {
           db.User.create(req.body)
-          .then(dbModel => res.send(dbModel))
+          .then(data => res.json(data));
         }
       })
     },
