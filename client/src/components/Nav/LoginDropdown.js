@@ -70,15 +70,15 @@ const UserDropdown = () => {
             to="/logout"
             onClick={closeDropdownPopover}
 
-           /* <Link onClick={() => {
-              dispatch({
-                type: LOGOUT
-              })
-              if(localStorage.getItem('user')) {
-                localStorage.removeItem('user')
-              }
-              fetch('/logout');
-            }} */
+          //  {/* <Link onClick={() => {
+          //     dispatch({
+          //       type: LOGOUT
+          //     })
+          //     if(localStorage.getItem('user')) {
+          //       localStorage.removeItem('user')
+          //     }
+          //     fetch('/logout');
+          //   }} */}
 
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
