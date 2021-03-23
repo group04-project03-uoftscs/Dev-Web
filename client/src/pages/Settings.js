@@ -64,22 +64,36 @@ function Settings() {
   }, [state.logged]);
 
   return (
-    <>
-    <div className="my-14">
-      <h1><strong>Welcome to Your Account Settings</strong></h1>
+    <div className="settings-tab">
+      <div 
+        className="section-header"
+        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder"}}
+        >
+          <u>Your Account Settings</u>
+      </div>
+      
 
-      <h2>
+      <div
+      className="edit-profile"
+      style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"90px", fontWeight:"bold"}}
+      >
         Edit Your Profile
-      </h2>
+      </div>
 
-      <h4 className="languages">
-        Update your programming languages here:
+
+      <h4 
+      className="languages"
+      style={{paddingLeft:"90px", paddingTop:"20px"}}>
+        Update your programming language flags here:
       </h4>
 
-      <h4 className="location">
+      <h4 
+      className="location"
+      style={{paddingLeft:"90px", paddingTop:"25px"}}
+      >
         Update your location here:
       </h4>
-
+      
       <h2>
         Change Password (applicable for accounts not logging in through third-party authentication)
       </h2>
@@ -87,7 +101,6 @@ function Settings() {
         <strong>Delete Account</strong>
       </button>
     </div>
-    </>
   );
 }
 

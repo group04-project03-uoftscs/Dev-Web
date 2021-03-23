@@ -168,7 +168,7 @@ function Jobs() {
         </div>
       </form>
 
-      
+    <JobCard />
     </div>
   </div>
   );
