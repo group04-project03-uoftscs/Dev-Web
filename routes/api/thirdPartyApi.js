@@ -161,6 +161,7 @@ router.route("/listennotesepisodes")
 // const fakeEpisode = require('./apiresponses/episode-response.json')
 // router.route("/listennotesepisode/:id")
 // .get((req,res)=>{
+//     console.log('getting fake episode')
   
 //     const episode = {
       
@@ -177,7 +178,7 @@ router.route("/listennotesepisodes")
   
 // })
 
-// //real api call
+//real api call
 router.route("/listennotesepisode/:id")
 .get((req,res)=>{
   axios({
@@ -186,8 +187,8 @@ router.route("/listennotesepisode/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    console.log(result.data);
-
+    // console.log(result.data);
+    console.log('getting single episode')
     const episode = {
       
       id: result.data.id,
@@ -215,7 +216,7 @@ router.route("/listennotespodcast/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    console.log(result.data);
+    // console.log(result.data);
     const podcast = {
       id: result.data.id,
       title: result.data.title,

@@ -5,6 +5,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const routes = require('./routes');
+const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
 const GithubStrategy = require('passport-github2').Strategy;
 
@@ -12,11 +13,16 @@ const GithubStrategy = require('passport-github2').Strategy;
 const passport = require('./config/passport');
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: 'Klee was here', resave: true, saveUninitialized: true }));
-app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
+app.use(cookieParser("Klee was here"))
 app.use(passport.initialize())
 app.use(passport.session());
 
-let userData = {}
 // This is the github link strategy
 // Also make sure to add the clientID and secret to a .env file once the app is in production
 passport.use(new GithubStrategy({
@@ -26,18 +32,23 @@ passport.use(new GithubStrategy({
 },
 (accessToken, refreshToken, profile, done) => {
   userData = {
-    user: {...profile},
     auth: 'github'
   }
   return done(null, profile)
 }
 ));
 
-app.get('/user', (req,res) => {
-  console.log(userData);
-  console.log(req.user);
-  res.send(userData);
-})
+
+app.get('/user', (req, res) => {
+  console.log(req.user)
+  res.send(req.user);
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 require('dotenv').config();
 

@@ -7,13 +7,16 @@ export default {
     return axios.post("/api/user/login/",data);
   },
   signup: function(data) {
-    return axios.post("/api/user/signup/",data);
+    return axios.post("/user/signup/",data);
   },
   updateUser: function(user,data) {
     return axios.put("/api/user/"+user, data);
   },
   getUserInfo: function(user) {
     return axios.get("/api/user/"+user);
+  },
+  getDatabaseUser: function(user) {
+    return axios.get(`/api/user/${user}`);
   },
 
   saveFavorite: function(user, data) {
@@ -61,5 +64,9 @@ export default {
 
   findGithubUser: function(user) {
     return axios.get(`/api/github/${user}`)
+  },
+
+  getLocalUserUpdate: function(user, data) {
+    return axios.put(`/api/user/${user}`, data);
   }
 };
