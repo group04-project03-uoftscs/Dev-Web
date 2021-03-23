@@ -1,37 +1,26 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
 
 const db = require('../models');
 
 
 passport.use(new LocalStrategy(
-  {
-    usernameField: "username",
-  },
   (username,password, done) => {
-    db.User.findOne({
-      where: {
-        username: username
-      }
-    }).then(function(dbUser) {
-      // If there's no user with the given email
-      if (!dbUser) {
-        return done(null, false, {
-          message: "Incorrect username."
-        });
-      }
-      // If there is a user with the given email, but the password the user gives us is incorrect
-      else if (!dbUser.validPassword(password)) {
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
-      // If none of the above, return the user
-      // userData = {...dbUser}
-      return done(null, dbUser);
-    });
-  }
-));
+    db.User.findOne({username: username}, (err, user) => {
+      if(err) throw err;
+      if(!user) return done(null,false, {message: 'Incorrect user'})
+      bcrypt.compare(password, user.password, (err,result) => {
+        if(err) throw err;
+        if(result === true) {
+          return done(null, user)
+        } else {
+          return done(null, false, {message: 'Incorrect password'})
+        }
+      })
+    })
+  })
+);
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
@@ -41,7 +30,21 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+  let userInformation;
+  if(obj.hasOwnProperty('provider')) {
+    userInformation = {
+      user: {...obj},
+      auth: obj.provider
+    }
+  } else {
+    userInformation = {
+      user: {
+        username: obj.username
+      },
+      auth: 'local'
+    }
+  }
+  cb(null, userInformation);
 });
 
 

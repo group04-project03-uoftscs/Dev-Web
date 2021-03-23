@@ -8,6 +8,7 @@ const userSchema = new Schema({
   auth: { type: String},
   location: { type: String },
   languages: { type: String },
+  firstTime: {type: Boolean, default: true},
   favorites : { type : Array }
 });
 
