@@ -42,7 +42,13 @@ passport.use(new GithubStrategy({
 app.get('/user', (req, res) => {
   console.log(req.user)
   res.send(req.user);
-})
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 require('dotenv').config();
 

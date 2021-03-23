@@ -8,6 +8,7 @@ import { ReactComponent as News } from "../../assets/svg/icons8-news.svg"
 import Login from "../../assets/svg/icons8-user-shield-96.png"
 
 import { useStoreContext } from "../../utils/GlobalState";
+import { LOGOUT } from "../../utils/actions";
 
 const UserDropdown = () => {
 
@@ -61,8 +62,15 @@ const UserDropdown = () => {
             Account Settings
             </Link>
             <div className="h-0 my-2 border border-solid border-white" />
-            <Link
-            to="/logout"
+            <Link onClick={() => {
+              dispatch({
+                type: LOGOUT
+              })
+              if(localStorage.getItem('user')) {
+                localStorage.removeItem('user')
+              }
+              fetch('/logout');
+            }}
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
             }

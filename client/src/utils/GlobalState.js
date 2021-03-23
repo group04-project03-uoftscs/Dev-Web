@@ -15,7 +15,8 @@ import {
   FOUND_USER,
   LOADING,
   LOADED,
-  AUTH_METHOD
+  AUTH_METHOD,
+  LOGOUT
 } from "./actions";
 
 const StoreContext = createContext();
@@ -119,6 +120,23 @@ const reducer = (state, action) => {
       return {
         ...state,
         auth: action.auth
+      }
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        user : {},
+        favorites: [],
+        techNews: [],
+        worldNews: [],
+        recentEpisodes: [],
+        bestPodcasts: [],
+        jobs: [],
+        codewars: {},
+        logged: false,
+        loading: false,
+        location: "",
+        auth: ''
       }
     }
   }
