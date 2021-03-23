@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/styles.css"
 import githubicon from "../assets/images/github.svg"
 import googleicon from "../assets/images/google.svg";
 import API from '../utils/API';
+import axios from 'axios';
+import { useStoreContext } from "../utils/GlobalState";
+import { AUTH_METHOD, FOUND_LOCAL_USER, FOUND_USER } from '../utils/actions';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+  const [state, dispatch] = useStoreContext();
+  const history = useHistory();
+  const [remember, setRemember] = useState(false);
+
   useEffect(()=> {
     API.getUser()
     .then(data=>console.log(data.data.user))
@@ -12,6 +20,47 @@ function Login() {
   const githubLogin = () => {
     fetch('/github')
   }
+
+  const emailInput = useRef();
+  const passwordInput = useRef();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    let userData = {
+      username: emailInput.current.value,
+      password: passwordInput.current.value
+    }
+    console.log(userData);
+
+    axios({
+      method: 'POST',
+      data: userData,
+      withCredentials: true,
+      url: "/user/login"
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data)
+      if(res.data === 'Incorrect login information') {
+        alert('Email or password is not correct')
+      } else {
+        if(remember) {
+          localStorage.setItem('user', JSON.stringify(userData));
+        }
+        dispatch({
+          type: FOUND_USER,
+          user: {
+            username: userData.username
+          }
+        });
+        dispatch({
+          type: AUTH_METHOD,
+          auth: 'local'
+        });
+        history.push('/')
+      }
+    });
+  }
+
   return (
     <>
       <main className="relative w-full h-full min-h-screen bg-gray-500">
@@ -59,7 +108,7 @@ function Login() {
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign in with credentials</small>
                     </div>
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -72,6 +121,7 @@ function Login() {
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Email"
                           required
+                          ref={emailInput}
                         />
                       </div>
 
@@ -87,6 +137,7 @@ function Login() {
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Password"
                           required
+                          ref={passwordInput}
                         />
                       </div>
                       <div>
@@ -95,6 +146,8 @@ function Login() {
                             id="customCheckLogin"
                             type="checkbox"
                             className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                            name='remember'
+                            onChange={(e) => setRemember(e.target.checked)}
                           />
                           <span className="ml-2 text-sm font-semibold text-gray-700">
                             Remember me
@@ -105,7 +158,7 @@ function Login() {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                          type="button"
+                          type="submit"
                         >
                           Sign In
                         </button>

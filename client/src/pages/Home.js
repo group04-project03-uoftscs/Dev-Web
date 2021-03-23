@@ -7,8 +7,11 @@ import { useStoreContext } from "../utils/GlobalState";
 
 import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCATION } from '../utils/actions';
 
+import { githubAuth, checkLocalStorageHome } from '../functions/functions';
+
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
+import axios from 'axios';
 
 import Landing from './Landing';
 import Dashboard from './Dashboard';
@@ -26,6 +29,7 @@ function Home () {
   const [state, dispatch] = useStoreContext();
 
   const history = useHistory();
+
 
   useEffect(() => {
     if(!state.logged) {
@@ -87,6 +91,41 @@ function Home () {
       }
       getUser();
     }
+
+  {/* useLayoutEffect(() => {
+    dispatch({
+      type: LOADING
+    })
+    async function checkDatabase(axios, dispatch, history, API, state) {
+      await checkLocalStorageHome(axios, dispatch);
+      API.getUser()
+        .then(({data}) => {
+          console.log(data);
+          if(data.auth === 'github') {
+            githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
+          } else if (data.auth === 'local') {
+            dispatch({
+              type: FOUND_USER,
+              user: data.user
+            });
+            API.getDatabaseUser(data.user.username)
+            .then(localData => {
+              console.log(localData.data[0].firstTime);
+              if(localData.data[0].firstTime === true) {
+                API.getLocalUserUpdate(state.user.username, {firstTime: false})
+                .then(() => history.push('/newuser'));
+              }
+            })
+          } else {
+            return;
+          }
+        });
+        dispatch({
+          type: LOADED
+        })
+    }
+    checkDatabase(axios, dispatch, history, API, state); */}
+
   }, [state.logged]);
 
 
