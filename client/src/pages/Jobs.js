@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import Moment from 'moment';
+import JobCard from "../components/JobCard";
 
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";
@@ -123,26 +124,27 @@ function Jobs() {
   }, [state.logged]);
 
   return (
-    <div className="my-14 container">
-      <h1 className="margin-top margin-bottom " style={{ backgroundColor: "blue", color:"white", fontSize: "2rem"}}>
+    <div className="container">
+      <h1 className="title" style={{ backgroundColor: "blue", color:"white", fontSize: "2rem"}}>
         Find dev jobs in our web
       </h1>
       
       <div className="search-section">
       <form className="search-form" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-md-5">
+        <div className="row flex">
+          <div className="flex col-md-5">
             <div className="form-group" id="description">
               <input
                 type="text"
                 name="description"
                 value={description}
                 onChange={e=>setDescription(e.target.value)}
-                placeholder="Got a title in mind?"
+                placeholder="Got a title in mind? Type it here"
+                style={{ margin:"20px", width:"300px", backgroundColor:"lightBlue", fontWeight:"bolder", textAlign:"center", borderRadius:"99px"}}
               />
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="flex col-md-5">
             <div className="form-group" id="location">
               <input
                 type="text"
@@ -150,16 +152,23 @@ function Jobs() {
                 value={searchLocation}
                 onChange={e=>setsearchLocation(e.target.value)}
                 placeholder="Enter a location"
+                style={{ margin:"20px", width:"200px", backgroundColor:"lightBlue", fontWeight:"bold", textAlign:"center", borderRadius:"99px", color:"ThreeDShadow" }}
               />
               </div>
           </div>
-          <div className="col-md-2">
-            <button variant="primary" type="submit" className="btn-search">
-              Search
-            </button>
-          </div>
+            <div className="flex col-md-2">
+              <button 
+                style={{ width:"100px", height:"30px", margin:"16px", backgroundColor:"lightgray", borderRadius:"99px"}} 
+                type="submit" 
+                className="btn-search"
+                onClick={getJobs}>
+                <strong>Search</strong>
+              </button>
+            </div>
         </div>
       </form>
+
+      
     </div>
   </div>
   );
