@@ -20,19 +20,25 @@ function LoadFiles () {
   const [state, dispatch] = useStoreContext();
   
   useEffect(() => {
-    console.log('loading files');
     // getUser("test"); // We need to get the user that is logged in here. I added the name directly here for testing purpose
+    if(state.logged) {
+      console.log('loading files');
+      getCode();
+
+      if(localStorage.getItem('episodes') === null) localStorage.setItem('episodes', JSON.stringify([]))
+      if(localStorage.getItem('podcasts') === null) localStorage.setItem('podcasts', JSON.stringify([]))
+      checkLocalStorage(UPDATE_TECHNEWS, "technews", API.getTechNews)
+      checkLocalStorage(UPDATE_WORLDNEWS, "worldnews", API.getWorldNews)
+      checkLocalStorage(UPDATE_EPISODES, "recentEpisodes", API.getLatestEpisodes)
+      checkLocalStorage(UPDATE_PODCASTS, "bestPodcasts", API.getBestPodcasts)
+    }
+    else {
+      console.log('not logged in')
+      return;
+    }
     
-    getCode();
 
-    if(localStorage.getItem('episodes') === null) localStorage.setItem('episodes', JSON.stringify([]))
-    if(localStorage.getItem('podcasts') === null) localStorage.setItem('podcasts', JSON.stringify([]))
-    checkLocalStorage(UPDATE_TECHNEWS, "technews", API.getTechNews)
-    checkLocalStorage(UPDATE_WORLDNEWS, "worldnews", API.getWorldNews)
-    checkLocalStorage(UPDATE_EPISODES, "recentEpisodes", API.getLatestEpisodes)
-    checkLocalStorage(UPDATE_PODCASTS, "bestPodcasts", API.getBestPodcasts)
-
-  }, []);
+  }, [state.logged]);
 
   const checkLocalStorage = (action, type, api) => {
     if(localStorage.getItem(type)){
