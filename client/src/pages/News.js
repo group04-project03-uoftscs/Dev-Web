@@ -55,7 +55,7 @@ function News () {
       <div className="flex justify-between container mx-auto">
         <div className="w-full lg:w-8/12">
             {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between" style={{ paddingTop:"20px"}}>
             <h1 className="text-xl font-bold text-gray-700 md:text-2xl">Tech News</h1>
           </div>
             {/* Tech News Card */}
@@ -74,7 +74,7 @@ function News () {
         <div className="lg: w-4/12">
               {/* Header */}
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl">World News</h2>
+            <h2 className="text-xl font-bold text-gray-700 md:text-2xl" style={{ paddingTop:"20px" }}>World News</h2>
           </div>
 
                 {/* World News */}
