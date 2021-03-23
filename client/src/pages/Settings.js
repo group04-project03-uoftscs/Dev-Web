@@ -66,16 +66,26 @@ function Settings() {
   return (
     <>
     <div className="my-14">
-      <h1>Account Settings</h1>
+      <h1><strong>Welcome to Your Account Settings</strong></h1>
+
       <h2>
-        Edit Profile
+        Edit Your Profile
       </h2>
+
+      <h4 className="languages">
+        Update your programming languages here:
+      </h4>
+
+      <h4 className="location">
+        Update your location here:
+      </h4>
+
       <h2>
-        Change Password
+        Change Password (applicable for accounts not logging in through third-party authentication)
       </h2>
-      <h2>
-        Delete Account
-      </h2>
+      <button className="del-account" style={{ backgroundColor:"mediumvioletred", color:"white"}}>
+        <strong>Delete Account</strong>
+      </button>
     </div>
     </>
   );

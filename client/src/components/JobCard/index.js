@@ -14,9 +14,9 @@ const JobCard = (props) => {
   } = props;
 
   return (
-    <div className="job-card" index={index + 1}>
+    <div className="job-card" index={index + 1} style={{ marginLeft:"15px"}}>
       <div className="company-logo">
-        <img src={company_logo} alt={company} width="100" height="100" />
+        <img src={company_logo} alt={company} width="100" height="100"/>
       </div>
       <div className="job-info">
         <div className="job-title">{title}</div>
