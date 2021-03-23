@@ -93,10 +93,10 @@ function Dashboard () {
                             </li>
                         </ul>
                         <br></br>
-                        <div className="">
+                        <div className="flex-row flex-wrap">
                             <h1 className="text-xl font-bold">{state.auth !== 'local' ? state.user._json.name : state.user.username}</h1>
                             <span className="text-base font-semibold">{state.auth !== 'local' ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" target="_blank">{state.auth !== 'local' ? state.user._json.html_url : 'No url'}</a>
+                            <a className="block text-base text-yellow-500 mt-2" href={state.auth !== 'local' ? state.user._json.html_url : 'No url'} target="_blank">{state.auth !== 'local' ? state.user._json.html_url : 'No url'}</a>
                         </div>
                     </div>
                   </div>  
@@ -112,7 +112,7 @@ function Dashboard () {
           </div>
           
         
-          <div className="flex mt-10 w-1/2 mx-auto items-center justify-center bg-opacity-30 bg-indigo-300 rounded-3xl">
+          <div className="flex mt-10 w-3/4 mx-auto items-center justify-center bg-opacity-30 bg-indigo-300 rounded-3xl">
           { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
             <div>
               <div className="w-full">
@@ -157,7 +157,7 @@ function Dashboard () {
           }
           </div>
 
-          <div className="flex mt-0 w-full mx-auto items-center justify-center">
+          <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
             {state.favorites.length!==0 ?  state.favorites.slice(0,Math.min(state.favorites.length,5)).map((article) => {
               return (
                 <Card article={article} key={article.id}/>
@@ -165,7 +165,7 @@ function Dashboard () {
             })
             : 
             <div>
-              <div className="flex mt-20 w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
             </div>

@@ -1,8 +1,7 @@
 
-import React, {useLayoutEffect, useState, useEffect} from 'react';
+import React, {Component, useLayoutEffect, useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
-
-import "../styles/background.scss";
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
 import Card from '../components/Card';
 
@@ -41,6 +40,41 @@ function News () {
     getUser();
   }, [state.logged]);
 
+  function Addroom(props) {
+  return (
+    <div>
+       {/* Tech News */}
+              <div>
+                <div className="flex flex-row flex-wrap mx-auto">
+          
+                  {state.techNews.length!==0 ?  state.techNews.map((article) => {
+                  return (
+                  <Card article={article} key={article.id}/>
+                  )}):  
+                  <div>Loading</div>}
+                </div>
+              </div>
+    </div>
+  );
+}
+function HomePage(props) {
+  return (
+    <div>
+      {/* World News */}
+              <div>
+                <div className="flex flex-row flex-wrap mx-auto">
+          
+                  {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
+                  return (
+                  <Card article={article} key={article.id}/>
+                  )}): 
+                  <div>Loading</div>}
+                </div>
+              </div>
+    </div>
+  );
+}
+
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
 
@@ -50,65 +84,69 @@ function News () {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const renderContent = () => (
-    <div className="px-6 py-8">
-      <div className="flex justify-between container mx-auto">
-        <div className="w-full lg:w-8/12">
-            {/* Header */}
-          <div className="flex items-center justify-between" style={{ paddingTop:"20px"}}>
-            <h1 className="text-xl font-bold text-gray-700 md:text-2xl">Tech News</h1>
-          </div>
-            {/* Tech News Card */}
-          <div>
-            <div className="my-14 flex flex-row flex-wrap mx-auto">
-      
-              {state.techNews.length!==0 ?  state.techNews.map((article) => {
-              return (
-              <Card article={article} key={article.id}/>
-              )}): 
-              <div>Loading</div>}
-            </div>
-          </div>
-         </div>
+  const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
+  const [flag, setFlag] = useState(false);
 
-        <div className="lg: w-4/12">
-              {/* Header */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-700 md:text-2xl" style={{ paddingTop:"20px" }}>World News</h2>
-          </div>
-
-                {/* World News */}
-          <div>
-            <div className="my-14 flex flex-row flex-wrap mx-auto">
-      
-              {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
-              return (
-              <Card article={article} key={article.id}/>
-              )}): 
-              <div>Loading</div>}
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  );
+  
 
   return(
-    <div>
-      <section className="Parallax">
-        <div
-          className="Parallax__background"
-          style={{ transform: `translateY(-${offsetY * 0.5}px)` }}
-        />
-        <div
-          className="Parallax__background-triangles"
-          style={{ transform: `translateY(${offsetY * 1.0}px)` }}
-        />
-        <div className="Parallax__content">{renderContent()}</div>
-      </section>
-    </div>
+    <Parallax>
+      <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={3} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={4} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={5} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={6} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={7} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={8} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={9} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={10} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={11} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={12} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={13} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={14} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
+        <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
+        <ParallaxLayer style={{ opacity: 0.2 }}>
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '80%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '60%' }} />
+          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
+      </ParallaxLayer>
+
+      <div className="relative w-full h-full">
+        <div className="px-6 py-8">
+          <div className="flex justify-between container mx-auto">
+            <div className="w-full">
+                {/* Header */}
+              <div className="flex flex-col items-center justify-between">
+                <div className="flex-row mx-auto pt-10">
+                  <button className="flex mx-auto text-xl font-bold text-gray-700 focus:outline-none" onClick={() => setFlag(!flag)}>
+                    Tech News  |  World News
+                  </button>
+                {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
+               </div>
+              </div>
+                {/* Tech News Card */}
+              <div>
+                <div className="mt-2 flex flex-row flex-wrap mx-auto">
+          
+                  
+                  <div>Loading</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </Parallax>
   )
 }
+
+
 
 export default News;
