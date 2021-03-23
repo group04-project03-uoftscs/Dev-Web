@@ -186,8 +186,8 @@ router.route("/listennotesepisode/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    console.log(result.data);
-
+    // console.log(result.data);
+    console.log('getting single episode')
     const episode = {
       
       id: result.data.id,
@@ -215,7 +215,7 @@ router.route("/listennotespodcast/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    console.log(result.data);
+    // console.log(result.data);
     const podcast = {
       id: result.data.id,
       title: result.data.title,

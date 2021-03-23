@@ -99,9 +99,11 @@ function Home () {
     else{
       let fave = databaseList[favoriteList.length];
       if(fave.type === "episodes" || fave.type === "podcasts") {
+        console.log('getting episode and podcast')
         let localItems = JSON.parse(localStorage.getItem(fave.type));
         let found = localItems.filter(item => item.id === fave.id);
-        if(found.length === 1) {
+        console.log(found)
+        if(found.length >= 1) {
           favoriteList.push(found[0]);
           getFavoriteRecursion(databaseList,favoriteList,cb)
         }
