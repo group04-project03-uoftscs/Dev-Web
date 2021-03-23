@@ -158,54 +158,55 @@ router.route("/listennotesepisodes")
   })
 })
 
-// const fakeEpisode = require('./apiresponses/episode-response.json')
-// router.route("/listennotesepisode/:id")
-// .get((req,res)=>{
-  
-//     const episode = {
-      
-//       id: fakeEpisode.id,
-//       title: fakeEpisode.title,
-//       url: fakeEpisode.link,
-//       image: fakeEpisode.image,
-//       audio: fakeEpisode.audio,
-//       date: Moment(fakeEpisode.pub_date_ms).format("MMM DD, YYYY"),
-//       type: "episodes",
-//       source: "listennotes"
-//     }
-//     res.json(episode)
-  
-// })
-
-// //real api call
+const fakeEpisode = require('./apiresponses/episode-response.json')
 router.route("/listennotesepisode/:id")
 .get((req,res)=>{
-  axios({
-    method: 'get',
-      url: `${ListenNotesURL}/episodes/${req.params.id}`,
-      headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
-  })
-  .then(result =>{
-    // console.log(result.data);
-    console.log('getting single episode')
+    console.log('getting fake episode')
+  
     const episode = {
       
-      id: result.data.id,
-      title: result.data.title,
-      url: result.data.link,
-      image: result.data.image,
-      audio: result.data.audio,
-      date: Moment(result.data.pub_date_ms).format("MMM DD, YYYY"),
+      id: fakeEpisode.id,
+      title: fakeEpisode.title,
+      url: fakeEpisode.link,
+      image: fakeEpisode.image,
+      audio: fakeEpisode.audio,
+      date: Moment(fakeEpisode.pub_date_ms).format("MMM DD, YYYY"),
       type: "episodes",
       source: "listennotes"
     }
     res.json(episode)
-  })
-  .catch(err=>{
-    console.log(err);
-    res.json([])
-  })
+  
 })
+
+// //real api call
+// router.route("/listennotesepisode/:id")
+// .get((req,res)=>{
+//   axios({
+//     method: 'get',
+//       url: `${ListenNotesURL}/episodes/${req.params.id}`,
+//       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
+//   })
+//   .then(result =>{
+//     // console.log(result.data);
+//     console.log('getting single episode')
+//     const episode = {
+      
+//       id: result.data.id,
+//       title: result.data.title,
+//       url: result.data.link,
+//       image: result.data.image,
+//       audio: result.data.audio,
+//       date: Moment(result.data.pub_date_ms).format("MMM DD, YYYY"),
+//       type: "episodes",
+//       source: "listennotes"
+//     }
+//     res.json(episode)
+//   })
+//   .catch(err=>{
+//     console.log(err);
+//     res.json([])
+//   })
+// })
 
 router.route("/listennotespodcast/:id")
 .get((req,res)=>{
@@ -285,10 +286,11 @@ const getFakeNews = (url,cb) => {
 
 router.route("/worldnewsapi")
   .get((req,res)=>{
-    // getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
-    //   res.json(data)
-    // })
-    res.json(worldnewAPIReponse); // to get fake news
+    console.log('getting world news')
+    getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
+      res.json(data)
+    })
+    // res.json(worldnewAPIReponse); // to get fake news
   })
 
 
