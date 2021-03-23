@@ -28,10 +28,71 @@ function Home () {
 
   const [state, dispatch] = useStoreContext();
 
-  console.log(state);
   const history = useHistory();
 
-  useLayoutEffect(() => {
+
+  useEffect(() => {
+    if(!state.logged) {
+      dispatch({
+        type: LOADING
+      })
+      async function getUser() {
+        const {data} = await API.getUser();
+        console.log(data);
+        console.log(data.hasOwnProperty('user'))
+        if(data.hasOwnProperty('user')) {
+          const userData = data.user
+          console.log(userData);
+          dispatch({
+            type: AUTH_METHOD,
+            auth: data.auth
+          })
+          dispatch({
+            type: FOUND_USER,
+            user: userData
+          });
+          API.findGithubUser(userData.id)
+          .then(githubData=> {
+            if(!githubData.data.length){
+              let newGithubUserData = {
+                username: userData.username,
+                github: userData._json,
+                auth: 'github',
+                location: userData._json.location,
+                languages: '',
+                favorites: []
+              }
+              dispatch({
+                type: UPDATE_LOCATION,
+                location: userData._json.location
+              })
+              API.addGithubUser(newGithubUserData)
+              .then(() => {
+                history.push('/newuser')
+              }) 
+            } else {
+              dispatch({
+                type: UPDATE_LOCATION,
+                location: githubData.data[0].location
+              })
+              getFavoriteRecursion(githubData.data[0].favorites,[], favoriteList =>{
+            
+                console.log(favoriteList)
+                dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+              });
+            }
+          })
+        } else if(!data.hasOwnProperty('user')) {
+          dispatch({
+            type: LOADED
+          })
+          // history.push('/landing')
+        }
+      }
+      getUser();
+    }
+
+  {/* useLayoutEffect(() => {
     dispatch({
       type: LOADING
     })
@@ -63,10 +124,10 @@ function Home () {
           type: LOADED
         })
     }
-    checkDatabase(axios, dispatch, history, API, state);
+    checkDatabase(axios, dispatch, history, API, state); */}
+
   }, [state.logged]);
 
-  console.log(state)
 
   const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
     console.log(databaseList)
@@ -75,9 +136,11 @@ function Home () {
     else{
       let fave = databaseList[favoriteList.length];
       if(fave.type === "episodes" || fave.type === "podcasts") {
+        console.log('getting episode and podcast')
         let localItems = JSON.parse(localStorage.getItem(fave.type));
         let found = localItems.filter(item => item.id === fave.id);
-        if(found.length === 1) {
+        console.log(found)
+        if(found.length >= 1) {
           favoriteList.push(found[0]);
           getFavoriteRecursion(databaseList,favoriteList,cb)
         }
@@ -125,8 +188,6 @@ function Home () {
       }
     }
   }
-
-  console.log(state)
 
   if(state.logged) return <Dashboard/>
   else return <Landing/>

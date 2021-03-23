@@ -25,7 +25,7 @@ function Nav() {
                 <div className="relative mx-3" x-data="{dropdown : false}">
                 </div>
             </div>
-        
+            
             <div className="hidden md:flex w-full  h-full justify-center">
                 <div className="border-b-4 text-white hover:text-black hover:border-blue-600">
                     <Link to="/news"
