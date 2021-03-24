@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: { type: String, unique: true},
   password: { type: String },
-  github: { type: Object, unique: true },
+  github: { type: Object },
   auth: { type: String},
   location: { type: String },
   languages: { type: String },
