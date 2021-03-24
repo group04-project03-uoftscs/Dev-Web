@@ -32,6 +32,8 @@ function Home () {
 
 
   useEffect(() => {
+    console.log('back home');
+    console.log(state)
     if(!state.logged) {
       dispatch({
         type: LOADING

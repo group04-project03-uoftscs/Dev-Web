@@ -103,7 +103,7 @@ const reducer = (state, action) => {
     case UPDATE_LANGUAGES: 
       return {
         ...state,
-        languages: [...action.languages]
+        languages: action.languages
       }
     // new case related to adding user
     case FOUND_USER:
@@ -143,7 +143,7 @@ const reducer = (state, action) => {
         logged: false,
         loading: false,
         location: "",
-        languages: [],
+        languages:"",
         auth: ''
       }
     }

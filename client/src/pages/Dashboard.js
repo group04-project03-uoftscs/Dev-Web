@@ -19,7 +19,6 @@ function Dashboard () {
   const handleScroll = () => setOffsetY(window.pageYOffset);
 
   useEffect(() => {
-    console.log(state);
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
