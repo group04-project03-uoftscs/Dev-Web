@@ -6,6 +6,7 @@ import {
   UPDATE_TECHNEWS,
   GET_FAVORITES,
   UPDATE_USER,
+  UPDATE_LOCALUSERNAME,
   UPDATE_LOCATION,
   UPDATE_LANGUAGES,
   UPDATE_JOBS,
@@ -129,6 +130,13 @@ const reducer = (state, action) => {
         auth: action.auth
       }
     }
+    
+    case UPDATE_LOCALUSERNAME: {
+      return {
+        ...state,
+        localusername: action.username
+      }
+    }
     case LOGOUT: {
       return {
         ...state,
@@ -144,7 +152,8 @@ const reducer = (state, action) => {
         loading: false,
         location: "",
         languages:"",
-        auth: ''
+        auth: '',
+        localusername: ''
       }
     }
   }
@@ -166,7 +175,8 @@ const StoreProvider = ({value = [], ...props}) => {
     logged: false,
     loading: false,
     location: "",
-    auth: ''
+    auth: '',
+    localusername: ''
   });
   
   return <Provider value={[state, dispatch]} {...props} />;

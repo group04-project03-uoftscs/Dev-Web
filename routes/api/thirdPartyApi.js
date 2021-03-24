@@ -11,15 +11,17 @@ router.route("/githubuser/:username")
     axios(`https://api.github.com/users/${req.params.username}`)
       .then(result =>{
         console.log(result.data)
-        // let githubAccount = {
-        //   image: result.data.avatar_url,
-        //   link: result.data.html_url,
-        //   username: result.data.login,
-        //   numRepos: result.data.public_repos,
-        //   numFollowers: result.data.followers,
-        //   numFollowing: result.data.following,
-        // }
-        res.json(result.data)
+        let githubAccount = {
+          id: result.data.id,
+          nodeId: result.data.node_id,
+          displayName: result.data.name,
+          username: result.data.login,
+          profileUrl: result.data.url,
+          emails: result.data.email,
+          provider: "github",
+          _json: result.data
+        }
+        res.json(githubAccount)
       })
       .catch(err =>{
         console.log(err)

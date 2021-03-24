@@ -3,6 +3,22 @@ const db = require("../models");
 module.exports = {
   // find the information about a particular user
   // req.params.user needs to changed according to how we know which user is logged in
+  getAllGithubUsers: function(req, res) {
+    db.User.find({})
+      .then(dbModel => {
+        const usernames = [];
+        for(let i = 0; i < dbModel.length; i++) {
+          if(dbModel[i].github !== undefined) {
+            usernames.push(dbModel[i].github.username)
+          }
+        }
+        res.json(usernames)
+      })
+      .catch(err => res.status(422).json(err));
+  },
+
+  // find the information about a particular user
+  // req.params.user needs to changed according to how we know which user is logged in
   findUser: function(req, res) {
     db.User.find({username: req.params.user})
       .then(dbModel => res.json(dbModel))

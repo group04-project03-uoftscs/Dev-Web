@@ -24,7 +24,7 @@ import Podcast from "./pages/Podcast";
 import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 import LoadFiles from "./pages/LoadFiles";
-import PrivateRoute from "./pages/PrivateRoute"
+import PrivateRoute from "./pages/PrivateRoute";
 
 //components
 import Nav from "./components/Nav"

@@ -22,10 +22,11 @@ function Dashboard () {
     window.addEventListener("scroll", handleScroll);
 
     if(state.auth === 'local') {
-      API.getUserInfo(state.user.username)
+      API.getUserInfo(state.localusername)
         .then(data => {
+          console.log(data.data[0])
           if(data.data[0].firstTime === true) {
-            API.getLocalUserUpdate(state.user.username, {firstTime: false})
+            API.getLocalUserUpdate(state.localusername, {firstTime: false})
             .then(() => {
               history.push('/newUser');
             })
@@ -70,7 +71,7 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.auth !== 'local' ? state.user._json.avatar_url : ''}
+                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : ''}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
@@ -105,9 +106,9 @@ function Dashboard () {
                         </ul>
                         <br></br>
                         <div className="flex-row flex-wrap">
-                            <h1 className="text-xl font-bold">{state.auth !== 'local' ? state.user._json.name : state.user.username}</h1>
-                            <span className="text-base font-semibold">{state.auth !== 'local' ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.auth !== 'local' ? state.user._json.html_url : 'No url'} target="_blank">{state.auth !== 'local' ? state.user._json.html_url : 'No url'}</a>
+                            <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
+                            <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
+                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? state.user._json.html_url : 'No url'}</a>
                         </div>
                     </div>
                   </div>  

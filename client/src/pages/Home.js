@@ -5,7 +5,7 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCATION } from '../utils/actions';
+import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCALUSERNAME, UPDATE_LOCATION } from '../utils/actions';
 
 import { githubAuth, checkLocalStorageHome } from '../functions/functions';
 
@@ -31,99 +31,65 @@ function Home () {
   const history = useHistory();
 
 
-  useEffect(() => {
-    console.log('back home');
-    console.log(state)
-    if(!state.logged) {
+  async function checkDatabase(axios, dispatch, history, API, state) {
+    await checkLocalStorageHome(axios, dispatch);
+    let { data }  = await API.getUser();
+    console.log(data);
+    
+    if(data.auth === 'github') {
       dispatch({
-        type: LOADING
+        type: UPDATE_LOCALUSERNAME,
+        username: data.user.username
       })
-      async function checkDatabase(axios, dispatch, history, API, state) {
-      await checkLocalStorageHome(axios, dispatch);
-      let { data }  = await API.getUser();
-      console.log(data);
-      if(data.auth === 'github') {
-        await githubAuth(data, dispatch, API, state)
-      } else if (data.auth === 'local') {
-        let localData = await API.getUserInfo(data.user.username)
-        console.log(localData);
-        if(localData.data[0].firstTime === true) {
-          console.log('yes');
-          API.getLocalUserUpdate(state.user.username, {firstTime: false})
-            .then(() => {
-              dispatch({
-                type: FOUND_USER,
-                user: data.user
-              });
-              history.push('/newuser');
-            })
-        }
-      }
-      // await API.getUser()
-      //   .then(({data}) => {
-      //     console.log(data);
-      //     if(data.auth === 'github') {
-      //       githubAuth(data, dispatch, API, state)
-      //     } else if (data.auth === 'local') {
-      //       console.log('local auth')
-      //       console.log('after dispatch');
-      //       let localData = await API.getUserInfo(data.user.username)
-      //       console.log(localData);
-            // API.getUserInfo(data.user.username)
-            // .then(localData => {
-            //   console.log(localData)
-            //   console.log(localData.data[0].firstTime);
-            //   if(localData.data[0].firstTime === true) {
-            //     API.getLocalUserUpdate(state.user.username, {firstTime: false})
-            //     .then(() =>{ 
-            //       dispatch({
-            //         type: FOUND_USER,
-            //         user: data.user
-            //       });
-            //       history.push('/newuser')});
-            //   }
-            // })
-        //   }
-        // })
-    }
-    checkDatabase(axios, dispatch, history, API, state)
-  }
-
-  {/* useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function checkDatabase(axios, dispatch, history, API, state) {
-      await checkLocalStorageHome(axios, dispatch);
-      API.getUser()
-        .then(({data}) => {
-          console.log(data);
-          if(data.auth === 'github') {
-            githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
-          } else if (data.auth === 'local') {
+      await githubAuth(data, dispatch, API, state)
+    } else if (data.auth === 'local') {
+      dispatch({
+        type: UPDATE_LOCALUSERNAME,
+        username: data.user.username
+      })
+      let localData = await API.getUserInfo(data.user.username)
+      console.log(localData);
+      if(localData.data[0].firstTime === true) {
+        console.log('yes');
+        API.getLocalUserUpdate(state.user.username, {firstTime: false})
+          .then(() => {
             dispatch({
               type: FOUND_USER,
               user: data.user
             });
-            API.getDatabaseUser(data.user.username)
-            .then(localData => {
-              console.log(localData.data[0].firstTime);
-              if(localData.data[0].firstTime === true) {
-                API.getLocalUserUpdate(state.user.username, {firstTime: false})
-                .then(() => history.push('/newuser'));
-              }
-            })
-          } else {
-            return;
-          }
-        });
-        dispatch({
-          type: LOADED
-        })
+            history.push('/newuser');
+          })
+      }
+      else{
+        if(Object.keys(localData.data[0].github).length !== 0) {
+          dispatch({
+            type: FOUND_USER,
+            user: localData.data[0].github
+          })
+        }
+        else{
+          dispatch({
+            type: FOUND_USER,
+            user: data.user
+          })
+        }
+      }
     }
-    checkDatabase(axios, dispatch, history, API, state); */}
+  }
+    
+  useEffect(() => {
+    console.log(state)
+    if(!state.logged) {
+      
+    console.log('back home');
+      dispatch({
+        type: LOADING
+      })
+      checkDatabase(axios, dispatch, history, API, state)
+    }
 
-  }, [state.logged]);
+
+  }, [state.logged, state.auth]);
 
 
   const getFavoriteRecursion = (databaseList, favoriteList, cb) => {

@@ -10,7 +10,7 @@ export default {
     return axios.post("/user/signup/",data);
   },
   updateUser: function(user,data) {
-    return axios.put("/api/user/"+user, data);
+    return axios.put("/api/user/update/"+user, data);
   },
   getUserInfo: function(user) {
     return axios.get("/api/user/"+user);
@@ -24,6 +24,9 @@ export default {
   },
   removeFavorite: function(user, data) {
     return axios.patch("/api/user/"+user, data);
+  },
+  getAllGithubUsers: function() {
+    return axios.get("/api/user/");
   },
 
   getTechNews: function() {

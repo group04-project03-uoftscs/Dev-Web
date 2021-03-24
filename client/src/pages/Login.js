@@ -5,7 +5,7 @@ import googleicon from "../assets/images/google.svg";
 import API from '../utils/API';
 import axios from 'axios';
 import { useStoreContext } from "../utils/GlobalState";
-import { AUTH_METHOD, FOUND_LOCAL_USER, FOUND_USER } from '../utils/actions';
+import { AUTH_METHOD, UPDATE_USER } from '../utils/actions';
 import { useHistory } from 'react-router-dom';
 
 function Login() {
@@ -47,7 +47,7 @@ function Login() {
           localStorage.setItem('user', JSON.stringify(userData));
         }
         dispatch({
-          type: FOUND_USER,
+          type: UPDATE_USER,
           user: {
             username: userData.username
           }
@@ -114,11 +114,7 @@ function Login() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-<<<<<<< HEAD
                           Username
-=======
-                          username
->>>>>>> main
                         </label>
                         <input
                           type="text"
