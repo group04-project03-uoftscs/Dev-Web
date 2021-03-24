@@ -4,6 +4,7 @@ const userController = require("../../controllers/userController");
 // Matches with "/api/user"
 router
   .route("/:user")
+  .put(userController.getLocalUserUpdate)
   .get(userController.findUser)
   .post(userController.saveFavorite)
   .patch(userController.removeFavorite)

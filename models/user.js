@@ -5,7 +5,7 @@ const userSchema = new Schema({
   username: { type: String, unique: true },
   email: { type: String, uniquie: true },
   password: { type: String },
-  github: { type: Object, unique: true },
+  github: { type: Object },
   auth: { type: String},
   location: { type: String },
   languages: { type: String },

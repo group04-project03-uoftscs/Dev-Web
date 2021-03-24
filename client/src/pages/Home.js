@@ -36,61 +36,56 @@ function Home () {
       dispatch({
         type: LOADING
       })
-      async function getUser() {
-        const {data} = await API.getUser();
-        console.log(data);
-        console.log(data.hasOwnProperty('user'))
-        if(data.hasOwnProperty('user')) {
-          const userData = data.user
-          console.log(userData);
-          dispatch({
-            type: AUTH_METHOD,
-            auth: data.auth
-          })
-          dispatch({
-            type: FOUND_USER,
-            user: userData
-          });
-          API.findGithubUser(userData.id)
-          .then(githubData=> {
-            if(!githubData.data.length){
-              let newGithubUserData = {
-                username: userData.username,
-                github: userData._json,
-                auth: 'github',
-                location: userData._json.location,
-                languages: '',
-                favorites: []
-              }
+      async function checkDatabase(axios, dispatch, history, API, state) {
+      await checkLocalStorageHome(axios, dispatch);
+      let { data }  = await API.getUser();
+      console.log(data);
+      if(data.auth === 'github') {
+        await githubAuth(data, dispatch, API, state)
+      } else if (data.auth === 'local') {
+        let localData = await API.getUserInfo(data.user.username)
+        console.log(localData);
+        if(localData.data[0].firstTime === true) {
+          console.log('yes');
+          API.getLocalUserUpdate(state.user.username, {firstTime: false})
+            .then(() => {
               dispatch({
-                type: UPDATE_LOCATION,
-                location: userData._json.location
-              })
-              API.addGithubUser(newGithubUserData)
-              .then(() => {
-                history.push('/newuser')
-              }) 
-            } else {
-              dispatch({
-                type: UPDATE_LOCATION,
-                location: githubData.data[0].location
-              })
-              getFavoriteRecursion(githubData.data[0].favorites,[], favoriteList =>{
-            
-                console.log(favoriteList)
-                dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+                type: FOUND_USER,
+                user: data.user
               });
-            }
-          })
-        } else if(!data.hasOwnProperty('user')) {
-          dispatch({
-            type: LOADED
-          })
-          // history.push('/landing')
+              history.push('/newuser');
+            })
         }
       }
-      getUser();
+      // await API.getUser()
+      //   .then(({data}) => {
+      //     console.log(data);
+      //     if(data.auth === 'github') {
+      //       githubAuth(data, dispatch, API, state)
+      //     } else if (data.auth === 'local') {
+      //       console.log('local auth')
+      //       console.log('after dispatch');
+      //       let localData = await API.getUserInfo(data.user.username)
+      //       console.log(localData);
+            // API.getUserInfo(data.user.username)
+            // .then(localData => {
+            //   console.log(localData)
+            //   console.log(localData.data[0].firstTime);
+            //   if(localData.data[0].firstTime === true) {
+            //     API.getLocalUserUpdate(state.user.username, {firstTime: false})
+            //     .then(() =>{ 
+            //       dispatch({
+            //         type: FOUND_USER,
+            //         user: data.user
+            //       });
+            //       history.push('/newuser')});
+            //   }
+            // })
+        //   }
+        // })
     }
+    checkDatabase(axios, dispatch, history, API, state)
+  }
 
   {/* useLayoutEffect(() => {
     dispatch({
