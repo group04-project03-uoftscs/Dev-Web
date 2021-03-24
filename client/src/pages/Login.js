@@ -114,7 +114,11 @@ function Login() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
+<<<<<<< HEAD
                           Username
+=======
+                          username
+>>>>>>> main
                         </label>
                         <input
                           type="text"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Card from '../components/Card'
 
@@ -9,7 +9,6 @@ import { useStoreContext } from "../utils/GlobalState";
 
 import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCATION } from '../utils/actions';
 
-import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
@@ -17,9 +16,22 @@ function Dashboard () {
   const [state, dispatch] = useStoreContext();
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+
+    if(state.auth === 'local') {
+      API.getUserInfo(state.user.username)
+        .then(data => {
+          if(data.data[0].firstTime === true) {
+            API.getLocalUserUpdate(state.user.username, {firstTime: false})
+            .then(() => {
+              history.push('/newUser');
+            })
+          }
+        })
+    }
 
     return () => window.removeEventListener("scroll", handleScroll);
     

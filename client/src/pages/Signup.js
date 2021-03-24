@@ -21,7 +21,12 @@ function Signup() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(checked)
+    if(passwordInput.current.value === '') {
+      return alert('Please enter a password');
+    }
+    if(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(usernameInput.current.value) === true) {
+      return alert('Enter a valid username')
+    }
     let hashedPassword = bcrypt.hashSync(passwordInput.current.value, 10);
     const body = {
       username: usernameInput.current.value,
@@ -33,7 +38,6 @@ function Signup() {
       firstTime: true,
       favorites: []
     }
-    console.log(body);
     const verifyUser = await API.getUserInfo(usernameInput.current.value);
     if(Object.keys(verifyUser.data).length > 0) {
       return alert('User alreaedy exists');
