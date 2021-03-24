@@ -124,7 +124,7 @@ function HomePage(props) {
                 {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10">
-                  <button className="flex mx-auto text-xl font-bold text-gray-700 focus:outline-none" onClick={() => setFlag(!flag)}>
+                  <button className="flex mx-auto p-4 text-xl font-bold text-gray-700 focus:outline-none" onClick={() => setFlag(!flag)}>
                     Tech News  |  World News
                   </button>
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}

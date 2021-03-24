@@ -67,7 +67,7 @@ function Dashboard () {
                             <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user.username}</h2>
                             <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.auth !== 'local' ? state.user._json.location : 'No location set yet'}</a>
                             
-                            <Link to="/bookmark"><button className="flex hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
+                            <Link to="/bookmark"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
                                 <span className="block">Bookmarks</span>
                                 <svg className="block h-5 w-5 pl-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <FontAwesomeIcon icon={['fas','bookmark']} />
