@@ -135,7 +135,7 @@ function Settings() {
       <br />
       <button
         className="set-password"
-        style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px" }}
+        style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px", fontWeight:"bold" }}
       >
         Save Password
       </button>
@@ -146,7 +146,7 @@ function Settings() {
         style={{ textAlign:"center"}}
       >
         <h2
-        style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: CAREFUL ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
+        style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
           style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}>

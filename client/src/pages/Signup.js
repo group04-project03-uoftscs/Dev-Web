@@ -50,7 +50,7 @@ function Signup() {
   return (
     <>
     <main className="relative w-screen h-screen bg-gray-500">
-        <section className="absolute top-0 w-full h-full min-h-screen">
+        <section className="absolute top-0 pt-6 w-full h-full min-h-screen">
           <div className="mx-auto px-4 py-20 bg-gray-500">
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-6/12 px-4">
@@ -65,6 +65,9 @@ function Signup() {
                       <button
                         className="bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                         type="button"
+                        onClick={ () => {
+                          window.location.replace('http://localhost:3001/auth/github')
+                        }}
                       >
                         <img
                           alt="..."
