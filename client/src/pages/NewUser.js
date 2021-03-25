@@ -22,6 +22,7 @@ const [newLanguages, setNewLanguages] = useState("");
 
 const history = useHistory();
 
+
 const saveInfo = (githubAccount) => {
   API.updateUser(state.user.username,{
     github: githubAccount,
@@ -126,6 +127,7 @@ console.log(state)
                   placeholder="Github-Username"
                   value={newUsername}
                   onChange={e=>setNewUsername(e.target.value)}
+                  disabled={state.auth === 'github'}
                   readOnly={state.auth==="github"}
                 />
               </div>

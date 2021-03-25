@@ -17,5 +17,6 @@ router
 router
   .route("/update/:user")
   .put(userController.updateUser)
+  .delete(userController.removeUser)
 
 module.exports = router;
