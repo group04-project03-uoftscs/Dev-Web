@@ -19,14 +19,14 @@ function Dashboard () {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(state);
     window.addEventListener("scroll", handleScroll);
 
     if(state.auth === 'local') {
-      API.getUserInfo(state.user.username)
+      API.getUserInfo(state.localusername)
         .then(data => {
+          console.log(data.data[0])
           if(data.data[0].firstTime === true) {
-            API.getLocalUserUpdate(state.user.username, {firstTime: false})
+            API.getLocalUserUpdate(state.localusername, {firstTime: false})
             .then(() => {
               history.push('/newUser');
             })
@@ -71,13 +71,16 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.auth !== 'local' ? state.user._json.avatar_url : ''}
+                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : ''}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
                         <div className="flex items-center">
                             <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user.username}</h2>
-                            <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.auth !== 'local' ? state.user._json.location : 'No location set yet'}</a>
+                            <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">
+                              {/* {state.auth !== 'local' ? state.user._json.location : state.location !== "" ? state.location : state.user._json.location ? state.user._json.location : 'No location set yet'} */}
+                            {state.location !== '' ? state.location : 'No location set yet'}
+                            </a>
                             
                             <Link to="/bookmark"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
                                 <span className="block">Bookmarks</span>
@@ -95,20 +98,20 @@ function Dashboard () {
                         </div>
                         <ul className="flex justify-content-around items-center">
                             <li>
-                                <span className="text-base flex"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
+                                <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.followers : 0} </span> Followers</span>
+                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.following : 0} </span> Following</span>
+                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
                             </li>
                         </ul>
                         <br></br>
                         <div className="flex-row flex-wrap">
-                            <h1 className="text-xl font-bold">{state.auth !== 'local' ? state.user._json.name : state.user.username}</h1>
-                            <span className="text-base font-semibold">{state.auth !== 'local' ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.auth !== 'local' ? state.user._json.html_url : 'No url'} target="_blank">{state.auth !== 'local' ? state.user._json.html_url : 'No url'}</a>
+                            <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
+                            <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
+                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? state.user._json.html_url : 'No url'}</a>
                         </div>
                     </div>
                   </div>  

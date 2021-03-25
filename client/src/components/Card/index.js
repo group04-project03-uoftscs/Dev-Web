@@ -80,14 +80,31 @@ function Card ({article}) {
           <p className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
           </p>
-          <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg">
+          {/* <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg">
             
             {isBookmarked ? 
               <button onClick={removeBookmark}><FontAwesomeIcon icon={['fas','bookmark']} /></button> 
               :
               <button onClick={addBookmark}><FontAwesomeIcon icon={['far','bookmark']} /></button> 
             }
-          </button>
+          </button> */}
+
+          
+            
+            {isBookmarked ? 
+
+            <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+                    onClick={removeBookmark}>
+              <FontAwesomeIcon icon={['fas','bookmark']} />
+            </button> 
+              :
+
+              <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+                    onClick={addBookmark}>
+              <FontAwesomeIcon icon={['far','bookmark']} />
+            </button> 
+              
+            }
         </div>
       </div>
     </div>

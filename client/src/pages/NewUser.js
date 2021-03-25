@@ -7,7 +7,7 @@ import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_USER, FOUND_USER, LOADED, LOADING, UPDATE_LOCATION } from "../utils/actions";
+import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES } from "../utils/actions";
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -47,23 +47,66 @@ const history = useHistory();
 
 const handleSubmit = (e) =>{
   e.preventDefault();
+const saveInfo = (githubAccount) => {
   API.updateUser(state.user.username,{
-    // github: newUsername,
+    github: githubAccount,
     location: newLocation,
-    language: newLanguages
+    languages: newLanguages
   })
     .then(result =>{
-      dispatch({
-        type: UPDATE_USER,
-        items: result.data
-      })
+      console.log(result.data)
+      console.log(newLanguages)
       dispatch({
         type: UPDATE_LOCATION,
-        items: newLocation
+        location: newLocation
+      })
+      dispatch({
+        type: UPDATE_LANGUAGES,
+        languages: newLanguages
       })
       history.push('/')
     })
     .catch(err => console.log(err))
+}
+
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  if(state.auth === "github") saveInfo(state.user);
+  else{
+    if(newUsername.trim()!== ""){
+      API.getAllGithubUsers()
+        .then(result =>{
+          console.log(result.data)
+          console.log(newUsername)
+          if(result.data.indexOf(newUsername) !== -1) {
+            console.log('github already registered')
+            alert("Github Account Already Registered")
+          }
+          else{
+            API.getGithub(newUsername)
+            .then(result => {
+              if((Object.keys(result.data).length === 0)) alert('Invalid Github Username');
+              else{
+                let githubAccount = result.data;
+                console.log('github account:')
+                console.log(githubAccount)
+                dispatch({
+                  type: UPDATE_USER,
+                  user: githubAccount
+                })
+                saveInfo(githubAccount)
+                  
+              }
+            }) 
+          }
+        })
+      .catch(err => console.log(err))
+    }
+    else{
+      saveInfo({})
+    }
+  }
+  
 }
 /* The part above is to handle form request */
 
@@ -109,6 +152,7 @@ console.log(state)
                   value={newUsername}
                   onChange={e=>setNewUsername(e.target.value)}
                   disabled={state.auth === 'github'}
+                  readOnly={state.auth==="github"}
                 />
               </div>
             </div>
@@ -137,6 +181,7 @@ console.log(state)
                     placeholder="Toronto, Canada"
                     value={newLocation}
                     onChange={e=>setNewLocation(e.target.value)}
+                    // readOnly={state.auth==="github"}
                   />
                 </div>
               </div>

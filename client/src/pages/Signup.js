@@ -104,7 +104,7 @@ function Signup() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Name
+                          Username
                         </label>
                         <input
                           type="text"

@@ -67,7 +67,7 @@ const UserDropdown = () => {
             <div className="h-0 my-2 border border-solid border-white" />
 
             <Link
-            to="/logout"
+            to="/"
             onClick={()=> {
               closeDropdownPopover();
               dispatch({
@@ -76,6 +76,7 @@ const UserDropdown = () => {
               if(localStorage.getItem('user')) {
                 localStorage.removeItem('user')
               }
+              if(localStorage.getItem('jobs')) localStorage.removeItem('jobs')
               fetch('/logout');
             }}              
             className={

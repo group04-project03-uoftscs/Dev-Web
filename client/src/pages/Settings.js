@@ -7,6 +7,7 @@ import { UPDATE_USER, FOUND_USER, LOADING, LOADED, LOGOUT } from "../utils/actio
 
 // Used for redirection
 import { useHistory } from 'react-router-dom';
+import LanguagesList from "../components/LanguagesList";
 
 function Settings() {
 
@@ -15,6 +16,11 @@ function Settings() {
 
   /* This part below is to handle form request */
   const [state, dispatch] = useStoreContext();
+  
+  const [newGithub, setNewGithub] = useState(state.user.github.username || "");
+  const [newUsername, setNewUsername] = useState(state.user.localusername);
+  const [newLanguages, setNewLanguages] = useState(state.languages);
+  const [newLocation, setNewLocation] = useState(state.location);
 
   const githubRef = useRef();
   const locationRef = useRef();
@@ -100,6 +106,7 @@ function Settings() {
         style={{ paddingTop:"20px" }}>
           Update your programming language flags here:
         </h4>
+        <LanguagesList />
 
         <h4 
         className="location"
@@ -113,7 +120,16 @@ function Settings() {
           placeholder="Enter new location here"
           style={{ width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
         />
+      <br />
+      <button
+        className="set-profile"
+        style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px", fontWeight:"bold" }}
+      >
+        Update Profile
+      </button>
       </div>
+
+      
 
       <div 
         className="password-section"
@@ -128,21 +144,21 @@ function Settings() {
       <p style={{ paddingTop:"5px"}}>Type current password:</p>
       <input 
         className="current-pass"
-        type="text"
+        type="password"
         placeholder="Current password here"
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <p style={{ paddingTop:"5px"}}>Type in NEW password:</p>
       <input 
         className="new-pass"
-        type="text"
+        type="password"
         placeholder="New password here"
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <p style={{ paddingTop:"5px", paddingBottom:"5px"}}>Confirm NEW password:</p>
       <input 
         className="confirm-pass"
-        type="text"
+        type="password"
         placeholder="Confirm new password here"
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
