@@ -8,6 +8,7 @@ import { UPDATE_USER, FOUND_USER, LOADING, LOADED } from "../utils/actions";
 // Used for redirection
 import { useHistory } from 'react-router-dom';
 import LanguagesList from "../components/LanguagesList";
+import { updateLocale } from "moment";
 
 function Settings() {
 
