@@ -9,5 +9,6 @@ router
   .post(userController.saveFavorite)
   .patch(userController.removeFavorite)
   .put(userController.updateUser)
+  .delete(userController.removeUser)
 
 module.exports = router;

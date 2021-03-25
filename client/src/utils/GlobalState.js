@@ -136,7 +136,8 @@ const reducer = (state, action) => {
         logged: false,
         loading: false,
         location: "",
-        auth: ''
+        auth: '',
+        firstTime: false,
       }
     }
   }

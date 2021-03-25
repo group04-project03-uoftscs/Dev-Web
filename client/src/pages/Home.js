@@ -46,7 +46,6 @@ function Home () {
         let localData = await API.getUserInfo(data.user.username)
         console.log(localData);
         if(localData.data[0].firstTime === true) {
-          console.log('yes');
           API.getLocalUserUpdate(state.user.username, {firstTime: false})
             .then(() => {
               dispatch({
@@ -57,32 +56,6 @@ function Home () {
             })
         }
       }
-      // await API.getUser()
-      //   .then(({data}) => {
-      //     console.log(data);
-      //     if(data.auth === 'github') {
-      //       githubAuth(data, dispatch, API, state)
-      //     } else if (data.auth === 'local') {
-      //       console.log('local auth')
-      //       console.log('after dispatch');
-      //       let localData = await API.getUserInfo(data.user.username)
-      //       console.log(localData);
-            // API.getUserInfo(data.user.username)
-            // .then(localData => {
-            //   console.log(localData)
-            //   console.log(localData.data[0].firstTime);
-            //   if(localData.data[0].firstTime === true) {
-            //     API.getLocalUserUpdate(state.user.username, {firstTime: false})
-            //     .then(() =>{ 
-            //       dispatch({
-            //         type: FOUND_USER,
-            //         user: data.user
-            //       });
-            //       history.push('/newuser')});
-            //   }
-            // })
-        //   }
-        // })
     }
     checkDatabase(axios, dispatch, history, API, state)
   }
