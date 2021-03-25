@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useState } from "react";
 
 import API from '../utils/API';
 
@@ -17,10 +17,10 @@ function Settings() {
   /* This part below is to handle form request */
   const [state, dispatch] = useStoreContext();
   
-  const [newGithub, setNewGithub] = useState(state.user.github.username || "");
-  const [newUsername, setNewUsername] = useState(state.user.localusername);
-  const [newLanguages, setNewLanguages] = useState(state.languages);
-  const [newLocation, setNewLocation] = useState(state.location);
+  // const [newGithub, setNewGithub] = useState(state.user.github.username || "");
+  // const [newUsername, setNewUsername] = useState(state.user.localusername);
+  // const [newLanguages, setNewLanguages] = useState(state.languages);
+  // const [newLocation, setNewLocation] = useState(state.location);
 
   const githubRef = useRef();
   const locationRef = useRef();

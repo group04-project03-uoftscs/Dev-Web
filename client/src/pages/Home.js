@@ -41,38 +41,8 @@ function Home () {
         type: UPDATE_LOCALUSERNAME,
         username: data.user.username
       })
-
-        await githubAuth(data, dispatch, API, state)
-      } else if (data.auth === 'local') {
-        let localData = await API.getUserInfo(data.user.username)
-        console.log(localData);
-        if(localData.data[0].firstTime === true) {
-          API.getLocalUserUpdate(state.user.username, {firstTime: false})
-            .then(() => {
-              dispatch({
-                type: FOUND_USER,
-                user: data.user
-              });
-              history.push('/newuser');
-            })
-        }
-      }
-    }
-    checkDatabase(axios, dispatch, history, API, state)
-  }
-
-  {/* useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function checkDatabase(axios, dispatch, history, API, state) {
-      await checkLocalStorageHome(axios, dispatch);
-      API.getUser()
-        .then(({data}) => {
-          console.log(data);
-          if(data.auth === 'github') {
-            githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
-          } else if (data.auth === 'local') {
+        githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
+        } else if (data.auth === 'local') {
 
       await githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
     } else if (data.auth === 'local') {
