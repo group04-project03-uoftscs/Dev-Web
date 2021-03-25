@@ -7,7 +7,7 @@ import { useStoreContext } from "../utils/GlobalState";
 
 import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LANGUAGES, UPDATE_LOCALUSERNAME, UPDATE_LOCATION } from '../utils/actions';
 
-import { githubAuth, checkLocalStorageHome } from '../functions/functions';
+import { githubAuth, checkLocalStorageHome, getFavoriteRecursion } from '../functions/functions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -81,6 +81,11 @@ function Home () {
           type: UPDATE_LANGUAGES,
           languages: localData.data[0].languages
         })
+        getFavoriteRecursion(localData.data[0].favorites,[], favoriteList =>{
+          
+          console.log(favoriteList)
+          dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+        });
       }
     }
   }
@@ -100,65 +105,65 @@ function Home () {
   }, [state.logged, state.auth]);
 
 
-  const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
-    console.log(databaseList)
-    console.log(favoriteList)
-    if(databaseList.length === favoriteList.length) cb(favoriteList);
-    else{
-      let fave = databaseList[favoriteList.length];
-      if(fave.type === "episodes" || fave.type === "podcasts") {
-        console.log('getting episode and podcast')
-        let localItems = JSON.parse(localStorage.getItem(fave.type));
-        let found = localItems.filter(item => item.id === fave.id);
-        console.log(found)
-        if(found.length >= 1) {
-          favoriteList.push(found[0]);
-          getFavoriteRecursion(databaseList,favoriteList,cb)
-        }
-        else {
-          if(fave.type === "episodes"){
-            API.getEpisode(fave.id)
-              .then(result => {
+  // const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
+  //   console.log(databaseList)
+  //   console.log(favoriteList)
+  //   if(databaseList.length === favoriteList.length) cb(favoriteList);
+  //   else{
+  //     let fave = databaseList[favoriteList.length];
+  //     if(fave.type === "episodes" || fave.type === "podcasts") {
+  //       console.log('getting episode and podcast')
+  //       let localItems = JSON.parse(localStorage.getItem(fave.type));
+  //       let found = localItems.filter(item => item.id === fave.id);
+  //       console.log(found)
+  //       if(found.length >= 1) {
+  //         favoriteList.push(found[0]);
+  //         getFavoriteRecursion(databaseList,favoriteList,cb)
+  //       }
+  //       else {
+  //         if(fave.type === "episodes"){
+  //           API.getEpisode(fave.id)
+  //             .then(result => {
 
-                let saved = JSON.parse(localStorage.getItem(fave.type));
-                saved.push(result.data);
-                localStorage.setItem(fave.type, JSON.stringify(saved));
+  //               let saved = JSON.parse(localStorage.getItem(fave.type));
+  //               saved.push(result.data);
+  //               localStorage.setItem(fave.type, JSON.stringify(saved));
                 
-                favoriteList.push(result.data);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-              .catch(err =>{
-                console.log(err);
-                favoriteList.push(fave);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-          }
-          else if(fave.type === "podcasts"){
-            API.getPodcast(fave.id)
-              .then(result => {
-                console.log(result.data)
+  //               favoriteList.push(result.data);
+  //               getFavoriteRecursion(databaseList,favoriteList,cb);
+  //             })
+  //             .catch(err =>{
+  //               console.log(err);
+  //               favoriteList.push(fave);
+  //               getFavoriteRecursion(databaseList,favoriteList,cb);
+  //             })
+  //         }
+  //         else if(fave.type === "podcasts"){
+  //           API.getPodcast(fave.id)
+  //             .then(result => {
+  //               console.log(result.data)
 
-                let saved = JSON.parse(localStorage.getItem(fave.type));
-                saved.push(result.data);
-                localStorage.setItem(fave.type, JSON.stringify(saved));
+  //               let saved = JSON.parse(localStorage.getItem(fave.type));
+  //               saved.push(result.data);
+  //               localStorage.setItem(fave.type, JSON.stringify(saved));
                 
-                favoriteList.push(result.data);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-              .catch(err =>{
-                console.log(err);
-                favoriteList.push(fave);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-          }
-        }
-      }
-      else {
-        favoriteList.push(fave);
-        getFavoriteRecursion(databaseList,favoriteList,cb);
-      }
-    }
-  }
+  //               favoriteList.push(result.data);
+  //               getFavoriteRecursion(databaseList,favoriteList,cb);
+  //             })
+  //             .catch(err =>{
+  //               console.log(err);
+  //               favoriteList.push(fave);
+  //               getFavoriteRecursion(databaseList,favoriteList,cb);
+  //             })
+  //         }
+  //       }
+  //     }
+  //     else {
+  //       favoriteList.push(fave);
+  //       getFavoriteRecursion(databaseList,favoriteList,cb);
+  //     }
+  //   }
+  // }
 
   if(state.logged) return <Dashboard/>
   else return <Landing/>

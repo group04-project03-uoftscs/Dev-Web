@@ -112,3 +112,63 @@ export const checkLocalStorageLanding = (axios, dispatch) => {
     window.location.replace('/');
   }
 }
+
+export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
+  console.log(databaseList)
+  console.log(favoriteList)
+  if(databaseList.length === favoriteList.length) cb(favoriteList);
+  else{
+    let fave = databaseList[favoriteList.length];
+    if(fave.type === "episodes" || fave.type === "podcasts") {
+      console.log('getting episode and podcast')
+      let localItems = JSON.parse(localStorage.getItem(fave.type));
+      let found = localItems.filter(item => item.id === fave.id);
+      console.log(found)
+      if(found.length >= 1) {
+        favoriteList.push(found[0]);
+        getFavoriteRecursion(databaseList,favoriteList,cb)
+      }
+      else {
+        if(fave.type === "episodes"){
+          API.getEpisode(fave.id)
+            .then(result => {
+
+              let saved = JSON.parse(localStorage.getItem(fave.type));
+              saved.push(result.data);
+              localStorage.setItem(fave.type, JSON.stringify(saved));
+              
+              favoriteList.push(result.data);
+              getFavoriteRecursion(databaseList,favoriteList,cb);
+            })
+            .catch(err =>{
+              console.log(err);
+              favoriteList.push(fave);
+              getFavoriteRecursion(databaseList,favoriteList,cb);
+            })
+        }
+        else if(fave.type === "podcasts"){
+          API.getPodcast(fave.id)
+            .then(result => {
+              console.log(result.data)
+
+              let saved = JSON.parse(localStorage.getItem(fave.type));
+              saved.push(result.data);
+              localStorage.setItem(fave.type, JSON.stringify(saved));
+              
+              favoriteList.push(result.data);
+              getFavoriteRecursion(databaseList,favoriteList,cb);
+            })
+            .catch(err =>{
+              console.log(err);
+              favoriteList.push(fave);
+              getFavoriteRecursion(databaseList,favoriteList,cb);
+            })
+        }
+      }
+    }
+    else {
+      favoriteList.push(fave);
+      getFavoriteRecursion(databaseList,favoriteList,cb);
+    }
+  }
+}

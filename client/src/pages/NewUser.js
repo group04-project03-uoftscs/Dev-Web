@@ -155,7 +155,7 @@ console.log(state)
                     placeholder="Toronto, Canada"
                     value={newLocation}
                     onChange={e=>setNewLocation(e.target.value)}
-                    readOnly={state.auth==="github"}
+                    // readOnly={state.auth==="github"}
                   />
                 </div>
               </div>
