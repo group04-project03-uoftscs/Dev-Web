@@ -49,6 +49,13 @@ module.exports = {
     .catch(err => res.status(422).json(err));
   },
 
+  // Remove user from database
+  removeUser: function(req,res) {
+    db.User.findOneAndDelete({username: req.params.user})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   // adds a favourite item (like the news, podcasts)
   // and push it to the favorites array for that user
   saveFavorite: function(req,res) {

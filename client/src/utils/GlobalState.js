@@ -151,6 +151,7 @@ const reducer = (state, action) => {
         logged: false,
         loading: false,
         location: "",
+        firstTime: false,
         languages:"",
         auth: '',
         localusername: ''

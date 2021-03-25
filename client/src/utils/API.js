@@ -18,6 +18,9 @@ export default {
   getDatabaseUser: function(user) {
     return axios.get(`/api/user/${user}`);
   },
+  removeUser: function(user) {
+    return axios.delete('/api/user/'+user);
+  },
 
   saveFavorite: function(user, data) {
     return axios.post("/api/user/"+user, data);

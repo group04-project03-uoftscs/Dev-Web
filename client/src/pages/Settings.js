@@ -3,7 +3,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import API from '../utils/API';
 
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_USER, FOUND_USER, LOADING, LOADED } from "../utils/actions";
+import { UPDATE_USER, FOUND_USER, LOADING, LOADED, LOGOUT } from "../utils/actions";
 
 // Used for redirection
 import { useHistory } from 'react-router-dom';
@@ -68,6 +68,20 @@ function Settings() {
   //   }
   //   getUser();
   // }, [state.logged]);
+
+  const deleteUser = () => {
+    API.removeUser(state.user.username)
+    .then(data => {
+      console.log(data);
+      if(localStorage.getItem('user')) {
+        localStorage.removeItem('user');
+      }
+      dispatch({
+        type: LOGOUT
+      });
+      fetch('/logout');
+    })
+  }
 
   return (
     <div className="settings-tab">
@@ -165,7 +179,10 @@ function Settings() {
         style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
-          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}>
+          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}
+          onClick={() => {
+            deleteUser();
+          }}>
           <strong>Delete Account</strong>
         </button>
       </div>
