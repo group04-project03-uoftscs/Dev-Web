@@ -76,6 +76,7 @@ const UserDropdown = () => {
               if(localStorage.getItem('user')) {
                 localStorage.removeItem('user')
               }
+              if(localStorage.getItem('jobs')) localStorage.removeItem('jobs')
               fetch('/logout');
             }}              
             className={

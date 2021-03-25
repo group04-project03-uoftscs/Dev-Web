@@ -5,7 +5,7 @@ import Card from '../components/Card'
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCALUSERNAME, UPDATE_LOCATION } from '../utils/actions';
+import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LANGUAGES, UPDATE_LOCALUSERNAME, UPDATE_LOCATION } from '../utils/actions';
 
 import { githubAuth, checkLocalStorageHome } from '../functions/functions';
 
@@ -41,7 +41,7 @@ function Home () {
         type: UPDATE_LOCALUSERNAME,
         username: data.user.username
       })
-      await githubAuth(data, dispatch, API, state)
+      await githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
     } else if (data.auth === 'local') {
       dispatch({
         type: UPDATE_LOCALUSERNAME,
@@ -73,6 +73,14 @@ function Home () {
             user: data.user
           })
         }
+        dispatch({
+          type: UPDATE_LOCATION,
+          location: localData.data[0].location
+        })
+        dispatch({
+          type: UPDATE_LANGUAGES,
+          languages: localData.data[0].languages
+        })
       }
     }
   }

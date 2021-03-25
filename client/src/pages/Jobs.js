@@ -16,18 +16,17 @@ function Jobs() {
 
   const [searchLocation, setsearchLocation] = useState(state.location);
   const [description, setDescription] = useState("");
-  //Used for redirection
-  const history = useHistory();
+
 
   useEffect(() => {
-    checkLocalStorageJobs(UPDATE_JOBS, "jobs", API.getJobs, state.user.location);
+    checkLocalStorageJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location);
   }, []);
 
   
   const checkLocalStorageJobs = (action, type, api, location) => {
     if(localStorage.getItem(type)){
       if(JSON.parse(localStorage.getItem(type)).date !== today) {
-        getJobs(action, type, api,location);
+        findJobs(action, type, api,location);
       }
       else{
         
@@ -36,17 +35,17 @@ function Jobs() {
       }
     }
     else{
-      getJobs(action, type, api, location);
+      findJobs(action, type, api, location);
     }
   }
 
-  const getJobs = (action, type, api, location) =>{ 
+  const findJobs = (action, type, api, location) =>{ 
     console.log(`getting ${type}`)
     let data = {
       description: "",
       location: (location === "") ? "remote" : location
     }
-    console.log(data)
+    console.log(api)
     api(data)
       .then(result => {
         console.log(result)
@@ -93,35 +92,34 @@ function Jobs() {
           type: UPDATE_JOBS,
           items: result.data
         })
-
       })
       .catch(err => console.log(err))
   };
 /* The part above is to handle form request */
 
-// Used for authentication
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
-    }
-    getUser();
-  }, [state.logged]);
+// // Used for authentication
+//   useLayoutEffect(() => {
+//     dispatch({
+//       type: LOADING
+//     })
+//     async function getUser() {
+//       const {data} = await API.getUser();
+//       console.log(data.hasOwnProperty('user'))
+//       if(data.hasOwnProperty('user')) {
+//         dispatch({
+//           type: FOUND_USER,
+//           user: data.user
+//         });
+//         console.log('logged: ' + state.logged)
+//       } else if(!data.hasOwnProperty('user')) {
+//         dispatch({
+//           type: LOADED
+//         })
+//         history.push('/login')
+//       }
+//     }
+//     getUser();
+//   }, [state.logged]);
 
   return (
     <div className="container">
@@ -161,7 +159,7 @@ function Jobs() {
                 style={{ width:"100px", height:"30px", margin:"16px", backgroundColor:"lightgray", borderRadius:"99px"}} 
                 type="submit" 
                 className="btn-search"
-                onClick={getJobs}>
+              >
                 <strong>Search</strong>
               </button>
             </div>

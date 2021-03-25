@@ -17,28 +17,28 @@ function News () {
   console.log(state.worldNews);
   const history = useHistory();
 
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
-    }
-    getUser();
-  }, [state.logged]);
+  // useLayoutEffect(() => {
+  //   dispatch({
+  //     type: LOADING
+  //   })
+  //   async function getUser() {
+  //     const {data} = await API.getUser();
+  //     console.log(data.hasOwnProperty('user'))
+  //     if(data.hasOwnProperty('user')) {
+  //       dispatch({
+  //         type: FOUND_USER,
+  //         user: data.user
+  //       });
+  //       console.log('logged: ' + state.logged)
+  //     } else if(!data.hasOwnProperty('user')) {
+  //       dispatch({
+  //         type: LOADED
+  //       })
+  //       history.push('/login')
+  //     }
+  //   }
+  //   getUser();
+  // }, [state.logged]);
 
   function Addroom(props) {
   return (

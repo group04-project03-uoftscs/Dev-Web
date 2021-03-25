@@ -1,4 +1,4 @@
-import { AUTH_METHOD, FOUND_USER, UPDATE_LOCATION, UPDATE_FAVORITES } from '../utils/actions';
+import { AUTH_METHOD, FOUND_USER, UPDATE_LOCATION, UPDATE_FAVORITES, UPDATE_LANGUAGES } from '../utils/actions';
 
 export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, history) => {
   const userData = data.user
@@ -25,6 +25,10 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             favorites: [],
             firstTime: false
           }
+          dispatch({
+            type: UPDATE_LOCATION,
+            location: userData._json.location
+          })
           API.addGithubUser(newGithubUserData)
           .then(() => {
             history.push('/newuser')
@@ -34,6 +38,10 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             dispatch({
               type: UPDATE_LOCATION,
               location: githubData.data[0].location
+            })
+            dispatch({
+              type: UPDATE_LANGUAGES,
+              languages: githubData.data[0].languages
             })
             getFavoriteRecursion(githubData.data[0].favorites,[], favoriteList =>{
           
