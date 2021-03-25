@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 
 import API from '../utils/API';
 
@@ -17,7 +17,7 @@ function Settings() {
   /* This part below is to handle form request */
   const [state, dispatch] = useStoreContext();
   
-  const [newGithub, setNewGithub] = useState(state.user.github.username || "");
+  // const [newGithub, setNewGithub] = useState(state.user.github.username || "");
   const [newUsername, setNewUsername] = useState(state.user.localusername);
   const [newLanguages, setNewLanguages] = useState(state.languages);
   const [newLocation, setNewLocation] = useState(state.location);
@@ -46,28 +46,28 @@ function Settings() {
   /* The part above is to handle form request */
 
   //User authentication
-  // useLayoutEffect(() => {
-  //   dispatch({
-  //     type: LOADING
-  //   })
-  //   async function getUser() {
-  //     const {data} = await API.getUser();
-  //     console.log(data.hasOwnProperty('user'))
-  //     if(data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: FOUND_USER,
-  //         user: data.user
-  //       });
-  //       console.log('logged: ' + state.logged)
-  //     } else if(!data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: LOADED
-  //       })
-  //       history.push('/login')
-  //     }
-  //   }
-  //   getUser();
-  // }, [state.logged]);
+  useLayoutEffect(() => {
+    dispatch({
+      type: LOADING
+    })
+    async function getUser() {
+      const {data} = await API.getUser();
+      console.log(data.hasOwnProperty('user'))
+      if(data.hasOwnProperty('user')) {
+        dispatch({
+          type: FOUND_USER,
+          user: data.user
+        });
+        console.log('logged: ' + state.logged)
+      } else if(!data.hasOwnProperty('user')) {
+        dispatch({
+          type: LOADED
+        })
+        history.push('/login')
+      }
+    }
+    getUser();
+  }, [state.logged]);
 
   return (
     <div className="settings-tab">
@@ -165,7 +165,7 @@ function Settings() {
         style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
-          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}>
+          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"20px"}}>
           <strong>Delete Account</strong>
         </button>
       </div>
