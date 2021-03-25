@@ -5,24 +5,27 @@ const Moment = require("moment")
 const codewars = require('./codewarsChallenges.json')
 
 // Get Github profile
-router.get("/githubuser/:username")
+router.route("/githubuser/:username")
   .get((req,res) =>{
     console.log('getting username')
     axios(`https://api.github.com/users/${req.params.username}`)
       .then(result =>{
+        console.log(result.data)
         let githubAccount = {
-          image: result.data.avatar_url,
-          link: result.data.html_url,
+          id: result.data.id,
+          nodeId: result.data.node_id,
+          displayName: result.data.name,
           username: result.data.login,
-          numRepos: result.data.public_repos,
-          numFollowers: result.data.followers,
-          numFollowing: result.data.following,
+          profileUrl: result.data.url,
+          emails: result.data.email,
+          provider: "github",
+          _json: result.data
         }
         res.json(githubAccount)
       })
       .catch(err =>{
         console.log(err)
-        res.json([])
+        res.json({})
       })
   })
 

@@ -71,16 +71,6 @@ const UserDropdown = () => {
         >
           Podcasts
         </Link>
-        <div className="h-0 my-2 border border-solid border-white" />
-        <Link
-          to="/settings"
-          onClick={closeDropdownPopover}
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-black hover:bg-yellow-400 hover:text-indigo-600 hover:underline"
-          }
-        >
-          Account Settings
-        </Link>
       </div>
     </>
   );

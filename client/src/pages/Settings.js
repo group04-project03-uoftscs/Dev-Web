@@ -16,6 +16,11 @@ function Settings() {
 
   /* This part below is to handle form request */
   const [state, dispatch] = useStoreContext();
+  
+  const [newGithub, setNewGithub] = useState(state.user.github.username || "");
+  const [newUsername, setNewUsername] = useState(state.user.localusername);
+  const [newLanguages, setNewLanguages] = useState(state.languages);
+  const [newLocation, setNewLocation] = useState(state.location);
 
   const githubRef = useRef();
   const locationRef = useRef();
@@ -41,28 +46,28 @@ function Settings() {
   /* The part above is to handle form request */
 
   //User authentication
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
-    }
-    getUser();
-  }, [state.logged]);
+  // useLayoutEffect(() => {
+  //   dispatch({
+  //     type: LOADING
+  //   })
+  //   async function getUser() {
+  //     const {data} = await API.getUser();
+  //     console.log(data.hasOwnProperty('user'))
+  //     if(data.hasOwnProperty('user')) {
+  //       dispatch({
+  //         type: FOUND_USER,
+  //         user: data.user
+  //       });
+  //       console.log('logged: ' + state.logged)
+  //     } else if(!data.hasOwnProperty('user')) {
+  //       dispatch({
+  //         type: LOADED
+  //       })
+  //       history.push('/login')
+  //     }
+  //   }
+  //   getUser();
+  // }, [state.logged]);
 
   return (
     <div className="settings-tab">

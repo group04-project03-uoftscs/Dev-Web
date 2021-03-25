@@ -5,7 +5,7 @@ import googleicon from "../assets/images/google.svg";
 import API from '../utils/API';
 import axios from 'axios';
 import { useStoreContext } from "../utils/GlobalState";
-import { AUTH_METHOD, FOUND_LOCAL_USER, FOUND_USER } from '../utils/actions';
+import { AUTH_METHOD, UPDATE_USER } from '../utils/actions';
 import { useHistory } from 'react-router-dom';
 
 function Login() {
@@ -21,13 +21,13 @@ function Login() {
     fetch('/github')
   }
 
-  const emailInput = useRef();
+  const usernameInput = useRef();
   const passwordInput = useRef();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     let userData = {
-      username: emailInput.current.value,
+      username: usernameInput.current.value,
       password: passwordInput.current.value
     }
     console.log(userData);
@@ -47,7 +47,7 @@ function Login() {
           localStorage.setItem('user', JSON.stringify(userData));
         }
         dispatch({
-          type: FOUND_USER,
+          type: UPDATE_USER,
           user: {
             username: userData.username
           }
@@ -72,7 +72,7 @@ function Login() {
                   <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center mb-3">
                       <h6 className="text-gray-600 text-sm font-bold">
-                        Sign in with
+                        Log in with
                       </h6>
                     </div>
                     <div className="btn-wrapper text-center">
@@ -114,14 +114,14 @@ function Login() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          username
+                          Username
                         </label>
                         <input
                           type="text"
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="Email"
+                          placeholder="Username"
                           required
-                          ref={emailInput}
+                          ref={usernameInput}
                         />
                       </div>
 
