@@ -70,7 +70,7 @@ function Settings() {
   // }, [state.logged]);
 
   const deleteUser = () => {
-    API.removeUser(state.user.username)
+    API.removeUser(state.localusername)
     .then(data => {
       console.log(data);
       if(localStorage.getItem('user')) {
