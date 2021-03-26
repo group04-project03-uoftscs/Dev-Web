@@ -28,7 +28,7 @@ app.use(passport.session());
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "/auth/github/callback"
+  callbackURL: "https://dev-web3.herokuapp.com/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
   userData = {
