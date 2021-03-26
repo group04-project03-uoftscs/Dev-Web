@@ -42,9 +42,10 @@ function Dashboard () {
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
-    <Parallax pages={2} >
+    <Parallax pages={2}>
       <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
       <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+      <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
       <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
       <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
       <ParallaxLayer style={{ opacity: 0.2 }}>
@@ -77,10 +78,7 @@ function Dashboard () {
                     <div className="ml-10">
                         <div className="flex items-center">
                             <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user.username}</h2>
-                            <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">
-                              {/* {state.auth !== 'local' ? state.user._json.location : state.location !== "" ? state.location : state.user._json.location ? state.user._json.location : 'No location set yet'} */}
-                            {state.location !== '' ? state.location : 'No location set yet'}
-                            </a>
+                            <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.auth !== 'local' ? state.user._json.location : 'No location set yet'}</a>
                             
                             <Link to="/bookmarked"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
                                 <span className="block">Bookmarks</span>
@@ -98,13 +96,13 @@ function Dashboard () {
                         </div>
                         <ul className="flex justify-content-around items-center">
                             <li>
-                                <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
+                                <span className="text-base flex"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
+                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.followers : 0} </span> Followers</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
+                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.auth !== 'local' ? state.user._json.following : 0} </span> Following</span>
                             </li>
                         </ul>
                         <br></br>
@@ -120,7 +118,7 @@ function Dashboard () {
             :
             <div>
               <div className="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
-                <span className="text-xl tracking-wider text-gray-500 uppercase">Loading codewars account info</span>
+                <span className="text-xl tracking-wider text-gray-500 uppercase">Loading user account info</span>
               </div> 
             </div>
           }
@@ -132,17 +130,14 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    {/* <img src={state.auth !== 'local' ? state.user._json.avatar_url : ''}
-                        className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
-                        alt="username"/> */}
-                    <div className="ml-10">
+                    <div className="sm:flex-col ml-10">
                         <div className="flex items-center">
                             <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">CodeWars</h2>
                             <a className="cursor-pointer hidden md:inline-flex h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.codewars.name}</a>
                             <a className="cursor-pointer h-7 px-3 ml-3 focus:outline-none hover:border-transparent text-center rounded border border-green-400 hover:bg-green-500 hover:text-white bg-transparent text-green-200 font-semibold">{state.codewars.category}</a>
                             
                         </div>
-                        <ul className="flex justify-content-around items-center">
+                        <ul className="flex md:flex-row sm:flex-col flex-wrap justify-content-around items-center">
                             <li>
                                 <span className="text-base flex"><span className="font-bold mr-2">{state.codewars.totalAttempts} </span> Attempts</span>
                             </li>
@@ -166,7 +161,7 @@ function Dashboard () {
             :
             <div>
               <div className="flex items-center w-1/2 justify-center p-4 mt-4 bg-white rounded-md shadow-md">
-                <span className="text-xl tracking-wider text-gray-500 uppercase">Loading user account info</span>
+                <span className="text-xl tracking-wider text-gray-500 uppercase">Loading codewars account info</span>
               </div> 
             </div>
           }

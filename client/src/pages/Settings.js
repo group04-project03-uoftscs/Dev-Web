@@ -9,6 +9,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES, LOGOUT } from "../utils/actions";
 
 import LanguagesList from "../components/LanguagesList";
+import { updateLocale } from "moment";
 
 function Settings() {
 

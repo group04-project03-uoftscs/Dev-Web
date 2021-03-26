@@ -83,6 +83,7 @@ function Login() {
                         type="button"
                         onClick={ () => {
                           window.location.replace('http://localhost:3001/auth/github')
+                          // window.location.replace('/auth/github')
                         }}
                       >
                         <img
