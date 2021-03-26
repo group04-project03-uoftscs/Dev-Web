@@ -115,7 +115,10 @@ function LoadFiles () {
   const getCode = () => {
     API.getCodeWars()
       .then(result =>{
-        dispatch({ type: UPDATE_CODEWARS, code: result.data});
+        const codewars = result.data;
+        let description = codewars.description;
+        codewars["formatDescription"] = description.split("```");
+        dispatch({ type: UPDATE_CODEWARS, code:codewars});
         console.log(result.data);
       })
       .catch(err =>{

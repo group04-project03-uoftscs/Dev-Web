@@ -182,13 +182,13 @@ function Login() {
                 </div>
                 <div className="flex flex-wrap mt-6 relative">
                   <div className="w-1/2">
-                    <a
+                    {/* <a
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                       className="text-gray-300"
                     >
                       <small>Forgot password?</small>
-                    </a>
+                    </a> */}
                   </div>
                   <div className="w-1/2 text-right">
                     <a href="/signup" className="text-gray-300">

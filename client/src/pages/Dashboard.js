@@ -149,9 +149,12 @@ function Dashboard () {
                             </li>
                         </ul>
                         <div className="">
-                            <h1 className="text-xl font-bold">{state.codewars.tags[0]}, {state.codewars.tags[1]}, {state.codewars.tags[2]}, {state.codewars.tags[3]}</h1>
-                            <h2 className="text-base pr-7 text-gray-200 font-semibold  overflow-hidden line-clamp-5">{state.codewars.description}</h2>
-                            <h2 className="text-base text-green-200 font-semibold">{state.codewars.languages[0]}, {state.codewars.languages[1]}, {state.codewars.languages[2]}, {state.codewars.languages[3]}, {state.codewars.languages[4]}, {state.codewars.languages[5]}</h2>
+                            <h1 className="text-xl font-bold">{state.codewars.tags.slice(0, Math.min(4, state.codewars.tags.length)).join(", ")}</h1>
+                            <h2 className="text-base pr-7 text-gray-200 font-semibold  overflow-hidden line-clamp-5">{state.codewars.formatDescription.map((text, index)=>{
+                              if(index%2 === 0) return (<div>{text}</div>)
+                              else return (<code className="text-green-300">{text}</code>)
+                            })}</h2>
+                            <h2 className="text-base text-green-200 font-semibold">{state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).join(", ")}</h2>
                             <a className="block text-base text-yellow-500 mt-2" href={state.codewars.url} target="_blank">{state.codewars.url}</a>
                         </div>
                     </div>
