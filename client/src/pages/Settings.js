@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import API from '../utils/API';
 
@@ -44,34 +44,6 @@ function Settings() {
       })
       .catch(err => console.log(err))
   }
-<<<<<<< HEAD
-  /* The part above is to handle form request */
-
-  //User authentication
-  useLayoutEffect(() => {
-    dispatch({
-      type: LOADING
-    })
-    async function getUser() {
-      const {data} = await API.getUser();
-      console.log(data.hasOwnProperty('user'))
-      if(data.hasOwnProperty('user')) {
-        dispatch({
-          type: FOUND_USER,
-          user: data.user
-        });
-        console.log('logged: ' + state.logged)
-      } else if(!data.hasOwnProperty('user')) {
-        dispatch({
-          type: LOADED
-        })
-        history.push('/login')
-      }
-    }
-    getUser();
-  }, [state.logged]);
-=======
->>>>>>> e46e6c354db7fb9533a6f116ebb6b36d785fe02f
 
   const deleteUser = () => {
     console.log('deleting: '+ state.localusername)
