@@ -80,7 +80,8 @@ function Login() {
                         className="bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                         type="button"
                         onClick={ () => {
-                          window.location.replace('/auth/github')
+                          window.location.replace('http://localhost:3001/auth/github')
+                          // window.location.replace('/auth/github')
                         }}
                       >
                         <img

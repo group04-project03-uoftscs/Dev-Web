@@ -36,7 +36,8 @@ function Signup() {
       location: '',
       languages: '',
       firstTime: true,
-      favorites: []
+      favorites: [],
+      github: {}
     }
     const verifyUser = await API.getUserInfo(usernameInput.current.value);
     if(Object.keys(verifyUser.data).length > 0) {
@@ -71,6 +72,7 @@ function Signup() {
                         type="button"
                         onClick={ () => {
                           window.location.replace('http://localhost:3001/auth/github')
+                          window.location.replace('https://dev-web3.herokuapp.com/auth/github')
                         }}
                       >
                         <img
