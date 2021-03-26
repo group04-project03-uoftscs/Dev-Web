@@ -54,9 +54,9 @@ function Signup() {
   
   return (
     <>
-    <main className="relative w-screen h-screen bg-gray-500">
-        <section className="absolute top-0 pt-6 w-full h-full min-h-screen">
-          <div className="mx-auto px-4 py-20 bg-gray-500">
+    <main className="relative w-full h-full min-h-screen bg-gray-500">
+        <section className="absolute top-0 w-full h-full">
+          <div className="mx-auto h-full w-full ">
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
