@@ -26,8 +26,8 @@ app.use(passport.session());
 // This is the github link strategy
 // Also make sure to add the clientID and secret to a .env file once the app is in production
 passport.use(new GithubStrategy({
-  clientID: "d80a400b6a707075e0b2",
-  clientSecret: "71db6e6e0e5bf807ebcda7323a67c447cdcfc5ef",
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: "/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
