@@ -12,6 +12,7 @@ function Login() {
   const [state, dispatch] = useStoreContext();
   const history = useHistory();
   const [remember, setRemember] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(()=> {
     API.getUser()
@@ -41,7 +42,8 @@ function Login() {
       console.log(res);
       console.log(res.data)
       if(res.data === 'Incorrect login information') {
-        alert('Email or password is not correct')
+        console.log('Email or password is not correct')
+        setErrorMsg('Email or password is not correct')
       } else {
         if(remember) {
           localStorage.setItem('user', JSON.stringify(userData));
@@ -122,6 +124,7 @@ function Login() {
                           placeholder="Username"
                           required
                           ref={usernameInput}
+                          onChange={e => setErrorMsg("")}
                         />
                       </div>
 
@@ -138,6 +141,7 @@ function Login() {
                           placeholder="Password"
                           required
                           ref={passwordInput}
+                          onChange={e => setErrorMsg("")}
                         />
                       </div>
                       <div>
@@ -153,6 +157,15 @@ function Login() {
                             Remember me
                           </span>
                         </label>
+                      </div>
+
+                      <div>
+                        <div className="items-center">
+                            <span className="ml-2 text-sm font-semibold text-red-500">
+                            {errorMsg}
+                            </span>
+                        </div>
+                        
                       </div>
 
                       <div className="text-center mt-6">

@@ -140,11 +140,7 @@ console.log(state)
                 />
               </div>
               
-              {errorMsg === "" ? 
-                <div></div>
-                  :
-                <div className="text-sm text-red-500">{errorMsg}</div>
-              }
+              <div className="text-sm text-red-500">{errorMsg}</div>
             </div>
           </div>
 
