@@ -19,6 +19,7 @@ const [state, dispatch] = useStoreContext();
 const [newLocation, setNewLocation] = useState(state.location);
 const [newUsername, setNewUsername] = useState(state.user.username);
 const [newLanguages, setNewLanguages] = useState("");
+const [errorMsg, setErrorMsg] = useState("")
 
 const history = useHistory();
 
@@ -56,12 +57,16 @@ const handleSubmit = (e) =>{
           console.log(newUsername)
           if(result.data.indexOf(newUsername) !== -1) {
             console.log('github already registered')
-            alert("Github Account Already Registered")
+            //alert("Github Account Already Registered")
+            setErrorMsg("Github Account Already Registered")
           }
           else{
             API.getGithub(newUsername)
             .then(result => {
-              if((Object.keys(result.data).length === 0)) alert('Invalid Github Username');
+              if((Object.keys(result.data).length === 0)) {
+                // alert('Invalid Github Username')
+                setErrorMsg("Invalid Github Username");
+              }
               else{
                 let githubAccount = result.data;
                 console.log('github account:')
@@ -126,11 +131,20 @@ console.log(state)
                   className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                   placeholder="Github-Username"
                   value={newUsername}
-                  onChange={e=>setNewUsername(e.target.value)}
+                  onChange={e=>{
+                    setNewUsername(e.target.value);
+                    setErrorMsg("")
+                  }}
                   disabled={state.auth === 'github'}
                   readOnly={state.auth==="github"}
                 />
               </div>
+              
+              {errorMsg === "" ? 
+                <div></div>
+                  :
+                <div className="text-sm text-red-500">{errorMsg}</div>
+              }
             </div>
           </div>
 
@@ -157,7 +171,6 @@ console.log(state)
                     placeholder="Toronto, Canada"
                     value={newLocation}
                     onChange={e=>setNewLocation(e.target.value)}
-                    // readOnly={state.auth==="github"}
                   />
                 </div>
               </div>
