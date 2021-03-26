@@ -36,7 +36,7 @@ function Card ({article}) {
     API.saveFavorite(state.user.username, itemToAdd)
       .then(result =>{
         console.log(result)
-        dispatch({type: ADD_FAVORITE, item: itemToAdd});
+        dispatch({type: ADD_FAVORITE, item: article});
       })
   }
 
