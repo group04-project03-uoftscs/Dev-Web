@@ -44,6 +44,7 @@ function Settings() {
       })
       .catch(err => console.log(err))
   }
+<<<<<<< HEAD
   /* The part above is to handle form request */
 
   //User authentication
@@ -69,9 +70,12 @@ function Settings() {
     }
     getUser();
   }, [state.logged]);
+=======
+>>>>>>> e46e6c354db7fb9533a6f116ebb6b36d785fe02f
 
   const deleteUser = () => {
-    API.removeUser(state.user.username)
+    console.log('deleting: '+ state.localusername)
+    API.removeUser(state.localusername)
     .then(data => {
       console.log(data);
       if(localStorage.getItem('user')) {

@@ -41,11 +41,9 @@ function Home () {
         type: UPDATE_LOCALUSERNAME,
         username: data.user.username
       })
-        githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
-        } else if (data.auth === 'local') {
-
-      await githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
-    } else if (data.auth === 'local') {
+      githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
+    } 
+    else if (data.auth === 'local') {
       dispatch({
         type: UPDATE_LOCALUSERNAME,
         username: data.user.username
