@@ -1,7 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 
-const JobCard = (props) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/actions';
+import API from '../../utils/API';
+
+const JobCard = ({job}) => {
+
+  
+  const [state, dispatch] = useStoreContext();
+
   const {
     id,
     type,
@@ -11,7 +20,31 @@ const JobCard = (props) => {
     title,
     company_logo,
     index
-  } = props;
+  } = job;
+
+  
+  const isBookmarked = state.favorites.filter(item => {
+    return item.id == job.id
+  }).length == 1;
+
+  
+  // when you click on the button, calls on the api to add the article in the favorite list in the user database
+  const addBookmark = () => {
+    API.saveFavorite(state.localusername, job)
+      .then(result =>{
+        console.log(result)
+        dispatch({type: ADD_FAVORITE, item: job});
+      })
+  }
+
+  // when you click on the button, calls on the api to remove the article from the favorite list in the user database
+  const removeBookmark = () => {
+    API.removeFavorite(state.localusername, job)
+      .then(result =>{
+        console.log(result)
+        dispatch({type: REMOVE_FAVORITE, id: job.id});
+      })
+  }
 
   return (
     <div className="job-card" index={index + 1} style={{ marginLeft:"15px"}}>
@@ -30,6 +63,20 @@ const JobCard = (props) => {
           Posted {moment(new Date(created_at)).fromNow()}
         </div>
       </div>
+      {isBookmarked ? 
+
+<button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+        onClick={removeBookmark}>
+  <FontAwesomeIcon icon={['fas','bookmark']} />
+</button> 
+  :
+
+  <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+        onClick={addBookmark}>
+  <FontAwesomeIcon icon={['far','bookmark']} />
+</button> 
+  
+}
     </div>
   );
 };

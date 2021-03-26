@@ -166,7 +166,13 @@ function Jobs() {
         </div>
       </form>
 
-    <JobCard />
+
+      {state.jobs.length!==0 ?  state.jobs.map((job) => {
+          return (
+          <JobCard job={job} key={job.id}/>
+          )}): 
+          <div>Loading</div>
+      }
     </div>
   </div>
   );
