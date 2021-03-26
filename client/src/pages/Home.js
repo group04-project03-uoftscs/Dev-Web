@@ -62,7 +62,7 @@ function Home () {
           })
       }
       else{
-        if(Object.keys(localData.data[0].github).length !== 0) {
+        if(localData.data[0].github !== undefined) {
           dispatch({
             type: FOUND_USER,
             user: localData.data[0].github

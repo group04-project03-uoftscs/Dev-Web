@@ -6,6 +6,8 @@ import Location from "../assets/svg/icons8-location-96.png"
 import Code from "../assets/svg/icons8-code-96.png"
 import Github from "../assets/svg/icons8-github-96.png"
 
+import LanguagesList from "../components/LanguagesList";
+
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES } from "../utils/actions";
 
@@ -23,12 +25,40 @@ const [errorMsg, setErrorMsg] = useState("")
 
 const history = useHistory();
 
+const [listLanguages, setListLanguages] = useState({
+  "c": false,
+  "cpp": false,
+  "csharp": false,
+  "css": false,
+  "go": false,
+  "haskell": false,
+  "html": false,
+  "java": false,
+  "javascript": false,
+  "kotlin": false,
+  "lua": false,
+  "php": false,
+  "python": false,
+  "r": false,
+  "ruby": false,
+  "swift": false,
+  "typescript": false
+})
+
+const handleChecked = (lang) => {
+  console.log(lang);
+  const temp = {...listLanguages}
+  temp[lang] = !temp[lang];
+  setListLanguages({...temp})
+}
+
 
 const saveInfo = (githubAccount) => {
-  API.updateUser(state.user.username,{
+  const newListLanguages = Object.keys(listLanguages).filter(lang => listLanguages[lang])
+  API.updateUser(state.localusername,{
     github: githubAccount,
     location: newLocation,
-    languages: newLanguages
+    languages: newListLanguages
   })
     .then(result =>{
       console.log(result.data)
@@ -39,7 +69,7 @@ const saveInfo = (githubAccount) => {
       })
       dispatch({
         type: UPDATE_LANGUAGES,
-        languages: newLanguages
+        languages: newListLanguages
       })
       history.push('/')
     })
@@ -55,13 +85,13 @@ const handleSubmit = (e) =>{
         .then(result =>{
           console.log(result.data)
           console.log(newUsername)
-          if(result.data.indexOf(newUsername) !== -1) {
+          if(result.data.indexOf(newUsername.trim()) !== -1) {
             console.log('github already registered')
             //alert("Github Account Already Registered")
             setErrorMsg("Github Account Already Registered")
           }
           else{
-            API.getGithub(newUsername)
+            API.getGithub(newUsername.trim())
             .then(result => {
               if((Object.keys(result.data).length === 0)) {
                 // alert('Invalid Github Username')
@@ -90,8 +120,6 @@ const handleSubmit = (e) =>{
   
 }
 /* The part above is to handle form request */
-
-console.log(state)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -172,7 +200,7 @@ console.log(state)
               </div>
               <div>
                 <label className="text-sm text-gray-400">Languages</label>
-                <div className="w-full inline-flex border">
+                {/* <div className="w-full inline-flex border">
                   <div className="pt-2 w-1/12 bg-gray-100">
                     <img
                     fill="none"
@@ -190,7 +218,14 @@ console.log(state)
                     value={newLanguages}
                     onChange={e=>setNewLanguages(e.target.value)}
                   />
-                </div>
+                </div> */}
+                <div className="flex flex-row flex-wrap mx-auto">
+        {Object.keys(listLanguages).map((lang, index) => {
+          return(
+            <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
+          )
+        })}
+        </div>
               </div>
             </div>
           </div>

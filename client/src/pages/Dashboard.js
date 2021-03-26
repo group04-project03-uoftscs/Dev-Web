@@ -82,7 +82,7 @@ function Dashboard () {
                             {state.location !== '' ? state.location : 'No location set yet'}
                             </a>
                             
-                            <Link to="/bookmark"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
+                            <Link to="/bookmarked"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
                                 <span className="block">Bookmarks</span>
                                 <svg className="block h-5 w-5 pl-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <FontAwesomeIcon icon={['fas','bookmark']} />
