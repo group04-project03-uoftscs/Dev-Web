@@ -8,6 +8,7 @@ import { UPDATE_USER, FOUND_USER, LOADING, LOADED, LOGOUT } from "../utils/actio
 // Used for redirection
 import { useHistory } from 'react-router-dom';
 import LanguagesList from "../components/LanguagesList";
+import { updateLocale } from "moment";
 
 function Settings() {
 
@@ -155,7 +156,7 @@ function Settings() {
         style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
-          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}
+          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"20px"}}
           onClick={() => {
             deleteUser();
           }}>

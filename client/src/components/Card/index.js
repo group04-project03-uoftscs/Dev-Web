@@ -68,29 +68,20 @@ function Card ({article}) {
 
   return(
     <div className="transition-all duration-150 flex px-4 py-6 md:w-1/2 lg:w-1/3 xl:w-1/4">
-      <div className="px-4 pb-5 flex-grow-0 bg-white bg-opacity-50 rounded text-black border border-gray-300 shadow-lg">
+      <div className="px-4 pb-5 flex-grow-0 bg-white bg-opacity-50 rounded-xl text-black border border-gray-300 shadow-2xl transform transition duration-500 ease-in-out hover:bg-indigo-100 hover:bg-opacity-50 hover:scale-105">
         
-        <div className="w-full mb-3 pb-5 border-b border-1 border-white">
-          <h3 className="text-lg pt-2 font-semibold text-shadow overflow-hidden line-clamp-3"><a href={article.url} target="_blank" rel="noopener noreferrer"><h3>{article.title}</h3></a></h3>
+        <div className="w-full mb-3 border-b border-1 border-white">
+          <h3 className="text-lg pt-2 font-semibold text-shadow overflow-hidden h-24 line-clamp-3"><a href={article.url} target="_blank" rel="noopener noreferrer"><h3>{article.title}</h3></a></h3>
         </div>
 
         <div>
-          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-full h-48 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
+          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
           
           <p className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
           </p>
-          {/* <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg">
-            
-            {isBookmarked ? 
-              <button onClick={removeBookmark}><FontAwesomeIcon icon={['fas','bookmark']} /></button> 
-              :
-              <button onClick={addBookmark}><FontAwesomeIcon icon={['far','bookmark']} /></button> 
-            }
-          </button> */}
 
           
-            
             {isBookmarked ? 
 
             <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"

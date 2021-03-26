@@ -11,7 +11,11 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      animation: ['responsive', 'motion-safe', 'motion-reduce'],
+      backgroundColor: ['active'],
+      transform: ['hover', 'focus']
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
