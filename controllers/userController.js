@@ -51,8 +51,13 @@ module.exports = {
 
   // Remove user from database
   removeUser: function(req,res) {
+    console.log('removing');
+    console.log(req.params.user)
     db.User.findOneAndDelete({username: req.params.user})
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log(dbModel)
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
 

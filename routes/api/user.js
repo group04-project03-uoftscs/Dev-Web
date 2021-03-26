@@ -13,10 +13,10 @@ router
   .get(userController.findUser)
   .post(userController.saveFavorite)
   .patch(userController.removeFavorite)
+  .delete(userController.removeUser)
 
 router
   .route("/update/:user")
   .put(userController.updateUser)
-  .delete(userController.removeUser)
 
 module.exports = router;

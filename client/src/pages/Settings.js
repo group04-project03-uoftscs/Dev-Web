@@ -43,34 +43,10 @@ function Settings() {
       })
       .catch(err => console.log(err))
   }
-  /* The part above is to handle form request */
-
-  //User authentication
-  // useLayoutEffect(() => {
-  //   dispatch({
-  //     type: LOADING
-  //   })
-  //   async function getUser() {
-  //     const {data} = await API.getUser();
-  //     console.log(data.hasOwnProperty('user'))
-  //     if(data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: FOUND_USER,
-  //         user: data.user
-  //       });
-  //       console.log('logged: ' + state.logged)
-  //     } else if(!data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: LOADED
-  //       })
-  //       history.push('/login')
-  //     }
-  //   }
-  //   getUser();
-  // }, [state.logged]);
 
   const deleteUser = () => {
-    API.removeUser(state.user.username)
+    console.log('deleting: '+ state.localusername)
+    API.removeUser(state.localusername)
     .then(data => {
       console.log(data);
       if(localStorage.getItem('user')) {
