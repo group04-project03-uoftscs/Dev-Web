@@ -8,7 +8,7 @@ const userSchema = new Schema({
   github: { type: Object },
   auth: { type: String},
   location: { type: String },
-  languages: { type: String },
+  languages: { type: Array, default: [] },
   firstTime: {type: Boolean, default: true},
   favorites : { type : Array }
 });

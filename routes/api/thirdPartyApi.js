@@ -10,7 +10,6 @@ router.route("/githubuser/:username")
     console.log('getting username')
     axios(`https://api.github.com/users/${req.params.username}`)
       .then(result =>{
-        console.log(result.data)
         let githubAccount = {
           id: result.data.id,
           nodeId: result.data.node_id,
@@ -325,7 +324,7 @@ const interleave = (arr1, arr2) => {
 
 // Get HackerNews Data
 const getHackerNewsIDs = (cb) => {
-  axios("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty")
+  axios("https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty")
   .then(result => {
     cb(result.data.slice(0,10))
   })

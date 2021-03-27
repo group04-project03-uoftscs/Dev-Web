@@ -1,18 +1,8 @@
 import React, { useEffect } from 'react';
 import API from '../utils/API';
 import Moment from 'moment';
-
 import { useStoreContext } from "../utils/GlobalState";
-import { 
-  UPDATE_TECHNEWS, 
-  UPDATE_WORLDNEWS,
-  UPDATE_FAVORITES, 
-  UPDATE_EPISODES,
-  UPDATE_PODCASTS, 
-  UPDATE_USER, 
-  UPDATE_JOBS, 
-  UPDATE_CODEWARS 
-} from "../utils/actions";
+import { UPDATE_TECHNEWS, UPDATE_WORLDNEWS, UPDATE_EPISODES, UPDATE_PODCASTS, UPDATE_CODEWARS } from "../utils/actions";
 
 //This file does not render any components. It requests of the api calls to get the information.
 function LoadFiles () {
@@ -20,7 +10,6 @@ function LoadFiles () {
   const [state, dispatch] = useStoreContext();
   
   useEffect(() => {
-    // getUser("test"); // We need to get the user that is logged in here. I added the name directly here for testing purpose
     if(state.logged) {
       console.log('loading files');
       getCode();
@@ -33,7 +22,6 @@ function LoadFiles () {
       checkLocalStorage(UPDATE_PODCASTS, "bestPodcasts", API.getBestPodcasts)
     }
     else {
-      console.log('not logged in')
       return;
     }
     
@@ -42,81 +30,22 @@ function LoadFiles () {
 
   const checkLocalStorage = (action, type, api) => {
     if(localStorage.getItem(type)){
-      if(JSON.parse(localStorage.getItem(type)).date !== today) {
-        getItems(action, type, api);
-      }
-      else{
-        
+      if(JSON.parse(localStorage.getItem(type)).date === today) {
         console.log(type + ' already there')
-        dispatch({ type: action, items: JSON.parse(localStorage.getItem(type)).items})
+        return dispatch({ type: action, items: JSON.parse(localStorage.getItem(type)).items})
       }
     }
-    else{
-      getItems(action, type, api);
-    }
+    getItems(action, type, api);
   }
-
-  const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
-    if(databaseList.length === favoriteList.length) cb(favoriteList);
-    else{
-      let fave = databaseList[favoriteList.length];
-      if(fave.type === "episodes" || fave.type === "podcasts") {
-        let localItems = JSON.parse(localStorage.getItem(fave.type));
-        let found = localItems.filter(item => item.id === fave.id);
-        if(found.length === 1) {
-          favoriteList.push(found[0]);
-          getFavoriteRecursion(databaseList,favoriteList,cb)
-        }
-        else {
-          if(fave.type === "episodes"){
-            API.getEpisode(fave.id)
-              .then(result => {
-
-                let saved = JSON.parse(localStorage.getItem(fave.type));
-                saved.push(result.data);
-                localStorage.setItem(fave.type, JSON.stringify(saved));
-                
-                favoriteList.push(result.data);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-              .catch(err =>{
-                console.log(err);
-                favoriteList.push(fave);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-          }
-          else if(fave.type === "podcasts"){
-            API.getPodcast(fave.id)
-              .then(result => {
-                console.log(result.data)
-
-                let saved = JSON.parse(localStorage.getItem(fave.type));
-                saved.push(result.data);
-                localStorage.setItem(fave.type, JSON.stringify(saved));
-                
-                favoriteList.push(result.data);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-              .catch(err =>{
-                console.log(err);
-                favoriteList.push(fave);
-                getFavoriteRecursion(databaseList,favoriteList,cb);
-              })
-          }
-        }
-      }
-      else {
-        favoriteList.push(fave);
-        getFavoriteRecursion(databaseList,favoriteList,cb);
-      }
-    }
-  }
+  
 
   const getCode = () => {
     API.getCodeWars()
       .then(result =>{
-        dispatch({ type: UPDATE_CODEWARS, code: result.data});
-        console.log(result.data);
+        const codewars = result.data;
+        let description = codewars.description;
+        codewars["formatDescription"] = description.split("```");
+        dispatch({ type: UPDATE_CODEWARS, code:codewars});
       })
       .catch(err =>{
         console.log(err)

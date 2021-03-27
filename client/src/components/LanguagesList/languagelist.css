@@ -1,0 +1,32 @@
+
+.language-checkbox {
+  background-color:#EFEFEF;
+    border-radius:50px;
+    border:1px solid #D0D0D0;
+    width: 100px;
+    margin: 1px;
+}
+
+.language-checkbox label span {
+  text-align:center;
+  padding:3px 0px;
+  display:block;
+  cursor: pointer;
+}
+
+/* .language-checkbox label span {
+  text-align:center;
+  padding:3px 0px;
+  display:block;
+} */
+
+.language-checkbox input {
+  visibility: hidden;
+  position: absolute;
+  top: -20px;
+}
+.language-checkbox input:checked + span {
+  background-color:#6366F1;
+  color:#f4f5fd;
+  border-radius:50px;
+}

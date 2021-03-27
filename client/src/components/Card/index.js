@@ -33,7 +33,7 @@ function Card ({article}) {
       localStorage.setItem(article.type, JSON.stringify(saved));
     }
 
-    API.saveFavorite(state.user.username, itemToAdd)
+    API.saveFavorite(state.localusername, itemToAdd)
       .then(result =>{
         console.log(result)
         dispatch({type: ADD_FAVORITE, item: article});
@@ -56,7 +56,7 @@ function Card ({article}) {
       localStorage.setItem(article.type, JSON.stringify(newSaved));
     }
 
-    API.removeFavorite(state.user.username, article)
+    API.removeFavorite(state.localusername, article)
       .then(result =>{
         console.log(result)
         dispatch({type: REMOVE_FAVORITE, id: article.id});

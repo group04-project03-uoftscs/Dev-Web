@@ -54,10 +54,10 @@ function Nav() {
 
             </div>
             <div className="w-full  h-full flex justify-end space-x-2 items-center px-3">
-                <Link 
+                <div 
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
                     <UserDropdown />
-                </Link>
+                </div>
                 <Link to="/bookmarked"
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center">
                     <svg viewBox="0 0 96 96" width="40" height="40" className="rounded-full hover:bg-yellow-400"><Bookmark /></svg>
@@ -66,10 +66,10 @@ function Nav() {
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center">
                     <ReactImageFallback src={Errorpic} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
                 </Link>
-                <Link 
+                <div 
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
                     <LoginDropdown />
-                </Link>
+                </div>
             </div>
         </div>
     </nav>
