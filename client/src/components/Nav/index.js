@@ -55,7 +55,7 @@ function Nav() {
             </div>
             <div className="w-full  h-full flex justify-end space-x-2 items-center px-3">
                 <div 
-                    className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
+                    className="md:hidden flex w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full items-center justify-center">
                     <UserDropdown />
                 </div>
                 <Link to="/bookmarked"
