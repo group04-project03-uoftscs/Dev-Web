@@ -10,6 +10,7 @@ import './styles/styles.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 //pages
 import Home from "./pages/Home";
@@ -32,7 +33,7 @@ import Footer from "./components/Footer"
 
 import { StoreProvider } from "./utils/GlobalState";
 
-library.add(fasBookmark, farBookmark)
+library.add(fasBookmark, farBookmark, faGithub)
 
 
 function App() {

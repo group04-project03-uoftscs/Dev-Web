@@ -14,6 +14,7 @@ function News () {
   return (
     <div>
        {/* Tech News */}
+       {console.log("tech news")}
               <div>
                 <div className="flex flex-row flex-wrap mx-auto">
           
@@ -32,6 +33,7 @@ function HomePage(props) {
   return (
     <div>
       {/* World News */}
+       {console.log("world news")}
               <div>
                 <div className="flex flex-row flex-wrap mx-auto">
           
@@ -61,6 +63,7 @@ function HomePage(props) {
   
 
   return(
+    
     <Parallax>
       <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
@@ -95,6 +98,7 @@ function HomePage(props) {
           <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
       </ParallaxLayer>
 
+      {console.log("news")}
       <div className="relative w-full h-full">
         <div className="px-6 py-8">
           <div className="flex justify-between container mx-auto">

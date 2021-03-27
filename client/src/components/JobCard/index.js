@@ -62,7 +62,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
             <p className="mt-2 text-gray-600"></p>
         </div>
         <div className="flex justify-between items-center mt-4">
-            <a className="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
+            <a className="text-blue-600 hover:underline" href={url} target="_blank" rel="noopener noreferrer">Apply Now</a>
             {isBookmarked ? 
 
 <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
