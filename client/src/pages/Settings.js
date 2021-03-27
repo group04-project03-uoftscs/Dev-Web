@@ -5,6 +5,7 @@ import API from '../utils/API';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
+import LANGUAGEOBJECT from '../assets/languages.json'
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES, LOGOUT } from "../utils/actions";
 
@@ -30,25 +31,7 @@ function Settings() {
   const [updateMsgProfile, setUpdateMsgProfile] = useState("");
   const [updateMsgPassword, setUpdateMsgPassword] = useState("");
 
-  const [listLanguages, setListLanguages] = useState({
-      "c": false,
-      "cpp": false,
-      "csharp": false,
-      "css": false,
-      "go": false,
-      "haskell": false,
-      "html": false,
-      "java": false,
-      "javascript": false,
-      "kotlin": false,
-      "lua": false,
-      "php": false,
-      "python": false,
-      "r": false,
-      "ruby": false,
-      "swift": false,
-      "typescript": false
-  })
+  const [listLanguages, setListLanguages] = useState(LANGUAGEOBJECT)
 
   
   const currentPasswordInput = useRef();

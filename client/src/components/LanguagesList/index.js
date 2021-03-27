@@ -2,6 +2,7 @@ import React from "react";
 import './languagelist.css'
 
 const LanguagesList = (props) => {
+  let term = `devicon-${props.language}-plain colored`;
     return (
     <div className="language-checkbox">
         <label>
@@ -12,7 +13,7 @@ const LanguagesList = (props) => {
             checked={props.checked}
             onChange={props.handleChecked}
           />
-          <span>{props.language}</span>
+          <span><i class={term}></i></span>
           
         </label>
     </div>

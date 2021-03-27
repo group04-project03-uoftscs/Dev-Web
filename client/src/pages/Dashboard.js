@@ -44,7 +44,7 @@ function Dashboard () {
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
-    <Parallax pages={2}>
+    <Parallax>
       <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
       <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
       <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
@@ -111,10 +111,12 @@ function Dashboard () {
                         <div className="flex-row flex-wrap">
                             <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
                               {state.languages.map(lang =>{
+                                let term = `devicon-${lang}-plain`;
                                 return (
-                                <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${lang}/${lang}.png`} className="h-5 ml-2 mr-2" fallbackImage={Errorpic} />
+                                  <i class={term} style={{fontSize:"30px", color:"purple"}}></i>
                               )})
                               }
+                              <br></br>
                             <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
                             <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? 'Quick! To my Github!' : 'No Github Account linked'}</a>
                         </div>

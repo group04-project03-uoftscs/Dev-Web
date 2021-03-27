@@ -3,7 +3,6 @@
   background-color:#EFEFEF;
     border-radius:50px;
     border:1px solid #D0D0D0;
-    width: 100px;
     margin: 1px;
 }
 
@@ -12,6 +11,8 @@
   padding:3px 0px;
   display:block;
   cursor: pointer;
+  font-size: 30px;
+  padding: 3px;
 }
 
 /* .language-checkbox label span {
