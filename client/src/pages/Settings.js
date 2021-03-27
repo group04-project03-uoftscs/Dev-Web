@@ -343,7 +343,7 @@ function Settings() {
         style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
-          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}
+          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"25px"}}
           onClick={(e)=>{
             setShowModal(true)
           }}>
