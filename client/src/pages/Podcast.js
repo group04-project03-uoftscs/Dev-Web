@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import Card from '../components/Card';
+import ListenNotesLogo from "./listen_notes_logo.png";
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -122,7 +123,7 @@ function HomePage(props) {
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
                </div>
               </div>
-          
+          <img src={ListenNotesLogo} style={{ width:"350px", marginLeft:"500px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
         </div>
       </div>
     </div>
