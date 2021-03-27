@@ -1,5 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GithubStrategy = require('passport-github2').Strategy;
 const bcrypt = require('bcryptjs');
 
 const db = require('../models');
@@ -21,6 +22,24 @@ passport.use(new LocalStrategy(
     })
   })
 );
+
+// This is the github link strategy
+// Also make sure to add the clientID and secret to a .env file once the app is in production
+passport.use(new GithubStrategy({
+  clientID: "d80a400b6a707075e0b2",
+  clientSecret: "71db6e6e0e5bf807ebcda7323a67c447cdcfc5ef",
+  callbackURL: "/auth/github/callback"
+  // clientID: process.env.GITHUB_CLIENT_ID,
+  // clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  // callbackURL: "https://dev-web3.herokuapp.com/auth/github/callback"
+},
+(accessToken, refreshToken, profile, done) => {
+  userData = {
+    auth: 'github'
+  }
+  return done(null, profile)
+}
+));
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
