@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import ReactImageFallback from "react-image-fallback";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStoreContext } from "../../utils/GlobalState";
@@ -49,6 +50,8 @@ const JobCard = ({job}) => {
       })
   }
 
+const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
+
   return(
     <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" index={index + 1}>
         <div class="flex justify-between items-center">
@@ -57,7 +60,7 @@ const JobCard = ({job}) => {
         </div>
         <div class="mt-2">
             <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {type}</a>
-            <p class="mt-2 text-gray-600">{description}</p>
+            <p class="mt-2 text-gray-600"></p>
         </div>
         <div class="flex justify-between items-center mt-4">
             <a class="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
@@ -77,7 +80,7 @@ const JobCard = ({job}) => {
 }
             <div>
                 <a class="flex items-center" href="#">
-                    <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src={company_logo} alt={company}></img>
+                    <ReactImageFallback class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage="loader.gif" src={company_logo} fallbackImage={Errorpic} />
                     <h1 class="text-gray-700 font-bold">{company}</h1>
                 </a>
             </div>
