@@ -5,7 +5,6 @@ import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 
 import Card from '../components/Card'
-import '../styles/dashboard.scss'
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -63,9 +62,9 @@ function Dashboard () {
 
       <main className="relative w-full h-full">
         <section className="flex flex-col w-full h-full">
-        <div className="">
+        <div className="mb-48 px-8">
           
-          <div className="p-5 mt-10 w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
+          <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
                   <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName}!</span>
                 </div>
@@ -114,7 +113,7 @@ function Dashboard () {
                               {state.languages.map(lang =>{
                                 let term = `devicon-${lang}-plain`;
                                 return (
-                                  <i class={term} style={{fontSize:"30px", color:"purple"}}></i>
+                                  <i class={term} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
                               )})
                               }
                               <br></br>
@@ -164,10 +163,10 @@ function Dashboard () {
                               if(index%2 === 0) return (<div>{text}</div>)
                               else return (<code className="text-green-300">{text}</code>)
                             })}</h2>
-                            <div className="flex flex-row flex-wrap m-2">
+                            <div className="flex flex-row flex-wrap m-1">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
-                                  <i className={`devicon-${lang}-plain colored`} style={{fontSize:"20px"}}></i>
+                                  <i className={`devicon-${lang}-plain colored`} style={{fontSize:"20px", marginLeft:"5px"}}></i>
                               )})
                               }
                             </div>
