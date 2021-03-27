@@ -4,6 +4,8 @@ import React, { useRef, useLayoutEffect, useState } from "react";
 import githubicon from "../assets/images/github.svg"
 import Location from "../assets/svg/icons8-location-96.png"
 import Code from "../assets/svg/icons8-code-96.png"
+
+import LANGUAGEOBJECT from '../assets/languages.json'
 import Github from "../assets/svg/icons8-github-96.png"
 
 import LanguagesList from "../components/LanguagesList";
@@ -25,25 +27,7 @@ function NewUser() {
 
   const history = useHistory();
 
-  const [listLanguages, setListLanguages] = useState({
-    "c": false,
-    "cpp": false,
-    "csharp": false,
-    "css": false,
-    "go": false,
-    "haskell": false,
-    "html": false,
-    "java": false,
-    "javascript": false,
-    "kotlin": false,
-    "lua": false,
-    "php": false,
-    "python": false,
-    "r": false,
-    "ruby": false,
-    "swift": false,
-    "typescript": false
-  })
+  const [listLanguages, setListLanguages] = useState(LANGUAGEOBJECT)
 
   const handleChecked = (lang) => {
     console.log(lang);
@@ -200,31 +184,12 @@ const handleSubmit = (e) =>{
             </div>
             <div>
               <label className="text-sm text-gray-400">Languages</label>
-              {/* <div className="w-full inline-flex border">
-                <div className="pt-2 w-1/12 bg-gray-100">
-                  <img
-                  fill="none"
-                  className="w-6 text-gray-400 mx-auto"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  src={Code}
-                >
-                </img>
-                </div>
-                <input
-                  type="text"
-                  className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  placeholder="JavaScript, Java, Python, SQL, C#, ..."
-                  value={newLanguages}
-                  onChange={e=>setNewLanguages(e.target.value)}
-                />
-              </div> */}
               <div className="flex flex-row flex-wrap mx-auto">
-      {Object.keys(listLanguages).map((lang, index) => {
-        return(
-          <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
-        )
-      })}
+              {Object.keys(listLanguages).map((lang, index) => {
+                return(
+                  <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
+                )
+              })}
       </div>
             </div>
           </div>

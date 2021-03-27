@@ -14,7 +14,6 @@ router.use("/auth", authRoutes);
 // Login and signup Routes
 router.use('/user', userRoutes);
 router.post('/user/login', (req, res, next) => {
-  console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
     if(err) throw err;
     if(!user) res.send('Incorrect login information');
@@ -22,10 +21,19 @@ router.post('/user/login', (req, res, next) => {
       req.logIn(user, err => {
         if(err) throw err;
         res.send('Successfully authenticated')
-        console.log(req.user)
       });
     }
   })(req,res,next)
+});
+
+router.get('/user', (req, res) => {
+  res.send(req.user);
+});
+
+// Logout
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 // If no API routes are hit, send the React app

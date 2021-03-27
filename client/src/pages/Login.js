@@ -31,7 +31,6 @@ function Login() {
       username: usernameInput.current.value,
       password: passwordInput.current.value
     }
-    console.log(userData);
 
     axios({
       method: 'POST',
@@ -39,8 +38,6 @@ function Login() {
       withCredentials: true,
       url: "/user/login"
     }).then((res) => {
-      console.log(res);
-      console.log(res.data)
       if(res.data === 'Incorrect login information') {
         console.log('Email or password is not correct')
         setErrorMsg('Email or password is not correct')

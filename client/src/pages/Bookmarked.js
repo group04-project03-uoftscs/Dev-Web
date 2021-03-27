@@ -17,6 +17,67 @@ function Bookmarked() {
   const handleScroll = () => setOffsetY(window.pageYOffset);
   const history = useHistory();
 
+  function News(props) {
+  return (
+    <div>
+       <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
+            {state.favorites.length!==0 ?  state.favorites.map((article) => {
+              return (
+                <Card article={article} key={article.id}/>
+              )
+            })
+            : 
+            <div>
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
+                <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
+              </div>
+            </div>
+          }
+          </div>
+    </div>
+  );
+}
+function PodcastPage(props) {
+  return (
+    <div>
+      <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
+            {state.favorites.length!==0 ?  state.favorites.map((article) => {
+              return (
+                <Card article={article} key={article.id}/>
+              )
+            })
+            : 
+            <div>
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-yellow-200 rounded-md shadow-md">
+                <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
+              </div>
+            </div>
+          }
+          </div>
+    </div>
+  );
+}
+function JobsPage(props) {
+  return (
+    <div>
+      <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
+            {state.favorites.length!==0 ?  state.favorites.map((article) => {
+              return (
+                <Card article={article} key={article.id}/>
+              )
+            })
+            : 
+            <div>
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
+                <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
+              </div>
+            </div>
+          }
+          </div>
+    </div>
+  );
+}
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
@@ -37,7 +98,7 @@ function Bookmarked() {
     
   }, []);
 
-  
+  const [flag, setFlag] = useState(false);
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
@@ -59,7 +120,7 @@ function Bookmarked() {
 
       <main className="relative w-full h-full">
         <section className="flex flex-col w-full h-full">
-        <div className="">
+        <div className="px-6">
           
           <div className="p-5 mt-10 w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
@@ -67,20 +128,23 @@ function Bookmarked() {
                 </div>
           </div>
 
-          <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
-            {state.favorites.length!==0 ?  state.favorites.map((article) => {
-              return (
-                <Card article={article} key={article.id}/>
-              )
-            })
-            : 
-            <div>
-              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
-                <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
+           {/* Header */}
+              <div className="flex flex-col items-center justify-between">
+                <div className="flex-row mx-auto pt-10 p-4">
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
+                    News
+                  </button>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
+                    Podcasts 
+                  </button>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
+                    Jobs 
+                  </button>
+                {flag ? <PodcastPage a={flag} /> : <News h={flag} />}
+               </div>
               </div>
-            </div>
-          }
-          </div>
+
+          
 
 
 
