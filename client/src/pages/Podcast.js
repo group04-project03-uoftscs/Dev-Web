@@ -113,10 +113,10 @@ function HomePage(props) {
               {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(!flag)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
                     Best Episodes
                   </button>
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(!flag)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
                     Featured Episodes 
                   </button>
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
