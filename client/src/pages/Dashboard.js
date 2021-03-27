@@ -110,6 +110,11 @@ function Dashboard () {
                         <br></br>
                         <div className="flex-row flex-wrap">
                             <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
+                              {state.languages.map(lang =>{
+                                return (
+                                <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${lang}/${lang}.png`} className="h-5 ml-2 mr-2" fallbackImage={Errorpic} />
+                              )})
+                              }
                             <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
                             <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? 'Quick! To my Github!' : 'No Github Account linked'}</a>
                         </div>
@@ -157,13 +162,11 @@ function Dashboard () {
                               else return (<code className="text-green-300">{text}</code>)
                             })}</h2>
                             <div className="flex flex-row flex-wrap m-2">
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[0]}/${state.codewars.languages[0]}.png`} className="h-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[1]}/${state.codewars.languages[1]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[2]}/${state.codewars.languages[2]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[3]}/${state.codewars.languages[3]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[4]}/${state.codewars.languages[4]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[5]}/${state.codewars.languages[5]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
-                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[6]}/${state.codewars.languages[6]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
+                                return (
+                                <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${lang}/${lang}.png`} className="h-5 ml-2 mr-2" fallbackImage={Errorpic} />
+                              )})
+                              }
                             </div>
                             <h2 className="text-base text-green-200 flex-wrap font-semibold">{state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).join(", ")}</h2>
                             <a className="block text-base text-yellow-500 mt-2" href={state.codewars.url} target="_blank">Check it out on CodeWars!</a>
