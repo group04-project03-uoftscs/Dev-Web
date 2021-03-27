@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import { createPopper } from "@popperjs/core";
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -13,9 +13,11 @@ const UserDropdown = () => {
   const btnDropdownRef = useRef();
   const popoverDropdownRef = useRef();
 
-  createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-    placement: "bottom-start",
-  });
+  useEffect(()=>{
+    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+      placement: "bottom-start",
+  })
+  }, []);
 
   const handleDropdownClick = (e) =>{
     setDropdownPopoverShow(!dropdownPopoverShow)
@@ -26,20 +28,22 @@ const UserDropdown = () => {
   return (
     <>
       <OutsideClickHandler onOutsideClick={closeDropdownPopover}> 
-        <Link
-          className="text-gray-600 block"
+        <div
+          className="text-gray-600 block  cursor-pointer"
           ref={btnDropdownRef}
           onClick={handleDropdownClick}
+          id="user-dropdown-button"
         >
           <div className="items-center">
             <div className="w-8 h-8 lg:h-10 lg:w-10 border-none bg-indigo-400 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
               <svg viewBox="0 0 64 64" width="96px" height="96px"><Caret /></svg>
             </div>
           </div>
-        </Link>
+        </div>
       </OutsideClickHandler>
       <div
         ref={popoverDropdownRef}
+        id="popover-dropdown-ref"
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
           "bg-indigo-200 text-base z-50 float-left px-2 py-2 list-none text-left rounded shadow-lg min-w-48"

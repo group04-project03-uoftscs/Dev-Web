@@ -77,9 +77,9 @@ function Card ({article}) {
         <div>
           <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
           
-          <p className="mb-3 tracking-wide text-base text-shadow">
+          <div className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
-          </p>
+          </div>
 
           
             {isBookmarked ? 

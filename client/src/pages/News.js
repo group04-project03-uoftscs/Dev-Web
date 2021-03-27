@@ -1,21 +1,14 @@
 
-import React, {Component, useLayoutEffect, useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
-
+import Loading from '../components/Loading'
 import Card from '../components/Card';
 
 import { useStoreContext } from "../utils/GlobalState";
 
-import { FOUND_USER, LOADED, LOADING } from '../utils/actions';
-
-import API from '../utils/API';
-
 function News () {
 
   const [state, dispatch] = useStoreContext();
-  console.log(state.worldNews);
-  const history = useHistory();
 
   function Addroom(props) {
   return (
@@ -28,7 +21,8 @@ function News () {
                   return (
                   <Card article={article} key={article.id}/>
                   )}):  
-                  <div>Loading</div>}
+                  <Loading>Loading news articles...</Loading>}
+                      
                 </div>
               </div>
     </div>
@@ -45,7 +39,7 @@ function HomePage(props) {
                   return (
                   <Card article={article} key={article.id}/>
                   )}): 
-                  <div>Loading</div>}
+                  <Loading>Loading news articles...</Loading>}
                 </div>
               </div>
     </div>
@@ -118,13 +112,7 @@ function HomePage(props) {
                </div>
               </div>
                 {/* Tech News Card */}
-              <div>
-                <div className="mt-2 flex flex-row flex-wrap mx-auto">
-          
-                  
-                  <div>Loading</div>
-                </div>
-              </div>
+              
             </div>
             
           </div>
