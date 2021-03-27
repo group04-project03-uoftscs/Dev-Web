@@ -96,6 +96,8 @@ function HomePage(props) {
         <ParallaxLayer factor={1} offset={3} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={4} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={5} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={6} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={7} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
         <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
         <ParallaxLayer style={{ opacity: 0.2 }}>
@@ -114,10 +116,10 @@ function HomePage(props) {
               {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
                     Best Episodes
                   </button>
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
                     Featured Episodes 
                   </button>
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}

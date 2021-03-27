@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 
 import Card from '../components/Card'
+import '../styles/dashboard.scss'
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -166,7 +167,7 @@ function Dashboard () {
                             <div className="flex flex-row flex-wrap m-2">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
-                                <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${lang}/${lang}.png`} className="h-5 ml-2 mr-2" fallbackImage={Errorpic} />
+                                  <i className={`devicon-${lang}-plain colored`} style={{fontSize:"20px"}}></i>
                               )})
                               }
                             </div>
