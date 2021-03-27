@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 function Jobs() {
   
   const [state, dispatch] = useStoreContext();
+console.log(state.jobs);
   const today = Moment().format("YYYY-MM-DD");
 
   const [searchLocation, setsearchLocation] = useState(state.location);
