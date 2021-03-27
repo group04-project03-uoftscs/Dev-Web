@@ -12,6 +12,7 @@ function Login() {
   const [state, dispatch] = useStoreContext();
   const history = useHistory();
   const [remember, setRemember] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(()=> {
     API.getUser()
@@ -41,7 +42,8 @@ function Login() {
       console.log(res);
       console.log(res.data)
       if(res.data === 'Incorrect login information') {
-        alert('Email or password is not correct')
+        console.log('Email or password is not correct')
+        setErrorMsg('Email or password is not correct')
       } else {
         if(remember) {
           localStorage.setItem('user', JSON.stringify(userData));
@@ -123,6 +125,7 @@ function Login() {
                           placeholder="Username"
                           required
                           ref={usernameInput}
+                          onChange={e => setErrorMsg("")}
                         />
                       </div>
 
@@ -139,6 +142,7 @@ function Login() {
                           placeholder="Password"
                           required
                           ref={passwordInput}
+                          onChange={e => setErrorMsg("")}
                         />
                       </div>
                       <div>
@@ -156,6 +160,15 @@ function Login() {
                         </label>
                       </div>
 
+                      <div>
+                        <div className="items-center">
+                            <span className="ml-2 text-sm font-semibold text-red-500">
+                            {errorMsg}
+                            </span>
+                        </div>
+                        
+                      </div>
+
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -169,13 +182,13 @@ function Login() {
                 </div>
                 <div className="flex flex-wrap mt-6 relative">
                   <div className="w-1/2">
-                    <a
+                    {/* <a
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                       className="text-gray-300"
                     >
                       <small>Forgot password?</small>
-                    </a>
+                    </a> */}
                   </div>
                   <div className="w-1/2 text-right">
                     <a href="/signup" className="text-gray-300">

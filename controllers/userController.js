@@ -11,6 +11,9 @@ module.exports = {
           if(dbModel[i].github !== undefined) {
             usernames.push(dbModel[i].github.username)
           }
+          else{
+            usernames.push()
+          }
         }
         res.json(usernames)
       })
