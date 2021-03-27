@@ -68,7 +68,7 @@ function Signup() {
   
   return (
     <>
-    <main className="relative w-full h-full min-h-screen bg-gray-500">
+    <main className="relative w-full h-full min-h-screen bg-gray-500" style={{ marginTop:"30px"}}>
         <section className="absolute top-0 w-full h-full">
           <div className="mx-auto h-full w-full ">
             <div className="flex content-center items-center justify-center h-full">
