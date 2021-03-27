@@ -26,6 +26,9 @@ function Settings() {
   
   const [errorMsgProfile, setErrorMsgProfile] = useState("");
   const [errorMsgPassword, setErrorMsgPassword] = useState("");
+  
+  const [updateMsgProfile, setUpdateMsgProfile] = useState("");
+  const [updateMsgPassword, setUpdateMsgPassword] = useState("");
 
   const [listLanguages, setListLanguages] = useState({
       "c": false,
@@ -70,6 +73,7 @@ function Settings() {
 
 
   const handleChecked = (lang) => {
+    setUpdateMsgProfile("");
     console.log(lang);
     const temp = {...listLanguages}
     temp[lang] = !temp[lang];
@@ -93,6 +97,7 @@ function Settings() {
           type: UPDATE_LANGUAGES,
           languages: newListLanguages
         })
+        setUpdateMsgProfile("Profile updated");
       })
       .catch(err => console.log(err))
   }
@@ -114,12 +119,10 @@ function Settings() {
     }
     else{
       if(state.user._json !== undefined) {
-        console.log('after return')
         if(state.user._json.login === newGithub.trim()) {
           return saveInfo(state.user)
         }
       }
-      console.log('chekcing')
       API.getAllGithubUsers()
         .then(result =>{
           if(result.data.indexOf(newGithub.trim()) !== -1) {
@@ -195,6 +198,8 @@ function Settings() {
         API.updateUser(userData.username, {
           password: bcrypt.hashSync(userData.password, 10)
         })
+        
+        setUpdateMsgPassword("Password updated");
         currentPasswordInput.current.value = "";
         new1PasswordInput.current.value = "";
         new2PasswordInput.current.value = "";
@@ -233,12 +238,12 @@ function Settings() {
           onChange={e=>{
             setNewGithub(e.target.value);
             setErrorMsgProfile("")
+            setUpdateMsgProfile("");
           }}
           disabled={state.auth === 'github'}
           readOnly={state.auth ==="github"}
         />
         <div className="text-sm text-red-500 h-2">{errorMsgProfile}</div>
-
         <h4 
         className="languages"
         style={{ paddingTop:"20px" }}>
@@ -263,10 +268,14 @@ function Settings() {
           placeholder="Enter new location here"
           
           value={newLocation}
-          onChange={e=>setNewLocation(e.target.value)}
+          onChange={e=>{
+            setUpdateMsgProfile("");
+            setNewLocation(e.target.value)
+          }}
           style={{ width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
         />
       <br />
+      <div className="text-sm text-green-500 h-5">{updateMsgProfile}</div>
       <button
         type="submit"
         className="set-profile"
@@ -294,9 +303,13 @@ function Settings() {
         className="current-pass"
         type="password"
         required
+        disabled={state.auth === 'github'}
         placeholder="Current password here"
         ref={currentPasswordInput}
-        onChange={e => setErrorMsgPassword("")}
+        onChange={e => {
+          setErrorMsgPassword("")
+          setUpdateMsgPassword("")
+        }}
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <p style={{ paddingTop:"5px"}}>Type in NEW password:</p>
@@ -305,7 +318,11 @@ function Settings() {
         type="password"
         required
         placeholder="New password here"
-        onChange={e => setErrorMsgPassword("")}
+        disabled={state.auth === 'github'}
+        onChange={e => {
+          setErrorMsgPassword("")
+          setUpdateMsgPassword("")
+        }}
         ref={new1PasswordInput}
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
@@ -314,15 +331,20 @@ function Settings() {
         className="confirm-pass"
         type="password"
         required
-        onChange={e => setErrorMsgPassword("")}
+        onChange={e => {
+          setErrorMsgPassword("")
+          setUpdateMsgPassword("")
+        }}
         ref={new2PasswordInput}
+        disabled={state.auth === 'github'}
         placeholder="Confirm new password here"
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
-      <div className="text-sm text-red-500 h-5">{errorMsgPassword}</div>
+      <div className="text-sm h-5"><span className="text-red-500">{errorMsgPassword}</span><span className="text-green-500">{updateMsgPassword}</span></div>
 
       <button
         type="submit"
+        disabled={state.auth === 'github'}
         className="set-password"
         style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px", fontWeight:"bold" }}
       >

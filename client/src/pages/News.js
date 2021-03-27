@@ -17,29 +17,6 @@ function News () {
   console.log(state.worldNews);
   const history = useHistory();
 
-  // useLayoutEffect(() => {
-  //   dispatch({
-  //     type: LOADING
-  //   })
-  //   async function getUser() {
-  //     const {data} = await API.getUser();
-  //     console.log(data.hasOwnProperty('user'))
-  //     if(data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: FOUND_USER,
-  //         user: data.user
-  //       });
-  //       console.log('logged: ' + state.logged)
-  //     } else if(!data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: LOADED
-  //       })
-  //       history.push('/login')
-  //     }
-  //   }
-  //   getUser();
-  // }, [state.logged]);
-
   function Addroom(props) {
   return (
     <div>
@@ -124,10 +101,10 @@ function HomePage(props) {
                 {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(!flag)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
                     World News
                   </button>
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(!flag)}>
+                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-bold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
                     Tech News 
                   </button>
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
