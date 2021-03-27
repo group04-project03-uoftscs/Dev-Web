@@ -14,6 +14,7 @@ import Login from "../../assets/svg/icons8-user-shield-96.png"
 
 function Nav() {
   const [state, dispatch] = useStoreContext();
+  let lego = state.localusername.length%10;
   const Errorpic = 'https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png';
 
   return (
