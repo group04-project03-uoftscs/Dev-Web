@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import UserDropdown from "./UserDropdown";
 import LoginDropdown from "./LoginDropdown";
 import ReactImageFallback from "react-image-fallback";
+import { useStoreContext } from "../../utils/GlobalState";
 
 //svg & icons
 import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg"
@@ -12,6 +13,7 @@ import Podcast from "../../assets/svg/icons8-browse-podcasts-96.png"
 import Login from "../../assets/svg/icons8-user-shield-96.png"
 
 function Nav() {
+  const [state, dispatch] = useStoreContext();
   const Errorpic = 'https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png';
 
   return (
@@ -64,7 +66,7 @@ function Nav() {
                 </Link>
                 <Link to="/"
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center">
-                    <ReactImageFallback src={Errorpic} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
+                    <ReactImageFallback src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
                 </Link>
                 <div 
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
