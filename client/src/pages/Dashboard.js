@@ -3,6 +3,7 @@ import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
+import Font, {Text} from "react-font";
 
 import Card from '../components/Card'
 
@@ -12,6 +13,7 @@ import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCA
 
 import API from '../utils/API';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import JobCard from "../components/JobCard";
 
 function Dashboard () {
   const [state, dispatch] = useStoreContext();
@@ -60,7 +62,7 @@ function Dashboard () {
       </ParallaxLayer>
       {console.log(state)}
 
-      <main className="relative w-full h-full">
+      <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
         <div className="mb-48 px-8">
           
@@ -101,10 +103,10 @@ function Dashboard () {
                                 <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
                             </li>
                         </ul>
                         <br></br>
@@ -188,9 +190,16 @@ function Dashboard () {
 
           <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
             {state.favorites.length!==0 ?  state.favorites.slice(0,Math.min(state.favorites.length,5)).map((article) => {
-              return (
-                <Card article={article} key={article.id}/>
-              )
+              if(article.type ==="jobs") {
+                return (
+                  <JobCard job={article} key={article.id}/>
+                )
+              }
+              else{
+                return (
+                  <Card article={article} key={article.id}/>
+                )
+              }
             })
             : 
             <div>

@@ -7,7 +7,7 @@ function Footer() {
       <div className="w-full bg-indigo-500 shadow-md h-16 flex justify-between ">
           <div className="w-full h-full justify-center text-white">
             <div className="flex items-center h-full justify-center">
-                Copyright © 2021 - Dev Web Team
+                <strong>Copyright © 2021 - <u><a title="Dev-Web GitHub Repo" href="https://github.com/group04-project03-uoftscs/Dev-Web">Dev Web Team</a></u></strong>
             </div>
         </div>
       </div>

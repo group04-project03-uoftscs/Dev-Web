@@ -14,21 +14,20 @@ const JobCard = ({job}) => {
 
   const {
     id,
-    type,
-    created_at,
+    position,
+    date,
     company,
     location,
     title,
-    company_logo,
+    image,
     index,
     description,
-    how_to_apply,
     url
   } = job;
 
   
   const isBookmarked = state.favorites.filter(item => {
-    return item.id == job.id
+    return item.id == id
   }).length == 1;
 
   
@@ -55,11 +54,11 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
   return(
     <div class="max-w-3xl px-10 my-4 py-6 bg-white rounded-lg shadow-md bg-opacity-75" index={index + 1}>
         <div class="flex justify-between items-center">
-            <span class="font-light text-gray-600">Posted {moment(new Date(created_at)).fromNow()}</span>
+            <span class="font-light text-gray-600">Posted {moment(new Date(date)).fromNow()}</span>
             <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{location}</a>
         </div>
         <div class="mt-2">
-            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {type}</a>
+            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {position}</a>
             <p class="mt-2 text-gray-600"></p>
         </div>
         <div class="flex justify-between items-center mt-4">
@@ -81,7 +80,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
             
             <div>
                 <a class="flex items-center" href="#">
-                    <ReactImageFallback class="mx-4 w-12 h-12 object-cover rounded-full bg-white hidden sm:block" src={company_logo} fallbackImage={Errorpic} />
+                    <ReactImageFallback class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage="loader.gif" src={image} fallbackImage={Errorpic} />
                     <h1 class="text-gray-700 font-bold">{company}</h1>
                 </a>
             </div>
