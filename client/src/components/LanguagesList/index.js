@@ -1,5 +1,5 @@
 import React from "react";
-import './languagelist.css'
+import './languagelist.css';
 
 const LanguagesList = (props) => {
   let term = `devicon-${props.language}-plain colored`;
@@ -14,7 +14,6 @@ const LanguagesList = (props) => {
             onChange={props.handleChecked}
           />
           <span><i class={term}></i></span>
-          
         </label>
     </div>
     );
