@@ -20,25 +20,8 @@ console.log(state.jobs);
 
 
   useEffect(() => {
-    checkLocalStorageJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location);
+    findJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location);
   }, []);
-
-  
-  const checkLocalStorageJobs = (action, type, api, location) => {
-    if(localStorage.getItem(type)){
-      if(JSON.parse(localStorage.getItem(type)).date !== today) {
-        findJobs(action, type, api,location);
-      }
-      else{
-        
-        console.log(type + ' already there')
-        dispatch({ type: action, items: JSON.parse(localStorage.getItem(type)).items})
-      }
-    }
-    else{
-      findJobs(action, type, api, location);
-    }
-  }
 
   const findJobs = (action, type, api, location) =>{ 
     console.log(`getting ${type}`)
@@ -46,7 +29,6 @@ console.log(state.jobs);
       description: "",
       location: (location === "") ? "remote" : location
     }
-    console.log(api)
     api(data)
       .then(result => {
         console.log(result)
@@ -58,20 +40,10 @@ console.log(state.jobs);
           api(data)
             .then(result2 =>{
               dispatch({ type: action, items: result2.data})
-      
-                localStorage.setItem(type , JSON.stringify({
-                  date: today,
-                  items: result2.data
-                }))
             })
         }
         else{
           dispatch({ type: action, items: result.data})
-      
-          localStorage.setItem(type , JSON.stringify({
-            date: today,
-            items: result.data
-          }))
         }
         
     })
@@ -79,9 +51,7 @@ console.log(state.jobs);
       console.log(err)
     });
   }
-
-/* This part below is to handle form request */
-
+  
   const handleSubmit = (e) =>{
     e.preventDefault();
     API.getJobs({
@@ -96,32 +66,6 @@ console.log(state.jobs);
       })
       .catch(err => console.log(err))
   };
-/* The part above is to handle form request */
-
-// // Used for authentication
-//   useLayoutEffect(() => {
-//     dispatch({
-//       type: LOADING
-//     })
-//     async function getUser() {
-//       const {data} = await API.getUser();
-//       console.log(data.hasOwnProperty('user'))
-//       if(data.hasOwnProperty('user')) {
-//         dispatch({
-//           type: FOUND_USER,
-//           user: data.user
-//         });
-//         console.log('logged: ' + state.logged)
-//       } else if(!data.hasOwnProperty('user')) {
-//         dispatch({
-//           type: LOADED
-//         })
-//         history.push('/login')
-//       }
-//     }
-//     getUser();
-//   }, [state.logged]);
-
   return (
     <div className="container">
       <h1 className="title" style={{ backgroundColor: "blue", color:"white", fontSize: "2rem"}}>

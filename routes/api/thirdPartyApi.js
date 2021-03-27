@@ -356,20 +356,23 @@ router.route("/githubjobs")
   .post((req,res) => {
     axios(`https://jobs.github.com/positions.json?description=${req.body.description}&location=${req.body.location}`)
     .then(result => {
-      // console.log(result.data)
-      result.data.map(job => {
+       console.log(result.data)
+      const jobList = result.data.map(job => {
         let time = job.created_at.split(" ");
         return {
-          type: job.type,
+          position: job.type,
           location: job.location,
           title: job.title,
           date: `${time[1]} ${time[2]}, ${time[time.length-1]}`,
           company: job.company,
           image: job.company_logo,
-          type: "jobs"
+          type: "jobs",
+          id: job.id,
+          url: job.url
         }
       })
-      res.json(result.data)
+      console.log(jobList)
+      res.json(jobList)
     })    
     .catch(err => {
       console.log(err)
