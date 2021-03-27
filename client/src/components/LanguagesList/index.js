@@ -13,7 +13,7 @@ const LanguagesList = (props) => {
             checked={props.checked}
             onChange={props.handleChecked}
           />
-          <span><i class={term}></i></span>
+          <span><i class={term} title={props.language}></i></span>
         </label>
     </div>
     );
