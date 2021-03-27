@@ -2,7 +2,8 @@ const { default: axios } = require("axios");
 const router = require("express").Router();
 const scrape = require('./scraper');
 const Moment = require("moment")
-const codewars = require('./codewarsChallenges.json')
+const codewars = require('./codewarsChallenges.json');
+const extendTimeoutMiddleware = require("../../config/middleware/extendedTimeOut")
 
 // Get Github profile
 router.route("/githubuser/:username")
@@ -296,7 +297,7 @@ router.route("/worldnewsapi")
 
 
 router.route("/technewsapi")
-  .get((req,res)=>{
+  .get(extendTimeoutMiddleware, (req,res)=>{
     // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
     getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
