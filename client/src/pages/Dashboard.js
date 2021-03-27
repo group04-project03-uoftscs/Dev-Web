@@ -96,17 +96,22 @@ function Dashboard () {
                                 </svg></Link>
                             </a>
                         </div>
-                        <ul className="flex justify-content-around items-center">
+                        {state.user._json !== undefined ? 
+                            <ul className="flex justify-content-around items-center">
                             <li>
-                                <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
+                                <span className="text-base flex"><span className="font-bold mr-2">{state.user._json.public_repos} </span> Repos</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.followers} </span> Followers</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.following} </span> Following</span>
                             </li>
                         </ul>
+                          : null
+                        }
+
+                        
                         <br></br>
                         <div className="flex-row flex-wrap">
                             <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
@@ -115,8 +120,14 @@ function Dashboard () {
                                 <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${lang}/${lang}.png`} className="h-5 ml-2 mr-2" fallbackImage={Errorpic} />
                               )})
                               }
-                            <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? 'Quick! To my Github!' : 'No Github Account linked'}</a>
+                              {state.user._json !== undefined ? 
+                                  <div>
+                                    <span className="text-base font-semibold">{state.user._json.bio}</span>
+                                    <a className="block text-base text-yellow-500 mt-2" href={state.user._json.html_url} target="_blank">Quick! To my Github!</a>
+                                  </div>
+                                : null
+                              }
+                            
                         </div>
                     </div>
                   </div>  
