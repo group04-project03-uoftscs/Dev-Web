@@ -62,7 +62,7 @@ function Dashboard () {
       </ParallaxLayer>
       {console.log(state)}
 
-      <main className="relative w-full h-full">
+      <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
         <div className="">
           
