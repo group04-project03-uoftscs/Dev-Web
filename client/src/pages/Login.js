@@ -29,7 +29,8 @@ function Login() {
     e.preventDefault();
     let userData = {
       username: usernameInput.current.value,
-      password: passwordInput.current.value
+      password: passwordInput.current.value,
+      remember_me: remember,
     }
     console.log(userData);
 
@@ -45,9 +46,9 @@ function Login() {
         console.log('Email or password is not correct')
         setErrorMsg('Email or password is not correct')
       } else {
-        if(remember) {
-          localStorage.setItem('user', JSON.stringify(userData));
-        }
+        // if(remember) {
+        //   localStorage.setItem('user', JSON.stringify(userData));
+        // }
         dispatch({
           type: UPDATE_USER,
           user: {

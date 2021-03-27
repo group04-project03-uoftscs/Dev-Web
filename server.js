@@ -7,10 +7,11 @@ const app = express();
 const routes = require('./routes');
 const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
-const GithubStrategy = require('passport-github2').Strategy;
+
+app.use(cookieParser())
 
 // Passport
-const passport = require('./config/passport');
+const {passport} = require('./config/passport');
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: 'Klee was here', resave: true, saveUninitialized: true }));
 
@@ -22,36 +23,8 @@ app.use(cors({
 app.use(cookieParser("Klee was here"))
 app.use(passport.initialize())
 app.use(passport.session());
+app.use(passport.authenticate('remember-me'))
 
-// This is the github link strategy
-// Also make sure to add the clientID and secret to a .env file once the app is in production
-passport.use(new GithubStrategy({
-  clientID: "d80a400b6a707075e0b2",
-  clientSecret: "71db6e6e0e5bf807ebcda7323a67c447cdcfc5ef",
-  callbackURL: "/auth/github/callback"
-  // clientID: process.env.GITHUB_CLIENT_ID,
-  // clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  // callbackURL: "https://dev-web3.herokuapp.com/auth/github/callback"
-},
-(accessToken, refreshToken, profile, done) => {
-  userData = {
-    auth: 'github'
-  }
-  return done(null, profile)
-}
-));
-
-
-app.get('/user', (req, res) => {
-  console.log(req.user)
-  res.send(req.user);
-});
-
-// Logout
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
 
 require('dotenv').config();
 
