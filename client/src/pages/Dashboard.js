@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
+import ReactImageFallback from "react-image-fallback";
 
 import Card from '../components/Card'
 
@@ -38,7 +39,8 @@ function Dashboard () {
     
   }, []);
 
-  
+  let lego = Math.floor(Math.random() * 10);
+  const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
@@ -72,7 +74,7 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : ''}
+                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
@@ -109,7 +111,7 @@ function Dashboard () {
                         <div className="flex-row flex-wrap">
                             <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
                             <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? state.user._json.html_url : 'No url'}</a>
+                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? 'Quick! To my Github!' : 'No Github Account linked'}</a>
                         </div>
                     </div>
                   </div>  
@@ -128,13 +130,13 @@ function Dashboard () {
           <div className="flex mt-10 w-3/4 mx-auto items-center justify-center bg-opacity-30 bg-indigo-300 rounded-3xl">
           { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
             <div>
-              <div className="w-full">
-            <div className="flex justify-center pb-1">
-                    <div className="sm:flex-col ml-10">
-                        <div className="flex items-center">
-                            <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">CodeWars</h2>
-                            <a className="cursor-pointer hidden md:inline-flex h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.codewars.name}</a>
-                            <a className="cursor-pointer h-7 px-3 ml-3 focus:outline-none hover:border-transparent text-center rounded border border-green-400 hover:bg-green-500 hover:text-white bg-transparent text-green-200 font-semibold">{state.codewars.category}</a>
+              <div className="w-full mb-1">
+            <div className="md:flex justify-center pb-1">
+                    <div className="ml-10">
+                        <div className="flex sm:flex-col sm:flex-wrap md:flex-row my-2 mt-2">
+                          <h2 className="leading-relaxed font-light mb-1 text-gray-700 text-xl">Your Codewars Challenge</h2>
+                            <a className="cursor-pointer px-3 p-1 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.codewars.name}</a>
+                            <a className="cursor-pointer hidden md:flex px-3 p-1 ml-3 focus:outline-none hover:border-transparent text-center rounded border border-green-400 hover:bg-green-500 hover:text-white bg-transparent text-green-200 font-semibold">{state.codewars.category}</a>
                             
                         </div>
                         <ul className="flex md:flex-row sm:flex-col flex-wrap justify-content-around items-center">
@@ -154,8 +156,17 @@ function Dashboard () {
                               if(index%2 === 0) return (<div>{text}</div>)
                               else return (<code className="text-green-300">{text}</code>)
                             })}</h2>
-                            <h2 className="text-base text-green-200 font-semibold">{state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).join(", ")}</h2>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.codewars.url} target="_blank">{state.codewars.url}</a>
+                            <div className="flex flex-row flex-wrap m-2">
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[0]}/${state.codewars.languages[0]}.png`} className="h-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[1]}/${state.codewars.languages[1]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[2]}/${state.codewars.languages[2]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[3]}/${state.codewars.languages[3]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[4]}/${state.codewars.languages[4]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[5]}/${state.codewars.languages[5]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                              <ReactImageFallback src={`https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${state.codewars.languages[6]}/${state.codewars.languages[6]}.png`} className="h-5 ml-5" fallbackImage={Errorpic} />
+                            </div>
+                            <h2 className="text-base text-green-200 flex-wrap font-semibold">{state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).join(", ")}</h2>
+                            <a className="block text-base text-yellow-500 mt-2" href={state.codewars.url} target="_blank">Check it out on CodeWars!</a>
                         </div>
                     </div>
                   </div>  
