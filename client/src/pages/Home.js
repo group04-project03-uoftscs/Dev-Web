@@ -4,7 +4,7 @@ import "../styles/background.scss";
 import { useStoreContext } from "../utils/GlobalState";
 import { FOUND_USER, LOADING, UPDATE_FAVORITES, UPDATE_LANGUAGES, UPDATE_LOCALUSERNAME, UPDATE_LOCATION } from '../utils/actions';
 
-import { githubAuth, checkLocalStorageHome, getFavoriteRecursion } from '../functions/functions';
+import { githubAuth, checkLocalStorageHome, getFavoriteRecursion, googleAuth } from '../functions/functions';
 
 import { useHistory } from 'react-router-dom';
 import API from '../utils/API';
@@ -31,6 +31,7 @@ function Home () {
   async function checkDatabase(axios, dispatch, history, API, state) {
     await checkLocalStorageHome(axios, dispatch);
     let { data }  = await API.getUser();
+    console.log('this is the data ', data);
     
     if(data.auth === 'github') {
       dispatch({
@@ -38,7 +39,14 @@ function Home () {
         username: data.user.username
       })
       githubAuth(data, dispatch, API, state, getFavoriteRecursion, history)
-    } 
+    }
+    else if(data.auth === 'google') {
+      dispatch({
+        type: UPDATE_LOCALUSERNAME,
+        username: data.user.displayName
+      });
+      googleAuth(data, dispatch, API, state, getFavoriteRecursion, history)
+    }
     else if (data.auth === 'local') {
       dispatch({
         type: UPDATE_LOCALUSERNAME,

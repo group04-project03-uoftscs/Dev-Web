@@ -6,6 +6,7 @@ const userSchema = new Schema({
   email: { type: String, uniquie: true },
   password: { type: String },
   github: { type: Object },
+  google: {type: Object},
   auth: { type: String},
   location: { type: String },
   languages: { type: Array, default: [] },

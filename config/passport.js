@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GithubStrategy = require('passport-github2').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcryptjs');
 
 const db = require('../models');
@@ -37,9 +38,20 @@ passport.use(new GithubStrategy({
   userData = {
     auth: 'github'
   }
-  return done(null, profile)
+  return done(null, profile);
 }
 ));
+
+passport.use(new GoogleStrategy({
+    clientID: '852782765736-kb9a4nhtp283psctoo6cd0t6lh9psuuo.apps.googleusercontent.com',
+    clientSecret: 'rxYwpMpPsIan1s0WgR-8KiH4',
+    callbackURL: 'http://localhost:3001/auth/google/callback'
+  },
+  (accessToken, refreshToken, profile, done) => {
+    console.log(profile)
+    return done(null, profile);
+  }
+))
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
