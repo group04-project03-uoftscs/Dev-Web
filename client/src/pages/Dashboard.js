@@ -3,6 +3,7 @@ import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
+import Font, {Text} from "react-font";
 
 import Card from '../components/Card'
 import '../styles/dashboard.scss'
@@ -61,7 +62,7 @@ function Dashboard () {
       </ParallaxLayer>
       {console.log(state)}
 
-      <main className="relative w-full h-full">
+      <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
         <div className="">
           
