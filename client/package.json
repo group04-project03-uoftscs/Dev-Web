@@ -26,6 +26,7 @@
     "react-scripts": "^4.0.3",
     "react-spring": "^8.0.27",
     "react-transition-group": "^4.4.1",
+    "react-font": "^1.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   },
   "scripts": {

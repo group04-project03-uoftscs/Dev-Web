@@ -104,10 +104,10 @@ function Dashboard () {
                                 <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
+                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
                             </li>
                         </ul>
                         <br></br>
