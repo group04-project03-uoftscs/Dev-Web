@@ -114,8 +114,6 @@ export const checkLocalStorageLanding = (axios, dispatch) => {
 }
 
 export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
-  console.log(databaseList)
-  console.log(favoriteList)
   if(databaseList.length === favoriteList.length) cb(favoriteList);
   else{
     let fave = databaseList[favoriteList.length];
@@ -123,7 +121,6 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
       console.log('getting episode and podcast')
       let localItems = JSON.parse(localStorage.getItem(fave.type));
       let found = localItems.filter(item => item.id === fave.id);
-      console.log(found)
       if(found.length >= 1) {
         favoriteList.push(found[0]);
         getFavoriteRecursion(databaseList,favoriteList,cb)
@@ -149,8 +146,6 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
         else if(fave.type === "podcasts"){
           API.getPodcast(fave.id)
             .then(result => {
-              console.log(result.data)
-
               let saved = JSON.parse(localStorage.getItem(fave.type));
               saved.push(result.data);
               localStorage.setItem(fave.type, JSON.stringify(saved));
