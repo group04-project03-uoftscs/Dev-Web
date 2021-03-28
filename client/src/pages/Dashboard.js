@@ -76,7 +76,7 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
+                    <img src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">

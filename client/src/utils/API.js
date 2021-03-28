@@ -64,12 +64,16 @@ export default {
     return axios.get('/user');
   },
 
-  addGithubUser: function(githubUserData) {
+  addNonLocalUser: function(githubUserData) {
     return axios.post('/api/github/add', githubUserData);
   },
 
   findGithubUser: function(user) {
     return axios.get(`/api/github/${user}`)
+  },
+
+  findGoogleUser: function(user) {
+    return axios.get(`/api/google/${user}`)
   },
 
   getLocalUserUpdate: function(user, data) {

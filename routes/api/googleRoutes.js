@@ -3,7 +3,7 @@ const userController = require("../../controllers/userController");
 
 router
   .route('/:user')
-  .get(userController.findGithubUser)
+  .get(userController.findGoogleUser)
 
 router
   .route('/add')
