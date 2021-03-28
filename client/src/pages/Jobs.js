@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 0dc0fe30659556e4c9316108629815c2981c588b
 import Moment from 'moment';
 import JobCard from "../components/JobCard";
 
@@ -71,6 +75,7 @@ function Jobs() {
     findJobs(UPDATE_JOBS, "jobs", API.getJobs, searchLocation, description);
   };
 
+<<<<<<< HEAD
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
   const [flag, setFlag] = useState(1);
   function Page1({page}) {
@@ -197,6 +202,46 @@ function Jobs() {
         </div>
       </div>
   </Parallax>
+=======
+  function SearchResults() {
+    return (
+      <div>
+        {state.jobs.length!==0 ?  state.jobs.slice(0,5).map((job) => {
+        return (
+        <JobCard job={job} key={job.id}/>
+        )}): 
+        <div>No result</div>
+        }
+          
+      </div>
+    );
+  }
+
+  return (
+    <div>
+              <div>
+                {state.jobs.length!==0 ?  state.jobs.slice(5,Math.min(state.jobs.length,7)).map((job) => {
+                  return (
+                    <JobCard job={job} key={job.id}/>
+                  )}): 
+                    <div>Loading</div>
+                }
+              </div>
+
+              <div className="flex col-md-2">
+                <button 
+                  style={{ width:"100px", height:"30px", margin:"16px", backgroundColor:"lightgray", borderRadius:"99px"}} 
+                  type="submit" 
+                  className="btn-search"
+                >
+                  <strong>Search</strong>
+                </button>
+            </div>
+      {findingJobs ? 
+          <Loading>Finding jobs</Loading> : <SearchResults/>
+      }
+    </div>
+>>>>>>> 0dc0fe30659556e4c9316108629815c2981c588b
   );
 }
 

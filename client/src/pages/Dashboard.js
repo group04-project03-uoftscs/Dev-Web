@@ -62,8 +62,11 @@ function Dashboard () {
 
       <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
+<<<<<<< HEAD
         <div className="mb-48 px-8">
           
+=======
+>>>>>>> 0dc0fe30659556e4c9316108629815c2981c588b
           <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
                   <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName ? state.user.displayName : state.localusername}!</span>
@@ -128,7 +131,11 @@ function Dashboard () {
                               {state.languages.map(lang =>{
                                 let term = `devicon-${lang}-plain`;
                                 return (
+<<<<<<< HEAD
                                   <i className={term} key={`lang-${lang}`} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
+=======
+                                  <i className={term} key={term} style={{fontSize:"30px", color:"purple"}}></i>
+>>>>>>> 0dc0fe30659556e4c9316108629815c2981c588b
                               )})
                               }
                               <br></br>
@@ -188,7 +195,11 @@ function Dashboard () {
                             <div className="flex flex-row flex-wrap m-1">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
+<<<<<<< HEAD
                                   <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px", marginLeft:"5px"}}></i>
+=======
+                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px"}}></i>
+>>>>>>> 0dc0fe30659556e4c9316108629815c2981c588b
                               )})
                               }
                             </div>
