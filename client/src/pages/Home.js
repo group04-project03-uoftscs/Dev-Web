@@ -84,7 +84,7 @@ function Home () {
           type: UPDATE_LANGUAGES,
           languages: localData.data[0].languages
         })
-        getFavoriteRecursion(localData.data[0].favorites,[], favoriteList =>{
+        getFavoriteRecursion(localData.data[0].favorites,[], API, favoriteList =>{
           dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
         });
       }

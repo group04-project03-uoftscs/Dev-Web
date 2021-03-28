@@ -43,7 +43,7 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
               type: UPDATE_LANGUAGES,
               languages: githubData.data[0].languages
             })
-            getFavoriteRecursion(githubData.data[0].favorites,[], favoriteList =>{
+            getFavoriteRecursion(githubData.data[0].favorites,[],API, favoriteList =>{
           
               console.log(favoriteList)
               dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
@@ -113,7 +113,7 @@ export const checkLocalStorageLanding = (axios, dispatch) => {
   }
 }
 
-export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
+export const getFavoriteRecursion = (databaseList, favoriteList, API, cb) => {
   if(databaseList.length === favoriteList.length) cb(favoriteList);
   else{
     let fave = databaseList[favoriteList.length];
@@ -123,7 +123,7 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
       let found = localItems.filter(item => item.id === fave.id);
       if(found.length >= 1) {
         favoriteList.push(found[0]);
-        getFavoriteRecursion(databaseList,favoriteList,cb)
+        getFavoriteRecursion(databaseList,favoriteList,API,cb)
       }
       else {
         if(fave.type === "episodes"){
@@ -135,12 +135,12 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
               localStorage.setItem(fave.type, JSON.stringify(saved));
               
               favoriteList.push(result.data);
-              getFavoriteRecursion(databaseList,favoriteList,cb);
+              getFavoriteRecursion(databaseList,favoriteList,API,cb);
             })
             .catch(err =>{
               console.log(err);
               favoriteList.push(fave);
-              getFavoriteRecursion(databaseList,favoriteList,cb);
+              getFavoriteRecursion(databaseList,favoriteList,API,cb);
             })
         }
         else if(fave.type === "podcasts"){
@@ -151,19 +151,19 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
               localStorage.setItem(fave.type, JSON.stringify(saved));
               
               favoriteList.push(result.data);
-              getFavoriteRecursion(databaseList,favoriteList,cb);
+              getFavoriteRecursion(databaseList,favoriteList,API,cb);
             })
             .catch(err =>{
               console.log(err);
               favoriteList.push(fave);
-              getFavoriteRecursion(databaseList,favoriteList,cb);
+              getFavoriteRecursion(databaseList,favoriteList,API,cb);
             })
         }
       }
     }
     else {
       favoriteList.push(fave);
-      getFavoriteRecursion(databaseList,favoriteList,cb);
+      getFavoriteRecursion(databaseList,favoriteList,API,cb);
     }
   }
 }
@@ -231,7 +231,7 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
                 user: userData
               })
             }
-            getFavoriteRecursion(googleData.data[0].favorites,[], favoriteList =>{
+            getFavoriteRecursion(googleData.data[0].favorites,[],API, favoriteList =>{
           
               console.log(favoriteList)
               dispatch({ type: UPDATE_FAVORITES, items: favoriteList});

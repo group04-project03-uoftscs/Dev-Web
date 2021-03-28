@@ -147,16 +147,16 @@ const getFakeEpisodes = (cb) => {
 
 router.route("/listennotespodcasts")
   .get((req,res)=>{
-    // getBestPodcasts(data =>{ // to be used when using API calls
-    getFakePodcasts(data =>{ // get saved response to save on api
+    getBestPodcasts(data =>{ // to be used when using API calls
+    // getFakePodcasts(data =>{ // get saved response to save on api
       res.json(data);
     })
   })
 
 router.route("/listennotesepisodes")
 .get((req,res)=>{
-  // getLatestEpisodes(data =>{ // to be used when using API calls
-  getFakeEpisodes(data =>{ // get saved response to save on api
+  getLatestEpisodes(data =>{ // to be used when using API calls
+  // getFakeEpisodes(data =>{ // get saved response to save on api
     res.json(data);
   })
 })
@@ -289,17 +289,17 @@ const getFakeNews = (url,cb) => {
 
 router.route("/worldnewsapi")
   .get((req,res)=>{
-    // getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
-    //   res.json(data)
-    // })
-    res.json(worldnewAPIReponse); // to get fake news
+    getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
+      res.json(data)
+    })
+    // res.json(worldnewAPIReponse); // to get fake news
   })
 
 
 router.route("/technewsapi")
   .get(extendTimeoutMiddleware, (req,res)=>{
-    // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
-    getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
+    getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
+    // getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
