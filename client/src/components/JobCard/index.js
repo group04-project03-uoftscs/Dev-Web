@@ -80,7 +80,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
             
             <div>
                 <a className="flex items-center" href="#">
-                    <ReactImageFallback className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage="loader.gif" src={image} fallbackImage={Errorpic} />
+                    <ReactImageFallback className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage={image} src={image} fallbackImage={Errorpic} />
                     <h1 className="text-gray-700 font-bold">{company}</h1>
                 </a>
             </div>

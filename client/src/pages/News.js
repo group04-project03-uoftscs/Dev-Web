@@ -10,23 +10,22 @@ function News () {
 
   const [state, dispatch] = useStoreContext();
 
-
   function Addroom() {
   return (
     <div>
        {/* Tech News */}
        {console.log("tech news")}
-              <div>
-                <div className="flex flex-row flex-wrap mx-auto">
-          
-                  {state.techNews.length!==0 ?  state.techNews.map((article, index) => {
-                  return (
-                  <Card article={article} key={index}/>
-                  )}):  
-                  <Loading>Loading news articles...</Loading>}
-                      
-                </div>
-              </div>
+      <div>
+        <div className="flex flex-row flex-wrap mx-auto">
+  
+          {state.techNews.length!==0 ?  state.techNews.map((article, index) => {
+          return (
+          <Card article={article} key={index}/>
+          )}):  
+          <Loading>Loading news articles...</Loading>}
+              
+        </div>
+      </div>
     </div>
   );
 }
@@ -35,16 +34,16 @@ function HomePage() {
     <div>
       {/* World News */}
        {console.log("world news")}
-              <div>
-                <div className="flex flex-row flex-wrap mx-auto">
-          
-                  {state.worldNews.length!==0 ?  state.worldNews.map((article, index) => {
-                  return (
-                  <Card article={article} key={index}/>
-                  )}): 
-                  <Loading>Loading news articles...</Loading>}
-                </div>
-              </div>
+          <div>
+            <div className="flex flex-row flex-wrap mx-auto">
+      
+              {state.worldNews.length!==0 ?  state.worldNews.map((article, index) => {
+              return (
+              <Card article={article} key={index}/>
+              )}): 
+              <Loading>Loading news articles...</Loading>}
+            </div>
+          </div>
     </div>
   );
 }
