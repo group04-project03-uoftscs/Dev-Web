@@ -297,8 +297,8 @@ router.route("/worldnewsapi")
 
 router.route("/technewsapi")
   .get((req,res)=>{
-    getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
-    // getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
+    // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
+    getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
