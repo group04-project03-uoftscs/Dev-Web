@@ -77,7 +77,7 @@ function Jobs() {
       <div>
         {state.jobs.length!==0 ?  state.jobs.slice(0,5).map((job) => {
         return (
-        <JobCard job={job} key={job.id} style={{ marginTop:"25px" }}/>
+        <JobCard job={job} key={job.id}/>
         )}): 
         <div>No result</div>
         }

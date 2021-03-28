@@ -191,7 +191,8 @@ function Settings() {
   }
 
   return (
-    <div className="settings-tab">
+    <section className="py-20 bg-gray-200 bg-opacity-50"> 
+   <div className="settings-tab">
       <div 
         className="section-header"
         style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder", marginTop:"65px"}}
@@ -340,7 +341,7 @@ function Settings() {
         style={{ textAlign:"center"}}
       >
         <h2
-        style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
+        style={{ paddingBottom:"10px", paddingTop:"10px" }}>:::::::::::::: EXTRA CARE BEYOND THIS POINT :::::::::::::: </h2>
         <button 
           className="del-account" 
           style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"25px"}}
@@ -414,6 +415,7 @@ function Settings() {
         </>
       ) : null}
     </div>
+  </section>  
   );
 }
 

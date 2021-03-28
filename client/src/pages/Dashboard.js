@@ -199,7 +199,7 @@ function Dashboard () {
             })
             : 
             <div>
-              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md" style={{ marginBottom:"20px"}}>
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
             </div>
