@@ -3,7 +3,6 @@ const router = require("express").Router();
 const scrape = require('./scraper');
 const Moment = require("moment")
 const codewars = require('./codewarsChallenges.json');
-const extendTimeoutMiddleware = require("../../config/middleware/extendedTimeOut")
 
 // Get Github profile
 router.route("/githubuser/:username")
@@ -297,7 +296,7 @@ router.route("/worldnewsapi")
 
 
 router.route("/technewsapi")
-  .get(extendTimeoutMiddleware, (req,res)=>{
+  .get((req,res)=>{
     getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
     // getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
@@ -308,7 +307,9 @@ router.route("/technewsapi")
         })
         const articles = await Promise.all(promises)
         const combinedArticles = interleave(data, articles);
-        res.json(combinedArticles)
+        // res.json(combinedArticles)
+        res.write(JSON.stringify(combinedArticles));
+        res.end();
       })
     })
   })

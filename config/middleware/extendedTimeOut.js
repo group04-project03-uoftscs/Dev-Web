@@ -5,10 +5,12 @@ const extendTimeoutMiddleware = (req, res, next) => {
 
   console.log(`isFinished: ${isFinished} & isDataSent: ${isDataSent}`)
   // Only extend the timeout for API requests
-  if (!req.url.includes('/api')) {
-    next();
-    return;
-  }
+  
+  // if (!req.url.includes('/api/thirdparty/technewsapi')) {
+    
+  //   next();
+  //   return;
+  // }
 
   res.once('finish', () => {
     isFinished = true;
@@ -26,6 +28,7 @@ const extendTimeoutMiddleware = (req, res, next) => {
       if (!isFinished && !isDataSent) {
       //   Need to write the status code/headers if they haven't been sent yet.
         if (!res.headersSent) {
+          console.log('sending 202')
           res.writeHead(202);
         }
 
