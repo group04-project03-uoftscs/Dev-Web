@@ -81,14 +81,14 @@ function Card ({article}) {
           <h3 className="text-lg pt-2 font-semibold text-shadow overflow-hidden h-24 line-clamp-3"><a href={article.url} target="_blank" rel="noopener noreferrer"><h3>{article.title}</h3></a></h3>
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage={article.image} src={article.image} fallbackImage={Errorpic}/></a>
           
-          <div className="mb-3 tracking-wide text-base text-shadow">
+          <div className="mb-0 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
           </div>
 
-          
+          <div className="self-end">          
             {isBookmarked ? 
 
             <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
@@ -103,6 +103,7 @@ function Card ({article}) {
             </button> 
               
             }
+            </div>
         </div>
       </div>
     </div>

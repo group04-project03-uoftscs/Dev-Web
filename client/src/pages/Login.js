@@ -65,18 +65,18 @@ function Login() {
       <main className="relative w-full h-full min-h-screen bg-gray-500">
         <section className="absolute top-0 w-full h-full">
           <div className="mx-auto h-full w-full">
-            <div className="flex content-center items-center justify-center h-full">
+            <div className="flex content-center items-center justify-center h-full pt-10">
               <div className="w-full lg:w-4/12 px-4">
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
                   <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center mb-3">
-                      <h6 className="text-gray-600 text-sm font-bold">
+                      <h6 className="logo text-gray-600 text-sm font-bold">
                         Log in with
                       </h6>
                     </div>
                     <div className="btn-wrapper text-center">
                       <button
-                        className="bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                        className="logo bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                         type="button"
                         onClick={ () => {
                           // window.location.replace('http://localhost:3001/auth/github')
@@ -91,7 +91,7 @@ function Login() {
                         Github
                       </button>
                       <button
-                        className="bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                        className="logo bg-white active:bg-gray-100 text-gray-800 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                         type="button"
                         onClick = {() => {
                           console.log('hello')
@@ -109,20 +109,20 @@ function Login() {
                     <hr className="mt-6 border-b-1 border-gray-400" />
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                    <div className="text-gray-500 text-center mb-3 font-bold">
+                    <div className="logo text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign in with credentials</small>
                     </div>
                     <form onSubmit={handleFormSubmit}>
                       <div className="relative w-full mb-3">
                         <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          className="logo block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Username
                         </label>
                         <input
                           type="text"
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                          className="logo focus:logo px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Username"
                           required
                           ref={usernameInput}
@@ -132,14 +132,14 @@ function Login() {
 
                       <div className="relative w-full mb-3">
                         <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          className="logo block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Password
                         </label>
                         <input
                           type="password"
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                          className="logo px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Password"
                           required
                           ref={passwordInput}
@@ -151,11 +151,11 @@ function Login() {
                           <input
                             id="customCheckLogin"
                             type="checkbox"
-                            className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                            className="logo form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                             name='remember'
                             onChange={(e) => setRemember(e.target.checked)}
                           />
-                          <span className="ml-2 text-sm font-semibold text-gray-700">
+                          <span className="logo ml-2 text-sm font-semibold text-gray-700">
                             Remember me
                           </span>
                         </label>
@@ -163,7 +163,7 @@ function Login() {
 
                       <div>
                         <div className="items-center">
-                            <span className="ml-2 text-sm font-semibold text-red-500">
+                            <span className="logo ml-2 text-sm font-semibold text-red-500">
                             {errorMsg}
                             </span>
                         </div>
@@ -172,7 +172,7 @@ function Login() {
 
                       <div className="text-center mt-6">
                         <button
-                          className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                          className="logo bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                           type="submit"
                         >
                           Sign In
@@ -181,18 +181,9 @@ function Login() {
                     </form>
                   </div>
                 </div>
-                <div className="flex flex-wrap mt-6 relative">
-                  <div className="w-1/2">
-                    {/* <a
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      className="text-gray-300"
-                    >
-                      <small>Forgot password?</small>
-                    </a> */}
-                  </div>
-                  <div className="w-1/2 text-right">
-                    <a href="/signup" className="text-gray-300">
+                <div className="flex flex-wrap mt-4 relative">
+                  <div className="w-full text-center">
+                    <a href="/signup" className="logo text-lg font-bold text-gray-300">
                       <small>Create new account</small>
                     </a>
                   </div>
