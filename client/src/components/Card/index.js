@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import './card.css';
@@ -14,7 +14,6 @@ function Card ({article}) {
   const isBookmarked = state.favorites.filter(item => {
     return item.id == article.id
   }).length == 1;
-
 
   // when you click on the button, calls on the api to add the article in the favorite list in the user database
   const addBookmark = () => {
@@ -77,9 +76,9 @@ function Card ({article}) {
         <div>
           <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
           
-          <p className="mb-3 tracking-wide text-base text-shadow">
+          <div className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
-          </p>
+          </div>
 
           
             {isBookmarked ? 

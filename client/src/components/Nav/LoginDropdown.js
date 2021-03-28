@@ -1,5 +1,5 @@
-import React, {useState, useRef} from "react";
-import { createPopper } from "@popperjs/core";
+import React, {useState, useRef, useEffect, useLayoutEffect} from "react";
+import { createPopper, preventOverflow, flip } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -17,13 +17,17 @@ const UserDropdown = () => {
   const [state,dispatch] = useStoreContext();
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
-  const btnDropdownRef = useRef();
-  const popoverDropdownRef = useRef();
-  createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-    placement: "bottom-start",
-  });
+  const btnDropdownLoginRef = useRef();
+  const popoverDropdownLoginRef = useRef();
+
+  // useLayoutEffect(()=>{
+  //   const popperInstance = createPopper(btnDropdownLoginRef.current, popoverDropdownLoginRef.current, {
+  //     placement: "bottom-start"
+  // })
+  // }, []);
 
   const handleDropdownClick = (e) =>{
+    createPopper(btnDropdownLoginRef.current, popoverDropdownLoginRef.current)
     setDropdownPopoverShow(!dropdownPopoverShow)
   }
   const closeDropdownPopover = () => {
@@ -34,9 +38,9 @@ const UserDropdown = () => {
   return (
     <>
       <OutsideClickHandler onOutsideClick={closeDropdownPopover}>
-        <Link
-          className="text-gray-600 block"
-          ref={btnDropdownRef}
+        <div
+          className="text-gray-600 block cursor-pointer"
+          ref={btnDropdownLoginRef}
           onClick={handleDropdownClick}
         >
           <div className="items-center">
@@ -44,10 +48,10 @@ const UserDropdown = () => {
               <img viewBox="0 0 64 64" width="96px" height="96px" src={ Login }></img>
             </div>
           </div>
-        </Link>
+        </div>
       </OutsideClickHandler>
       <div
-        ref={popoverDropdownRef}
+        ref={popoverDropdownLoginRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
           "bg-indigo-100 text-base z-50 float-left px-2 py-2 list-none text-left rounded shadow-lg min-w-48"

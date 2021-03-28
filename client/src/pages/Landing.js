@@ -8,7 +8,7 @@ export default class Landing extends React.Component {
 
     return (
       <Parallax ref={ref => (this.parallax = ref)} pages={3} >
-        <div parallax className="bg-cover bg-indigo-500 z-50">
+        <div className="bg-cover bg-indigo-500 z-50">
           <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#6500B0' }} />
           <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
