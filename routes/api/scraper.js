@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 const scrape = async (scrapeURL) => {
 
     const chromeOptions = {
-        headless: true,
+        headless: false,
         defaultViewport: null,
         args: [
             "--incognito",
