@@ -22,7 +22,10 @@ function News () {
           return (
           <Card article={article} key={index}/>
           )}):  
-          <Loading>Loading news articles...</Loading>}
+          <div className="mt-4">
+            <Loading>Loading news articles...</Loading>
+          </div>
+          }
               
         </div>
       </div>
@@ -41,7 +44,10 @@ function HomePage() {
               return (
               <Card article={article} key={index}/>
               )}): 
-              <Loading>Loading news articles...</Loading>}
+              <div className="mt-4">
+                <Loading>Loading news articles...</Loading>
+              </div>
+              }
             </div>
           </div>
     </div>

@@ -5,9 +5,8 @@ const scrape = async (scrapeURL) => {
 
     const chromeOptions = {
         headless: true,
-        defaultViewport: null,
         args: [
-            "--no-sandbox",
+            "--no-sandbox", 
             '--disable-setuid-sandbox'
         ],
         'ignoreHTTPSErrors': true
@@ -18,15 +17,8 @@ const scrape = async (scrapeURL) => {
     const page = await browser.newPage();
     
     try{
-      await page.setRequestInterception(true)
-      await page.goto(scrapeURL, {waitUntil: 'networkidle2'});
-      page.on('request', (request) => {
-          if (request.resourceType() === 'document') {
-              request.continue();
-          } else {
-              request.abort();
-          }
-      });
+      
+      await page.goto(scrapeURL, {waitUntil: 'load'});
       image = await page.$eval('meta[property="og:image"]', el => el.content);
     }
 

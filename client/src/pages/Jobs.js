@@ -17,6 +17,8 @@ function Jobs() {
   const [description, setDescription] = useState("");
   const [findingJobs, setfindingJobs] = useState(state.jobs.length === 0);
   const [numPages, setNumPages] = useState([1]);
+  const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
+  const [flag, setFlag] = useState(1);
 
 
   useEffect(() => {
@@ -44,19 +46,21 @@ function Jobs() {
         console.log(result)
         if(result.data.length === 0) {
           data = {
-            description: "",
+            description: description,
             location: "remote"
           }
           api(data)
             .then(result2 =>{
               dispatch({ type: action, items: result2.data})
               calculatePage(result2.data)
+              setFlag(1)
               setfindingJobs(false)
             })
         }
         else{
           dispatch({ type: action, items: result.data})
           calculatePage(result.data)
+          setFlag(1)
           setfindingJobs(false)
         }
         
@@ -72,20 +76,16 @@ function Jobs() {
     findJobs(UPDATE_JOBS, "jobs", API.getJobs, searchLocation, description);
   };
 
-  const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-  const [flag, setFlag] = useState(1);
   function Page1({page}) {
     console.log(page)
   return (
     <div>
-      <div>
-        {state.jobs.length!==0 ?  state.jobs.slice(0+7*(page-1),Math.min(state.jobs.length,7+7*(page-1))).map((job) => {
-          return (
-          <JobCard job={job} key={job.id}/>
-          )}): 
-          <div>No Result</div>
+      {state.jobs.length!==0 ?  state.jobs.slice(0+7*(page-1),Math.min(state.jobs.length,7+7*(page-1))).map((job) => {
+        return (
+        <JobCard job={job} key={job.id}/>
+        )}): 
+        <div>No Result</div>
       }
-      </div>
     </div>
   );
 }
@@ -125,7 +125,7 @@ function Jobs() {
           <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
       </ParallaxLayer>
 
-      <div className="relative w-full h-full ">
+      <div className="relative w-full h-full">
         <div className="px-6 py-8 ">
           <div className="flex justify-between container mx-auto">
             <div className="w-full mt-14 mb-60">
@@ -135,7 +135,7 @@ function Jobs() {
               
               <div className="search-section">
               <form className="search-form" onSubmit={handleSubmit}>
-                <div className="row flex">
+                <div className="row flex flex-wrap">
                   <div className="flex col-md-5">
                     <div className="form-group" id="description">
                       <input
@@ -173,8 +173,12 @@ function Jobs() {
               </form>
 
               <div className="flex-row mx-auto pt-10 p-4">
-                {findingJobs ? <Loading>Finding Jobs</Loading> : 
-                <div className="absolute bottom-56">
+                {
+                findingJobs ? <Loading>Finding Jobs</Loading> 
+                : 
+                <div>
+                  <Page1 page={flag}/>
+                  <div className="absolute bottom-56">
                   {numPages.map(page =>(
                     <button 
                       key={`job-page-${page}`}
@@ -184,8 +188,10 @@ function Jobs() {
                     </button>
                   ))}
                 </div>
+                </div>
+                
                 }
-                <Page1 page={flag}/>
+                
                </div>
                
 
