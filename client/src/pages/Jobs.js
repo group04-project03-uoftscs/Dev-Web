@@ -15,11 +15,12 @@ function Jobs() {
 
   const [searchLocation, setsearchLocation] = useState(state.location);
   const [description, setDescription] = useState("");
-  const [findingJobs, setfindingJobs] = useState(true);
+  const [findingJobs, setfindingJobs] = useState(state.jobs.length === 0);
   const [numPages, setNumPages] = useState([1]);
 
 
   useEffect(() => {
+    console.log(findingJobs)
     findJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location, "");
   }, []);
 
