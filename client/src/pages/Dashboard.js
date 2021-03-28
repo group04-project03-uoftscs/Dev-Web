@@ -6,7 +6,6 @@ import ReactImageFallback from "react-image-fallback";
 import Font, {Text} from "react-font";
 
 import Card from '../components/Card'
-import '../styles/dashboard.scss'
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -63,8 +62,9 @@ function Dashboard () {
 
       <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
+        <div className="mb-48 px-8">
           
-          <div className="p-5 mt-10 w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
+          <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
                   <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName}!</span>
                 </div>
@@ -74,7 +74,7 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
+                    <img src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
@@ -113,7 +113,7 @@ function Dashboard () {
                               {state.languages.map(lang =>{
                                 let term = `devicon-${lang}-plain`;
                                 return (
-                                  <i className={term} key={term} style={{fontSize:"30px", color:"purple"}}></i>
+                                  <i class={term} key={`lang-${lang}`} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
                               )})
                               }
                               <br></br>
@@ -163,10 +163,10 @@ function Dashboard () {
                               if(index%2 === 0) return (<div key={`code-${index}`}>{text}</div>)
                               else return (<code className="text-green-300"  key={`code-${index}`}>{text}</code>)
                             })}</h2>
-                            <div className="flex flex-row flex-wrap m-2">
+                            <div className="flex flex-row flex-wrap m-1">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
-                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px"}}></i>
+                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px", marginLeft:"5px"}}></i>
                               )})
                               }
                             </div>

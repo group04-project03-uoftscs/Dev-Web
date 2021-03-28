@@ -14,7 +14,7 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
       console.log(state)
       API.findGithubUser(userData.id)
       .then(githubData=> {
-        console.log(githubData.data.length)
+        console.log(githubData)
         if(!githubData.data.length){
           let newGithubUserData = {
             username: userData.username,
@@ -29,7 +29,7 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             type: UPDATE_LOCATION,
             location: userData._json.location
           })
-          API.addGithubUser(newGithubUserData)
+          API.addNonLocalUser(newGithubUserData)
           .then(() => {
             history.push('/newuser')
           }) 
@@ -167,3 +167,56 @@ export const getFavoriteRecursion = (databaseList, favoriteList, cb) => {
     }
   }
 }
+
+// For google similar to github just with some small changed data
+export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, history) => {
+  const userData = data.user
+      console.log('this is the userData ', userData);
+      dispatch({
+        type: AUTH_METHOD,
+        auth: data.auth
+      })
+      dispatch({
+        type: FOUND_USER,
+        user: userData
+      });
+      console.log(state)
+      API.findGoogleUser(userData.id)
+      .then(googleData=> {
+        console.log(googleData.data.length)
+        if(!googleData.data.length){
+          let newGoogleUserData = {
+            username: userData.displayName,
+            google: userData._json,
+            auth: 'google',
+            location: '',
+            languages: '',
+            favorites: [],
+            firstTime: false
+          }
+          dispatch({
+            type: UPDATE_LOCATION,
+            location: ''
+          })
+          API.addNonLocalUser(newGoogleUserData)
+          .then(() => {
+            history.push('/newuser')
+          }) 
+        } else {
+          console.log(googleData.data[0].location)
+            dispatch({
+              type: UPDATE_LOCATION,
+              location: googleData.data[0].location
+            })
+            dispatch({
+              type: UPDATE_LANGUAGES,
+              languages: googleData.data[0].languages
+            })
+            getFavoriteRecursion(googleData.data[0].favorites,[], favoriteList =>{
+          
+              console.log(favoriteList)
+              dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
+            });
+        }
+      })
+};
