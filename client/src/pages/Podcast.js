@@ -125,7 +125,7 @@ function HomePage(props) {
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
                </div>
               </div>
-          <img src={ListenNotesLogo} style={{ width:"350px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
+          <img className="responsive" src={ListenNotesLogo} style={{ width:"350px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
         </div>
       </div>
     </div>
