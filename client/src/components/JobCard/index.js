@@ -52,16 +52,16 @@ const JobCard = ({job}) => {
 const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
 
   return(
-    <div class="max-w-3xl px-10 my-4 py-6 bg-white rounded-lg shadow-md bg-opacity-75" index={index + 1}>
-        <div class="flex justify-between items-center">
-            <span class="font-light text-gray-600">Posted {moment(new Date(date)).fromNow()}</span>
-            <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{location}</a>
+    <div className="max-w-3xl px-10 my-4 py-6 bg-white rounded-lg shadow-md bg-opacity-75" index={index + 1}>
+        <div className="flex justify-between items-center">
+            <span className="font-light text-gray-600">Posted {moment(new Date(date)).fromNow()}</span>
+            <a className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{location}</a>
         </div>
         <div className="mt-2">
             <a className="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {position}</a>
             <p className="mt-2 text-gray-600"></p>
         </div>
-        <div class="flex justify-between items-center mt-4">
+        <div className="flex justify-between items-center mt-4">
             {isBookmarked ? 
 
               <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
@@ -76,7 +76,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
               </button> 
                 
             }
-            <a class="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
+            <a className="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
             
             <div>
                 <a className="flex items-center" href="#">

@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react";
-=======
 import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
->>>>>>> main
 import Moment from 'moment';
 import JobCard from "../components/JobCard";
 
@@ -20,16 +16,26 @@ function Jobs() {
   const [searchLocation, setsearchLocation] = useState(state.location);
   const [description, setDescription] = useState("");
   const [findingJobs, setfindingJobs] = useState(true);
+  const [numPages, setNumPages] = useState([1]);
 
 
   useEffect(() => {
-    findJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location);
+    findJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location, "");
   }, []);
 
-  const findJobs = (action, type, api, location) =>{ 
+  const calculatePage = (jobList) => {
+    let pages = [];
+    for(let i = 0; i < parseInt(jobList.length/7)+1; i++) {
+      pages.push(i+1);
+    }
+    console.log(pages)
+    setNumPages(pages)
+  }
+
+  const findJobs = (action, type, api, location, description) =>{ 
     console.log(`getting ${type}`)
     let data = {
-      description: "",
+      description: description,
       location: (location === "") ? "remote" : location
     }
     api(data)
@@ -43,11 +49,13 @@ function Jobs() {
           api(data)
             .then(result2 =>{
               dispatch({ type: action, items: result2.data})
+              calculatePage(result2.data)
               setfindingJobs(false)
             })
         }
         else{
           dispatch({ type: action, items: result.data})
+          calculatePage(result.data)
           setfindingJobs(false)
         }
         
@@ -60,94 +68,38 @@ function Jobs() {
   const handleSubmit = (e) =>{
     setfindingJobs(true)
     e.preventDefault();
-    API.getJobs({
-      description: description,
-      location: searchLocation
-    })
-      .then(result =>{
-        dispatch({
-          type: UPDATE_JOBS,
-          items: result.data
-        })
-        setfindingJobs(false)
-      })
-      .catch(err => {
-        console.log(err)
-        setfindingJobs(false)
-      })
+    findJobs(UPDATE_JOBS, "jobs", API.getJobs, searchLocation, description);
+    // API.getJobs({
+    //   description: description,
+    //   location: searchLocation
+    // })
+    //   .then(result =>{
+    //     dispatch({
+    //       type: UPDATE_JOBS,
+    //       items: result.data
+    //     })
+    //     setfindingJobs(false)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //     setfindingJobs(false)
+    //   })
   };
 
-<<<<<<< HEAD
-
-  function SearchResults() {
-    return (
-      <div>
-        {state.jobs.length!==0 ?  state.jobs.slice(0,5).map((job) => {
-        return (
-        <JobCard job={job} key={job.id}/>
-        )}): 
-        <div>No result</div>
-        }
-          
-      </div>
-    );
-  }
-
-
-=======
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-  const [flag, setFlag] = useState(false);
-  function Page1(props) {
->>>>>>> main
+  const [flag, setFlag] = useState(1);
+  function Page1({page}) {
+    console.log(page)
   return (
     <div>
-              <div>
-                {state.jobs.length!==0 ?  state.jobs.slice(5,Math.min(state.jobs.length,7)).map((job) => {
-                  return (
-                  <JobCard job={job} key={job.id}/>
-                  )}): 
-                  <div>Loading</div>
-              }
-              </div>
-<<<<<<< HEAD
-          </div>
-            <div className="flex col-md-2">
-              <button 
-                style={{ width:"100px", height:"30px", margin:"16px", backgroundColor:"lightgray", borderRadius:"99px"}} 
-                type="submit" 
-                className="btn-search"
-              >
-                <strong>Search</strong>
-              </button>
-            </div>
-        </div>
-      </form>
-    {console.log(findingJobs)}
-      {findingJobs ? 
-          <Loading>Finding jobs</Loading> : <SearchResults/>
+      <div>
+        {state.jobs.length!==0 ?  state.jobs.slice(0+7*(page-1),Math.min(state.jobs.length,7+7*(page-1))).map((job) => {
+          return (
+          <JobCard job={job} key={job.id}/>
+          )}): 
+          <div>No Result</div>
       }
-      
-    </div>
-  </div>
-=======
-    </div>
-  );
-}
-function Page2(props) {
-  return (
-    <div>
-              <div>
-                {state.jobs.length!==0 ?  state.jobs.slice(0,Math.min(state.jobs.length,7)).map((job) => {
-                  return (
-                  <JobCard job={job} key={job.id}/>
-                  )}): 
-                  <div>
-                    <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
-                      <span className="text-xl tracking-wider text-gray-500 uppercase">Loading</span>
-                    </div>
-                  </div>
-              }
-              </div>
+      </div>
     </div>
   );
 }
@@ -236,14 +188,16 @@ function Page2(props) {
 
               <div className="flex-row mx-auto pt-10 p-4">
                 <div className="absolute bottom-56">
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
-                    Page 1
-                  </button>
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
-                    Page 2
-                  </button>
+                  {numPages.map(page =>(
+                    <button 
+                      key={`job-page-${page}`}
+                      className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" 
+                      onClick={() => setFlag(page)}>
+                      Page {page}
+                    </button>
+                  ))}
                 </div>
-                {flag ? <Page1 a={flag} /> : <Page2 h={flag} />}
+                <Page1 page={flag}/>
                </div>
 
 
@@ -255,7 +209,6 @@ function Page2(props) {
         </div>
       </div>
   </Parallax>
->>>>>>> main
   );
 }
 
