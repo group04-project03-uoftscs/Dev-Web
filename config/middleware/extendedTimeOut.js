@@ -13,13 +13,18 @@ const extendTimeoutMiddleware = (req, res, next) => {
   // }
 
   res.on('finish', () => {
-    console.log('finish')
     isFinished = true;
   });
 
   res.on('end', () => {
-    console.log('end')
     isFinished = true;
+  });
+   res.on('data', (data) => {
+    // Look for something other than our blank space to indicate that real
+    // data is now being sent back to the client.
+    if (data !== space) {
+      isDataSent = true;
+    }
   });
     
   const waitAndSend = () => {

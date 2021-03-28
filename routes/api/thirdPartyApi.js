@@ -303,6 +303,7 @@ router.route("/technewsapi")
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
           let article = await getHackerURL(id);
+          console.log(article)
           return article
         })
         const articles = await Promise.all(promises)

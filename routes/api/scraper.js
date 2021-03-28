@@ -20,6 +20,13 @@ const scrape = async (scrapeURL) => {
     await page.setRequestInterception(true)
     try{
       await page.goto(scrapeURL, {waitUntil: 'networkidle2'});
+      page.on('request', (request) => {
+          if (request.resourceType() === 'document') {
+              request.continue();
+          } else {
+              request.abort();
+          }
+      });
       image = await page.$eval('meta[property="og:image"]', el => el.content);
     }
 
