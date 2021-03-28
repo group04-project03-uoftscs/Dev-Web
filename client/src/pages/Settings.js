@@ -194,7 +194,7 @@ function Settings() {
     <div className="settings-tab">
       <div 
         className="section-header"
-        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder"}}
+        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder", marginTop:"65px"}}
         >
           <u>Your Account Settings</u>
       </div>

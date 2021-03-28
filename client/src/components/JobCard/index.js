@@ -61,22 +61,25 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
             <a className="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {position}</a>
             <p className="mt-2 text-gray-600"></p>
         </div>
+
         <div className="flex justify-between items-center mt-4">
             <a className="text-blue-600 hover:underline" href={url} target="_blank" rel="noopener noreferrer">Apply Now</a>
             {isBookmarked ? 
 
-<button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
-        onClick={removeBookmark}>
-  <FontAwesomeIcon icon={['fas','bookmark']} />
-</button> 
-  :
+              <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+                      onClick={removeBookmark}>
+                <FontAwesomeIcon icon={['fas','bookmark']} />
+              </button> 
+                :
 
-  <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
-        onClick={addBookmark}>
-  <FontAwesomeIcon icon={['far','bookmark']} />
-</button> 
-  
-}
+                <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
+                      onClick={addBookmark}>
+                <FontAwesomeIcon icon={['far','bookmark']} />
+              </button> 
+                
+            }
+            <a class="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
+            
             <div>
                 <a className="flex items-center" href="#">
                     <ReactImageFallback className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage="loader.gif" src={image} fallbackImage={Errorpic} />
