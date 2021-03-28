@@ -81,7 +81,6 @@ const reducer = (state, action) => {
         ...state,
         bestPodcasts: [...action.items]
       };
-
       
     case UPDATE_CODEWARS:
       return {

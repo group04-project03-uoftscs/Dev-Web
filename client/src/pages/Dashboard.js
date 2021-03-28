@@ -6,7 +6,6 @@ import ReactImageFallback from "react-image-fallback";
 import Font, {Text} from "react-font";
 
 import Card from '../components/Card'
-import '../styles/dashboard.scss'
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -28,7 +27,6 @@ function Dashboard () {
     if(state.auth === 'local') {
       API.getUserInfo(state.localusername)
         .then(data => {
-          console.log(data.data[0])
           if(data.data[0].firstTime === true) {
             API.getLocalUserUpdate(state.localusername, {firstTime: false})
             .then(() => {
@@ -61,13 +59,10 @@ function Dashboard () {
         <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '60%' }} />
         <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
       </ParallaxLayer>
-      {console.log(state)}
 
       <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
-        
-          
-          <div className="p-5 mt-10 w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
+          <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
                   <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName}!</span>
                 </div>
@@ -77,7 +72,7 @@ function Dashboard () {
             <div>
               <div className="w-full">
             <div className="flex justify-center pb-1">
-                    <img src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
+                    <img src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
                         className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
@@ -91,13 +86,13 @@ function Dashboard () {
                                     <FontAwesomeIcon icon={['fas','bookmark']} />
                                 </svg>
                             </button></Link>
-                            <a className="cursor-pointer ml-2 p-1 border-transparent text-gray-700 rounded-full hover:text-yellow-100 focus:outline-none focus:text-gray-800"
+                            <div className="cursor-pointer ml-2 p-1 border-transparent text-gray-700 rounded-full hover:text-yellow-100 focus:outline-none focus:text-gray-800"
                             aria-label="Settings">
-                                <Link to="/settings"><svg className="h-8 w-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24">
+                                <Link to="/settings"><svg className="h-8 w-8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                     <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg></Link>
-                            </a>
+                            </div>
                         </div>
                         <ul className="flex justify-content-around items-center">
                             <li>
@@ -116,7 +111,7 @@ function Dashboard () {
                               {state.languages.map(lang =>{
                                 let term = `devicon-${lang}-plain`;
                                 return (
-                                  <i class={term} style={{fontSize:"30px", color:"purple"}}></i>
+                                  <i className={term} key={term} style={{fontSize:"30px", color:"purple"}}></i>
                               )})
                               }
                               <br></br>
@@ -163,13 +158,13 @@ function Dashboard () {
                         <div className="">
                             <h1 className="text-xl font-bold">{state.codewars.tags.slice(0, Math.min(4, state.codewars.tags.length)).join(", ")}</h1>
                             <h2 className="text-base pr-7 text-gray-200 font-semibold  overflow-hidden line-clamp-5">{state.codewars.formatDescription.map((text, index)=>{
-                              if(index%2 === 0) return (<div>{text}</div>)
-                              else return (<code className="text-green-300">{text}</code>)
+                              if(index%2 === 0) return (<div key={`code-${index}`}>{text}</div>)
+                              else return (<code className="text-green-300"  key={`code-${index}`}>{text}</code>)
                             })}</h2>
-                            <div className="flex flex-row flex-wrap m-2">
+                            <div className="flex flex-row flex-wrap m-1">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
-                                  <i className={`devicon-${lang}-plain colored`} style={{fontSize:"20px"}}></i>
+                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px"}}></i>
                               )})
                               }
                             </div>
@@ -210,7 +205,6 @@ function Dashboard () {
             </div>
           }
           </div>
-        </div>
         </section>
       </main>
     </Parallax>

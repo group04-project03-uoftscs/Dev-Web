@@ -2,7 +2,8 @@ const { default: axios } = require("axios");
 const router = require("express").Router();
 const scrape = require('./scraper');
 const Moment = require("moment")
-const codewars = require('./codewarsChallenges.json')
+const codewars = require('./codewarsChallenges.json');
+const extendTimeoutMiddleware = require("../../config/middleware/extendedTimeOut")
 
 // Get Github profile
 router.route("/githubuser/:username")
@@ -296,7 +297,7 @@ router.route("/worldnewsapi")
 
 
 router.route("/technewsapi")
-  .get((req,res)=>{
+  .get(extendTimeoutMiddleware, (req,res)=>{
     // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
     getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
@@ -356,7 +357,6 @@ router.route("/githubjobs")
   .post((req,res) => {
     axios(`https://jobs.github.com/positions.json?description=${req.body.description}&location=${req.body.location}`)
     .then(result => {
-       console.log(result.data)
       const jobList = result.data.map(job => {
         let time = job.created_at.split(" ");
         return {
@@ -371,7 +371,6 @@ router.route("/githubjobs")
           url: job.url
         }
       })
-      console.log(jobList)
       res.json(jobList)
     })    
     .catch(err => {
