@@ -133,7 +133,13 @@ module.exports = {
   },
 
   findGithubUser: function(req,res) {
-    db.User.find({"github.id": (req.params.user)})
+    db.User.find({"github.id": parseInt(req.params.user)})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  findGoogleUser: function (req, res) {
+    db.User.find({'google.sub': req.params.user})
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
