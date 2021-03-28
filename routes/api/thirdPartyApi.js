@@ -307,6 +307,11 @@ router.route("/technewsapi")
         })
         const articles = await Promise.all(promises)
         const combinedArticles = interleave(data, articles);
+        combinedArticles.sort((a,b)=>{
+          let dateB = new Date(b.date);
+          let dateA = new Date(a.date)
+          return dateB - dateA
+        })
         // res.json(combinedArticles)
         res.write(JSON.stringify(combinedArticles));
         res.end();

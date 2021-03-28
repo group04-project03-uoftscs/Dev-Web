@@ -17,8 +17,9 @@ const scrape = async (scrapeURL) => {
 
     const browser = await puppeteer.launch(chromeOptions);
     const page = await browser.newPage();
+    await page.setRequestInterception(true)
     try{
-      await page.goto(scrapeURL, {waitUntil: 'load'});
+      await page.goto(scrapeURL, {waitUntil: 'networkidle2'});
       image = await page.$eval('meta[property="og:image"]', el => el.content);
     }
 

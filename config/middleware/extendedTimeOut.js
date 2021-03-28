@@ -12,12 +12,20 @@ const extendTimeoutMiddleware = (req, res, next) => {
   //   return;
   // }
 
-  res.once('finish', () => {
+  res.on('finish', () => {
     isFinished = true;
   });
 
-  res.once('end', () => {
+  res.on('end', () => {
     isFinished = true;
+  });
+
+  res.on('data', (data) => {
+    // Look for something other than our blank space to indicate that real
+    // data is now being sent back to the client.
+    if (data !== space) {
+      isDataSent = true;
+    }
   });
     
   const waitAndSend = () => {
@@ -25,7 +33,7 @@ const extendTimeoutMiddleware = (req, res, next) => {
         
   console.log(`inside isFinished: ${isFinished} & isDataSent: ${isDataSent} res.headersSent: ${res.headersSent}`)
       // If the response hasn't finished and hasn't sent any data back....
-      if (!isFinished && !isDataSent) {
+      if (!isFinished  && !isDataSent) {
       //   Need to write the status code/headers if they haven't been sent yet.
         if (!res.headersSent) {
           console.log('sending 202')
