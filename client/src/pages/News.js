@@ -16,7 +16,7 @@ function News () {
        {/* Tech News */}
        {console.log("tech news")}
       <div>
-        <div className="flex flex-row flex-wrap mx-auto">
+        <div className="flex flex-row flex-wrap mx-auto mb-20">
   
           {state.techNews.length!==0 ?  state.techNews.map((article, index) => {
           return (
@@ -38,7 +38,7 @@ function HomePage() {
       {/* World News */}
        {console.log("world news")}
           <div>
-            <div className="flex flex-row flex-wrap mx-auto">
+            <div className="flex flex-row flex-wrap mx-auto mb-20">
       
               {state.worldNews.length!==0 ?  state.worldNews.map((article, index) => {
               return (

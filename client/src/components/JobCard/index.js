@@ -52,16 +52,24 @@ const JobCard = ({job}) => {
 const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
 
   return(
-    <div className="max-w-3xl px-10 my-4 py-6 bg-white rounded-lg shadow-md bg-opacity-75" index={index + 1}>
-        <div className="flex justify-between items-center">
-            <span className="font-light text-gray-600">Posted {moment(new Date(date)).fromNow()}</span>
-            <a className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{location}</a>
+    <div className="transition-all duration-150 flex px-4 py-6 md:w-1/2 lg:w-1/3 xl:w-1/4" index={index + 1}>
+      <div className="px-4 pb-5 w-auto flex-grow-0 bg-white bg-opacity-50 rounded-xl text-black border border-gray-300 shadow-2xl transform transition duration-500 ease-in-out hover:bg-indigo-100 hover:bg-opacity-50 hover:scale-105">
+        
+        <div className="w-full mb-3">
+          <h3 className="text-lg pt-2 mb-1 border-b border-1 border-white font-semibold text-shadow overflow-hidden h-16 line-clamp-2"><a href={url} target="_blank" rel="noopener noreferrer"><h3>{title}, {position}</h3></a></h3>
+          <h1 className="text-gray-700 font-bold h-8 line-clamp-2 transform transition duration-500 ease-in-out hover:scale-125 origin-left">{company}</h1>
         </div>
-        <div className="mt-2">
-            <a className="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{title}, {position}</a>
-            <p className="mt-2 text-gray-600"></p>
-        </div>
-        <div className="flex justify-between items-center mt-4">
+
+        <div>
+          <a className="absolute top-24 right-1 text-sm px-2 py-1 w-auto bg-indigo-600 text-gray-100 font-light rounded hover:bg-gray-500 line-clamp-1 overflow-hidden" href={url} target="_blank">{location}</a>
+          <a href={url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="bg-indigo-200 flex justify-items-center items-center w-72 h-40 mt-5 object-contain rounded-2xl" initialImage={image} src={image} fallbackImage={Errorpic} /></a>
+          
+          <div className="mb-1 mt-1 tracking-wide text-base text-shadow">
+            <span className="font-semibold text-indigo-800">Posted {moment(new Date(date)).fromNow()}</span>
+          </div>
+          
+          <div className="flex justify-between">
+            <a className="text-blue-500 hover:underline" href={url} target="_blank">Apply Now</a>
             {isBookmarked ? 
 
               <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
@@ -76,16 +84,10 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
               </button> 
                 
             }
-            <a className="text-blue-600 hover:underline" href={url} target="_blank">Apply Now</a>
-            
-            <div>
-                <a className="flex items-center" href="#">
-                    <ReactImageFallback className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" initialImage={image} src={image} fallbackImage={Errorpic} />
-                    <h1 className="text-gray-700 font-bold">{company}</h1>
-                </a>
             </div>
         </div>
       </div>
+    </div>
   )
 };
 

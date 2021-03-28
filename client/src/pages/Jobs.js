@@ -79,8 +79,8 @@ function Jobs() {
   function Page1({page}) {
     console.log(page)
   return (
-    <div>
-      {state.jobs.length!==0 ?  state.jobs.slice(0+7*(page-1),Math.min(state.jobs.length,7+7*(page-1))).map((job) => {
+    <div className="flex flex-row flex-wrap mx-auto">
+      {state.jobs.length!==0 ?  state.jobs.slice(0+9*(page-1),Math.min(state.jobs.length,9+9*(page-1))).map((job) => {
         return (
         <JobCard job={job} key={job.id}/>
         )}): 

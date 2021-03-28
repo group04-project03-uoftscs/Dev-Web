@@ -66,8 +66,8 @@ function Nav() {
                     <svg viewBox="0 0 96 96" width="40" height="40" className="rounded-full hover:bg-yellow-400"><Bookmark /></svg>
                 </Link>
                 <Link to="/"
-                    className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center">
-                    <ReactImageFallback src={state.user._json !== undefined ? state.user._json.avatar_url : `https://api.randomuser.me/portraits/lego/${lego}.jpg`} fallbackImage={Errorpic} className="rounded-full hover:bg-yellow-400"/>
+                    className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300 rounded-full flex items-center justify-center ring-4 ring-indigo-300 ring-inset">
+                    <ReactImageFallback src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : Errorpic} fallbackImage={`https://api.randomuser.me/portraits/lego/${lego}.jpg`} className="rounded-full hover:bg-yellow-400"/>
                 </Link>
                 <div 
                     className="w-8 h-8 lg:h-10 lg:w-10 bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
