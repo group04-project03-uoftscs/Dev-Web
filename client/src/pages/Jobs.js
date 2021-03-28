@@ -69,21 +69,6 @@ function Jobs() {
     setfindingJobs(true)
     e.preventDefault();
     findJobs(UPDATE_JOBS, "jobs", API.getJobs, searchLocation, description);
-    // API.getJobs({
-    //   description: description,
-    //   location: searchLocation
-    // })
-    //   .then(result =>{
-    //     dispatch({
-    //       type: UPDATE_JOBS,
-    //       items: result.data
-    //     })
-    //     setfindingJobs(false)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //     setfindingJobs(false)
-    //   })
   };
 
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -187,6 +172,7 @@ function Jobs() {
               </form>
 
               <div className="flex-row mx-auto pt-10 p-4">
+                {findingJobs ? <Loading>Finding Jobs</Loading> : 
                 <div className="absolute bottom-56">
                   {numPages.map(page =>(
                     <button 
@@ -197,8 +183,10 @@ function Jobs() {
                     </button>
                   ))}
                 </div>
+                }
                 <Page1 page={flag}/>
                </div>
+               
 
 
               
