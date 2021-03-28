@@ -10,40 +10,46 @@ function News () {
 
   const [state, dispatch] = useStoreContext();
 
-  function Addroom(props) {
+  function Addroom() {
   return (
     <div>
        {/* Tech News */}
        {console.log("tech news")}
-              <div>
-                <div className="flex flex-row flex-wrap mx-auto">
-          
-                  {state.techNews.length!==0 ?  state.techNews.map((article) => {
-                  return (
-                  <Card article={article} key={article.id}/>
-                  )}):  
-                  <Loading>Loading news articles...</Loading>}
-                      
-                </div>
-              </div>
+      <div>
+        <div className="flex flex-row flex-wrap mx-auto">
+  
+          {state.techNews.length!==0 ?  state.techNews.map((article, index) => {
+          return (
+          <Card article={article} key={index}/>
+          )}):  
+          <div className="mt-4">
+            <Loading>Loading news articles...</Loading>
+          </div>
+          }
+              
+        </div>
+      </div>
     </div>
   );
 }
-function HomePage(props) {
+function HomePage() {
   return (
     <div>
       {/* World News */}
        {console.log("world news")}
-              <div>
-                <div className="flex flex-row flex-wrap mx-auto">
-          
-                  {state.worldNews.length!==0 ?  state.worldNews.map((article) => {
-                  return (
-                  <Card article={article} key={article.id}/>
-                  )}): 
-                  <Loading>Loading news articles...</Loading>}
-                </div>
+          <div>
+            <div className="flex flex-row flex-wrap mx-auto">
+      
+              {state.worldNews.length!==0 ?  state.worldNews.map((article, index) => {
+              return (
+              <Card article={article} key={index}/>
+              )}): 
+              <div className="mt-4">
+                <Loading>Loading news articles...</Loading>
               </div>
+              }
+            </div>
+          </div>
     </div>
   );
 }
@@ -112,7 +118,7 @@ function HomePage(props) {
                   <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
                     Tech News 
                   </button>
-                {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
+                {flag ? <Addroom /> : <HomePage />}
                </div>
               </div>
                 {/* Tech News Card */}

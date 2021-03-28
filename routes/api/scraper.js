@@ -5,19 +5,19 @@ const scrape = async (scrapeURL) => {
 
     const chromeOptions = {
         headless: true,
-        defaultViewport: null,
         args: [
-            "--incognito",
-            "--no-sandbox",
-            "--single-process",
-            "--no-zygote",
+            "--no-sandbox", 
+            '--disable-setuid-sandbox'
         ],
+        'ignoreHTTPSErrors': true
     };
     let image = "";
 
     const browser = await puppeteer.launch(chromeOptions);
     const page = await browser.newPage();
+    
     try{
+      
       await page.goto(scrapeURL, {waitUntil: 'load'});
       image = await page.$eval('meta[property="og:image"]', el => el.content);
     }

@@ -62,9 +62,11 @@ function Dashboard () {
 
       <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
         <section className="flex flex-col w-full h-full">
+        <div className="mb-48 px-8">
+          
           <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
-                  <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName}!</span>
+                  <span className="text-3xl font-semibold tracking-wider uppercase">Welcome {state.user.displayName ? state.user.displayName : state.localusername}!</span>
                 </div>
           </div>
           <div className="flex mt-10 w-full mx-auto items-center justify-center">
@@ -77,7 +79,7 @@ function Dashboard () {
                         alt="username"/>
                     <div className="ml-10">
                         <div className="flex items-center">
-                            <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user.username}</h2>
+                            <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user._json !== undefined ? (state.user._json.login !== undefined ? state.user._json.login : state.user.username) :state.user.username}</h2>
                             <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.location ? state.location : 'No location set yet'}</a>
                             
                             <Link to="/bookmarked"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
@@ -94,8 +96,24 @@ function Dashboard () {
                                 </svg></Link>
                             </div>
                         </div>
-                        <ul className="flex justify-content-around items-center">
-                            <li>
+                            {state.user._json !== undefined ? 
+                              (state.user._json.login !== undefined ?
+                              <ul className="flex justify-content-around items-center">
+                                <li>
+                                    <span className="text-base flex"><span className="font-bold mr-2">{state.user._json.public_repos} </span> Repos</span>
+                                </li>
+                                <li>
+                                    <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.followers} </span> Followers</span>
+                                </li>
+                                <li>
+                                    <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.following} </span> Following</span>
+                                </li>
+                              </ul>
+                              : null
+                              )
+                              : null
+                            } 
+                            {/* <li>
                                 <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
                             </li>
                             <li>
@@ -103,20 +121,26 @@ function Dashboard () {
                             </li>
                             <li>
                                 <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
-                            </li>
-                        </ul>
+                            </li> */}
                         <br></br>
                         <div className="flex-row flex-wrap">
-                            <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1>
+                            {/* <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1> */}
                               {state.languages.map(lang =>{
                                 let term = `devicon-${lang}-plain`;
                                 return (
-                                  <i className={term} key={term} style={{fontSize:"30px", color:"purple"}}></i>
+                                  <i className={term} key={`lang-${lang}`} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
                               )})
                               }
                               <br></br>
-                            <span className="text-base font-semibold">{state.user._json !== undefined ? state.user._json.bio : 'No bio'}</span>
-                            <a className="block text-base text-yellow-500 mt-2" href={state.user._json !== undefined ? state.user._json.html_url : 'No url'} target="_blank">{state.user._json !== undefined ? 'Quick! To my Github!' : 'No Github Account linked'}</a>
+                              {state.user._json !== undefined ? 
+                                state.user._json.bio !==undefined ? 
+                                <div>
+                                  <span className="text-base font-semibold">{state.user._json.bio}</span>
+                                  <a className="block text-base text-yellow-500 mt-2" href={state.user._json.html_url} target="_blank">{'Quick! To my Github!'}</a>
+                                </div>
+                                  : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
+                                : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
+                              }
                         </div>
                     </div>
                   </div>  
@@ -164,7 +188,7 @@ function Dashboard () {
                             <div className="flex flex-row flex-wrap m-1">
                               {state.codewars.languages.slice(0, Math.min(6, state.codewars.languages.length)).map(lang =>{
                                 return (
-                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px"}}></i>
+                                  <i className={`devicon-${lang}-plain colored`} key={`code-${lang}`} style={{fontSize:"20px", marginLeft:"5px"}}></i>
                               )})
                               }
                             </div>
@@ -205,6 +229,7 @@ function Dashboard () {
             </div>
           }
           </div>
+        </div>
         </section>
       </main>
     </Parallax>

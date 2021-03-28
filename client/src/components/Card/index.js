@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import './card.css';
@@ -10,13 +10,18 @@ import logo from '../../assets/images/Dev_Web.gif'
 function Card ({article}) {
 
   const [state, dispatch] = useStoreContext();
-
-  const isBookmarked = state.favorites.filter(item => {
+  const [isBookmarked, setIsisBookmarked] = useState(state.favorites.filter(item => {
     return item.id == article.id
-  }).length == 1;
+  }).length == 1);
+
+  // const isBookmarked = state.favorites.filter(item => {
+  //   return item.id == article.id
+  // }).length == 1;
 
   // when you click on the button, calls on the api to add the article in the favorite list in the user database
-  const addBookmark = () => {
+  const addBookmark = (event) => {
+    event.preventDefault();
+    
     let itemToAdd = {...article}
     if(article.type === "episodes" || article.type === "podcasts" ){
       itemToAdd = {
@@ -37,10 +42,12 @@ function Card ({article}) {
         console.log(result)
         dispatch({type: ADD_FAVORITE, item: article});
       })
+      setIsisBookmarked(true)
   }
 
   // when you click on the button, calls on the api to remove the article from the favorite list in the user database
-  const removeBookmark = () => {
+  const removeBookmark = (event) => {
+    event.preventDefault()
     let itemToAdd = {...article}
     if(article.type === "episodes" || article.type === "podcasts" ){
       itemToAdd = {
@@ -59,6 +66,7 @@ function Card ({article}) {
       .then(result =>{
         console.log(result)
         dispatch({type: REMOVE_FAVORITE, id: article.id});
+        setIsisBookmarked(false)
       })
   }
 
@@ -74,7 +82,7 @@ function Card ({article}) {
         </div>
 
         <div>
-          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
+          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage={article.image} src={article.image} fallbackImage={Errorpic}/></a>
           
           <div className="mb-3 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
