@@ -80,7 +80,7 @@ function Jobs() {
     console.log(page)
   return (
     <div className="flex flex-row flex-wrap mx-auto">
-      {state.jobs.length!==0 ?  state.jobs.slice(0+9*(page-1),Math.min(state.jobs.length,9+9*(page-1))).map((job) => {
+      {state.jobs.length!==0 ?  state.jobs.slice(0+12*(page-1),Math.min(state.jobs.length,12+12*(page-1))).map((job) => {
         return (
         <JobCard job={job} key={job.id}/>
         )}): 
@@ -129,14 +129,14 @@ function Jobs() {
         <div className="px-6 py-8 ">
           <div className="flex justify-between container mx-auto">
             <div className="w-full mt-14 mb-60">
-             <h1 className="title font-semibold" style={{ color:"white", fontSize: "2rem"}}>
+             <h1 className="logo title font-semibold" style={{ color:"white", fontSize: "2rem"}}>
                 Find dev jobs in our web
               </h1>
               
               <div className="search-section">
               <form className="search-form" onSubmit={handleSubmit}>
-                <div className="row flex flex-wrap">
-                  <div className="flex col-md-5">
+                <div className="row flex flex-wrap mt-1 gap-y-1">
+                  <div className="flex col-md-5 ">
                     <div className="form-group" id="description">
                       <input
                         type="text"
@@ -144,35 +144,33 @@ function Jobs() {
                         value={description}
                         onChange={e=>setDescription(e.target.value)}
                         placeholder="Got a title in mind? Type it here"
-                        style={{ margin:"20px", width:"300px", backgroundColor:"lightBlue", fontWeight:"bolder", textAlign:"center", borderRadius:"99px"}}
+                        className="logo bg-indigo-300 rounded-full mr-12 p-1 px-3 w-full focus:outline-none text-gray-700 placeholder-gray-600"
                       />
                     </div>
                   </div>
-                  <div className="flex col-md-5">
-                    <div className="form-group" id="location">
-                      <input
+                  <div className="form-group flex items-center" id="location">
+                      <input 
                         type="text"
                         name="location"
                         value={searchLocation}
                         onChange={e=>setsearchLocation(e.target.value)}
-                        placeholder="Enter a location"
-                        style={{ margin:"20px", width:"200px", backgroundColor:"lightBlue", fontWeight:"bold", textAlign:"center", borderRadius:"99px", color:"ThreeDShadow" }}
-                      />
-                      </div>
+                        placeholder=" Enter a location"
+                        className="logo bg-indigo-300 rounded-full ml-2 p-1 px-3 focus:outline-none text-gray-700 placeholder-gray-600"/>
                   </div>
-                    <div className="flex col-md-2">
+                    <div className="logo flex items-center ml-3">
+                      
                       <button 
-                        style={{ width:"100px", height:"30px", margin:"16px", backgroundColor:"lightgray", borderRadius:"99px"}} 
+                        style={{ width:"100px", height:"30px", backgroundColor:"lightgray", borderRadius:"99px"}} 
                         type="submit" 
-                        className="btn-search"
+                        className="logo btn-search focus:ring-4 focus:ring-indigo-600 focus:ring-opacity-50 focus:outline-none"
                       >
-                        <strong>Search</strong>
+                        <strong><i className="logo devicon-github-original colored"></i> Search</strong>
                       </button>
                     </div>
                 </div>
               </form>
 
-              <div className="flex-row mx-auto pt-10 p-4">
+              <div className="flex-row mx-auto pt-5 p-4">
                 {
                 findingJobs ? <Loading>Finding Jobs</Loading> 
                 : 
@@ -182,7 +180,7 @@ function Jobs() {
                   {numPages.map(page =>(
                     <button 
                       key={`job-page-${page}`}
-                      className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" 
+                      className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" 
                       onClick={() => setFlag(page)}>
                       Page {page}
                     </button>
