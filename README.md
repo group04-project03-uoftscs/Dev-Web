@@ -25,6 +25,10 @@ We're adding database functionality to our solution to ease the load of bookmark
 - As a busy individual, I want to find these links in one app so that I can find podcasts, news, job listings and information in one place.
 - As a sometimes-forgetful-person, I want the option to bookmark and save links so that I can use them for frequent reference and to find my to-read list easily.
 
+## App Sample
+
+![DevWeb App Demo](client/src/assets/images/DevWeb_demo.gif)
+
 ## APIs Used
 
 1. [Listen Notes](https://www.listennotes.com/api/docs)
@@ -48,6 +52,15 @@ We're adding database functionality to our solution to ease the load of bookmark
 * Node
 
 ## Credits
+
+Our app is deployed and hosted in [Heroku](https://www.heroku.com). 
+It gathers content from [CodeWars](https://www.codewars.com/), [ListenNotes](https://www.listennotes.com/), [Hacker News](https://news.ycombinator.com/), [GitHub Jobs](https://jobs.github.com/), and [News API](https://newsapi.org/).
+
+Icons are sourced via [Devicon](https://devicon.dev/).
+
+Third-party account authentication is possible via [GitHub](https://github.com/) and [Google](https://www.google.com/account/about/) using [OAuth 2.0](https://oauth.net/2/). 
+
+Our logo was put together using [Canva](https://www.canva.com/).
 
 ## License
 
