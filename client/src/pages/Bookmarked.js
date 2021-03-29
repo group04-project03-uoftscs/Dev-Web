@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import Card from '../components/Card'
 import JobCard from '../components/JobCard'

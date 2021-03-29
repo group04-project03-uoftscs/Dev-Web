@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import Card from '../components/Card';
 import ListenNotesLogo from "./listen_notes_logo.png";
-import useDarkMode from '../functions/useDarkMode'
+import useDarkMode from './useDarkMode'
 
 import { useStoreContext } from "../utils/GlobalState";
 import Loading from '../components/Loading'

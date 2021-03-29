@@ -4,7 +4,7 @@ import UserDropdown from "./UserDropdown";
 import LoginDropdown from "./LoginDropdown";
 import ReactImageFallback from "react-image-fallback";
 import { useStoreContext } from "../../utils/GlobalState";
-import useDarkMode from '../../functions/useDarkMode'
+import useDarkMode from '../../pages/useDarkMode'
 
 //svg & icons
 import { ReactComponent as Bookmark } from "../../assets/svg/icons8-bookmark.svg"

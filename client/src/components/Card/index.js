@@ -6,7 +6,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/actions';
 import API from '../../utils/API';
 import logo from '../../assets/images/Dev_Web.gif'
-import useDarkMode from '../../functions/useDarkMode';
+import useDarkMode from '../../pages/useDarkMode';
 
 function Card ({article}) {
 
