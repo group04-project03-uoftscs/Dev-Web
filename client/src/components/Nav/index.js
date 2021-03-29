@@ -24,7 +24,7 @@ function Nav() {
     <nav className="fixed top-0 w-full z-30">
         <div className="w-full bg-indigo-500 dark:bg-black transition duration-500 shadow-md h-12 flex">
             <div className="logo w-full lg:w-4/6 xl:w-full h-full flex items-center px-4 ">
-                <Link to="/news"><img className="fill-current rounded-full w-8 h-8 lg:w-10 lg:h-10 text-white"
+                <Link to="/"><img className="fill-current rounded-full w-8 h-8 lg:w-10 lg:h-10 text-white"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3f6aff"
                         src="https://i.postimg.cc/CMBZQw3B/Dev-Web.png"></img></Link>
 
