@@ -9,7 +9,7 @@ import LANGUAGEOBJECT from '../assets/languages.json'
 import Github from "../assets/svg/icons8-github-96.png"
 
 import LanguagesList from "../components/LanguagesList";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES } from "../utils/actions";

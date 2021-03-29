@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useDarkMode from '../../functions/useDarkMode'
+import useDarkMode from '../../pages/useDarkMode'
 
 function Footer() {
 
