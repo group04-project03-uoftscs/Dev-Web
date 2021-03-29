@@ -7,7 +7,6 @@ const codewars = require('./codewarsChallenges.json');
 // Get Github profile
 router.route("/githubuser/:username")
   .get((req,res) =>{
-    console.log('getting username')
     axios(`https://api.github.com/users/${req.params.username}`)
       .then(result =>{
         let githubAccount = {
@@ -32,10 +31,8 @@ router.route("/githubuser/:username")
 router.route("/codewars")
   .get((req,res)=>{
     let index = Math.floor(Math.random()*codewars.length)
-    // console.log(codewars[index])
     axios(`https://www.codewars.com/api/v1/code-challenges/${codewars[index]}`)
     .then(result =>{
-      // console.log(result.data);
       res.json(result.data)
     })
     .catch(err=>{
@@ -62,7 +59,6 @@ const getBestPodcasts = (cb) => {
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result => {
-    // console.log(result.data)
     let podcasts = result.data.podcasts.map(podcast =>{
       return {
         id: podcast.id,
@@ -89,7 +85,6 @@ const getLatestEpisodes = (cb) => {
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result => {
-    // console.log(result.data)
     let episodes = result.data.results.map(episode =>{
       return {
         id: episode.id,
@@ -189,10 +184,7 @@ router.route("/listennotesepisode/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    // console.log(result.data);
-    console.log('getting single episode')
     const episode = {
-      
       id: result.data.id,
       title: result.data.title,
       url: result.data.link,
@@ -218,7 +210,6 @@ router.route("/listennotespodcast/:id")
       headers: {'X-ListenAPI-Key': process.env.LISTENNOTES_API},
   })
   .then(result =>{
-    // console.log(result.data);
     const podcast = {
       id: result.data.id,
       title: result.data.title,
@@ -291,15 +282,12 @@ router.route("/worldnewsapi")
     getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
       res.json(data)
     })
-    // res.json(worldnewAPIReponse); // to get fake news
   })
 
 
 router.route("/technewsapi")
   .get((req,res)=>{
-    // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
-    getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
-      // console.log(data)
+    getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
           let article = await getHackerURL(id);
@@ -313,9 +301,7 @@ router.route("/technewsapi")
           let dateA = new Date(a.date)
           return dateB - dateA
         })
-        // res.json(combinedArticles)
-        res.write(JSON.stringify(combinedArticles));
-        res.end();
+        res.json(combinedArticles)
       })
     })
   })
@@ -340,10 +326,8 @@ const getHackerNewsIDs = (cb) => {
 
 const getHackerURL = async (id) => {
   const result = await axios(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
-  // console.log(result.data)
-  let image = await scrape(result.data.url);
-  let values = {title:result.data.title, url:result.data.url, image: image, date: Moment(result.data.time*1000).format("MMM DD, YYYY"), id: id, type: "articles", source: "hackernews"}
-  // console.log(values)
+  let values = {title:result.data.title, url:result.data.url, image: "", date: Moment(result.data.time*1000).format("MMM DD, YYYY"), id: id, type: "articles", source: "hackernews"}
+
   return values;
 }
 
