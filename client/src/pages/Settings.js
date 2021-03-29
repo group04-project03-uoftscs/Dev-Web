@@ -230,32 +230,34 @@ function Settings() {
   }
 
   return (
-    <section className="py-20 bg-gray-200 bg-opacity-50"> 
-   <div className="settings-tab">
+  <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
+   <div className="settings-tab bg-white space-y-6 rounded" style={{ margin:"15px" }}>
       <div 
         className="section-header"
-        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder", marginTop:"65px"}}
+        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder", marginTop:"65px", paddingTop:"10px"}}
         >
+          <h2>
           <u>Your Account Settings</u>
+          </h2>
       </div>
       
     <form id="profile-form" onSubmit={handleSubmitProfile}
 
       className="edit-profile"
-      style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"90px", fontWeight:"bold"}}
+      style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"60px", fontWeight:"bold", width:"450px"}}
       >
-        <p>Edit Your Profile</p>
+        <h4><u>Edit Your Profile</u></h4>
       
         <h4 
         className="location"
         style={{ paddingTop:"25px" }}
         >
-          Update your github username:
+          Update your GitHub username:
         </h4>
         <input 
           className="new-github"
           type="text"
-          placeholder="Enter new github username"
+          placeholder="Enter new GitHub username"
           style={{ width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
           value={newGithub}
           onChange={e=>{
@@ -312,15 +314,16 @@ function Settings() {
 
       <form 
         className="password-section"
-        style={{paddingLeft:"90px", paddingTop:"20px"}}
+        style={{paddingLeft:"60px", paddingTop:"20px", width:"550px"}}
         onSubmit={handleChangePassword}
       >
-      <h2 
+      <h4 
       className="password-notice"
+      family="Allerta Stencil"
       style={{ paddingTop:"25px", fontWeight:"bold"}}
       >
-        Change Password (Applicable for accounts not logging in through third-party authentication service)
-      </h2>
+        Change Password <i>(Applicable for accounts not logging in through third-party authentication service)</i>
+      </h4>
       <p style={{ paddingTop:"5px"}}>Type current password:</p>
       <input 
         className="current-pass"
@@ -371,7 +374,7 @@ function Settings() {
         className="set-password"
         style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px", fontWeight:"bold" }}
       >
-        Save Password
+        <strong>Save Password</strong>
       </button>
       </form> 
 
@@ -379,8 +382,8 @@ function Settings() {
         className="danger-zone"
         style={{ textAlign:"center"}}
       >
-        <h2
-        style={{ paddingBottom:"10px", paddingTop:"10px" }}>:::::::::::::: EXTRA CARE BEYOND THIS POINT :::::::::::::: </h2>
+        <p
+        style={{ paddingBottom:"10px", paddingTop:"10px" }}>:::::::::::::: EXTRA CARE BEYOND THIS POINT :::::::::::::: </p>
         <button 
           className="del-account" 
           style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"25px"}}
@@ -454,7 +457,7 @@ function Settings() {
         </>
       ) : null}
     </div>
-  </section>  
+  </div>  
   );
 }
 

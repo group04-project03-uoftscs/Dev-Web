@@ -3,7 +3,6 @@ import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
-import Font, {Text} from "react-font";
 
 import Card from '../components/Card'
 
