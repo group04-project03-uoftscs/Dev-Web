@@ -72,6 +72,12 @@ Third-party account authentication is possible via [GitHub](https://github.com/)
 
 Our logo was put together using [Canva](https://www.canva.com/).
 
+## Future Development
+
+As part of our goal to provide useful links to developers, we intend to draw from more news sources, industry job boards and podcast/music content providers to further curate our app's offerings and, thus, increase its usefulness to our users.
+
+Future features may include a community reference and support board for developers to reach out to others to brainstorm and find elegant and efficient solutions to coding problems.
+
 ## License
 
 Licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
