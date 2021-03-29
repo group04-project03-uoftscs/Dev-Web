@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import Moment from 'moment';
 import JobCard from "../components/JobCard";
+import useDarkMode from '../functions/useDarkMode';
 
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";
@@ -92,28 +93,29 @@ function Jobs() {
 
   return (
     <Parallax>
-      <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={3} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={4} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={5} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={6} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={7} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={8} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={9} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={10} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={11} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={12} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={13} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={14} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={15} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={16} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={17} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={18} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={19} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={20} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={21} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+      <useDarkMode />
+      <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={3} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={4} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={5} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={11} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={12} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={13} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={14} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={15} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={16} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={17} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={18} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={19} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={20} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={21} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
         <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
         <ParallaxLayer style={{ opacity: 0.2 }}>
@@ -180,7 +182,7 @@ function Jobs() {
                   {numPages.map(page =>(
                     <button 
                       key={`job-page-${page}`}
-                      className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" 
+                      className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" 
                       onClick={() => setFlag(page)}>
                       Page {page}
                     </button>
