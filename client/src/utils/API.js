@@ -15,6 +15,9 @@ export default {
   getUserInfo: function(user) {
     return axios.get("/api/user/"+user);
   },
+  getUserEmail: function(email) {
+    return axios.get("/api/user/email/"+email);
+  },
   getDatabaseUser: function(user) {
     return axios.get(`/api/user/${user}`);
   },
