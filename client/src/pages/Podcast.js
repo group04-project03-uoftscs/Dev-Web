@@ -1,43 +1,14 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import Card from '../components/Card';
 import ListenNotesLogo from "./listen_notes_logo.png";
 
 import { useStoreContext } from "../utils/GlobalState";
-
-import { FOUND_USER, LOADED, LOADING } from '../utils/actions';
-
-import { useHistory } from 'react-router-dom';
-import API from '../utils/API';
+import Loading from '../components/Loading'
 
 function Podcast() {
-
-  const history = useHistory();
   
   const [state, dispatch] = useStoreContext();
-
-  // useLayoutEffect(() => {
-  //   dispatch({
-  //     type: LOADING
-  //   })
-  //   async function getUser() {
-  //     const {data} = await API.getUser();
-  //     console.log(data.hasOwnProperty('user'))
-  //     if(data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: FOUND_USER,
-  //         user: data.user
-  //       });
-  //       console.log('logged: ' + state.logged)
-  //     } else if(!data.hasOwnProperty('user')) {
-  //       dispatch({
-  //         type: LOADED
-  //       })
-  //       history.push('/login')
-  //     }
-  //   }
-  //   getUser();
-  // }, [state.logged]);
 
   function Addroom(props) {
   return (
@@ -50,7 +21,7 @@ function Podcast() {
                 return (
                 <Card article={article} key={article.id}/>
                 )}): 
-                <div>Loading</div>}
+                <Loading>Loading podcasts...</Loading>}
               </div>
             </div>
           </div>
@@ -67,7 +38,7 @@ function HomePage(props) {
                 return (
                 <Card article={article} key={article.id}/>
                 )}): 
-                <div>Loading</div>}
+                <Loading>Loading podcasts...</Loading>}
               </div>
             </div>
             
@@ -92,11 +63,11 @@ function HomePage(props) {
     <Parallax>
       <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={3} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={4} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={4} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={5} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-        <ParallaxLayer factor={1} offset={6} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+        <ParallaxLayer factor={1} offset={6} className="bg-gradient-to-br from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer factor={1} offset={7} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
         <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
         <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
@@ -116,16 +87,16 @@ function HomePage(props) {
               {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag(false)}>
                     Best Episodes
                   </button>
-                  <button className="cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-lg focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag(true)}>
                     Featured Episodes 
                   </button>
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
                </div>
               </div>
-          <img src={ListenNotesLogo} style={{ width:"350px", marginLeft:"500px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
+          <img src={ListenNotesLogo} style={{ width:"350px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
         </div>
       </div>
     </div>

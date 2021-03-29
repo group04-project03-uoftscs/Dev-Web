@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import './card.css';
@@ -10,14 +10,18 @@ import logo from '../../assets/images/Dev_Web.gif'
 function Card ({article}) {
 
   const [state, dispatch] = useStoreContext();
-
-  const isBookmarked = state.favorites.filter(item => {
+  const [isBookmarked, setIsisBookmarked] = useState(state.favorites.filter(item => {
     return item.id == article.id
-  }).length == 1;
+  }).length == 1);
 
+  // const isBookmarked = state.favorites.filter(item => {
+  //   return item.id == article.id
+  // }).length == 1;
 
   // when you click on the button, calls on the api to add the article in the favorite list in the user database
-  const addBookmark = () => {
+  const addBookmark = (event) => {
+    event.preventDefault();
+    
     let itemToAdd = {...article}
     if(article.type === "episodes" || article.type === "podcasts" ){
       itemToAdd = {
@@ -38,10 +42,12 @@ function Card ({article}) {
         console.log(result)
         dispatch({type: ADD_FAVORITE, item: article});
       })
+      setIsisBookmarked(true)
   }
 
   // when you click on the button, calls on the api to remove the article from the favorite list in the user database
-  const removeBookmark = () => {
+  const removeBookmark = (event) => {
+    event.preventDefault()
     let itemToAdd = {...article}
     if(article.type === "episodes" || article.type === "podcasts" ){
       itemToAdd = {
@@ -60,6 +66,7 @@ function Card ({article}) {
       .then(result =>{
         console.log(result)
         dispatch({type: REMOVE_FAVORITE, id: article.id});
+        setIsisBookmarked(false)
       })
   }
 
@@ -74,14 +81,14 @@ function Card ({article}) {
           <h3 className="text-lg pt-2 font-semibold text-shadow overflow-hidden h-24 line-clamp-3"><a href={article.url} target="_blank" rel="noopener noreferrer"><h3>{article.title}</h3></a></h3>
         </div>
 
-        <div>
-          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage="loader.gif" src={article.image} fallbackImage={Errorpic}/></a>
+        <div className="flex flex-col">
+          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage={article.image} src={article.image} fallbackImage={Errorpic}/></a>
           
-          <p className="mb-3 tracking-wide text-base text-shadow">
+          <div className="mb-0 tracking-wide text-base text-shadow">
             <p>Published: {article.date}</p>
-          </p>
+          </div>
 
-          
+          <div className="self-end">          
             {isBookmarked ? 
 
             <button className="bg-white bg-opacity-0 border border-white px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-yellow-400 text-lg"
@@ -96,6 +103,7 @@ function Card ({article}) {
             </button> 
               
             }
+            </div>
         </div>
       </div>
     </div>

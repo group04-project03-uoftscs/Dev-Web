@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const router = require("express").Router();
 const scrape = require('./scraper');
 const Moment = require("moment")
-const codewars = require('./codewarsChallenges.json')
+const codewars = require('./codewarsChallenges.json');
 
 // Get Github profile
 router.route("/githubuser/:username")
@@ -146,16 +146,16 @@ const getFakeEpisodes = (cb) => {
 
 router.route("/listennotespodcasts")
   .get((req,res)=>{
-    // getBestPodcasts(data =>{ // to be used when using API calls
-    getFakePodcasts(data =>{ // get saved response to save on api
+    getBestPodcasts(data =>{ // to be used when using API calls
+    // getFakePodcasts(data =>{ // get saved response to save on api
       res.json(data);
     })
   })
 
 router.route("/listennotesepisodes")
 .get((req,res)=>{
-  // getLatestEpisodes(data =>{ // to be used when using API calls
-  getFakeEpisodes(data =>{ // get saved response to save on api
+  getLatestEpisodes(data =>{ // to be used when using API calls
+  // getFakeEpisodes(data =>{ // get saved response to save on api
     res.json(data);
   })
 })
@@ -288,10 +288,10 @@ const getFakeNews = (url,cb) => {
 
 router.route("/worldnewsapi")
   .get((req,res)=>{
-    // getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
-    //   res.json(data)
-    // })
-    res.json(worldnewAPIReponse); // to get fake news
+    getNews(NewsAPIURL_WORLD, data => { // to be used to get data from actual API
+      res.json(data)
+    })
+    // res.json(worldnewAPIReponse); // to get fake news
   })
 
 
@@ -303,11 +303,19 @@ router.route("/technewsapi")
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
           let article = await getHackerURL(id);
+          console.log(article)
           return article
         })
         const articles = await Promise.all(promises)
         const combinedArticles = interleave(data, articles);
-        res.json(combinedArticles)
+        combinedArticles.sort((a,b)=>{
+          let dateB = new Date(b.date);
+          let dateA = new Date(a.date)
+          return dateB - dateA
+        })
+        // res.json(combinedArticles)
+        res.write(JSON.stringify(combinedArticles));
+        res.end();
       })
     })
   })
@@ -356,20 +364,21 @@ router.route("/githubjobs")
   .post((req,res) => {
     axios(`https://jobs.github.com/positions.json?description=${req.body.description}&location=${req.body.location}`)
     .then(result => {
-      // console.log(result.data)
-      result.data.map(job => {
+      const jobList = result.data.map(job => {
         let time = job.created_at.split(" ");
         return {
-          type: job.type,
+          position: job.type,
           location: job.location,
           title: job.title,
           date: `${time[1]} ${time[2]}, ${time[time.length-1]}`,
           company: job.company,
           image: job.company_logo,
-          type: "jobs"
+          type: "jobs",
+          id: job.id,
+          url: job.url
         }
       })
-      res.json(result.data)
+      res.json(jobList)
     })    
     .catch(err => {
       console.log(err)

@@ -19,8 +19,6 @@ function Settings() {
   const [state, dispatch] = useStoreContext();
   
   const [newGithub, setNewGithub] = useState("");
-  // const [newGithub, setNewGithub] = useState(state.user._json.login || "");
-  // const [newLanguages, setNewLanguages] = useState(state.languages);
   const [newLocation, setNewLocation] = useState(state.location);
   
   const [showModal, setShowModal] = React.useState(false);
@@ -41,7 +39,9 @@ function Settings() {
 
   useEffect(()=>{
     if(state.user._json !== undefined) {
-      setNewGithub(state.user._json.login)
+      if(state.user._json.login !== undefined) {
+        setNewGithub(state.user._json.login)
+      }
     }
     if(state.languages.length !== 0){
       const temp = {...listLanguages}
@@ -91,12 +91,30 @@ function Settings() {
       saveInfo(state.user)
     }
     else if(newGithub.trim() === ""){
-      dispatch({
-        type: UPDATE_USER,
-        user: {
-          username: state.localusername
-        }
-      })
+      if(state.auth === "google"){
+        const userData = {...state.user}
+        const _json = {...userData._json};
+        delete _json["login"];
+        delete _json["html_url"];
+        delete _json["public_repos"];
+        delete _json["followers"];
+        delete _json["following"];
+        delete _json["bio"];
+        userData._json = {..._json}
+        console.log(userData)
+        dispatch({
+          type: UPDATE_USER,
+          user: userData
+        })
+      }
+      else{
+        dispatch({
+          type: UPDATE_USER,
+          user: {
+            username: state.localusername
+          }
+        })
+      }
       saveInfo({})
 
     }
@@ -119,10 +137,31 @@ function Settings() {
               }
               else{
                 let githubAccount = result.data;
-                dispatch({
-                  type: UPDATE_USER,
-                  user: githubAccount
-                })
+
+                if(state.auth === "google"){
+                  const userData = {...state.user}
+                  const _json = {...userData._json};
+                  const github_json = {
+                      "login":  githubAccount._json.login,
+                      "html_url": githubAccount._json.html_url,
+                      "public_repos" : githubAccount._json.public_repos,
+                      "followers": githubAccount._json.followers,
+                      "following": githubAccount._json.following,
+                      "bio": githubAccount._json.bio
+                    }
+                  userData._json = {..._json, ...github_json}
+                  console.log(userData)
+                  dispatch({
+                    type: UPDATE_USER,
+                    user: userData
+                  })
+                }
+                else{
+                  dispatch({
+                    type: UPDATE_USER,
+                    user: githubAccount
+                  })
+                }
                 console.log(githubAccount)
                 saveInfo(githubAccount)
                   
@@ -194,7 +233,7 @@ function Settings() {
     <div className="settings-tab">
       <div 
         className="section-header"
-        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder"}}
+        style={{ fontSize:"2rem", textAlign:"center", fontWeight:"bolder", marginTop:"65px"}}
         >
           <u>Your Account Settings</u>
       </div>
@@ -286,7 +325,7 @@ function Settings() {
         className="current-pass"
         type="password"
         required
-        disabled={state.auth === 'github'}
+        disabled={state.auth === 'github' || state.auth === "google"}
         placeholder="Current password here"
         ref={currentPasswordInput}
         onChange={e => {
@@ -301,7 +340,7 @@ function Settings() {
         type="password"
         required
         placeholder="New password here"
-        disabled={state.auth === 'github'}
+        disabled={state.auth === 'github' || state.auth === "google"}
         onChange={e => {
           setErrorMsgPassword("")
           setUpdateMsgPassword("")
@@ -319,7 +358,7 @@ function Settings() {
           setUpdateMsgPassword("")
         }}
         ref={new2PasswordInput}
-        disabled={state.auth === 'github'}
+        disabled={state.auth === 'github' || state.auth === "google"}
         placeholder="Confirm new password here"
         style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
@@ -327,7 +366,7 @@ function Settings() {
 
       <button
         type="submit"
-        disabled={state.auth === 'github'}
+        disabled={state.auth === 'github' || state.auth === "google"}
         className="set-password"
         style={{ marginLeft:"8px", marginTop:"10px", width:"175px", backgroundColor:"lightskyblue", color:"white", borderRadius:"99px", fontWeight:"bold" }}
       >
@@ -343,7 +382,7 @@ function Settings() {
         style={{ paddingBottom:"10px" }}>::::::::::::::::::::::::::::::::::::::::::::::::: EXTRA CARE BEYOND THIS POINT ::::::::::::::::::::::::::::::::::::::::::::::::: </h2>
         <button 
           className="del-account" 
-          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px"}}
+          style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"25px"}}
           onClick={(e)=>{
             setShowModal(true)
           }}>

@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
 
 //icons & svg
 import githubicon from "../assets/images/github.svg"
@@ -21,7 +21,7 @@ function NewUser() {
   /* This part below is to handle form request */
   const [state, dispatch] = useStoreContext();
   const [newLocation, setNewLocation] = useState(state.location);
-  const [newUsername, setNewUsername] = useState(state.user.username);
+  const [newUsername, setNewUsername] = useState("");
   const [newLanguages, setNewLanguages] = useState("");
   const [errorMsg, setErrorMsg] = useState("")
 
@@ -29,13 +29,16 @@ function NewUser() {
 
   const [listLanguages, setListLanguages] = useState(LANGUAGEOBJECT)
 
+  useEffect(()=> {
+    if(state.auth === "github") setNewUsername(state.localusername)
+  }, [])
+
   const handleChecked = (lang) => {
     console.log(lang);
     const temp = {...listLanguages}
     temp[lang] = !temp[lang];
     setListLanguages({...temp})
   }
-
 
   const saveInfo = (githubAccount) => {
     const newListLanguages = Object.keys(listLanguages).filter(lang => listLanguages[lang])
@@ -71,24 +74,43 @@ const handleSubmit = (e) =>{
           console.log(newUsername)
           if(result.data.indexOf(newUsername.trim()) !== -1) {
             console.log('github already registered')
-            //alert("Github Account Already Registered")
             setErrorMsg("Github Account Already Registered")
           }
           else{
             API.getGithub(newUsername.trim())
             .then(result => {
               if((Object.keys(result.data).length === 0)) {
-                // alert('Invalid Github Username')
                 setErrorMsg("Invalid Github Username");
               }
               else{
                 let githubAccount = result.data;
                 console.log('github account:')
                 console.log(githubAccount)
-                dispatch({
-                  type: UPDATE_USER,
-                  user: githubAccount
-                })
+
+                if(state.auth === "google"){
+                  const userData = {...state.user}
+                  const _json = {...userData._json};
+                  const github_json = {
+                      "login":  githubAccount._json.login,
+                      "html_url": githubAccount._json.html_url,
+                      "public_repos" : githubAccount._json.public_repos,
+                      "followers": githubAccount._json.followers,
+                      "following": githubAccount._json.following,
+                      "bio": githubAccount._json.bio
+                    }
+                  userData._json = {..._json, ...github_json}
+                  console.log(userData)
+                  dispatch({
+                    type: UPDATE_USER,
+                    user: userData
+                  })
+                }
+                else{
+                  dispatch({
+                    type: UPDATE_USER,
+                    user: githubAccount
+                  })
+                }
                 saveInfo(githubAccount)
                   
               }
@@ -208,9 +230,9 @@ const handleSubmit = (e) =>{
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               </svg>
