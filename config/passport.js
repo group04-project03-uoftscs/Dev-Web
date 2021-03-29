@@ -27,27 +27,30 @@ passport.use(new LocalStrategy(
 // This is the github link strategy
 // Also make sure to add the clientID and secret to a .env file once the app is in production
 passport.use(new GithubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "https://dev-web3.herokuapp.com/auth/github/callback"
+  clientID: "d80a400b6a707075e0b2",
+  clientSecret: "71db6e6e0e5bf807ebcda7323a67c447cdcfc5ef",
+  callbackURL: "/auth/github/callback"
+  // clientID: process.env.GITHUB_CLIENT_ID,
+  // clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  // callbackURL: "https://dev-web3.herokuapp.com/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
   userData = {
     auth: 'github'
   }
-  return done(null, profile);
+  return done(null, profile)
 }
 ));
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
-  },
-  (accessToken, refreshToken, profile, done) => {
-    console.log(profile)
-    return done(null, profile);
-  }
+  clientID: '852782765736-kb9a4nhtp283psctoo6cd0t6lh9psuuo.apps.googleusercontent.com',
+  clientSecret: 'rxYwpMpPsIan1s0WgR-8KiH4',
+  callbackURL: 'http://localhost:3001/auth/google/callback'
+},
+(accessToken, refreshToken, profile, done) => {
+  console.log(profile)
+  return done(null, profile);
+}
 ))
 
 // In order to help keep authentication state across HTTP requests,

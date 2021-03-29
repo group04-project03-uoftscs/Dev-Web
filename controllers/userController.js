@@ -28,6 +28,13 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  //find the user email
+  findEmail: function(req, res) {
+    db.User.find({email: req.params.email})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   // addUser will be used to add a user to the database when they register for the first time
   addUser: function(req,res) {
     db.User.findOne({username: req.body.username}, (err, user) => {

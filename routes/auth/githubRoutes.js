@@ -7,9 +7,9 @@ router
 
 router
   .route('/callback')
-  .get(passport.authenticate('github', {failureRedirect: 'https://dev-web3.herokuapp.com//login'}),
+  .get(passport.authenticate('github', {failureRedirect: 'http://localhost:3000/login'}),
   (req,res) => {
-    res.redirect('https://dev-web3.herokuapp.com/')
+    res.redirect('http://localhost:3000')
   })
 
 module.exports = router;

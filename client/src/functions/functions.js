@@ -18,6 +18,7 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
         if(!githubData.data.length){
           let newGithubUserData = {
             username: userData.username,
+            email: userData._json.email,
             github: userData._json,
             auth: 'github',
             location: userData._json.location,
@@ -187,6 +188,7 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
         if(!googleData.data.length){
           let newGoogleUserData = {
             username: userData.displayName,
+            email: userData.emails[0].value,
             google: userData._json,
             auth: 'google',
             location: '',

@@ -19,9 +19,9 @@ router
 
 router 
   .route('/callback')
-  .get(passport.authenticate('google', {failureRedirect: 'https://dev-web3.herokuapp.com/'}),
+  .get(passport.authenticate('google', {failureRedirect: 'http://localhost:3000/login'}),
   (req,res) => {
-    res.redirect('https://dev-web3.herokuapp.com/')
+    res.redirect('http://localhost:3000')
   })
 
 module.exports = router;

@@ -190,7 +190,9 @@ function Settings() {
 
   const handleChangePassword = (e) =>{
     e.preventDefault();
-
+    if(!new1PasswordInput.current.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/) && new1PasswordInput.current.value.length < 6) {
+      return setErrorMsgPassword('Password must be longer than 6 characters');
+    }
     if(new1PasswordInput.current.value !== new2PasswordInput.current.value){
       return setErrorMsgPassword('Password confirmation does not match')
     }
