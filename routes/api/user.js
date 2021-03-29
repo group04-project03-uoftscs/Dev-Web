@@ -19,4 +19,8 @@ router
   .route("/update/:user")
   .put(userController.updateUser)
 
+  router
+    .route("/email/:email")
+    .get(userController.findEmail)
+
 module.exports = router;
