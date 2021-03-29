@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
+import useDarkMode from '../functions/useDarkMode';
 
 import Card from '../components/Card'
 import JobCard from '../components/JobCard'
@@ -100,14 +101,15 @@ function JobsPage(props) {
     
   }, []);
 
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState("News");
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
-    <Parallax pages={2}>
-      <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
-      <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-      <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+    <Parallax>
+      <useDarkMode />
+      <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
       <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
       <ParallaxLayer style={{ opacity: 0.2 }}>
@@ -133,13 +135,13 @@ function JobsPage(props) {
            {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200" onClick={() => setFlag("news")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("news")}>
                     News
                   </button>
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-l-2 border-indigo-200" onClick={() => setFlag("podcasts")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("podcasts")}>
                     Podcasts 
                   </button>
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200" onClick={() => setFlag("jobs")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("jobs")}>
                     Jobs 
                   </button>
                 {flag === "news" ? <News /> : flag === "podcasts" ? <PodcastPage /> : <JobsPage />}

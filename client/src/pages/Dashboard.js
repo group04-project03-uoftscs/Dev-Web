@@ -3,7 +3,7 @@ import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
-import Font, {Text} from "react-font";
+import useDarkMode from '../functions/useDarkMode';
 
 import Card from '../components/Card'
 
@@ -46,9 +46,10 @@ function Dashboard () {
 
   return(
     <Parallax>
-      <ParallaxLayer factor={1} offset={0} className="bg-gradient-to-br from-yellow-300 via-indigo-500 to-blue-800" />
-      <ParallaxLayer factor={1} offset={1} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
-      <ParallaxLayer factor={1} offset={2} className="bg-gradient-to-tr from-indigo-300 via-indigo-500 to-blue-800" />
+      <useDarkMode />
+      <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
       <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
       <ParallaxLayer style={{ opacity: 0.2 }}>
@@ -79,7 +80,7 @@ function Dashboard () {
                         alt="username"/>
                     <div className="ml-10">
                         <div className="flex items-center">
-                            <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl">{state.user._json !== undefined ? (state.user._json.login !== undefined ? state.user._json.login : state.user.username) :state.user.username}</h2>
+                            <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl dark:text-white transition duration-500">{state.user._json !== undefined ? (state.user._json.login !== undefined ? state.user._json.login : state.user.username) :state.user.username}</h2>
                             <a className="cursor-pointer h-7 px-3 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.location ? state.location : 'No location set yet'}</a>
                             
                             <Link to="/bookmarked"><button className="hidden md:inline-flex items-center ml-3 border border-yellow-400 hover:bg-yellow-500 hover:text-white rounded outline-none focus:outline-none bg-transparent text-yellow-300 text-sm py-1 px-2">
@@ -100,13 +101,13 @@ function Dashboard () {
                               (state.user._json.login !== undefined ?
                               <ul className="flex justify-content-around items-center">
                                 <li>
-                                    <span className="text-base flex"><span className="font-bold mr-2">{state.user._json.public_repos} </span> Repos</span>
+                                    <span className="text-base flex dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.user._json.public_repos} </span> Repos</span>
                                 </li>
                                 <li>
-                                    <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.followers} </span> Followers</span>
+                                    <span className="text-base flex ml-5 dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.user._json.followers} </span> Followers</span>
                                 </li>
                                 <li>
-                                    <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json.following} </span> Following</span>
+                                    <span className="text-base flex ml-5 dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.user._json.following} </span> Following</span>
                                 </li>
                               </ul>
                               : null
@@ -163,24 +164,24 @@ function Dashboard () {
             <div className="md:flex justify-center pb-1">
                     <div className="ml-10">
                         <div className="flex sm:flex-col sm:flex-wrap md:flex-row my-2 mt-2">
-                          <h2 className="leading-relaxed font-light mb-1 text-gray-700 text-xl">Your Codewars Challenge</h2>
+                          <h2 className="leading-relaxed font-light mb-1 text-gray-700 text-xl dark:text-white transition duration-500">Your Codewars Challenge</h2>
                             <a className="cursor-pointer px-3 p-1 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.codewars.name}</a>
                             <a className="cursor-pointer hidden md:flex px-3 p-1 ml-3 focus:outline-none hover:border-transparent text-center rounded border border-green-400 hover:bg-green-500 hover:text-white bg-transparent text-green-200 font-semibold">{state.codewars.category}</a>
                             
                         </div>
                         <ul className="flex md:flex-row sm:flex-col flex-wrap justify-content-around items-center">
                             <li>
-                                <span className="text-base flex"><span className="font-bold mr-2">{state.codewars.totalAttempts} </span> Attempts</span>
+                                <span className="text-base flex dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.codewars.totalAttempts} </span> Attempts</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.codewars.totalCompleted} </span> Completed</span>
+                                <span className="cursor-pointer text-base flex ml-5 dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.codewars.totalCompleted} </span> Completed</span>
                             </li>
                             <li>
-                                <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">{state.codewars.voteScore} </span> Votes</span>
+                                <span className="cursor-pointer text-base flex ml-5 dark:text-white transition duration-500"><span className="font-bold mr-2 dark:text-white transition duration-500">{state.codewars.voteScore} </span> Votes</span>
                             </li>
                         </ul>
                         <div className="">
-                            <h1 className="text-xl font-bold">{state.codewars.tags.slice(0, Math.min(4, state.codewars.tags.length)).join(", ")}</h1>
+                            <h1 className="text-xl font-bold dark:text-white transition duration-500">{state.codewars.tags.slice(0, Math.min(4, state.codewars.tags.length)).join(", ")}</h1>
                             <h2 className="text-base pr-7 text-gray-200 font-semibold  overflow-hidden line-clamp-5">{state.codewars.formatDescription.map((text, index)=>{
                               if(index%2 === 0) return (<div key={`code-${index}`}>{text}</div>)
                               else return (<code className="text-green-300"  key={`code-${index}`}>{text}</code>)
@@ -223,7 +224,7 @@ function Dashboard () {
             })
             : 
             <div>
-              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
+              <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md" style={{ marginBottom:"20px"}}>
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
             </div>

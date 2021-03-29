@@ -39,6 +39,9 @@ function Signup() {
       // return alert('Enter a valid username')
       return setErrorMsg('Enter a valid username');
     }
+    if(!passwordInput.current.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/) && passwordInput.current.value.length < 6) {
+      return setErrorMsg('Enter a password that is longer than 6 characters and contain at least an uppercase character');
+    }
     let hashedPassword = bcrypt.hashSync(passwordInput.current.value, 10);
     const body = {
       username: usernameInput.current.value,
@@ -52,9 +55,14 @@ function Signup() {
       github: {}
     }
     const verifyUser = await API.getUserInfo(usernameInput.current.value);
+    const verifyEmail = await API.getUserEmail(emailInput.current.value);
     if(Object.keys(verifyUser.data).length > 0) {
       // return alert('User alreaedy exists');
       return setErrorMsg('User alreaedy exists');
+    }
+    if(Object.keys(verifyEmail.data).length > 0) {
+      // return alert('User alreaedy exists');
+      return setErrorMsg('Email already exists');
     }
     if(!checked) {
       // return alert('Please accept our privacy policy')
@@ -68,7 +76,7 @@ function Signup() {
   
   return (
     <>
-    <main className="relative w-full h-full min-h-screen bg-gray-500">
+    <main className="relative w-full h-full min-h-screen bg-gray-500" style={{ marginTop:"30px"}}>
         <section className="absolute top-0 w-full h-full">
           <div className="mx-auto h-full w-full ">
             <div className="flex content-center items-center justify-center h-full pt-10">

@@ -1,11 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useDarkMode from '../../functions/useDarkMode'
 
 function Footer() {
 
   return (
+    useDarkMode(),
     <footer className="relative z-40 bottom-0 max-h-full w-full">
-      <div className="w-full bg-indigo-500 shadow-md h-16 flex justify-between ">
+      <div className="w-full bg-indigo-500 shadow-md h-16 flex justify-between dark:bg-black transition duration-500">
           <div className="w-full h-full justify-center text-white">
             <div className="flex items-center h-full justify-center">
                 <strong>Copyright © 2021 - Dev Web Team &nbsp;

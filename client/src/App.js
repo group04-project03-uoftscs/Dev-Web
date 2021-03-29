@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, Link, useHistory } from "react-router-dom";
+import Font from "react-font";
 
 import './App.css'
 import './styles/tailwind.css'
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <Router>
+      <Font family="Allerta Stencil">
       <div className="page-container">
         <StoreProvider>
           <LoadFiles />
@@ -65,6 +67,7 @@ function App() {
           <Footer />
         </StoreProvider>
       </div>
+      </Font>
     </Router>
   );
 }

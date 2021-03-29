@@ -9,6 +9,7 @@ import LANGUAGEOBJECT from '../assets/languages.json'
 import Github from "../assets/svg/icons8-github-96.png"
 
 import LanguagesList from "../components/LanguagesList";
+import useDarkMode from '../functions/useDarkMode';
 
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_USER, UPDATE_LOCATION, UPDATE_LANGUAGES } from "../utils/actions";
@@ -128,8 +129,9 @@ const handleSubmit = (e) =>{
 /* The part above is to handle form request */
 
   return (
+    useDarkMode,
     <form onSubmit={handleSubmit}>
-    <section className="py-20 bg-gray-200 bg-opacity-50 h-screen">
+    <section className="py-20 bg-gray-200 bg-opacity-50 dark:bg-black dark:text-white transition duration-500"> {/* Removed h-screen from class to keep footer from overlapping with form */}
     <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
       <div className="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-indigo-500 rounded-t">
         <div className="max-w-sm mx-auto md:w-full md:mx-0">
