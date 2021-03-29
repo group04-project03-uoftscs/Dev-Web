@@ -2,6 +2,8 @@
 
 Our goal is to create a useful portal for developers to find news, job postings, industry podcasts and relevant information all in one spot. Stop scouring all over the web just to find and manage your web dev bookmarks. 
 
+Link to our deployed app: [DevWeb](https://dev-web3.herokuapp.com/)
+
 ## Team Members
 
 * [Annie Kwan](https://github.com/akwanmtl)
@@ -16,7 +18,7 @@ Our goal is to create a useful portal for developers to find news, job postings,
 
 ## Project Description
 
-Similar to how Daily Dev provides a mosaic of dev-geared article links, we're looking to build and provide a web dev portal to access industry news, job postings, dev podcasts and relevant links to save users time.
+Similar to how the Chrome extension <b>Daily Dev</b> provides a mosaic of dev-geared article links, we're looking to build and provide a web dev portal to access industry news, job postings, dev podcasts and relevant links to save users time.
 
 We're adding database functionality to our solution to ease the load of bookmarking/favouriting useful reference links and reading list from the browser.
 
@@ -38,18 +40,26 @@ We're adding database functionality to our solution to ease the load of bookmark
 
 ## Libraries Used
 
-* bcrypt
-* Puppeteer
-* Tailwinds CSS
-* Ant Design
-* OAuth 2.0
+* [Ant Design](https://ant.design/)
+* [Axios](https://www.npmjs.com/package/axios)
+* [bcrypt](https://www.npmjs.com/package/bcrypt)
+* [Font Awesome](https://fontawesome.com/)
+* [Mongoose](https://mongoosejs.com/)
+* [OAuth 2.0](https://oauth.net/2/)
+* [Passport](http://www.passportjs.org/)
+* [Popper](https://popper.js.org/)
+* [Puppeteer](https://www.npmjs.com/package/puppeteer)
+* [React-Font](https://www.npmjs.com/package/react-font)
+* [React-Image-Fallback](https://www.npmjs.com/package/react-image-fallback)
+* [Tailwinds CSS](https://tailwindcss.com/)
+
 
 ## Tech Used
 
-* MongoDB
-* Express
-* React
-* Node
+* [MongoDB](https://www.mongodb.com/) + [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+* [Express](https://expressjs.com/)
+* [React](https://reactjs.org/)
+* [Node](https://nodejs.org/en/)
 
 ## Credits
 
