@@ -28,7 +28,7 @@ function Jobs() {
 
   const calculatePage = (jobList) => {
     let pages = [];
-    for(let i = 0; i < parseInt(jobList.length/7)+1; i++) {
+    for(let i = 0; i < parseInt(jobList.length/12)+1; i++) {
       pages.push(i+1);
     }
     console.log(pages)

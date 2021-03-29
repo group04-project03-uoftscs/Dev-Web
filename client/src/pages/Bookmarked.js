@@ -100,7 +100,7 @@ function JobsPage(props) {
     
   }, []);
 
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState("News");
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(

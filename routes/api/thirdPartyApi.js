@@ -297,8 +297,8 @@ router.route("/worldnewsapi")
 
 router.route("/technewsapi")
   .get((req,res)=>{
-    // getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
-    getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
+    getNews(NewsAPIURL_TECH, data => { // to be used to get data from actual API
+    // getFakeNews(NewsAPIURL_TECH, data => { // used to save on api request
       // console.log(data)
       getHackerNewsIDs(async (ids) => {
         let promises = ids.map(async (id) =>{
@@ -341,8 +341,9 @@ const getHackerNewsIDs = (cb) => {
 const getHackerURL = async (id) => {
   const result = await axios(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
   // console.log(result.data)
-  let image = await scrape(result.data.url);
-  let values = {title:result.data.title, url:result.data.url, image: image, date: Moment(result.data.time*1000).format("MMM DD, YYYY"), id: id, type: "articles", source: "hackernews"}
+  // let image = await scrape(result.data.url);
+  // let values = {title:result.data.title, url:result.data.url, image: image, date: Moment(result.data.time*1000).format("MMM DD, YYYY"), id: id, type: "articles", source: "hackernews"}
+  let values = {title:result.data.title, url:result.data.url, image: "", date: Moment(result.data.time*1000).format("MMM DD, YYYY"), id: id, type: "articles", source: "hackernews"}
   // console.log(values)
   return values;
 }
