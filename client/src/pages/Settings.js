@@ -241,7 +241,7 @@ function Settings() {
       className="edit-profile"
       style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"60px", fontWeight:"bold", width:"450px"}}
       >
-        <h4><u>Edit Your Profile</u></h4>
+        <h4>Edit Your Profile</h4>
       
         <h4 
         className="location"
@@ -267,7 +267,7 @@ function Settings() {
         <h4 
         className="languages"
         style={{ paddingTop:"20px" }}>
-          Update your programming language flags here:
+          Update your language flags here:
         </h4>
         <div className="flex flex-row flex-wrap mx-auto">
         {Object.keys(listLanguages).map((lang, index) => {
@@ -317,7 +317,7 @@ function Settings() {
       family="Allerta Stencil"
       style={{ paddingTop:"25px", fontWeight:"bold"}}
       >
-        Change Password <i>(Applicable for accounts not logging in through third-party authentication service)</i>
+        Change Password <i>(If not using third-party authentication)</i>
       </h4>
       <p style={{ paddingTop:"5px"}}>Type current password:</p>
       <input 
