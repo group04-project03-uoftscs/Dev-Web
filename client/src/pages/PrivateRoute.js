@@ -24,18 +24,4 @@ function PrivateRoute({component : Component, ...rest}) {
   )
 }
 
-  
-  
-
-
 export default PrivateRoute;
-
-// function PrivateRoute ({children}) {
-//   const [state, dispatch] = useStoreContext();
-//   if(state.logged) return <Redirect to="/landing"/>;
-//   else return <
-  
-  
-// }
-
-// export default PrivateRoute;

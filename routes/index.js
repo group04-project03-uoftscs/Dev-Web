@@ -4,10 +4,7 @@ const apiRoutes = require("./api");
 const authRoutes = require("./auth");
 const userRoutes = require('./user');
 const passport = require('../config/passport');
-const extendTimeoutMiddleware = require("../config/middleware/extendedTimeOut")
 
-
-// router.use('/api/thirdparty/technewsapi', extendTimeoutMiddleware);
 // API Routes
 router.use("/api", apiRoutes);
 

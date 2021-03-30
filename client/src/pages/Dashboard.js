@@ -23,24 +23,11 @@ function Dashboard () {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
-    if(state.auth === 'local') {
-      API.getUserInfo(state.localusername)
-        .then(data => {
-          if(data.data[0].firstTime === true) {
-            API.getLocalUserUpdate(state.localusername, {firstTime: false})
-            .then(() => {
-              history.push('/newUser');
-            })
-          }
-        })
-    }
-
     return () => window.removeEventListener("scroll", handleScroll);
     
   }, []);
 
-  let lego = state.localusername.length%10;//Math.floor(Math.random() * 10);
+  let lego = state.localusername.length%10;
   const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
@@ -113,35 +100,25 @@ function Dashboard () {
                               : null
                               )
                               : null
-                            } 
-                            {/* <li>
-                                <span className="text-base flex"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.public_repos : 'No public repos'} </span> Repos</span>
-                            </li>
-                            <li>
-                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.followers : 0} </span> Followers</span>
-                            </li>
-                            <li>
-                                <span className="text-base flex ml-5"><span className="font-bold mr-2">{state.user._json !== undefined ? state.user._json.following : 0} </span> Following</span>
-                            </li> */}
+                            }
                         <br></br>
                         <div className="flex-row flex-wrap">
-                            {/* <h1 className="text-xl font-bold">{state.user._json !== undefined ? state.user._json.name : state.user.username}</h1> */}
-                              {state.languages.map(lang =>{
-                                let term = `devicon-${lang}-plain`;
-                                return (
-                                  <i className={term} key={`lang-${lang}`} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
-                              )})
-                              }
-                              <br></br>
-                              {state.user._json !== undefined ? 
-                                state.user._json.bio !==undefined ? 
-                                <div>
-                                  <span className="text-base font-semibold">{state.user._json.bio}</span>
-                                  <a className="block text-base text-yellow-500 mt-2" href={state.user._json.html_url} target="_blank">{'Quick! To my Github!'}</a>
-                                </div>
-                                  : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
-                                : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
-                              }
+                          {state.languages.map(lang =>{
+                            let term = `devicon-${lang}-plain`;
+                            return (
+                              <i className={term} key={`lang-${lang}`} style={{fontSize:"30px", color:"purple", marginLeft:"5px"}}></i>
+                          )})
+                          }
+                          <br></br>
+                          {state.user._json !== undefined ? 
+                            state.user._json.bio !==undefined ? 
+                            <div>
+                              <span className="text-base font-semibold">{state.user._json.bio}</span>
+                              <a className="block text-base text-yellow-500 mt-2" href={state.user._json.html_url} target="_blank">{'Quick! To my Github!'}</a>
+                            </div>
+                              : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
+                            : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
+                          }
                         </div>
                     </div>
                   </div>  

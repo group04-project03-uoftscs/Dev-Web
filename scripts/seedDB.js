@@ -7,14 +7,11 @@ const userSeed = [
   {
     username: "username",
     password: "password",
-    github: "githubuser",
-    favorites: []
-  },
-  {
-    username: "test",
-    password: "test",
-    github: "test",
-    favorites: []
+    github: {},
+    email: "username@email.com",
+    languages: ['cplusplus','html5','react'],
+    favorites: [],
+    auth: "local"
   }
 ];
 

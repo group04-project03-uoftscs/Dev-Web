@@ -11,11 +11,10 @@ function News () {
 
   const [state, dispatch] = useStoreContext();
 
-  function Addroom() {
+  function TechPage() {
   return (
     <div>
        {/* Tech News */}
-       {console.log("tech news")}
       <div>
         <div className="flex flex-row flex-wrap mx-auto mb-20">
   
@@ -33,11 +32,10 @@ function News () {
     </div>
   );
 }
-function HomePage() {
+function WorldPage() {
   return (
     <div>
       {/* World News */}
-       {console.log("world news")}
           <div>
             <div className="flex flex-row flex-wrap mx-auto mb-20">
       
@@ -111,13 +109,13 @@ function HomePage() {
                 {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(false)}>
-                    World News
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(true)}>
+                    Tech News
                   </button>
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(true)}>
-                    Tech News 
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(false)}>
+                    World News 
                   </button>
-                {flag ? <Addroom /> : <HomePage />}
+                {flag ? <TechPage /> : <WorldPage />}
                </div>
               </div>
                 {/* Tech News Card */}

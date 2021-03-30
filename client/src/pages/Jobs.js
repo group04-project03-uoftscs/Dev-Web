@@ -23,7 +23,6 @@ function Jobs() {
 
 
   useEffect(() => {
-    console.log(findingJobs)
     findJobs(UPDATE_JOBS, "jobs", API.getJobs, state.location, "");
   }, []);
 
@@ -32,19 +31,16 @@ function Jobs() {
     for(let i = 0; i < parseInt(jobList.length/12)+1; i++) {
       pages.push(i+1);
     }
-    console.log(pages)
     setNumPages(pages)
   }
 
   const findJobs = (action, type, api, location, description) =>{ 
-    console.log(`getting ${type}`)
     let data = {
       description: description,
       location: (location === "") ? "remote" : location
     }
     api(data)
       .then(result => {
-        console.log(result)
         if(result.data.length === 0) {
           data = {
             description: description,
@@ -78,7 +74,6 @@ function Jobs() {
   };
 
   function Page1({page}) {
-    console.log(page)
   return (
     <div className="flex flex-row flex-wrap mx-auto">
       {state.jobs.length!==0 ?  state.jobs.slice(0+12*(page-1),Math.min(state.jobs.length,12+12*(page-1))).map((job) => {

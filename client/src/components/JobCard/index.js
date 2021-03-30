@@ -36,7 +36,6 @@ const JobCard = ({job}) => {
   const addBookmark = () => {
     API.saveFavorite(state.localusername, job)
       .then(result =>{
-        console.log(result)
         dispatch({type: ADD_FAVORITE, item: job});
       })
   }
@@ -45,7 +44,6 @@ const JobCard = ({job}) => {
   const removeBookmark = () => {
     API.removeFavorite(state.localusername, job)
       .then(result =>{
-        console.log(result)
         dispatch({type: REMOVE_FAVORITE, id: job.id});
       })
   }

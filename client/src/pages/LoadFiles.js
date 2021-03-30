@@ -11,7 +11,6 @@ function LoadFiles () {
   
   useEffect(() => {
     if(state.logged) {
-      console.log('loading files');
       getCode();
 
       if(localStorage.getItem('episodes') === null) localStorage.setItem('episodes', JSON.stringify([]))
@@ -31,7 +30,6 @@ function LoadFiles () {
   const checkLocalStorage = (action, type, api) => {
     if(localStorage.getItem(type)){
       if(JSON.parse(localStorage.getItem(type)).date === today) {
-        console.log(type + ' already there')
         return dispatch({ type: action, items: JSON.parse(localStorage.getItem(type)).items})
       }
     }
@@ -53,7 +51,6 @@ function LoadFiles () {
   }
 
   const getItems = (action, type, api) =>{
-    console.log(`getting ${type}`)
     api()
       .then(result => {
         dispatch({ type: action, items: result.data})
