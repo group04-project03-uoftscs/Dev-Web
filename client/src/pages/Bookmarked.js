@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import Card from '../components/Card'
 import JobCard from '../components/JobCard'
