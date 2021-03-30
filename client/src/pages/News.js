@@ -63,7 +63,7 @@ function WorldPage() {
   }, []);
 
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(true);
 
   return(
     <Parallax>
