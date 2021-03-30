@@ -239,7 +239,7 @@ function Settings() {
     <form id="profile-form" onSubmit={handleSubmitProfile}
 
       className="edit-profile"
-      style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"60px", fontWeight:"bold", width:"450px"}}
+      style={{paddingLeft:"70px", paddingTop:"20px", maxWidth:"550px", textAlign:"center", fontWeight:"bold" }}
       >
         <h4>Edit Your Profile</h4>
       
@@ -309,7 +309,7 @@ function Settings() {
 
       <form 
         className="password-section"
-        style={{paddingLeft:"60px", paddingTop:"20px", width:"550px"}}
+        style={{paddingLeft:"60px", paddingTop:"20px", width:"550px", textAlign:"center" }}
         onSubmit={handleChangePassword}
       >
       <h4 
@@ -317,7 +317,7 @@ function Settings() {
       family="Allerta Stencil"
       style={{ paddingTop:"25px", fontWeight:"bold"}}
       >
-        Change Password <i>(If not using third-party authentication)</i>
+        <u>Change Password</u>
       </h4>
       <p style={{ paddingTop:"5px"}}>Type current password:</p>
       <input 
