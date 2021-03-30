@@ -57,7 +57,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
         
         <div className="w-full mb-3">
           <h3 className="text-lg pt-2 mb-1 border-b border-1 border-white font-semibold text-shadow overflow-hidden h-16 line-clamp-2 dark:text-white transition duration-500"><a href={url} target="_blank" rel="noopener noreferrer"><h3>{title}, {position}</h3></a></h3>
-          <h1 className="text-gray-700 font-bold h-8 line-clamp-2 transform ease-in-out hover:scale-125 origin-left dark:text-white transition duration-500">{company}</h1>
+          <h1 className="text-gray-700 font-bold h-12 line-clamp-2 transform ease-in-out hover:scale-125 origin-left dark:text-white transition duration-500">{company}</h1>
         </div>
 
         <div>
