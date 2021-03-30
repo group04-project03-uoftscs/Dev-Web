@@ -239,9 +239,9 @@ function Settings() {
     <form id="profile-form" onSubmit={handleSubmitProfile}
 
       className="edit-profile"
-      style={{ fontSize:"1rem", textAlign:"left", paddingLeft:"60px", fontWeight:"bold", width:"450px"}}
+      style={{paddingLeft:"70px", paddingTop:"20px", maxWidth:"550px", textAlign:"center", fontWeight:"bold" }}
       >
-        <h4><u>Edit Your Profile</u></h4>
+        <h4>Edit Your Profile</h4>
       
         <h4 
         className="location"
@@ -267,9 +267,9 @@ function Settings() {
         <h4 
         className="languages"
         style={{ paddingTop:"20px" }}>
-          Update your programming language flags here:
+          Update your language flags here:
         </h4>
-        <div className="flex flex-row flex-wrap mx-auto">
+        <div className="flex flex-row flex-wrap mx-auto" style={{ maxWidth:"375px" }}>
         {Object.keys(listLanguages).map((lang, index) => {
           return(
             <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
@@ -309,7 +309,7 @@ function Settings() {
 
       <form 
         className="password-section"
-        style={{paddingLeft:"60px", paddingTop:"20px", width:"550px"}}
+        style={{paddingLeft:"60px", paddingTop:"20px", width:"550px", textAlign:"center" }}
         onSubmit={handleChangePassword}
       >
       <h4 
@@ -317,7 +317,7 @@ function Settings() {
       family="Allerta Stencil"
       style={{ paddingTop:"25px", fontWeight:"bold"}}
       >
-        Change Password <i>(Applicable for accounts not logging in through third-party authentication service)</i>
+        <u>Change Password</u>
       </h4>
       <p style={{ paddingTop:"5px"}}>Type current password:</p>
       <input 
