@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../../utils/actions';
 import API from '../../utils/API';
-import useDarkMode from '../../functions/useDarkMode';
+import useDarkMode from '../../pages/useDarkMode';
 
 const JobCard = ({job}) => {
 

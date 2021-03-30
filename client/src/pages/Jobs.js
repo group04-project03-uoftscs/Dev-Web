@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import Moment from 'moment';
 import JobCard from "../components/JobCard";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";

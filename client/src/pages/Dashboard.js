@@ -3,7 +3,7 @@ import "../styles/background.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import Card from '../components/Card'
 
