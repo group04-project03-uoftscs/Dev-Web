@@ -1,23 +1,16 @@
-import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import useDarkMode from '../functions/useDarkMode';
 
 import Card from '../components/Card'
 import JobCard from '../components/JobCard'
 
 import { useStoreContext } from "../utils/GlobalState";
-
-import { AUTH_METHOD, FOUND_USER, LOADED, LOADING, UPDATE_FAVORITES, UPDATE_LOCATION } from '../utils/actions';
-
-import API from '../utils/API';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
 function Bookmarked() {
   const [state, dispatch] = useStoreContext();
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
-  const history = useHistory();
 
   function News(props) {
   return (
@@ -83,20 +76,6 @@ function JobsPage(props) {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
-    if(state.auth === 'local') {
-      API.getUserInfo(state.localusername)
-        .then(data => {
-          console.log(data.data[0])
-          if(data.data[0].firstTime === true) {
-            API.getLocalUserUpdate(state.localusername, {firstTime: false})
-            .then(() => {
-              history.push('/newUser');
-            })
-          }
-        })
-    }
-
     return () => window.removeEventListener("scroll", handleScroll);
     
   }, []);

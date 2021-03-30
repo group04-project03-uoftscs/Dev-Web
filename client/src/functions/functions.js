@@ -2,7 +2,6 @@ import { AUTH_METHOD, FOUND_USER, UPDATE_LOCATION, UPDATE_FAVORITES, UPDATE_LANG
 
 export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, history) => {
   const userData = data.user
-      console.log(userData);
       dispatch({
         type: AUTH_METHOD,
         auth: data.auth
@@ -11,10 +10,8 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
         type: FOUND_USER,
         user: userData
       });
-      console.log(state)
       API.findGithubUser(userData.id)
       .then(githubData=> {
-        console.log(githubData)
         if(!githubData.data.length){
           let newGithubUserData = {
             username: userData.username,
@@ -35,7 +32,6 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             history.push('/newuser')
           }) 
         } else {
-          console.log(githubData.data[0].location)
             dispatch({
               type: UPDATE_LOCATION,
               location: githubData.data[0].location
@@ -45,8 +41,6 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
               languages: githubData.data[0].languages
             })
             getFavoriteRecursion(githubData.data[0].favorites,[],API, favoriteList =>{
-          
-              console.log(favoriteList)
               dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
             });
         }
@@ -56,15 +50,12 @@ export const githubAuth = (data, dispatch, API, state, getFavoriteRecursion, his
 export const checkLocalStorageHome = (axios, dispatch) => {
   if(localStorage.getItem('user')) {
     let userData = JSON.parse(localStorage.getItem('user'));
-    console.log(userData);
     axios({
       method: 'POST',
       data: userData,
       withCredentials: true,
       url: "/user/login"
     }).then((res) => {
-      console.log(res);
-      console.log(res.data)
       if(res.data === 'Incorrect login information') {
         alert('Email or password is not correct')
       } else {
@@ -86,15 +77,12 @@ export const checkLocalStorageHome = (axios, dispatch) => {
 export const checkLocalStorageLanding = (axios, dispatch) => {
   if(localStorage.getItem('user')) {
     let userData = JSON.parse(localStorage.getItem('user'));
-    console.log(userData);
     axios({
       method: 'POST',
       data: userData,
       withCredentials: true,
       url: "/user/login"
     }).then((res) => {
-      console.log(res);
-      console.log(res.data)
       if(res.data === 'Incorrect login information') {
         alert('Email or password is not correct')
       } else {
@@ -119,7 +107,6 @@ export const getFavoriteRecursion = (databaseList, favoriteList, API, cb) => {
   else{
     let fave = databaseList[favoriteList.length];
     if(fave.type === "episodes" || fave.type === "podcasts") {
-      console.log('getting episode and podcast')
       let localItems = JSON.parse(localStorage.getItem(fave.type));
       let found = localItems.filter(item => item.id === fave.id);
       if(found.length >= 1) {
@@ -172,7 +159,6 @@ export const getFavoriteRecursion = (databaseList, favoriteList, API, cb) => {
 // For google similar to github just with some small changed data
 export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, history) => {
   const userData = data.user
-      console.log('this is the userData ', userData);
       dispatch({
         type: AUTH_METHOD,
         auth: data.auth
@@ -181,10 +167,8 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
         type: FOUND_USER,
         user: userData
       });
-      console.log(state)
       API.findGoogleUser(userData.id)
       .then(googleData=> {
-        console.log(googleData.data.length)
         if(!googleData.data.length){
           let newGoogleUserData = {
             username: userData.displayName,
@@ -205,7 +189,6 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             history.push('/newuser')
           }) 
         } else {
-          console.log(googleData.data[0].location)
             dispatch({
               type: UPDATE_LOCATION,
               location: googleData.data[0].location
@@ -216,7 +199,6 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
             })
 
             if(googleData.data[0].github){
-              console.log(googleData.data[0])
               const _json = {...userData._json};
               const github_json = {
                   "login":  googleData.data[0].github._json.login,
@@ -227,15 +209,12 @@ export const googleAuth = (data, dispatch, API, state, getFavoriteRecursion, his
                   "bio": googleData.data[0].github._json.bio
                 }
               userData._json = {..._json, ...github_json}
-              console.log(userData)
               dispatch({
                 type: UPDATE_USER,
                 user: userData
               })
             }
             getFavoriteRecursion(googleData.data[0].favorites,[],API, favoriteList =>{
-          
-              console.log(favoriteList)
               dispatch({ type: UPDATE_FAVORITES, items: favoriteList});
             });
         }
