@@ -269,7 +269,7 @@ function Settings() {
         style={{ paddingTop:"20px" }}>
           Update your language flags here:
         </h4>
-        <div className="flex flex-row flex-wrap mx-auto">
+        <div className="flex flex-row flex-wrap mx-auto" style={{ maxWidth:"375px" }}>
         {Object.keys(listLanguages).map((lang, index) => {
           return(
             <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
