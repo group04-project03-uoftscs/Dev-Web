@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import ReactImageFallback from "react-image-fallback";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import API from '../../utils/API';
 import useDarkMode from '../../pages/useDarkMode';
 
 import { useStoreContext } from "../../utils/GlobalState";
 
-function Weather ({}) {
+function Weather ({temperature, weatherIcon, weatherDescription}) {
 
-    const [state, dispatch] = useStoreContext();
+    // const [state, dispatch] = useStoreContext();
 
     
-    const [temperature, setTemperature] = useState();
-    const [weatherIcon, setWeatherIcon] = useState();
-    const [weatherDescription, setWeatherDescription] = useState();
+    // const [temperature, setTemperature] = useState();
+    // const [weatherIcon, setWeatherIcon] = useState();
+    // const [weatherDescription, setWeatherDescription] = useState();
 
-    useEffect(() => {
-        API.getWeather(state.location)
-        .then(result =>{
-            setTemperature(result.data.temp);
-            setWeatherIcon(result.data.iconUrl);
-            setWeatherDescription(result.data.description)
-        })
-        .catch(err=> console.log(err))
-    }, []);
+    // useEffect(() => {
+    //     API.getWeather(state.location)
+    //     .then(result =>{
+    //         setTemperature(result.data.temp);
+    //         setWeatherIcon(result.data.iconUrl);
+    //         setWeatherDescription(result.data.description)
+    //     })
+    //     .catch(err=> console.log(err))
+    // }, []);
 
     return(
         useDarkMode,
@@ -44,8 +42,8 @@ function Weather ({}) {
                 </g>
             </svg>
             </div>
-            <p class="text-gray-700 mb-2">result.data.description</p>
-            <div class="text-2xl font-semibold text-gray-900 mb-6">result.data.tempº</div>
+            <p class="text-gray-700 mb-2">{weatherDescription}</p>
+            <div class="text-2xl font-semibold text-gray-900 mb-6">{temperature} &#8451;</div>
             <div class="flex w-full">
             <div class="flex items-center text-gray-700 px-2">
                 <svg class="mr-2 h-4" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg">

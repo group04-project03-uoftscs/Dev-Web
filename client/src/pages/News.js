@@ -122,21 +122,12 @@ function WorldPage() {
           <svg style={{ display: 'block', width: '10%', marginLeft: '30%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
       </ParallaxLayer>
 
-      {console.log("news")}
       <div className="relative w-full h-full">
         <div className="px-6 py-8">
           <div className="flex justify-between container mx-auto">
             <div className="w-full">
                 {/* Header */}
               <div className="flex flex-col items-center justify-center">
-                { weatherIcon !== undefined ? 
-                    <div className="inline">
-                      <Weather />
-                      <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-xl">{temperature} &#8451;</span>
-                    </div>
-                    :
-                    null
-                  }
                 <div className="flex-row mx-auto pt-10 p-4">
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(true)}>
                     Tech News
@@ -144,6 +135,15 @@ function WorldPage() {
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(false)}>
                     World News 
                   </button>
+                  
+                  { weatherIcon !== undefined ? 
+                      <div className="inline">
+                        <Weather weatherIcon={weatherIcon} weatherDescription={weatherDescription} temperature={temperature}/>
+                        <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-xl">{temperature} &#8451;</span>
+                      </div>
+                      :
+                      null
+                    }
                 {flag ? <TechPage /> : <WorldPage />}
                </div>
               </div>
