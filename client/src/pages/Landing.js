@@ -60,13 +60,13 @@ export default class Landing extends React.Component {
           <ParallaxLayer
             offset={2}
             speed={-0.3}>
-            <a href="/login"><img className="w-80 rounded-2xl hidden md:inline-flex absolute bottom-24 left-24 transform hover:scale-110 motion-reduce:transform-none" src="https://i.postimg.cc/dVGC5wPt/podcast.png"></img></a>
+            <a href="/login"><img className="w-80 rounded-2xl hidden lg:inline-flex absolute bottom-24 left-24 transform hover:scale-110 motion-reduce:transform-none" src="https://i.postimg.cc/dVGC5wPt/podcast.png"></img></a>
           </ParallaxLayer>
 
           <ParallaxLayer
             offset={2}
             speed={-0.3}>
-            <img className="w-80 hidden rounded-2xl md:inline-flex absolute bottom-24 right-24" src="https://i.postimg.cc/0j56XsCh/jobs.png"></img>
+            <img className="w-80 hidden rounded-2xl lg:inline-flex absolute bottom-24 right-24" src="https://i.postimg.cc/0j56XsCh/jobs.png"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -74,7 +74,7 @@ export default class Landing extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(1)}
             className="flex items-center justify-center bg-opacity-25">
-            <img className="w-5/12" src="https://i.postimg.cc/fWdKWTTV/Dev-Web.gif"></img>
+            <img className="w-11/12 md:w-5/12" src="https://i.postimg.cc/fWdKWTTV/Dev-Web.gif"></img>
             <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png"></img>
           </ParallaxLayer>
 
@@ -83,7 +83,7 @@ export default class Landing extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(2)}
             className="flex items-center justify-center">
-            <img className="w-4/12" src="https://i.postimg.cc/LsrPSMrt/Congrats-on-your-promotion-1.gif"></img>
+            <img className="w-11/12 md:w-4/12" src="https://i.postimg.cc/LsrPSMrt/Congrats-on-your-promotion-1.gif"></img>
             <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png"></img>
           </ParallaxLayer>
 

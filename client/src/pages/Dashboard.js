@@ -37,7 +37,15 @@ function Dashboard () {
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
-      <ParallaxLayer offset={0} speed={0}>
+      <ParallaxLayer factor={1} offset={3} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={4} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={5} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
+    <ParallaxLayer offset={0} speed={0}>
         <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
       </ParallaxLayer>
       <ParallaxLayer offset={1} speed={1}>

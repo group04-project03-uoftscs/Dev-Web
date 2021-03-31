@@ -89,6 +89,14 @@ function JobsPage(props) {
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={3} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={4} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={5} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer offset={0} speed={0}>
         <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
       </ParallaxLayer>
@@ -119,7 +127,7 @@ function JobsPage(props) {
           </div>
 
            <div className="w-full">
-              <div className="flex flex-col items-center justify-between">
+              <div className="w-full">
                 <div className="flex-row mx-auto pt-10 p-4">
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("news")}>
                     News

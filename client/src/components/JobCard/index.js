@@ -53,7 +53,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
   return(
     useDarkMode,
     <div className="transition-all duration-150 flex px-4 py-6 md:w-1/2 lg:w-1/3 xl:w-1/4" index={index + 1}>
-      <div className="px-4 pb-5 w-auto md:w-80 flex-grow-0 bg-white bg-opacity-50 rounded-xl text-black border border-gray-300 shadow-2xl transform transition duration-500 ease-in-out hover:bg-indigo-100 hover:bg-opacity-50 hover:scale-105">
+      <div className="px-4 pb-5 w-80 flex-grow-0 bg-white bg-opacity-50 rounded-xl text-black border border-gray-300 shadow-2xl transform transition duration-500 ease-in-out hover:bg-indigo-100 hover:bg-opacity-50 hover:scale-105">
         
         <div className="w-full mb-3">
           <h3 className="text-lg pt-2 mb-1 border-b border-1 border-white font-semibold text-shadow overflow-hidden h-16 line-clamp-2 dark:text-white transition duration-500"><a href={url} target="_blank" rel="noopener noreferrer"><h3>{title}, {position}</h3></a></h3>
