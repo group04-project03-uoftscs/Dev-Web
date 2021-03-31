@@ -68,7 +68,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
             <span className="font-semibold text-indigo-800 dark:text-white transition duration-500">Posted {moment(new Date(date)).fromNow()}</span>
           </div>
           
-          <div className="flex justify-between">
+          <div className="flex mt-2 justify-between">
             <a className="text-blue-500 hover:underline" href={url} target="_blank">Apply Now</a>
             {isBookmarked ? 
 

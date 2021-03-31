@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useDarkMode from '../functions/useDarkMode';
+import useDarkMode from './useDarkMode';
 
 import Card from '../components/Card'
 import JobCard from '../components/JobCard'
@@ -22,7 +22,7 @@ function Bookmarked() {
                 )
             })
             : 
-            <div>
+            <div className="h-screen">
               <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
@@ -42,7 +42,7 @@ function PodcastPage(props) {
               )
             })
             : 
-            <div>
+            <div className="h-screen">
               <div className="flex w-full mx-auto items-center justify-center p-4 bg-yellow-200 rounded-md shadow-md">
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
@@ -63,7 +63,7 @@ function JobsPage(props) {
             )
             })
             : 
-            <div>
+            <div className="h-screen">
               <div className="flex w-full mx-auto items-center justify-center p-4 bg-white rounded-md shadow-md">
                 <span className="text-xl tracking-wider text-gray-500 uppercase">No Bookmarks</span>
               </div>
@@ -89,19 +89,26 @@ function JobsPage(props) {
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
-      <ParallaxLayer style={{ backgroundImage: url('stars', true), backgroundSize: 'cover' }} />
-      <ParallaxLayer offset={1} style={{ backgroundImage: url('stars', true)}} />
+      <ParallaxLayer offset={0} speed={0}>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+      </ParallaxLayer>
+      <ParallaxLayer offset={1} speed={1}>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+      </ParallaxLayer>
+      <ParallaxLayer offset={2} speed={1}>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+      </ParallaxLayer>
       <ParallaxLayer style={{ opacity: 0.2 }}>
-        <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
-        <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
-        <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '80%' }} />
-        <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
-        <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '60%' }} />
-        <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
+        <svg style={{ display: 'block', width: '20%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+          <svg style={{ display: 'block', width: '20%', marginLeft: '5%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+          <svg style={{ display: 'block', width: '20%', marginLeft: '80%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+          <svg style={{ display: 'block', width: '10%', marginLeft: '10%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+          <svg style={{ display: 'block', width: '10%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+          <svg style={{ display: 'block', width: '10%', marginLeft: '30%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
       </ParallaxLayer>
       {console.log(state)}
 
-      <main className="relative w-full h-full" style={{ marginBottom:"45px" }}>
+      <main className="relative w-full h-full mb-96">
         <section className="flex flex-col w-full h-full">
         <div className="px-6">
           
@@ -114,13 +121,13 @@ function JobsPage(props) {
            {/* Header */}
               <div className="flex flex-col items-center justify-between">
                 <div className="flex-row mx-auto pt-10 p-4">
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("news")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("news")}>
                     News
                   </button>
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-r-2 border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("podcasts")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("podcasts")}>
                     Podcasts 
                   </button>
-                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-gray-700 focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("jobs")}>
+                  <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("jobs")}>
                     Jobs 
                   </button>
                 {flag === "news" ? <News /> : flag === "podcasts" ? <PodcastPage /> : <JobsPage />}

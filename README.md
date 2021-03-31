@@ -37,10 +37,11 @@ We're adding database functionality to our solution to ease the load of bookmark
 2. [Hacker News](https://github.com/HackerNews/API)
 3. [News API](https://newsapi.org/docs)
 4. [GitHub Jobs](https://jobs.github.com/api)
+5. [Codewars](https://dev.codewars.com/)
+6. [Random User](https://randomuser.me/)
 
 ## Libraries Used
 
-* [Ant Design](https://ant.design/)
 * [Axios](https://www.npmjs.com/package/axios)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [Font Awesome](https://fontawesome.com/)
@@ -51,6 +52,7 @@ We're adding database functionality to our solution to ease the load of bookmark
 * [Puppeteer](https://www.npmjs.com/package/puppeteer)
 * [React-Font](https://www.npmjs.com/package/react-font)
 * [React-Image-Fallback](https://www.npmjs.com/package/react-image-fallback)
+* [React-Outside-Click-Handler](https://www.npmjs.com/package/react-outside-click-handler)
 * [Tailwinds CSS](https://tailwindcss.com/)
 
 
