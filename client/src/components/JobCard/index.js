@@ -62,7 +62,7 @@ const Errorpic = 'https://i.postimg.cc/fWdKWTTV/Dev-Web.gif';
 
         <div>
           <a className="absolute top-24 right-1 text-sm px-2 py-1 w-auto bg-indigo-600 text-gray-100 font-light rounded hover:bg-gray-500 line-clamp-1 overflow-hidden" href={url} target="_blank">{location}</a>
-          <a href={url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="bg-indigo-200 flex justify-items-center items-center w-72 h-40 mt-5 object-contain rounded-2xl" initialImage={image} src={image} fallbackImage={Errorpic} /></a>
+          <a href={url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="bg-indigo-200 flex justify-items-center items-center w-72 h-40 mt-5 object-contain rounded-2xl" initialImage={image} src={image} fallbackImage={Errorpic} alt="Dev Web logo"/></a>
           
           <div className="mb-1 mt-1 tracking-wide text-base text-shadow">
             <span className="font-semibold text-indigo-800 dark:text-white transition duration-500">Posted {moment(new Date(date)).fromNow()}</span>
