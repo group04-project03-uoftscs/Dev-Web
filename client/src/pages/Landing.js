@@ -12,13 +12,13 @@ export default class Landing extends React.Component {
           <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
           <ParallaxLayer offset={0} speed={0}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="object-cover w-full h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
           </ParallaxLayer>
           <ParallaxLayer offset={1} speed={1}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="object-cover w-full h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
           </ParallaxLayer>
           <ParallaxLayer offset={2} speed={1}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="object-cover w-full h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
           </ParallaxLayer>
 
           <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>

@@ -80,7 +80,7 @@ function Card ({article}) {
         </div>
 
         <div className="flex flex-col">
-          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-2 object-cover mb-2" initialImage={article.image} src={article.image} fallbackImage={Errorpic} alt="Dev Web logo"/></a>
+          <a href={article.url} target="_blank" rel="noopener noreferrer"><ReactImageFallback className="w-96 h-48 mt-3 object-cover mb-2" initialImage={article.image} src={article.image} fallbackImage={Errorpic} alt="Dev Web logo"/></a>
           
           <div className="mb-0 tracking-wide text-base text-shadow dark:text-white transition duration-500">
             <p>Published: {article.date}</p>
