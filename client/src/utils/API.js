@@ -33,7 +33,13 @@ export default {
   },
   getAllGithubUsers: function() {
     return axios.get("/api/user/");
+  },  
+  
+  getWeather: function(location) {
+    if(location === "") location = "currentcity";
+    return axios.get("/api/thirdparty/weather/"+location);
   },
+
 
   getTechNews: function() {
     return axios.get("/api/thirdparty/technewsapi");
