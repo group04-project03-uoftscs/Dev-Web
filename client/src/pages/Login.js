@@ -14,13 +14,13 @@ function Login() {
   const [remember, setRemember] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  useEffect(()=> {
-    API.getUser()
-    .then(data=>console.log(data.data.user))
-  })
-  const githubLogin = () => {
-    fetch('/github')
-  }
+  // useEffect(()=> {
+  //   API.getUser()
+  //   .then(data=>console.log(data.data.user))
+  // })
+  // const githubLogin = () => {
+  //   fetch('/github')
+  // }
 
   const usernameInput = useRef();
   const passwordInput = useRef();
@@ -39,7 +39,6 @@ function Login() {
       url: "/user/login"
     }).then((res) => {
       if(res.data === 'Incorrect login information') {
-        console.log('Email or password is not correct')
         setErrorMsg('Email or password is not correct')
       } else {
         if(remember) {
