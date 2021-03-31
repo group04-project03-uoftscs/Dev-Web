@@ -38,13 +38,13 @@ function Dashboard () {
       <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer offset={0} speed={0}>
-        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
       </ParallaxLayer>
       <ParallaxLayer offset={1} speed={1}>
-        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
       </ParallaxLayer>
       <ParallaxLayer offset={2} speed={1}>
-        <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+        <img className="cover hidden md:block md:w-full md:h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
       </ParallaxLayer>
       <ParallaxLayer style={{ opacity: 0.2 }}>
         <svg style={{ display: 'block', width: '20%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
@@ -56,8 +56,8 @@ function Dashboard () {
       </ParallaxLayer>
 
       <main className="relative w-full h-full" style={{ marginBottom:"55px" }}>
-        <section className="flex flex-col w-full h-full">
-        <div className="mb-48 px-8">
+        <section className="flex flex-col w-full h-full mb-10">
+        <div className="mb-48 md:px-8">
           
           <div className="p-5 mt-10 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
@@ -68,9 +68,9 @@ function Dashboard () {
           { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
             <div>
               <div className="w-full">
-            <div className="flex justify-center pb-1">
+            <div className="flex flex-col md:flex-row justify-center pb-1">
                     <img src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
-                        className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
+                        className="h-40 w-40 mx-auto rounded-2xl flex items-center justify center border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
                         alt="username"/>
                     <div className="ml-10">
                         <div className="flex items-center">
@@ -83,7 +83,7 @@ function Dashboard () {
                                     <FontAwesomeIcon icon={['fas','bookmark']} />
                                 </svg>
                             </button></Link>
-                            <div className="cursor-pointer ml-2 p-1 border-transparent text-gray-700 rounded-full hover:text-yellow-100 focus:outline-none focus:text-gray-800"
+                            <div className="cursor-pointer ml-2 p-1 border-transparent text-gray-900 rounded-full hover:text-yellow-100 focus:outline-none focus:text-gray-800"
                             aria-label="Settings">
                                 <Link to="/settings"><svg className="h-8 w-8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -120,7 +120,7 @@ function Dashboard () {
                           {state.user._json !== undefined ? 
                             state.user._json.bio !==undefined ? 
                             <div>
-                              <span className="text-base font-semibold">{state.user._json.bio}</span>
+                              <span className="text-base font-semibold dark:text-white transition duration-500">{state.user._json.bio}</span>
                               <a className="block text-base text-yellow-500 mt-2" href={state.user._json.html_url} target="_blank">{'Quick! To my Github!'}</a>
                             </div>
                               : <a className="block text-base text-yellow-500 mt-2">{'No Github Account linked'}</a>
@@ -141,13 +141,13 @@ function Dashboard () {
           </div>
           
         
-          <div className="flex mt-10 w-3/4 mx-auto items-center justify-center bg-opacity-30 bg-indigo-300 rounded-3xl">
+          <div className="flex mt-10 w-full md:w-3/4 mx-auto items-center justify-center bg-opacity-30 bg-indigo-300 rounded-3xl">
           { (Object.keys(state.user).length !== 0 && Object.keys(state.codewars).length !== 0) ? 
             <div>
               <div className="w-full mb-1">
             <div className="md:flex justify-center pb-1">
-                    <div className="ml-10">
-                        <div className="flex sm:flex-col sm:flex-wrap md:flex-row my-2 mt-2">
+                    <div className="md:ml-10 p-2">
+                        <div className="flex flex-col sm:flex-wrap md:flex-row my-2 mt-2">
                           <h2 className="leading-relaxed font-light mb-1 text-gray-700 text-xl dark:text-white transition duration-500">Your Codewars Challenge</h2>
                             <a className="cursor-pointer px-3 p-1 ml-3 outline-none border-transparent text-center rounded border bg-blue-500 hover:bg-blue-600 text-white bg-transparent font-semibold">{state.codewars.name}</a>
                             <a className="cursor-pointer hidden md:flex px-3 p-1 ml-3 focus:outline-none hover:border-transparent text-center rounded border border-green-400 hover:bg-green-500 hover:text-white bg-transparent text-green-200 font-semibold">{state.codewars.category}</a>
