@@ -3,7 +3,9 @@ import React, { useState, useEffect} from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import Loading from '../components/Loading'
 import Card from '../components/Card';
+import Weather from '../components/Weather'
 import useDarkMode from './useDarkMode';
+import API from '../utils/API';
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -126,7 +128,15 @@ function WorldPage() {
           <div className="flex justify-between container mx-auto">
             <div className="w-full">
                 {/* Header */}
-              <div className="flex flex-col items-center justify-between">
+              <div className="flex flex-col items-center justify-center">
+                { weatherIcon !== undefined ? 
+                    <div className="inline">
+                      <Weather />
+                      <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-xl">{temperature} &#8451;</span>
+                    </div>
+                    :
+                    null
+                  }
                 <div className="flex-row mx-auto pt-10 p-4">
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(true)}>
                     Tech News
@@ -134,13 +144,6 @@ function WorldPage() {
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(false)}>
                     World News 
                   </button>
-                  { weatherIcon !== undefined ? 
-                    <div className="inline">
-                      <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-xl">{temperature} &#8451;</span>
-                    </div>
-                    :
-                    null
-                  }
                 {flag ? <TechPage /> : <WorldPage />}
                </div>
               </div>
