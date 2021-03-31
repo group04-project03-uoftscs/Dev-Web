@@ -269,7 +269,8 @@ function Settings() {
         style={{ paddingTop:"20px" }}>
           Update your language flags here:
         </h4>
-        <div className="flex flex-row flex-wrap mx-auto" style={{ maxWidth:"375px" }}>
+        <div className="flex flex-row flex-wrap mx-auto" 
+        style={{ maxWidth:"365px", marginLeft:"25%", marginRight:"25%", position:"relative"}}>
         {Object.keys(listLanguages).map((lang, index) => {
           return(
             <LanguagesList key={index} language={lang} checked={listLanguages[lang]} handleChecked={() => {handleChecked(lang)}}/>
@@ -309,7 +310,7 @@ function Settings() {
 
       <form 
         className="password-section"
-        style={{ paddingTop:"20px", width:"350px", textAlign:"center" }}
+        style={{ paddingTop:"20px", width:"350px", textAlign:"center", marginLeft:"22%", marginRight:"22%" }}
         onSubmit={handleChangePassword}
       >
       <h4 
