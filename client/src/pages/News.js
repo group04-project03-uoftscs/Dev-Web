@@ -138,7 +138,7 @@ function WorldPage() {
                   
                   { weatherIcon !== undefined ? 
                       <div className="inline">
-                        <Weather weatherIcon={weatherIcon} weatherDescription={weatherDescription} temperature={temperature}/>
+                        {/* <Weather weatherIcon={weatherIcon} weatherDescription={weatherDescription} temperature={temperature}/> */}
                         <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-xl">{temperature} &#8451;</span>
                       </div>
                       :
