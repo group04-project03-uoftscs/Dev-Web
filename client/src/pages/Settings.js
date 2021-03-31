@@ -377,8 +377,8 @@ function Settings() {
         className="danger-zone"
         style={{ textAlign:"center"}}
       >
-        <p
-        style={{ paddingBottom:"10px", paddingTop:"10px" }}>:::::::::::::: EXTRA CARE BEYOND THIS POINT :::::::::::::: </p>
+        <p style={{ paddingTop:"10px" }}>:::::::::::::: EXTRA CARE ::::::::::::::</p>
+        <p style={{ paddingBottom:"10px"}}> :::::::::::::: BEYOND THIS POINT :::::::::::::: </p>
         <button 
           className="del-account" 
           style={{ width:"200px",backgroundColor:"mediumvioletred", color:"white", borderRadius:"99px", marginBottom:"25px"}}
