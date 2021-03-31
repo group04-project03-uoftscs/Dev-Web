@@ -97,7 +97,7 @@ function Signup() {
                         }}
                       >
                         <img
-                          alt="..."
+                          alt="GitHub logo"
                           className="w-5 mr-1"
                           src={ githubicon }
                         />
@@ -111,7 +111,7 @@ function Signup() {
                         }}
                       >
                         <img
-                          alt="..."
+                          alt="Google logo"
                           className="w-5 mr-1"
                           src={ googleicon }
                         />

@@ -12,13 +12,13 @@ export default class Landing extends React.Component {
           <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
           <ParallaxLayer offset={0} speed={0}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
           </ParallaxLayer>
           <ParallaxLayer offset={1} speed={1}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
           </ParallaxLayer>
           <ParallaxLayer offset={2} speed={1}>
-            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+            <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
           </ParallaxLayer>
 
           <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
@@ -54,7 +54,7 @@ export default class Landing extends React.Component {
           </ParallaxLayer>
 
           <ParallaxLayer offset={2.5} speed={-0.4} className="flex items-center justify-center">
-            <img className="flex items-center justify-center" src="https://i.postimg.cc/7ZGkf5xs/earth.png"></img>
+            <img className="flex items-center justify-center" src="https://i.postimg.cc/7ZGkf5xs/earth.png" alt="Western Hemisphere Globe Image"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -66,7 +66,7 @@ export default class Landing extends React.Component {
           <ParallaxLayer
             offset={2}
             speed={-0.3}>
-            <img className="w-80 hidden rounded-2xl md:inline-flex absolute bottom-24 right-24" src="https://i.postimg.cc/0j56XsCh/jobs.png"></img>
+            <img className="w-80 hidden rounded-2xl md:inline-flex absolute bottom-24 right-24" src="https://i.postimg.cc/0j56XsCh/jobs.png" alt="Job Listing example"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -74,8 +74,8 @@ export default class Landing extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(1)}
             className="flex items-center justify-center bg-opacity-25">
-            <img className="w-5/12" src="https://i.postimg.cc/fWdKWTTV/Dev-Web.gif"></img>
-            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png"></img>
+            <img className="w-5/12" src="https://i.postimg.cc/fWdKWTTV/Dev-Web.gif" alt="Dev Web logo image"></img>
+            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png" alt="Scroll down icon"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -83,8 +83,8 @@ export default class Landing extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(2)}
             className="flex items-center justify-center">
-            <img className="w-4/12" src="https://i.postimg.cc/LsrPSMrt/Congrats-on-your-promotion-1.gif"></img>
-            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png"></img>
+            <img className="w-4/12" src="https://i.postimg.cc/LsrPSMrt/Congrats-on-your-promotion-1.gif" alt="Invitation to take a break"></img>
+            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/8CGFSRZz/icons8-page-down-button-96.png" alt="Scrll down icon"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -92,8 +92,8 @@ export default class Landing extends React.Component {
             speed={-0}
             className="flex items-center justify-center"
             onClick={() => this.parallax.scrollTo(0)}>
-            <img className="w-80 rounded-2xl" src="https://i.postimg.cc/3whjgWqZ/news.png"></img>
-            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/hGGXvDRk/icons8-page-up-button-96.png"></img>
+            <img className="w-80 rounded-2xl" src="https://i.postimg.cc/3whjgWqZ/news.png" alt="Latest News example listing"></img>
+            <img className="w-12 absolute bottom-12 animate-bounce" src="https://i.postimg.cc/hGGXvDRk/icons8-page-up-button-96.png" alt="Scroll up icon"></img>
           </ParallaxLayer>
         </div>
       </Parallax>
