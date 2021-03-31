@@ -25,6 +25,37 @@ router.route("/githubuser/:username")
       })
   })
 
+  router.route("/weather/:location")
+  .get((req,res) =>{
+    axios(`https://api.openweathermap.org/data/2.5/weather?q=${req.params.location}&units=metric&APPID=${process.env.WEATHER_API}`)
+      .then(result =>{
+        let weather = {
+          temp: parseInt(result.data.main.temp),
+          description: result.data.weather[0].description,
+          iconUrl: "http://openweathermap.org/img/wn/"+result.data.weather[0].icon+"@2x.png"
+        }
+        res.json(weather)
+      })
+      .catch(err =>{
+        axios(`http://ip-api.com/json/`)
+        .then(geolocation =>{
+          axios(`https://api.openweathermap.org/data/2.5/weather?lat=${geolocation.data.lat}&lon=${geolocation.data.lon}&units=metric&APPID=${process.env.WEATHER_API}`)
+            .then(result => {
+              let weather = {
+                temp: parseInt(result.data.main.temp),
+                description: result.data.weather[0].description,
+                iconUrl: "http://openweathermap.org/img/wn/"+result.data.weather[0].icon+"@2x.png"
+              }
+              res.json(weather)
+            })
+        })
+        .catch(err =>{
+          console.log(err);
+          res.json({})
+        })
+      })
+  })
+
 router.route("/codewars")
   .get((req,res)=>{
     let index = Math.floor(Math.random()*codewars.length)
