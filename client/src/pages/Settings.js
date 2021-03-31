@@ -309,7 +309,7 @@ function Settings() {
 
       <form 
         className="password-section"
-        style={{paddingLeft:"60px", paddingTop:"20px", width:"350px", textAlign:"center" }}
+        style={{ paddingTop:"20px", width:"350px", textAlign:"center" }}
         onSubmit={handleChangePassword}
       >
       <h4 
