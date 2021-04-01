@@ -15,7 +15,7 @@ function Bookmarked() {
   function News(props) {
   return (
     <div>
-       <div className="flex mt-20 flex-row flex-wrap mx-auto">
+       <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
             {state.favorites.filter(article => article.type === "articles").length!==0 ?  state.favorites.filter(article => article.type === "articles").map((article) => {
                 return (
                   <Card article={article} key={article.id}/>
