@@ -71,6 +71,24 @@ function HomePage(props) {
         <ParallaxLayer factor={1} offset={5} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={11} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={12} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={13} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={14} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={15} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={16} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={17} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={18} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={19} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={20} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={21} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={22} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={23} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={24} className="dark:bg-black dark:text-white transition duration-500" />
+        <ParallaxLayer factor={1} offset={25} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer offset={0} speed={0}>
           <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
