@@ -97,6 +97,11 @@ function JobsPage(props) {
       <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={11} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={12} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={13} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={14} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={15} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer offset={0} speed={0}>
       <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
       </ParallaxLayer>
