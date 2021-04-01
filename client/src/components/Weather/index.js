@@ -26,10 +26,10 @@ function Weather ({temperature, weatherIcon, weatherDescription}) {
     return(
         useDarkMode,
         <div className="flex flex-col md:flex-row justify-center w-full md:w-96">
-        <div class=" mt-5 cursor-pointer border b-gray-400 flex flex-col md:flex-row justify-center space-x-3 items-center text-center p-1 px-2 rounded-2xl bg-gradient-to-br from-yellow-300 via-indigo-400 to-indigo-600 dark:bg-black">
-            <div class="text-md font-bold flex flex-col text-gray-900"><span class="uppercase">Today</span> <span class="font-normal text-gray-700 text-sm">Date</span></div>
-            <div class="w-32 h-32 flex items-center justify-center">
-            <svg class="h-20" viewBox="0 0 81 73" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <div className=" mt-5 cursor-pointer border b-gray-400 flex flex-col md:flex-row justify-center space-x-3 items-center text-center p-1 px-2 rounded-2xl bg-gradient-to-br from-yellow-300 via-indigo-400 to-indigo-600 dark:bg-black">
+            <div className="text-md font-bold flex flex-col text-gray-900"><span className="uppercase">Today</span> <span class="font-normal text-gray-700 text-sm">Date</span></div>
+            <div className="w-32 h-32 flex items-center justify-center">
+            <svg className="h-20" viewBox="0 0 81 73" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="Desktop-HD" transform="translate(-174.000000, -308.000000)" fill-rule="nonzero">
                         <g id="Group" transform="translate(95.000000, 222.000000)">
@@ -42,11 +42,11 @@ function Weather ({temperature, weatherIcon, weatherDescription}) {
                 </g>
             </svg>
             </div>
-            <p class="text-gray-700 mb-2">{weatherDescription}</p>
-            <div class="text-2xl font-semibold text-gray-900 mb-6">{temperature} &#8451;</div>
-            <div class="flex w-full">
-            <div class="flex items-center text-gray-700 px-2">
-                <svg class="mr-2 h-4" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <p className="text-gray-700 mb-2">{weatherDescription}</p>
+            <div className="text-2xl font-semibold text-gray-900 mb-6">{temperature} &#8451;</div>
+            <div className="flex w-full">
+            <div className="flex items-center text-gray-700 px-2">
+                <svg className="mr-2 h-4" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="Desktop-HD" transform="translate(-120.000000, -479.000000)" fill="#60A2D7" fill-rule="nonzero">
                             <g id="Group" transform="translate(95.000000, 222.000000)">
@@ -61,8 +61,8 @@ function Weather ({temperature, weatherIcon, weatherDescription}) {
                 </svg>
                 Chance of rain:
             </div>
-            <div class="flex items-center text-gray-700 px-2">
-                <svg class="mr-2 h-4 w-4" viewBox="0 0 12 21" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <div className="flex items-center text-gray-700 px-2">
+                <svg className="mr-2 h-4 w-4" viewBox="0 0 12 21" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="Desktop-HD" transform="translate(-201.000000, -480.000000)" fill="#0ABDE3" fill-rule="nonzero">
                     <g id="Group" transform="translate(95.000000, 222.000000)">

@@ -82,7 +82,7 @@ function Login() {
                         }}
                       >
                         <img
-                          alt="..."
+                          alt="github"
                           className="w-5 mr-1"
                           src={ githubicon }
                         />
@@ -96,7 +96,7 @@ function Login() {
                         }}
                       >
                         <img
-                          alt="..."
+                          alt="google"
                           className="w-5 mr-1"
                           src={ googleicon }
                         />

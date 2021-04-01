@@ -45,7 +45,7 @@ const UserDropdown = () => {
         >
           <div className="items-center">
             <div className="w-8 h-8 lg:h-10 lg:w-10 border-none bg-indigo-100 focus:outline-none hover:bg-yellow-400 rounded-full flex items-center justify-center">
-              <img viewBox="0 0 64 64" width="96px" height="96px" src={ Login }></img>
+              <img viewBox="0 0 64 64" width="96px" height="96px" alt="login" src={ Login }></img>
             </div>
           </div>
         </div>

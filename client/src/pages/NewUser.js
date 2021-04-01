@@ -155,6 +155,7 @@ const handleSubmit = (e) =>{
               <div className="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
                   fill="none"
+                  alt="github"
                   className="w-6 text-gray-400 mx-auto"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -190,6 +191,7 @@ const handleSubmit = (e) =>{
                 <div className="w-1/12 pt-2 bg-gray-100">
                   <img
                   fill="none"
+                  alt="location"
                   className="w-6 text-gray-400 mx-auto"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

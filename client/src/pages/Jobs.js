@@ -112,13 +112,13 @@ function Jobs() {
         <ParallaxLayer factor={1} offset={20} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={21} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer offset={0} speed={0}>
-          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={1}>
-          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={1}>
-          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer style={{ opacity: 0.2 }}>
           <svg style={{ display: 'block', width: '20%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
