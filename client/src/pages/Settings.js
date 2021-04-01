@@ -239,12 +239,12 @@ function Settings() {
     <form id="profile-form" onSubmit={handleSubmitProfile}
 
       className="edit-profile"
-      style={{paddingLeft:"70px", paddingTop:"20px", maxWidth:"550px", textAlign:"center", fontWeight:"bold" }}
+      style={{ paddingTop:"20px", maxWidth:"600px", textAlign:"center", fontWeight:"bold" }}
       >
         <h4>Edit Your Profile</h4>
       
         <h4 
-        className="location"
+        className="github-account"
         style={{ paddingTop:"25px" }}
         >
           Update your GitHub username:
@@ -253,7 +253,7 @@ function Settings() {
           className="new-github"
           type="text"
           placeholder="Enter new GitHub username"
-          style={{ width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
+          style={{ width:"250px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
           value={newGithub}
           onChange={e=>{
             setNewGithub(e.target.value);
@@ -293,7 +293,7 @@ function Settings() {
             setUpdateMsgProfile("");
             setNewLocation(e.target.value)
           }}
-          style={{ width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
+          style={{ width:"250px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
         />
       <br />
       <div className="text-sm text-green-500 h-5">{updateMsgProfile}</div>
@@ -306,11 +306,15 @@ function Settings() {
       </button>
 
       </form>
-      
+
+     <div 
+        className="container mx-auto flex justify-center"
+        style={{ textAlign:"center" }}
+      > 
 
       <form 
-        className="password-section"
-        style={{ paddingTop:"20px", width:"350px", textAlign:"center", marginLeft:"22%", marginRight:"22%" }}
+        className="password-section flex-wrap object-center"
+        style={{ paddingTop:"20px", width:"275px", textAlign:"center" }}
         onSubmit={handleChangePassword}
       >
       <h4 
@@ -332,7 +336,7 @@ function Settings() {
           setErrorMsgPassword("")
           setUpdateMsgPassword("")
         }}
-        style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
+        style={{  width:"250px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <p style={{ paddingTop:"5px"}}>Type in NEW password:</p>
       <input 
@@ -346,7 +350,7 @@ function Settings() {
           setUpdateMsgPassword("")
         }}
         ref={new1PasswordInput}
-        style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
+        style={{  width:"250px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <p style={{ paddingTop:"5px", paddingBottom:"5px"}}>Confirm NEW password:</p>
       <input 
@@ -360,7 +364,7 @@ function Settings() {
         ref={new2PasswordInput}
         disabled={state.auth === 'github' || state.auth === "google"}
         placeholder="Confirm new password here"
-        style={{  width:"300px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
+        style={{  width:"250px", height:"30px", margin:"6px", backgroundColor:"lightgray", borderRadius:"99px", textAlign:"center" }}
       />
       <div className="text-sm h-5"><span className="text-red-500">{errorMsgPassword}</span><span className="text-green-500">{updateMsgPassword}</span></div>
 
@@ -373,6 +377,7 @@ function Settings() {
         <strong>Save Password</strong>
       </button>
       </form> 
+    </div>  
 
       <div
         className="danger-zone"
