@@ -78,8 +78,8 @@ function Dashboard () {
               <div className="w-full">
             <div className="flex flex-col md:flex-row justify-center pb-1">
                     <img src={state.user._json !== undefined ? (state.user._json.avatar_url !== undefined ? state.user._json.avatar_url: state.user._json.picture) : `https://api.randomuser.me/portraits/lego/${lego}.jpg`}
-                        className="h-40 w-40 rounded-2xl hidden md:inline-flex border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
-                        alt="User avatar"/>
+                        className="h-40 w-40 mx-auto rounded-2xl flex items-center justify center border-white border-opacity-100 border-4 bg-gradient-to-br from-yellow-200 via-indigo-200 to-indigo-300  object-cover"
+                        alt="username"/>
                     <div className="ml-10">
                         <div className="flex items-center">
                             <h2 className="block leading-relaxed font-light mb-2 text-gray-700 text-3xl dark:text-white transition duration-500">{state.user._json !== undefined ? (state.user._json.login !== undefined ? state.user._json.login : state.user.username) :state.user.username}</h2>
