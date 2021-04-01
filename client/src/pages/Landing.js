@@ -6,7 +6,7 @@ export default class Landing extends React.Component {
   render() {
 
     return (
-      <Parallax ref={ref => (this.parallax = ref)} pages={3} >
+      <Parallax ref={ref => (this.parallax = ref)} pages={3} className="bg-gradient-to-br from-blue-500 via-indigo-600 to-indigo-800 dark:bg-black">
         <div className="bg-cover z-50">
           <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#6500B0' }} />
           <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
@@ -54,7 +54,7 @@ export default class Landing extends React.Component {
           </ParallaxLayer>
 
           <ParallaxLayer offset={2.5} speed={-0.4} className="flex items-center justify-center">
-            <img className="flex hidden lg:inline-flex items-center justify-center" src="https://i.postimg.cc/7ZGkf5xs/earth.png" alt="background"></img>
+            <img className="hidden lg:inline-flex items-center justify-center" src="https://i.postimg.cc/7ZGkf5xs/earth.png" alt="background"></img>
           </ParallaxLayer>
 
           <ParallaxLayer
