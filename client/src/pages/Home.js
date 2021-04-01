@@ -31,7 +31,6 @@ function Home () {
   async function checkDatabase(axios, dispatch, history, API, state) {
     await checkLocalStorageHome(axios, dispatch);
     let { data }  = await API.getUser();
-    console.log('this is the data ', data);
     
     if(data.auth === 'github') {
       dispatch({

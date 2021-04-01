@@ -3,7 +3,9 @@ import React, { useState, useEffect} from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import Loading from '../components/Loading'
 import Card from '../components/Card';
+import Weather from '../components/Weather'
 import useDarkMode from './useDarkMode';
+import API from '../utils/API';
 
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -78,7 +80,7 @@ function WorldPage() {
   const [flag, setFlag] = useState(true);
 
   return(
-    <Parallax>
+    <Parallax className="bg-gradient-to-br from-blue-500 via-indigo-600 to-indigo-800 dark:bg-black">
       <useDarkMode />
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
@@ -103,13 +105,13 @@ function WorldPage() {
         <ParallaxLayer factor={1} offset={20} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={21} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer offset={0} speed={0}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={1}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={1}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer style={{ opacity: 0.2 }}>
           <svg style={{ display: 'block', width: '20%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
@@ -120,13 +122,12 @@ function WorldPage() {
           <svg style={{ display: 'block', width: '10%', marginLeft: '30%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
       </ParallaxLayer>
 
-      {console.log("news")}
       <div className="relative w-full h-full">
-        <div className="px-6 py-8">
+        <div className="md:px-5 px-1 py-8">
           <div className="flex justify-between container mx-auto">
             <div className="w-full">
                 {/* Header */}
-              <div className="flex flex-col items-center justify-between">
+              <div className="flex flex-col items-center justify-center">
                 <div className="flex-row mx-auto pt-10 p-4">
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(true)}>
                     Tech News
@@ -134,13 +135,15 @@ function WorldPage() {
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag(false)}>
                     World News 
                   </button>
+                  
                   { weatherIcon !== undefined ? 
-                    <div className="inline">
-                      <img src={weatherIcon} alt={weatherDescription} className="inline" alt="Weather forecast icon"/> <span className="text-xl">{temperature} &#8451;</span>
-                    </div>
-                    :
-                    null
-                  }
+                      <div className="inline">
+                        {/* <Weather weatherIcon={weatherIcon} weatherDescription={weatherDescription} temperature={temperature}/> */}
+                        <img src={weatherIcon} alt={weatherDescription} className="inline"/> <span className="text-2xl dark:text-white transition duration-500">{temperature} &#8451;</span>
+                      </div>
+                      :
+                      null
+                    }
                 {flag ? <TechPage /> : <WorldPage />}
                </div>
               </div>

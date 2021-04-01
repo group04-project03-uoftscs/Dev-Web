@@ -15,7 +15,7 @@ function Bookmarked() {
   function News(props) {
   return (
     <div>
-       <div className="flex mt-20 flex-row flex-wrap w-full mx-auto items-center justify-center">
+       <div className="flex mt-20 flex-row flex-wrap mx-auto">
             {state.favorites.filter(article => article.type === "articles").length!==0 ?  state.favorites.filter(article => article.type === "articles").map((article) => {
                 return (
                   <Card article={article} key={article.id}/>
@@ -84,11 +84,19 @@ function JobsPage(props) {
   const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
   return(
-    <Parallax>
+    <Parallax className="bg-gradient-to-br from-blue-500 via-indigo-600 to-indigo-800 dark:bg-black">
       <useDarkMode />
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer factor={1} offset={2} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={3} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={4} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={5} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={8} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={9} className="dark:bg-black dark:text-white transition duration-500" />
+      <ParallaxLayer factor={1} offset={10} className="dark:bg-black dark:text-white transition duration-500" />
       <ParallaxLayer offset={0} speed={0}>
         <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
       </ParallaxLayer>
@@ -108,18 +116,18 @@ function JobsPage(props) {
       </ParallaxLayer>
       {console.log(state)}
 
-      <main className="relative w-full h-full mb-96">
-        <section className="flex flex-col w-full h-full">
-        <div className="px-6">
-          
-          <div className="p-5 mt-10 w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
+      <div className="relative w-full h-full mb-96">
+        <div className="md:px-5 px-1 py-10">
+        <div className="flex flex-col justify-between container mx-auto">
+          {/* Header */}
+          <div className="p-5 w-full md:w-1/2 mx-auto items-center justify-center text-white bg-indigo-400 rounded-md shadow-md">
                 <div className="flex items-center justify-center">
                   <span className="text-3xl font-semibold tracking-wider uppercase">My Bookmarks</span>
                 </div>
           </div>
 
-           {/* Header */}
-              <div className="flex flex-col items-center justify-between">
+           <div className="w-full">
+              <div className="w-full">
                 <div className="flex-row mx-auto pt-10 p-4">
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-r-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("news")}>
                     News
@@ -130,18 +138,13 @@ function JobsPage(props) {
                   <button className="logo cursor-pointer hover:bg-indigo-200 px-1 py-1 text-xl focus:bg-indigo-700 focus:text-white font-semibold text-black focus:outline-none border-l-2 border-indigo-200 dark:text-white transition duration-500" onClick={() => setFlag("jobs")}>
                     Jobs 
                   </button>
-                {flag === "news" ? <News /> : flag === "podcasts" ? <PodcastPage /> : <JobsPage />}
+                  {flag === "news" ? <News /> : flag === "podcasts" ? <PodcastPage /> : <JobsPage />}
                </div>
               </div>
-
-          
-
-
-
-
+            </div>
         </div>
-        </section>
-      </main>
+        </div>
+      </div>
     </Parallax>
   )
 }

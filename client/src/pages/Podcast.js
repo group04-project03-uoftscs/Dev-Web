@@ -61,7 +61,7 @@ function HomePage(props) {
 
 
   return(
-    <Parallax>
+    <Parallax className="bg-gradient-to-br from-blue-500 via-indigo-600 to-indigo-800 dark:bg-black">
       <useDarkMode />
       <ParallaxLayer factor={1} offset={0} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={1} className="dark:bg-black dark:text-white transition duration-500" />
@@ -72,13 +72,13 @@ function HomePage(props) {
         <ParallaxLayer factor={1} offset={6} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer factor={1} offset={7} className="dark:bg-black dark:text-white transition duration-500" />
         <ParallaxLayer offset={0} speed={0}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={1}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={1}>
-          <img className="cover hidden md:block md:w-full md:h-full opacity-20" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="Binary code background image"></img>
+          <img className="object-cover w-full h-full opacity-10" src="https://i.postimg.cc/1XydR6bn/bg-2.png" alt="background"></img>
         </ParallaxLayer>
         <ParallaxLayer style={{ opacity: 0.2 }}>
           <svg style={{ display: 'block', width: '20%', marginLeft: '60%' }} fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
@@ -90,7 +90,7 @@ function HomePage(props) {
       </ParallaxLayer>
 
     <div className="relative w-full h-full">
-      <div className="px-6 py-10">
+      <div className="md:px-5 px-1 py-10">
         <div className="flex justify-between container mx-auto">
           <div className="w-full">
               {/* Header */}
@@ -105,7 +105,7 @@ function HomePage(props) {
                 {flag ? <Addroom a={flag} /> : <HomePage h={flag} />}
                </div>
               </div>
-          <img className="responsive" src={ListenNotesLogo} style={{ width:"350px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
+          <img className="responsive dark:bg-gray-800" src={ListenNotesLogo} style={{ width:"350px", marginBottom:"50px" }} alt="Listen Notes API logo"/>
         </div>
       </div>
     </div>

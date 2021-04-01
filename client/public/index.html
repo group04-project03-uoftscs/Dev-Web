@@ -2,23 +2,35 @@
 <html lang="en">
 
 <head>
+  <meta
+  name="description"           
+  content="A useful portal for developers to find news, job postings, industry podcasts and relevant information all in one spot!">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link rel="icon" href="./favicon-32x32.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.10.1/devicon.min.css">
   <meta name="google-site-verification" content="DdVr_aKFDfTE-8eEZ6dyoAZdDGEtnsncEuvEyYUWx5o" />
-  <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> -->
-  <!-- <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" /> -->
+  <link rel="manifest" crossorigin="use-credentials" href="manifest.json"/>
+	<link rel="apple-touch-icon" href="./Dev_Web.png">
+	<meta name="theme-color" content="#3c0069"/>
   <title>Dev-Web</title>
 </head>
 
-<body class="text-gray-800 antialiased bg-gradient-to-br from-blue-500 via-indigo-600 to-indigo-800">
+<body class="text-gray-800 antialiased bg-indigo-800">
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").then(reg => {
+          console.log("We found your service worker file!", reg);
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

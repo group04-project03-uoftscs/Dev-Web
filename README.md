@@ -39,6 +39,9 @@ We're adding database functionality to our solution to ease the load of bookmark
 4. [GitHub Jobs](https://jobs.github.com/api)
 5. [Codewars](https://dev.codewars.com/)
 6. [Random User](https://randomuser.me/)
+7. [Open Weather](https://openweathermap.org/)
+8. [Geolocation API](https://ip-api.com/docs/api:json)
+9. [GitHub](https://docs.github.com/en/rest)
 
 ## Libraries Used
 
